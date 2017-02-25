@@ -13,7 +13,9 @@ class Header extends Component {
 		const login_btn = document.getElementById("login-btn");
 		
 		const login_btn_DOMRec = login_btn.getBoundingClientRect();
-		console.log(login_btn_DOMRec.left);
+		
+		// TODO
+		
 		form.setAttribute("style", "display: inline-block; ");
 	}
 	
