@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 import React, { Component } from 'react';
+import Login from './Login';
 
 class Header extends Component {
 	displayLoginForm(event){
@@ -25,12 +26,17 @@ class Header extends Component {
 		
 		// TODO
 		// if login-in, display PROFILE		(Theme to be dynamic here?)
+
+		login_prof = <Login />;
+		
+		/*
 		login_prof = <button type="button"	
 									className="btn-info align-right" 
 									id = "login-btn"
 									onClick={this.displayLoginForm.bind(this)}>
 							Login
 						 </button>;
+		*/
 		
 		// else login-in button
 		/*
@@ -51,15 +57,19 @@ class Header extends Component {
 							{login_prof}
 					</div>
 				</nav>
-				
+
+			</div>
+		);
+		
+						
+				/*
 				<form id="login-form">
 					<loginAnnon>First name:</loginAnnon> <br />
 					<input type="text" name="firstname" /><br />
 					<loginAnnon>Last name:</loginAnnon> <br />
 					<input type="text" name="lastname" />
 				</form>
-			</div>
-		);
+				*/
   }
 }
 
