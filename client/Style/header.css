@@ -4,36 +4,51 @@ body {
     margin: 0;
 }
 
-nav {
-    min-height: 50px;
+/* Variable declaration */
+:root {
+    --min-nav-width: 35em;
     
-    padding-top: 0.5rem;
-    padding-bottom: 0.7rem;
+    --navbar-tt-size: 40px;
+    --nav-pd-top: 0.5rem;
+    --nav-pd-bottom: 0.7rem;
+    
+    --nav-mi-pd-top: 0.5em;
+}
+
+nav {
+    /* SAME-relation - 'nav' min-width & 'navbar-content' max-width */
+    min-width: var(--min-nav-width);
+    
+    padding-top: var(--nav-pd-top);
+    padding-bottom: var(--nav-pd-bottom);
     /* " padding-right/left " is required to stop .navbar-content from touching the edge of the window (on small screens) */
     padding-right: 1rem;
     padding-left: 1rem;
     margin-bottom: 1rem;
     
-    font-size: 22px;
+    /* Last item account for the natural font padding of the PhraseDidact title */
+    height: calc( var(--navbar-tt-size) + var(--nav-pd-top) + var(--nav-pd-bottom) +        var(--navbar-tt-size) / 3 );
+    font-size: 2.4rem;
     
-    overflow: auto;
+    /* i.e. allow login form to display over bottom boundary  */
+    overflow: visible;
 }
 
 .navbar-content{
-    max-width: 45em;
+    max-width: var(--min-nav-width);
     /* i.e. center component */
     margin: auto;
 }
 
 .navbar-title{
-    font-size: 40px;
+    font-size: var(--navbar-tt-size);
     margin-right: 5%;
 }
 
 .navbar-menu-items{
     /* Padding is applied to each item individually so that
     the same padding remains applied if they stack on top of each other (on small screens) */
-    padding-top: 13px;
+    padding-top: var(--nav-mi-pd-top);
     margin-right: 4%;
 }
 
@@ -55,6 +70,7 @@ nav {
     /* Height of triangle */
     border-top: 8px solid black;
     
+    /********************* TODO to dynanic ******************/
     margin-top: 22px;
     float: inherit;
 }
@@ -99,6 +115,17 @@ nav {
 loginAnnon{
     /* Artifical padding */
     line-height: 200%;
+}
+
+
+#login-buttons{
+    /* act as right-padding */
+    min-width: 100px;
+    font-size: 20px;
+    padding-top: calc( var(--nav-mi-pd-top) * 1.5);
+    
+    /* i.e. right-align */
+    float: right;
 }
 
 /* Themes */
