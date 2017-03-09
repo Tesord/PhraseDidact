@@ -1,54 +1,39 @@
 /* CSS declarations go here */
-body {
-    /* Get rid of the default margin separating components from the very top of the window. */
-    margin: 0;
-}
 
 /* Variable declaration */
 :root {
     --min-nav-width: 35em;
-    
-    --navbar-tt-size: 40px;
-    --nav-pd-top: 0.5rem;
-    --nav-pd-bottom: 0.7rem;
-    
-    --nav-mi-pd-top: 0.5em;
 }
 
 nav {
     /* SAME-relation - 'nav' min-width & 'navbar-content' max-width */
     min-width: var(--min-nav-width);
     
-    padding-top: var(--nav-pd-top);
-    padding-bottom: var(--nav-pd-bottom);
+    padding-top: 0.5rem;
+    padding-bottom: 0.7rem;
     /* " padding-right/left " is required to stop .navbar-content from touching the edge of the window (on small screens) */
     padding-right: 1rem;
     padding-left: 1rem;
     margin-bottom: 1rem;
-    
-    /* Last item account for the natural font padding of the PhraseDidact title */
-    height: calc( var(--navbar-tt-size) + var(--nav-pd-top) + var(--nav-pd-bottom) +        var(--navbar-tt-size) / 3 );
+
     font-size: 2.4rem;
-    
-    /* i.e. allow login form to display over bottom boundary  */
-    overflow: visible;
+    /* i.e. Automatically adjust header height */
+    overflow: auto;
 }
 
-.navbar-content{
+#navbar-content{
     max-width: var(--min-nav-width);
-    /* i.e. center component */
-    margin: auto;
 }
 
 .navbar-title{
-    font-size: var(--navbar-tt-size);
+    font-size: 40px;
     margin-right: 5%;
 }
 
 .navbar-menu-items{
     /* Padding is applied to each item individually so that
     the same padding remains applied if they stack on top of each other (on small screens) */
-    padding-top: var(--nav-mi-pd-top);
+    padding-top: 0.5em;
     margin-right: 4%;
 }
 
@@ -59,7 +44,7 @@ nav {
     float: right;
 }
 
-/* TODO profile pic */
+/********************* TODO profile pic ******************/
 
 .arrow-down {
     width: 0; 
@@ -99,33 +84,9 @@ nav {
     margin-top: 9px;
 }
 
-#login-form{
-    margin: auto;
-    padding: 10px;
-    max-width: 300px;
-    
-    /* Precise coord will be set using javascript, thru the activation of the login button */
-    display: none;
-    position: absolute;
-        
-    border: 3px solid black;
-    border-radius: 4px;
-}
-
 loginAnnon{
     /* Artifical padding */
     line-height: 200%;
-}
-
-
-#login-buttons{
-    /* act as right-padding */
-    min-width: 100px;
-    font-size: 20px;
-    padding-top: calc( var(--nav-mi-pd-top) * 1.5);
-    
-    /* i.e. right-align */
-    float: right;
 }
 
 /* Themes */

@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08-Mar-2017, 21:54:45
+    Author     : Benny_000
+*/
+
+:root {
+    --login-width: 40%;
+}
+
+#login-content{
+    height: 80vh;
+    width: 70vw;
+    min-width: 35em;
+}
+
+.login-login{
+    width: var(--login-width);
+}
+
+.login-register{
+    width: calc( 100% - var(--login-width) );
+}
+
+.login-login, .login-register{
+    display: inline-block;
+    text-align: center;
+}
