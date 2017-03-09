@@ -4,15 +4,9 @@
  * and open the template in the editor.
  */
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 class Header extends Component {
-	
-	displayLogin(event){
-		event.preventDefault();
-		
-		// browser will not keep this in the 'back history'
-		window.location.replace("./login");
-	}
 	
 	/* ::L_NOTE:: 
 	 * Watch out! Unlike traditional CSS, "class" is not an valid attribute.
@@ -33,22 +27,21 @@ class Header extends Component {
 		
 		// else login-in button
 
-		login_prof = <button type="button"	
-									className="btn-info align-right" 
-									id = "login-btn"
-									onClick={this.displayLogin.bind(this)}>
+		login_prof = <Link to="/login"
+								 className="btn-info align-right" 
+								 id = "login-btn">
 							Login
-						 </button>;
+						 </Link>;
 		
 		return (
-			<nav className="navTheme-default">
+			<nav className="nav-ThemeDefault">
 				<div id="navbar-content" className="h-center">
 					<div className="align-left navbar-title">PhraseDidact</div>
 
-						<div className="align-left navbar-menu-items">Home</div>
-						<div className="align-left navbar-menu-items">SOMETHING</div>
+					<div className="align-left navbar-menu-items">Home</div>
+					<div className="align-left navbar-menu-items">SOMETHING</div>
 
-						{login_prof}
+					{login_prof}
 				</div>
 			</nav>
 		);

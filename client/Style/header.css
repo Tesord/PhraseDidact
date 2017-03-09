@@ -2,11 +2,11 @@
 
 /* Variable declaration */
 :root {
-    --min-nav-width: 35em;
+    /* SAME-relation - header.css' --min-nav-width & login.css' #login-content max-width */
+    --min-nav-width: 80rem;
 }
 
 nav {
-    /* SAME-relation - 'nav' min-width & 'navbar-content' max-width */
     min-width: var(--min-nav-width);
     
     padding-top: 0.5rem;
@@ -81,15 +81,12 @@ nav {
     border: 1px solid #005bef;
     border-radius: 4px;
     
+    text-decoration: none;
     margin-top: 9px;
 }
 
-loginAnnon{
-    /* Artifical padding */
-    line-height: 200%;
-}
-
 /* Themes */
-.navTheme-default{
+
+.nav-ThemeDefault{
     background-color: #9CB084;
 }

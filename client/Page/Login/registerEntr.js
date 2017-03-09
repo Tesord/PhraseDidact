@@ -9,9 +9,13 @@ import React, { Component } from 'react';
 
 const RegisterEntr = () => {
    return (
-		<div className="login-register v-center">
-			ENTRANCE
-		</div>
+		<form className="login-register v-center border-ThemeDefault register-ThemeDefault">
+			<loginTitle>Log in</loginTitle>
+			<loginAnnon>Username</loginAnnon>
+			<input name="username" type="text" className="loginField h-center" />
+			<loginAnnon>Password</loginAnnon>
+			<input name="password" type="password" className="loginField h-center" />
+		</form>
    );
 };
 
