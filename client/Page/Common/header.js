@@ -27,9 +27,8 @@ class Header extends Component {
 		
 		// else login-in button
 
-		login_prof = <Link to="/login"
-								 className="btn-info align-right" 
-								 id = "login-btn">
+		login_prof = <Link to="/login" type="button"
+								className="btn-info align-right"  id = "login-btn">
 							Login
 						 </Link>;
 		

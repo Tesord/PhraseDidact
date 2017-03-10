@@ -27,6 +27,14 @@ const routes = (
 	</Router>
 );
 
+
 Meteor.startup(() => {
 	ReactDOM.render(routes, document.querySelector('#render-target'));
+	
+	
+	/* By default, Bootstrap keeps all the <a /> 'depressed' after clicking them.
+	 * This jQuery select procedure gets rid of that */
+	$(" a ").mouseup(function(event) {
+        $("#" + event.target.id ).blur();
+   });
 });

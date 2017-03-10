@@ -1,5 +1,3 @@
-/* CSS declarations go here */
-
 /* Variable declaration */
 :root {
     /* SAME-relation - header.css' --min-nav-width & login.css' #login-content max-width */
@@ -61,10 +59,10 @@ nav {
 }
 
 #login-btn {
+    /* Adapted from Bootstrap, customised to suit my need */
+    
     display: inline-block;
-    padding: 8px 25px;
     margin-bottom: 0;
-    font-size: 14px;
     font-weight: normal;
     line-height: 1.42857143;
     text-align: center;
@@ -81,6 +79,8 @@ nav {
     border: 1px solid #005bef;
     border-radius: 4px;
     
+    padding: 8px 25px;
+    font-size: 16px;
     text-decoration: none;
     margin-top: 9px;
 }

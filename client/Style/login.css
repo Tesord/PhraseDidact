@@ -1,12 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 08-Mar-2017, 21:54:45
-    Author     : Benny_000
-*/
 :root {
     --login-form-width: 60%;
     --login-form-rmargin: 4%;
@@ -59,10 +50,10 @@ loginAnnon{
 }
 
 .loginField{
-    margin-top: 0.3rem;
-    margin-bottom: 0.9rem;
+    margin-top: 0.3rem      !important;
+    margin-bottom: 0.9rem       !important;
     
-    width: var(--login-form-comp-width);
+    width: var(--login-form-comp-width)     !important;
 }
 
 loginTitle, loginAnnon, .loginField{
