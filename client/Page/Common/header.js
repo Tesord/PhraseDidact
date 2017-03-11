@@ -3,52 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
+import AccountHead from './accountHead';
 
-class Header extends Component {
+
+const Header = () => {
 	
 	/* ::L_NOTE:: 
 	 * Watch out! Unlike traditional CSS, "class" is not an valid attribute.
 	 * In React components, "className" is used instead. */
-	render() {
-		let login_prof = null;
-		
-		// TODO
-		// if login-in, display PROFILE		(Theme to be dynamic here?)
+	return (
+		<nav className="nav-ThemeDefault">
+			<div id="navbar-content" className="h-center">
+			
+				<div className="align-left navbar-title">PhraseDidact</div>
 
-		/*
-		login_prof = <div className="align-right">PROFILE HERE     
-							<span className="arrow-down"></span>
-						 </div>;
-		*/
-	  
-//		login_prof = <Login />;
-		
-		// else login-in button
+				<div className="align-left navbar-menu-items">Home</div>
+				<div className="align-left navbar-menu-items">SOMETHING</div>
 
-		login_prof = <Link to="/login" type="button"
-								className="pd-btn btn-info align-right"  id = "login-btn">
-							Login
-						 </Link>;
-		
-		return (
-			<nav className="nav-ThemeDefault">
-				<div id="navbar-content" className="h-center">
-					<div className="align-left navbar-title">PhraseDidact</div>
-
-					<div className="align-left navbar-menu-items">Home</div>
-					<div className="align-left navbar-menu-items">SOMETHING</div>
-
-					{login_prof}
-				</div>
-			</nav>
-		);
-  }
+				<AccountHead />
+			</div>
+		</nav>
+	);
 }
 
-/* ::L_NOTE:: 
- * Works similar to home.js, but since the "class" annotation is used,
- * the render() method will be called instead. */
+
 export default Header;
 

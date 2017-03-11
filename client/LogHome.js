@@ -40,3 +40,8 @@ const LogHome = () => {
 export default LogHome;
 	
 	
+	
+	
+/* ::L_NOTE:: 
+ * Works similar to home.js, but since the "class" annotation is used,
+ * the render() method will be called instead. */

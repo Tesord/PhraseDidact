@@ -3,17 +3,55 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import React from 'react';
+import React, { Component } from 'react';
 import Header_JSC from './Common/header';
 
 
+const depressHTMLTagList = " a , button ";
+
+/* ::L_NOTE:: 
+ * ES6. */
+class App extends Component {
+	
+	mouseupDepresser(){
+		let alreadySet = [];
+		
+		/* By default, Bootstrap keeps all the <a /> + <button /> 'depressed' after clicking them.
+		* This jQuery select procedure applies the event handling code to get rid of that */
+		$( depressHTMLTagList ).filter( 
+			// i.e. only DOM elements that meet this condition (-1 means not found in array) will get the event written
+			function( index, element ) {
+				return	$.inArray(element.id , alreadySet) === -1;
+			}
+		)		
+		.mouseup(function(event) {
+			
+			console.log( event.target.id  );
+			alreadySet.push( event.target.id );
+			$("#" + event.target.id ).blur();
+			
+		});
+	}
+	
+	componentDidMount() {
+		this.mouseupDepresser();
+	}
+	
+	componentDidUpdate(){
+		this.mouseupDepresser();
+	}
+
+	render() {
+		return (
+			<div>
+				<Header_JSC />
+				{this.props.children}
+			</div>
+		);
+	}
+}
+
 /* ::L_NOTE:: 
  * When using < *Component name* /> notation, the component name MUST begin with capital letter. */
-export default (props) => {
-   return (
-		<div>
-			<Header_JSC />
-			{props.children}
-		</div>
-	);
-};
+export default App;
+	
