@@ -8,17 +8,6 @@ body {
     margin: auto;
 }
 
-
-.v-center{
-    /* i.e. vertially center this component 
-       Might NEED TO SET min-height to avoid top-overflow in short displays */
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
 .pd-btn{
     /* Extract from Bootstrap */
     display: inline-block;

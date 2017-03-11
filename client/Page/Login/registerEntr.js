@@ -3,19 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router';
 
 // TODO Change this class before FINAL release
 
 const RegisterEntr = () => {
    return (
-		<form className="login-register v-center border-ThemeDefault register-ThemeDefault">
-			<loginTitle>Log in</loginTitle>
-			<loginAnnon>Username</loginAnnon>
+		<div className="login-register		border-ThemeDefault login-ThemeDefault">
+			<loginTitle>Don't have an account? <br/> 
+							Create one now!</loginTitle>
+			<loginAnnon>Are you a student?</loginAnnon>
 			<input name="username" type="text" className="loginField h-center" />
-			<loginAnnon>Password</loginAnnon>
+			<loginAnnon>Are you a languages instructor / researcher?</loginAnnon>
 			<input name="password" type="password" className="loginField h-center" />
-		</form>
+				
+			<Link to="/register" type="button"
+					id="register-btn"		className="pd-btn		btn-default">
+				Register
+			</Link>
+		</div>
    );
 };
 

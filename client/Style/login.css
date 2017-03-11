@@ -1,20 +1,20 @@
 :root {
-    --login-form-width: 60%;
-    --login-form-rmargin: 4%;
+    --login-form-width: 50%;
+    --login-form-rmargin: 10%;
     
     --login-form-comp-width: 80%;
 }
 
 
 #login-content{
-    height: 80vh;
-    min-height: 40rem;
-    width: 70vw;
+    width: 80vw;
     /* SAME-relation - header.css' --min-nav-width & login.css' #login-content max-width */
     min-width: 80rem;
     
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
 }
 
 .login-login{
@@ -29,6 +29,7 @@
 
 .login-login, .login-register{
     display: inline-block;
+    vertical-align: middle;
     text-align: center;
 }
 

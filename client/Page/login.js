@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import React, { Component } from 'react';
+import React from 'react';
 
 import LoginForm_C from './Login/loginForm';
 import RegisterEntr_C from './Login/registerEntr';

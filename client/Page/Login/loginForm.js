@@ -3,19 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import React, { Component } from 'react';
+import React from 'react';
 
 // TODO Change this class before FINAL release
 
 const LoginForm = () => {
    return (
-		<form className="login-login		v-center border-ThemeDefault login-ThemeDefault">
+		<form className="login-login		border-ThemeDefault login-ThemeDefault">
 			<loginTitle>Log in</loginTitle>
-			<loginAnnon className="h-center">Username</loginAnnon>
-			<input name="username" type="text" className="loginField		h-center		form-control" />
+			
+			<loginAnnon className="h-center">Email Address / Username</loginAnnon>
+			<input name="username" type="text" className="loginField		h-center		form-control" 
+					 placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '	/>
+					 
 			<loginAnnon className="h-center">Password</loginAnnon>
-			<input name="password" type="password" className="loginField	h-center		form-control" />
-			<button type="button" id="login-form-btn" className="pd-btn rounded-border		btn-primary">Login</button>
+			<input name="password" type="password" className="loginField	h-center		form-control" 
+					 />
+			
+			<button type="submit" id="login-form-btn" className="pd-btn rounded-border		btn-primary">Login</button>
 		</form>
    );
 };

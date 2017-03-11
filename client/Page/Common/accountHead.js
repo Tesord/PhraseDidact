@@ -30,12 +30,7 @@ const AccountHead = () => {
  
 				<Link to="/login" type="button"
 						id="login-btn"		className="pd-btn rounded-border		btn-info">
-					Login
-				</Link>
-				
-				<Link to="/register" type="button"
-						id="register-btn"		className="pd-btn		btn-default">
-					Register
+					Login / Register
 				</Link>
 		
 			</div>;
