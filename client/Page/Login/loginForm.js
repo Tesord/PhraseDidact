@@ -9,12 +9,13 @@ import React, { Component } from 'react';
 
 const LoginForm = () => {
    return (
-		<form className="login-login v-center border-ThemeDefault login-ThemeDefault">
+		<form className="login-login		v-center border-ThemeDefault login-ThemeDefault">
 			<loginTitle>Log in</loginTitle>
 			<loginAnnon className="h-center">Username</loginAnnon>
-			<input name="username" type="text" className="loginField h-center form-control" />
+			<input name="username" type="text" className="loginField		h-center		form-control" />
 			<loginAnnon className="h-center">Password</loginAnnon>
-			<input name="password" type="password" className="loginField h-center form-control" />
+			<input name="password" type="password" className="loginField	h-center		form-control" />
+			<button type="button" id="login-form-btn" className="pd-btn rounded-border		btn-primary">Login</button>
 		</form>
    );
 };

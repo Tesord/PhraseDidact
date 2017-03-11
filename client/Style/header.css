@@ -42,6 +42,47 @@ nav {
     float: right;
 }
 
+
+#login-head-content{
+    display: inline-block;
+}
+
+/* Unlogged account head */
+
+#login-btn {
+    border: 1px solid #005bef;
+    padding: 8px 25px;
+    font-size: 16px;
+    
+    margin-right: 1.5rem;
+}
+
+#register-btn {
+    border: 2px solid #0099cc;
+    padding: 5px 18px;
+    font-size: 14px;
+    
+    background-color: #FFFFFF;
+    color: #0099cc;
+}
+
+/* Extract from bootstrap-button-pack [BootstrapBay] */
+#register-btn:hover, #register-btn:focus, #register-btn:active, #register-btn.active, .open > .dropdown-toggle.btn-primary {
+    color: #33a6cc;
+    border-color: #33a6cc;
+}
+#register-btn:active, #register-btn.active {
+    border-color: #007299;
+    color: #007299;
+    box-shadow: none;
+}
+
+
+#login-btn, #register-btn {
+    text-decoration: none;
+
+    margin-top: 9px;
+}
 /********************* TODO profile pic ******************/
 
 .arrow-down {
@@ -56,14 +97,6 @@ nav {
     /********************* TODO to dynanic ******************/
     margin-top: 22px;
     float: inherit;
-}
-
-#login-btn {
-    border: 1px solid #005bef;
-    padding: 8px 25px;
-    font-size: 16px;
-    text-decoration: none;
-    margin-top: 9px;
 }
 
 /* Themes */

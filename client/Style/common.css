@@ -36,6 +36,13 @@ body {
     -ms-user-select: none;
     user-select: none;
     background-image: none;
+}
+
+.pd-btn:focus {
+  outline: none     !important;
+}
+
+.rounded-border{
     border-radius: 4px;
 }
 

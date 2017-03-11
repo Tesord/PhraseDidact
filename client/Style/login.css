@@ -20,6 +20,7 @@
 .login-login{
     width: var(--login-form-width);
     margin-right: var(--login-form-rmargin);
+    padding-bottom: 3rem;
 }
 
 .login-register{
@@ -40,9 +41,6 @@ loginTitle{
 }
 
 loginAnnon{
-    /* Artifical padding */
-    line-height: 200%;
-    
     text-align: left;
     font-size: 2rem;
     
@@ -50,14 +48,24 @@ loginAnnon{
 }
 
 .loginField{
+    /* Keep input fields from being blurry */
     margin-top: 0.3rem      !important;
-    margin-bottom: 0.9rem       !important;
+    margin-bottom: 1.7rem       !important;
     
     width: var(--login-form-comp-width)     !important;
 }
 
 loginTitle, loginAnnon, .loginField{
     display: block;
+}
+
+#login-form-btn{
+    border: 1px solid #005bef;
+    padding: 8px 45px;
+    font-size: 16px;
+    
+    text-decoration: none;
+    margin-top: 9px;
 }
 
 
