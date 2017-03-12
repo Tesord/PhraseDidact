@@ -13,7 +13,7 @@ const Header = () => {
 	 * Watch out! Unlike traditional CSS, "class" is not an valid attribute.
 	 * In React components, "className" is used instead. */
 	return (
-		<nav className="nav-ThemeDefault">
+		<nav className="_Theme_nav_Default_">
 			<div id="navbar-content" className="h-center">
 			
 				<div className="align-left navbar-title">PhraseDidact</div>

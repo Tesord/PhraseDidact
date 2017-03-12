@@ -13,14 +13,13 @@
     
     padding-left: 1rem;
     padding-right: 1rem;
-    padding-top: 15vh;
+    padding-top: 10vh;
     padding-bottom: 15vh;
 }
 
 .login-login{
     width: var(--login-form-width);
     margin-right: var(--login-form-rmargin);
-    padding-bottom: 3rem;
 }
 
 .login-register{
@@ -31,10 +30,12 @@
     display: inline-block;
     vertical-align: middle;
     text-align: center;
+    
+    padding-bottom: 3rem;
 }
 
 
-/* Login form */
+/* Login form comp. */
 
 loginTitle{
     font-size: 3rem;
@@ -49,7 +50,6 @@ loginAnnon{
 }
 
 .loginField{
-    /* Keep input fields from being blurry */
     margin-top: 0.3rem      !important;
     margin-bottom: 1.7rem       !important;
     
@@ -62,7 +62,7 @@ loginTitle, loginAnnon, .loginField{
 
 #login-form-btn{
     border: 1px solid #005bef;
-    padding: 8px 45px;
+    padding: 8px 55px;
     font-size: 16px;
     
     text-decoration: none;
@@ -70,12 +70,58 @@ loginTitle, loginAnnon, .loginField{
 }
 
 
-/* Themes */
+/* Register entrance comp. */
 
-.login-ThemeDefault{
-    background-color: #ffffff;
+.login-register desc{
+    display: block;
+    font-size: 1.5rem;
+    
+    margin-top: 1.5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    
+    text-align: left;
 }
 
-.register-ThemeDefault{
-    background-color: #f4f2f2;
+
+#register-btn {
+    padding: 5px 18px;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    
+    border: 2px solid #0099cc;
 }
+
+
+.btn-register{
+    background-color: #FFFFFF;
+    color: #0099cc;
+}
+.btn-register:hover, .btn-register:focus, btn-register.focus {
+    /* Darker */
+    color: #007299;
+    border-color: #007299   !important;
+}
+.btn-register:active, .btn-register.active {
+    /* Lighter */
+    color: #84ccff;
+    border-color: #84ccff   !important;
+    box-shadow: none;
+}
+
+
+/****************************************************** TODO *************************************/
+
+/*
+.btn-register-ln{
+    
+}
+._Theme_register-btn-ln_Default_:hover, ._Theme_register-btn-ln_Default_:focus, ._Theme_register-btn-ln_Default_.focus {
+    color: #33a6cc;
+    border-color: #33a6cc;
+}
+._Theme_register-btn-ln_Default_:active, ._Theme_register-btn-ln_Default_.active {
+    border-color: #007299;
+    color: #007299;
+    box-shadow: none;
+}*/

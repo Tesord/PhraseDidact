@@ -9,14 +9,14 @@ import React from 'react';
 
 const LoginForm = () => {
    return (
-		<form className="login-login		border-ThemeDefault login-ThemeDefault">
-			<loginTitle>Log in</loginTitle>
+		<form className="login-login		_Theme_border_Default_ _Theme_login_Default_">
+			<loginTitle>	Log in	</loginTitle>
 			
-			<loginAnnon className="h-center">Email Address / Username</loginAnnon>
+			<loginAnnon className="h-center">	Email Address / Username	</loginAnnon>
 			<input name="username" type="text" className="loginField		h-center		form-control" 
 					 placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '	/>
 					 
-			<loginAnnon className="h-center">Password</loginAnnon>
+			<loginAnnon className="h-center">	Password	</loginAnnon>
 			<input name="password" type="password" className="loginField	h-center		form-control" 
 					 />
 			

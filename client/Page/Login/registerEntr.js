@@ -10,18 +10,29 @@ import { Link } from 'react-router';
 
 const RegisterEntr = () => {
    return (
-		<div className="login-register		border-ThemeDefault login-ThemeDefault">
-			<loginTitle>Don't have an account? <br/> 
-							Create one now!</loginTitle>
-			<loginAnnon>Are you a student?</loginAnnon>
-			<input name="username" type="text" className="loginField h-center" />
-			<loginAnnon>Are you a languages instructor / researcher?</loginAnnon>
-			<input name="password" type="password" className="loginField h-center" />
-				
+		<div className="login-register		_Theme_border_Default_ _Theme_register_Default_">
+			<h3>	Don't have an account? <br/> 
+					Create one now!</h3>
+			
+			<hr className="_Theme_hr_Default_"/>
+				 
+			<h4>	Are you a student?	</h4>
+			<desc>	Start learning languages completely free of charge!	</desc>
 			<Link to="/register" type="button"
-					id="register-btn"		className="pd-btn		btn-default">
-				Register
+					id="register-btn"		className="pd-btn		btn-register">
+				Register as student
 			</Link>
+			
+			<br /><br /><br />
+			
+			<h4>	Are you a language instructor / researcher?</h4>
+			<desc>	Get access to learner data and design your own language learning course!		</desc>
+			<Link to="/register" type="button"
+					id="register-btn"		className="pd-btn		btn-register">
+				Register as instructor
+			</Link>
+				
+			
 		</div>
    );
 };
