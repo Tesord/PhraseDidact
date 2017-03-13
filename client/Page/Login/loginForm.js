@@ -9,7 +9,7 @@ import React from 'react';
 
 const LoginForm = () => {
    return (
-		<form className="login-login		_Theme_border_Default_ _Theme_login_Default_">
+		<form className="login-form		_Theme_border_Default_ _Theme_login_Default_">
 			<loginTitle>	Log in	</loginTitle>
 			
 			<loginAnnon className="h-center">	Email Address / Username	</loginAnnon>

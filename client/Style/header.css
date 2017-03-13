@@ -1,6 +1,5 @@
 /* Variable declaration */
 :root {
-    /* SAME-relation - header.css' --min-nav-width & login.css' #login-content max-width */
     --min-nav-width: 80rem;
 }
 

@@ -25,14 +25,14 @@ body {
     -ms-user-select: none;
     user-select: none;
     background-image: none;
-    
+
     text-decoration: none;
 }
 .pd-btn:active, .pd-btn.active {
     /* ::L_NOTE::       .pd-btn.active  =  when clicked by mouse */
     outline: none;
 }
-.pd-btn:hover, .pd-btn:focus, .pd-btn.focus, .pd-btn:active, #register-btn.active {
+.pd-btn:hover, .pd-btn:focus, .pd-btn.focus, .pd-btn:active, .pd-btn.active {
     /* ::L_NOTE::       .pd-btn:focus  =  particularly when select by keyboard*/
     text-decoration: none   !important;
 }
@@ -40,4 +40,3 @@ body {
 .rounded-border{
     border-radius: 4px;
 }
-
