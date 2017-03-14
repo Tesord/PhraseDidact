@@ -1,0 +1,111 @@
+@login-form-comp-width: 80%;
+
+
+#login-content {
+   width: 40vw;
+   min-width: 40rem;
+
+   padding-left: 1rem;
+   padding-right: 1rem;
+   padding-top: 10vh;
+   padding-bottom: 15vh;
+}
+
+.login-form {
+   vertical-align: middle;
+   text-align: center;
+
+   width: 100%;
+   padding-bottom: 3rem;
+}
+
+
+/* Login form comp. */
+
+loginTitle {
+   font-size: 3rem;
+   margin-bottom: 2.4rem;
+}
+loginAnnon {
+   text-align: left;
+   font-size: 2rem;
+
+   width: @login-form-comp-width;
+}
+.loginField {
+   margin-top: 0.3rem      !important;
+   margin-bottom: 1.7rem       !important;
+
+   width: @login-form-comp-width     !important;
+}
+
+loginTitle, loginAnnon, .loginField {
+   display: block;
+}
+
+#login-form-btn {
+   border: 1px solid #005bef;
+   padding: 8px 55px;
+   font-size: 16px;
+
+   margin-top: 9px;
+}
+
+
+/* Register entrance comp. */
+
+registerDesc {
+   display: block;
+   font-size: 1.5rem;
+
+   margin-top: 1.5rem;
+   margin-left: 2rem;
+   margin-right: 2rem;
+}
+
+
+#register-btn {
+   padding: 5px 18px;
+   font-size: 1.75rem;
+   margin-top: 1.5rem;
+
+   border: 2px solid #0099cc;
+}
+
+
+.btn-register {
+   background-color: #ffffff;
+   color: #0099cc;
+
+
+   &:hover, &:focus, &.focus {
+      /* Darker */
+      color: #007299;
+
+      border-color: #007299   !important;
+   }
+
+   &:active, &.active {
+      /* Lighter */
+      color: #84ccff;
+      border-color: #84ccff   !important;
+      box-shadow: none;
+   }
+}
+
+
+/****************************************************** TODO *************************************/
+
+/*
+.btn-register-ln{
+
+}
+._Theme_register-btn-ln_Default_:hover, ._Theme_register-btn-ln_Default_:focus, ._Theme_register-btn-ln_Default_.focus {
+   color: #33a6cc;
+   border-color: #33a6cc;
+}
+._Theme_register-btn-ln_Default_:active, ._Theme_register-btn-ln_Default_.active {
+   border-color: #007299;
+   color: #007299;
+   box-shadow: none;
+}*/

@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,14 +8,14 @@ import AccountHead from './accountHead';
 
 
 const Header = () => {
-	
-	/* ::L_NOTE:: 
+
+	/* ::L_NOTE::
 	 * Watch out! Unlike traditional CSS, "class" is not an valid attribute.
 	 * In React components, "className" is used instead. */
 	return (
 		<nav className="_Theme_nav_Default_">
 			<div id="navbar-content" className="h-center">
-			
+
 				<div className="align-left navbar-title">PhraseDidact</div>
 
 				<div className="align-left navbar-menu-items">Home</div>
@@ -25,8 +25,7 @@ const Header = () => {
 			</div>
 		</nav>
 	);
-}
+};
 
 
 export default Header;
-
