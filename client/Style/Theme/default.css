@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+/* common */
+._Theme_hr_Default_{
+    border-top: 2px solid #bec6d3       !important;
+}
+
+._Theme_border_Default_ {
+    border-radius: 15px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+}
+
+
+/* header.js */
+._Theme_nav_Default_{
+    background-color: #9CB084;
+    color: #000000;
+}
+
+
+/* login.js */
+
+._Theme_login_Default_{
+    background-color: #ffffff;
+    color: #000000;
+}
+
+._Theme_register_Default_{
+    background-color: #f9f9f9;
+    color: #000000;
+}

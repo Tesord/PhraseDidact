@@ -1,0 +1,25 @@
+{
+	"singleLinePerSelector": {
+		"enabled": false
+	},
+	
+	"propertyOrdering": {
+		"enabled": false
+	},
+	
+	"idSelector": {
+		"enabled": false
+	},
+	
+	"maxCharPerLine": {
+		"enabled": false
+	},
+	
+	"trailingWhitespace": {
+		"enabled": false
+	},
+	
+	"newlineAfterBlock": {
+		"enabled": false
+	}
+}

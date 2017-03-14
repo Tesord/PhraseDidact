@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import Header_JSC from './Common/header';
 
 
+<<<<<<< HEAD
 const depressHTMLTagList = " a , button ";
 
 /* ::L_NOTE:: 
@@ -41,6 +42,12 @@ class App extends Component {
 		this.mouseupDepresser();
 	}
 
+=======
+/* ::L_NOTE::
+ * ES6. */
+class App extends Component {
+	
+>>>>>>> ff6b580198bd72cc2a2a7ecf5160ffb5793a41c4
 	render() {
 		return (
 			<div>
@@ -51,7 +58,13 @@ class App extends Component {
 	}
 }
 
+<<<<<<< HEAD
 /* ::L_NOTE:: 
  * When using < *Component name* /> notation, the component name MUST begin with capital letter. */
 export default App;
 	
+=======
+/* ::L_NOTE::
+ * When using < *Component name* /> notation, the component name MUST begin with capital letter. */
+export default App;
+>>>>>>> ff6b580198bd72cc2a2a7ecf5160ffb5793a41c4
