@@ -7,30 +7,38 @@ import React, {Component} from 'react';
 
 // TODO Change this class before FINAL release
 
-//       		<form className="login-form		_Theme_border_Default_ _Theme_login_Default_">
-
-
 class LoginForm extends Component {
 
-   flip(){
-      $(" #login-content ").css("transform","rotateY(180deg)");
+   componentDidMount(){
+
+      // initalise Flip mechanic
+      $("#login-content").flip({
+         axis: 'y',
+         trigger: 'manual',
+         forceHeight: false
+      });
+   }
+
+   handleButtonClick(){
+      $("#login-content").flip(true);
    }
 
    render(){
       return (
-         <div className="login-form       _Theme_border_Default_ _Theme_login_Default_">
-   			<loginTitle>	Log in	</loginTitle>
+      		<form className="login-form 	front   _Theme_border_Default_ _Theme_login_Default_">
+      			<loginTitle>	Log in	</loginTitle>
 
-   			<loginAnnon className="h-center">	Email Address / Username	</loginAnnon>
-   			<input name="username" type="text" className="loginField		h-center		form-control"
-   					 placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '	/>
+      			<loginAnnon className="h-center">	Email Address / Username	</loginAnnon>
+      			<input name="username" type="text" className="loginField		h-center		form-control"
+      					 placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '	/>
 
-   			<loginAnnon className="h-center">	Password	</loginAnnon>
-   			<input name="password" type="password" className="loginField	h-center		form-control"
-   					 />
+      			<loginAnnon className="h-center">	Password	</loginAnnon>
+      			<input name="password" type="password" className="loginField	h-center		form-control"
+      					 />
 
-                <button onClick={this.flip.bind(this)} id="login-form-btn" className="pd-btn rounded-border		btn-primary">Login</button>
-         </div>
+               <button onClick={this.handleButtonClick.bind(this)} id="login-form-btn" className="pd-btn rounded-border		btn-primary">Login</button>
+      		</form>
+
       );
    }
 };
