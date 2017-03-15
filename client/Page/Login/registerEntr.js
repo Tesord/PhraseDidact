@@ -10,7 +10,7 @@ import { Link } from 'react-router';
 
 const RegisterEntr = () => {
    return (
-		<div className="login-form		_Theme_border_Default_ _Theme_register_Default_">
+		<div className="register-form		_Theme_border_Default_ _Theme_register_Default_">
 			<h3>	Don't have an account? <br/>
 					Create one now!</h3>
 

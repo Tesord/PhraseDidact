@@ -8,14 +8,36 @@
    padding-left: 1rem;
    padding-right: 1rem;
    padding-top: 10vh;
-   padding-bottom: 15vh;
+   padding-bottom: 10vh;
+
+   /* To give  .login-form & .register-form   a location to base their  display:absolute   coordinate */
+   position: relative;
+
+   transition: all 0.4s ease-in;
+
+   transform-style: preserve-3d;
+   /* "perspective" attribute only apply to children selectors! So " transform: pespective() " must be used instead */
+   transform: perspective(1000px);
 }
 
-.login-form {
+
+.register-form {
+   /* Start off as the 'Back' */
+   transform: rotateY(180deg);
+}
+.login-form, .register-form {
+   width: 100%;
    text-align: center;
 
-   width: 100%;
    padding-bottom: 3rem;
+
+   /* hide face when they are flipped over */
+   backface-visibility: hidden;
+
+   /* allow both face to be placed onto the same coordinate */
+	position: absolute;
+	top: 10vh;
+	left: 0px;
 }
 
 
