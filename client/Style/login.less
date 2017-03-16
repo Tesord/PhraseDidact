@@ -1,9 +1,7 @@
-@login-form-comp-width: 80%;
-
 
 #login-content {
-   width: 40vw;
-   min-width: 40rem;
+   width: 35vw;
+   min-width: 45rem;
 
    padding-left: 1rem;
    padding-right: 1rem;
@@ -16,16 +14,18 @@
    transition: all 0.4s ease-in;
 
    transform-style: preserve-3d;
-   /* "perspective" attribute only apply to children selectors! So " transform: pespective() " must be used instead */
-   transform: perspective(1000px);
+
+   a {
+      text-decoration: none;
+   }
 }
 
 
-.register-form {
+#register-form {
    /* Start off as the 'Back' */
    transform: rotateY(180deg);
 }
-.login-form, .register-form {
+#login-form, #register-form {
    width: 100%;
    text-align: center;
 
@@ -45,24 +45,36 @@
 
 loginTitle {
    font-size: 3rem;
-   margin-bottom: 2.4rem;
+   /*  !important    allows overwritting of   "h-center" 's   margin: auto */
+   margin-bottom: 2.4rem   !important;
 }
 loginAnnon {
    text-align: left;
    font-size: 2rem;
 
-   width: @login-form-comp-width;
+   margin-top: 0.3rem      !important;
 }
 .loginField {
    margin-top: 0.3rem      !important;
-   margin-bottom: 1.7rem       !important;
+   margin-bottom: 1.5rem       !important;
+}
+loginLine {
+   min-height: 2em;
+}
+.loginBigLink {
+   /* Make width no more than the content */
+   display: table;
 
-   width: @login-form-comp-width     !important;
+   margin-top: 3rem     !important;
+   font-size: 1em;
 }
 
-loginTitle, loginAnnon, .loginField {
+/* Login form top-level components */
+loginTitle, loginAnnon, .loginField, loginLine {
    display: block;
+   width: 80%;
 }
+
 
 #login-form-btn {
    border: 1px solid #005bef;
