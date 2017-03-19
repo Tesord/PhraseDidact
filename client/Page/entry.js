@@ -5,17 +5,18 @@
  */
 import React, {Component} from 'react';
 
-import LoginForm_C from './Login/loginForm';
-import RegisterEntr_C from './Login/registerEntr';
+import Login_C from './Entry/login';
+import Register_C from './Entry/register';
 
 
 // TODO Change this class before FINAL release
 
-class Login extends Component{
+class Entry extends Component{
 
 	constructor(){
 		super();
 
+		/* HTML Display variables */
 		this.login_head_content = null;
 		this.navbar_content = null;
 		this.login_head_content_width = 0;
@@ -43,11 +44,11 @@ class Login extends Component{
 	render(){
 		return (
 			<div id="login-content" className="h-center">
-				<LoginForm_C />
-				<RegisterEntr_C />
+				<Login_C />
+				<Register_C />
 			</div>
 		);
 	}
 }
 
-export default Login;
+export default Entry;

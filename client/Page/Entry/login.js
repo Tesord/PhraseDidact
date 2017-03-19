@@ -6,13 +6,13 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 
+// ****************** TODO       might change FORGET PASSWORD
 
-class LoginForm extends Component {
+
+class Login extends Component {
 
    flip(){
       $(" #login-content ").css("transform","rotateY(180deg)");
-      /* TODO                   NEEED To adjust login-content HEIGHT    to suit back pane */
-
       $(" #login-content ").css("height", 66 + "rem" );
    }
 
@@ -45,4 +45,4 @@ class LoginForm extends Component {
    }
 };
 
-export default LoginForm;
+export default Login;
