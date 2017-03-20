@@ -29,7 +29,7 @@ const AccountHead = () => {
 			<div id="login-head-content" className="align-right">
 
 				<Link to="/login" type="button"
-						id="login-btn"		className="pd-btn rounded-border		btn-info">
+						id="login-btn"		className="rounded-border		btn-info">
 					Login / Register
 				</Link>
 

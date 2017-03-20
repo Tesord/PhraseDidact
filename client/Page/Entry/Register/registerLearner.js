@@ -3,21 +3,26 @@ import React from 'react';
 
 const RegisterLearner = () => {
 
-	/* ::L_NOTE::
-	 * Watch out! Unlike traditional CSS, "class" is not an valid attribute.
-	 * In React components, "className" is used instead. */
 	return (
-		<nav className="_Theme_nav_Default_">
-			<div id="navbar-content" className="h-center">
+		<div id="register-form" className="_Theme_border_Default_ _Theme_register_Default_">
+			<loginTitle className="h-center">	Sign up	</loginTitle>
 
-				<div className="align-left navbar-title">PhraseDidact</div>
+			<loginAnnon className="h-center">	Username		</loginAnnon>
+			<input name="username" type="text" className="loginField		h-center		form-control"
+   				 placeholder='e.g. david_smith72 '	/>
 
-				<div className="align-left navbar-menu-items">Home</div>
-				<div className="align-left navbar-menu-items">SOMETHING</div>
+			<loginAnnon className="h-center">	Email Address		</loginAnnon>
+			<input name="email" type="email" className="loginField	h-center		form-control"
+					 placeholder='e.g. " david.smith@example.com  '	/>
 
-				<AccountHead />
-			</div>
-		</nav>
+			<loginAnnon className="h-center">	Password		</loginAnnon>
+			<input name="password" type="password" className="loginField	h-center		form-control"/>
+
+			<loginAnnon className="h-center">	Confirm Password		</loginAnnon>
+			<input name="password2" type="password" className="loginField	h-center		form-control"/>
+
+			<button onClick=""  className="bs-standard-btn 	rounded-border		btn-primary">Register</button>
+		</div>
 	);
 };
 

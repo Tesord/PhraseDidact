@@ -36,6 +36,13 @@ input[type='checkbox'] {
 }
 
 
+.rounded-border {
+   border-radius: 4px;
+}
+
+
+
+/* Base class for all buttons. Should not be used on its own. */
 .pd-btn {
    /* Extract from Bootstrap */
    display: inline-block;
@@ -69,6 +76,61 @@ input[type='checkbox'] {
 }
 
 
-.rounded-border {
-   border-radius: 4px;
+/* Button instances */
+.bs-standard-btn {
+   border: 1px solid #005bef;
+   padding: 8px 55px;
+   font-size: 16px;
+
+   margin-top: 9px;
+}
+
+.outline-btn {
+   padding: 5px 18px;
+   font-size: 1.75rem;
+   margin-top: 1.5rem;
+}
+
+.bs-standard-btn, .outline-btn, {
+   .pd-btn
+}
+
+
+
+/* Color configs applied to a specific button */
+.btn-whitebg-blue {
+   background-color: #ffffff;
+   color: #0099cc;
+   border: 2px solid #0099cc;
+
+
+   &:hover, &:focus, &.focus {
+      /* Darker */
+      color: #007299;
+      border-color: #007299;
+   }
+
+   &:active, &.active {
+      /* Lighter */
+      color: #84ccff;
+      border-color: #84ccff;
+   }
+}
+.btn-whitebg-green {
+   background-color: #ffffff;
+   color: #4CAF50;
+   border: 2px solid #4CAF50;
+
+
+   &:hover, &:focus, &.focus {
+      /* Darker */
+      color: #3c8c3f;
+      border-color: #3c8c3f;
+   }
+
+   &:active, &.active {
+      /* Lighter */
+      color: #5cce61;
+      border-color: #5cce61;
+   }
 }

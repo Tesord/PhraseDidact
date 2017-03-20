@@ -23,6 +23,9 @@ class Register extends Component {
       this.state = {
          page : this.Page_Enum.ENTRANCE
       };
+
+
+      this.updateRegPage = this.setPage.bind(this);
    }
 
 
@@ -31,15 +34,13 @@ class Register extends Component {
    }
 
    render(){
-      const updateRegPage = this.setPage.bind(this);
-
       switch(this.state.page) {
          case     this.Page_Enum.R_LEARNER :
-            return ( <RegisterLearner_C  updateRegPage={ updateRegPage }    /> );
+            return ( <RegisterLearner_C  updateRegPage={ this.updateRegPage }   page_enum={ this.Page_Enum }   /> );
          case     this.Page_Enum.R_INSTRUCTOR :
-            return ( <RegisterInstructor_C   updateRegPage={ updateRegPage }   /> );
+            return ( <RegisterInstructor_C   updateRegPage={ this.updateRegPage }  page_enum={ this.Page_Enum }  /> );
          default:
-            return ( <RegisterEntr_C   updateRegPage={ updateRegPage }  /> );
+            return ( <RegisterEntr_C   updateRegPage={ this.updateRegPage }  page_enum={ this.Page_Enum }  /> );
       }
 
    }

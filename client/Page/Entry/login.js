@@ -37,7 +37,7 @@ class Login extends Component {
                <Link to="/forgetPass" className="align-right" type="text/html">Forget Password?</Link>
             </loginLine>
 
-            <button onClick={this.flip.bind(this)} id="login-form-btn" className="pd-btn rounded-border	btn-primary">Login</button>
+            <button onClick={this.flip.bind(this)}  className="bs-standard-btn   rounded-border	   btn-primary">Login</button>
 
             <a className="loginBigLink  h-center" href="javascript:void(0)" onClick={this.flip.bind(this)}>	I would like to join </a>
          </form>
