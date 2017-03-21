@@ -23,11 +23,11 @@ class RegisterEntr extends Component {
 
 				<hr className="_Theme_hr_Default_"/>
 
-				<h4>	Are you a student?	</h4>
+				<h4>	Are you a learner?	</h4>
 				<registerDesc>	Start learning languages completely free of charge!	</registerDesc>
 				<button onClick= { this.props.updateRegPage.bind( this, Register_C.Page_Enum.R_LEARNER ) }
                className="outline-btn     btn-whitebg-blue">
-					Register as student
+					Register as learner
 				</button>
 
 				<br /><br /><br />

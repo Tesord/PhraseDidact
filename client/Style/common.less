@@ -45,7 +45,7 @@ input[type='radio'] {
 
 
 
-/* Base class for all buttons. Should not be used on its own. */
+/* Base class for all buttons */
 .pd-btn {
    /* Extract from Bootstrap */
    display: inline-block;
@@ -65,6 +65,7 @@ input[type='radio'] {
    background-image: none;
 
    text-decoration: none;
+   margin-top: 1rem;
 
 
    &:focus, &.focus, &:active, &.active {
@@ -78,26 +79,29 @@ input[type='radio'] {
    }
 }
 
+.form-corner-button {
+   cursor: pointer;
+   display: block;
+   position: absolute;
+   top: 4%;
+}
 
-/* Button instances */
+
+/* Rectangular button instances */
+.bs-standard-btn, .outline-btn, {
+   .pd-btn
+}
+
 .bs-standard-btn {
    border: 1px solid #005bef;
    padding: 8px 55px;
-   font-size: 16px;
-
-   margin-top: 9px;
+   font-size: 1.7rem;
 }
 
 .outline-btn {
    padding: 5px 18px;
    font-size: 1.75rem;
-   margin-top: 1.5rem;
 }
-
-.bs-standard-btn, .outline-btn, {
-   .pd-btn
-}
-
 
 
 /* Color configs applied to a specific button */

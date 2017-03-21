@@ -1,5 +1,5 @@
 .funkyradio div {
-  display: inline-block;        /* CUSTOM:	changed */
+  display: inline-block;        /* CUSTOM:	changed so that multiple instances can be on the same line */
 }
 
 .funkyradio label {
@@ -8,7 +8,7 @@
   border: 1px solid #D1D3D4;
   font-weight: normal;
 
-  color: #777;		/* CUSTOM:	changed */
+  color: #777;		/* CUSTOM:	Unselected text color changed */
 }
 
 .funkyradio input[type="radio"]:empty,
@@ -20,8 +20,8 @@
 .funkyradio input[type="checkbox"]:empty ~ label {
   position: relative;
   line-height: 2.5em;
-  text-indent: 1.5em;      /* CUSTOM:	changed */
-  margin-top: 0.33em;		/* CUSTOM:	changed */
+  text-indent: 1.5em;      /* CUSTOM:	Text position changed */
+  margin-top: 0.33em;		/* CUSTOM:	margin-top (in general) changed */
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -50,20 +50,20 @@
 .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
 .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
   content: '\2714';
-  text-indent: .9em;
+  text-indent: 0px;			/* CUSTOM:	'tick' position (active, but not selected) changed */
   color: #C2C2C2;
 }
 
 .funkyradio input[type="radio"]:checked ~ label,
 .funkyradio input[type="checkbox"]:checked ~ label {
-  color: #000000;			/* CUSTOM:	changed */
-  border-color:	#c4c5c6;		/* CUSTOM:	changed */
+  color: #000000;			/* CUSTOM:	Selected text color changed */
+  border-color:	#c4c5c6;		/* CUSTOM:	Selected border color changed */
 }
 
 .funkyradio input[type="radio"]:checked ~ label:before,
 .funkyradio input[type="checkbox"]:checked ~ label:before {
   content: '\2714';
-  text-indent: 0px;			/* CUSTOM:	changed */
+  text-indent: 0px;			/* CUSTOM:	'tick' position (selected) changed */
   color: #333;
   background-color: #ccc;
 }
