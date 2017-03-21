@@ -13,7 +13,9 @@ class Login extends Component {
 
    flip(){
       $(" #login-content ").css("transform","rotateY(180deg)");
-      $(" #login-content ").css("height", 66 + "rem" );
+
+      // adjust bottom margin for new 'card' height
+      $(" #login-content ").css("height", 71 + "rem" );
    }
 
    render(){
