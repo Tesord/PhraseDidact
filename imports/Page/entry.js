@@ -28,6 +28,12 @@ class Entry extends Component{
 
 		/************** TODO         If unlogged only *****************/
 
+		/* ::L_NOTE::
+		 * React's 'refs' feature cannot be used cross-components. This is due to the fact that the function to run
+		 * only execute AFTER the source class has been mounted, so when the render method is finished (before
+		 * source class is considered mounted), all child components will have already gotten the value of the
+		 * references, which at that time is null. */
+		 
 		this.login_head = document.getElementById("login-head-content");
 		this.navbar = document.getElementById("navbar-content");
 		// offsetWidth is used instead as it gets the actual width at the time, not from the CSS
