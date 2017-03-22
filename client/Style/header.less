@@ -1,3 +1,6 @@
+@import (reference) "common";
+
+
 /* Variable declaration */
 @min-nav-width: 80rem;
 
@@ -34,15 +37,6 @@ nav {
 }
 
 
-.align-left {
-   float: left;
-}
-
-.align-right {
-   float: right;
-}
-
-
 #login-head-content {
    display: inline-block;
 }
@@ -50,13 +44,16 @@ nav {
 /* Unlogged account head */
 
 #login-btn {
+   .pd-btn;
+
    border: 1px solid #005bef;
    padding: 8px 25px;
    font-size: 16px;
 
-   margin-top: 9px;
+   margin-top: 9px      !important;
 
    margin-right: 1.5rem;
+
 }
 /********************* TODO profile pic ******************/
 

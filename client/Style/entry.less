@@ -1,0 +1,101 @@
+#login-content {
+   width: 35vw;
+   min-width: 45rem;
+
+   padding-left: 1rem;
+   padding-right: 1rem;
+   padding-top: 10vh;
+   padding-bottom: 10vh;
+
+   /* To give  .login-form & .register-form   a location to base their  display:absolute   coordinate */
+   position: relative;
+
+   transition: all 0.4s ease-in;
+
+   transform-style: preserve-3d;
+
+   a {
+      text-decoration: none;
+   }
+
+   .funkyradio{
+      margin-bottom: 1rem;
+   }
+   .funkyradio div {
+      width: 40%;
+   }
+   .funkyradio label {
+      width: 100%;
+   }
+   .funkyradio :first-child {
+      margin-right: 1rem      !important;
+   }
+}
+
+
+#register-form {
+   /* Start off as the 'Back' */
+   transform: rotateY(180deg);
+}
+
+#login-form, #register-form {
+   width: 100%;
+   text-align: center;
+
+   padding-bottom: 3rem;
+
+   /* hide face when they are flipped over */
+   backface-visibility: hidden;
+
+   /* allow both face to be placed onto the same coordinate */
+	position: absolute;
+	top: 10vh;
+	left: 0px;
+}
+
+
+/* Login form comp. */
+
+loginTitle {
+   font-size: 3rem;
+   /*  !important    allows overwritting of   "h-center" 's   margin: auto */
+   margin-bottom: 2.4rem   !important;
+}
+loginAnnon {
+   text-align: left;
+   font-size: 2rem;
+
+   margin-top: 0.3rem      !important;
+}
+.loginField {
+   margin-top: 0.3rem      !important;
+   margin-bottom: 1.5rem       !important;
+}
+loginLine {
+   min-height: 2em;
+}
+.loginBigLink {
+   /* Make width no more than the content */
+   display: table;
+
+   margin-top: 3rem     !important;
+   font-size: 1em;
+}
+
+/* Login form top-level components */
+loginTitle, loginAnnon, .loginField, loginLine {
+   display: block;
+   width: 80%;
+}
+
+
+/* Register entrance comp. */
+
+registerDesc {
+   display: block;
+   font-size: 1.5rem;
+
+   margin-top: 1.5rem;
+   margin-left: 2rem;
+   margin-right: 2rem;
+}

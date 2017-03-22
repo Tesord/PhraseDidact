@@ -3,11 +3,49 @@ body {
    margin: 0px;
 }
 
+label {
+   font-weight: normal;
+   font-size: calc(1em + 0.1em);
+
+   /* Line "label" up with any items in its right */
+   position: relative;
+   top: -0.15em;
+}
+
+input[type='checkbox'] {
+   margin-left: 0.3em;
+
+   /* Line "checkbox" up with its "label" */
+   position: relative;
+   top: 0.15em;
+}
+input[type='radio'] {
+   margin-right: 0.5em;
+}
+
+
 .h-center {
-   /* i.e. horizontally center this component */
+   /* i.e. horizontally center this component.  If component using this require custom margin,
+      then  !important  should be applied to them. */
    margin: auto;
 }
 
+.align-left {
+   float: left;
+}
+
+.align-right {
+   float: right;
+}
+
+
+.rounded-border {
+   border-radius: 4px;
+}
+
+
+
+/* Base class for all buttons */
 .pd-btn {
    /* Extract from Bootstrap */
    display: inline-block;
@@ -27,6 +65,7 @@ body {
    background-image: none;
 
    text-decoration: none;
+   margin-top: 1rem;
 
 
    &:focus, &.focus, &:active, &.active {
@@ -40,7 +79,65 @@ body {
    }
 }
 
+.form-corner-button {
+   cursor: pointer;
+   display: block;
+   position: absolute;
+   top: 4%;
+}
 
-.rounded-border {
-   border-radius: 4px;
+
+/* Rectangular button instances */
+.bs-standard-btn, .outline-btn, {
+   .pd-btn
+}
+
+.bs-standard-btn {
+   border: 1px solid #005bef;
+   padding: 8px 55px;
+   font-size: 1.7rem;
+}
+
+.outline-btn {
+   padding: 5px 18px;
+   font-size: 1.75rem;
+}
+
+
+/* Color configs applied to a specific button */
+.btn-whitebg-blue {
+   background-color: #ffffff;
+   color: #0099cc;
+   border: 2px solid #0099cc;
+
+
+   &:hover, &:focus, &.focus {
+      /* Darker */
+      color: #007299;
+      border-color: #007299;
+   }
+
+   &:active, &.active {
+      /* Lighter */
+      color: #84ccff;
+      border-color: #84ccff;
+   }
+}
+.btn-whitebg-green {
+   background-color: #ffffff;
+   color: #4caf50;
+   border: 2px solid #4caf50;
+
+
+   &:hover, &:focus, &.focus {
+      /* Darker */
+      color: #3c8c3f;
+      border-color: #3c8c3f;
+   }
+
+   &:active, &.active {
+      /* Lighter */
+      color: #5cce61;
+      border-color: #5cce61;
+   }
 }

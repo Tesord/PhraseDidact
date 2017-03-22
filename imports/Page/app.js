@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 import React, { Component } from 'react';
-import Header_JSC from './Common/header';
+import Header_C from './Common/header';
 
 
 /* ::L_NOTE::
  * ES6. */
 class App extends Component {
-	
+
 	render() {
 		return (
 			<div>
-				<Header_JSC />
+				<Header_C />
 				{this.props.children}
 			</div>
 		);
