@@ -12,10 +12,8 @@ import { Link } from 'react-router';
 class Login extends Component {
 
    flip(){
-      $(" #login-content ").css("transform","rotateY(180deg)");
-
-      // adjust bottom margin for new 'card' height
-      $(" #login-content ").css("height", 71 + "rem" );
+      document.getElementById("login-content").style.transform = "rotateY(180deg)";
+      document.getElementById("login-content").style.height = "71rem";
    }
 
    render(){

@@ -7,6 +7,8 @@ import Register_C from '../register';
 
 class RegisterForm extends Component {
 
+	//************************ TODO REFACTOR using React only
+
 	componentDidMount(){
 		/* Keyboard accessibility */
 		$(".form-corner-button").first().keypress(function(e) {
@@ -19,6 +21,9 @@ class RegisterForm extends Component {
 		$("#lbl-signup-learner, #lbl-signup-instructor").keypress(function(e) {
 			// Space Bar + Enter key toggle
 			if (e.keyCode == 0 || e.keyCode == 32 || e.keyCode == 13) {
+				// prevent bar-scrolling when space bar is clicked
+				e.preventDefault();
+
 				let forElementID = "#" + e.target.getAttribute("for");
 				$( forElementID ).prop('checked', true);
 		  	}
@@ -29,7 +34,7 @@ class RegisterForm extends Component {
 	render(){
 
 		return (
-			<div id="register-form" className="_Theme_border_Default_ _Theme_register_Default_">
+			<form id="register-form" className="_Theme_border_Default_ _Theme_register_Default_">
 				<img src="img/ui/back-button-wfilled-gb.svg" width="40rem" height="40rem" className="form-corner-button" tabIndex="0"
 					onClick={ this.props.updateRegPage.bind(this, Register_C.Page_Enum.R_ENTRANCE )	} />
 
@@ -64,7 +69,7 @@ class RegisterForm extends Component {
 				<input name="password2" type="password" className="loginField	h-center		form-control"/>
 
 				<button onClick=""  className="bs-standard-btn 	rounded-border		btn-primary">Register</button>
-			</div>
+			</form>
 		);
 	}
 };

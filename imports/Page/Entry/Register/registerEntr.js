@@ -10,8 +10,8 @@ import Register_C from '../register';
 class RegisterEntr extends Component {
 
    flip(){
-      $(" #login-content ").css("transform","rotateY(0deg)");
-      $(" #login-content ").css("height", 0 + "rem" );
+      document.getElementById("login-content").style.transform = "rotateY(0deg)";
+      document.getElementById("login-content").style.height = "0rem";
    }
 
 	render(){
