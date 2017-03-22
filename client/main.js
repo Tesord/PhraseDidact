@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import App_C from './Page/app';
-import Home_C from './Page/home';
-import NotFound_C from './Page/notFound';
-import Entry_C from './Page/entry';
+import App_C from '/imports/Page/app';
+import Home_C from '/imports/Page/home';
+import NotFound_C from '/imports/Page/notFound';
+import Entry_C from '/imports/Page/entry';
 
 /****************** TODO ****************/
 
