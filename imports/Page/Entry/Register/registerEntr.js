@@ -4,14 +4,11 @@ import { Link } from 'react-router';
 import Register_C from '../register';
 
 
-// ************************* TODO           Handle Props 	from 		register.js
-
-
 class RegisterEntr extends Component {
 
    flip(){
-      $(" #login-content ").css("transform","rotateY(0deg)");
-      $(" #login-content ").css("height", 0 + "rem" );
+      document.getElementById("login-content").style.transform = "rotateY(0deg)";
+      document.getElementById("login-content").style.height = "0rem";
    }
 
 	render(){
@@ -27,7 +24,7 @@ class RegisterEntr extends Component {
 				<registerDesc>	Start learning languages completely free of charge!	</registerDesc>
 				<button onClick= { this.props.updateRegPage.bind( this, Register_C.Page_Enum.R_LEARNER ) }
                className="outline-btn     btn-whitebg-blue">
-					Register as learner
+					   Register as learner
 				</button>
 
 				<br /><br /><br />
@@ -36,10 +33,12 @@ class RegisterEntr extends Component {
 				<registerDesc>	Get access to learner data and design your own language learning course!		</registerDesc>
 				<button onClick= { this.props.updateRegPage.bind( this, Register_C.Page_Enum.R_INSTRUCTOR ) }
                className="outline-btn     btn-whitebg-blue">
-					Register as instructor
+					   Register as instructor
 				</button>
 
-				<a className="loginBigLink  h-center" href="javascript:void(0)" onClick={this.flip.bind(this)}>	Back to login </a>
+				<a className="loginBigLink  h-center" href="javascript:void(0)" onClick={this.flip.bind(this)}>
+               Back to login
+            </a>
 			</div>
 		);
 

@@ -6,16 +6,16 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 
-// ****************** TODO       might change FORGET PASSWORD
+// ****************** TODO        get FORGET PASSWORD working
 
 
 class Login extends Component {
 
    flip(){
-      $(" #login-content ").css("transform","rotateY(180deg)");
+      document.getElementById("login-content").style.transform = "rotateY(180deg)";
 
       // adjust bottom margin for new 'card' height
-      $(" #login-content ").css("height", 71 + "rem" );
+      document.getElementById("login-content").style.height = "71rem";
    }
 
    render(){

@@ -4,9 +4,6 @@ import RegisterEntr_C from './Register/registerEntr';
 import RegisterForm_C from './Register/registerForm';
 
 
-// TODO Maybe change color of register buttons
-
-
 class Register extends Component {
 
    static Page_Enum = {

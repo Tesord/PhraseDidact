@@ -9,7 +9,6 @@ import Login_C from './Entry/login';
 import Register_C from './Entry/register';
 
 
-// TODO Change this class before FINAL release
 
 class Entry extends Component{
 
@@ -17,28 +16,41 @@ class Entry extends Component{
 		super();
 
 		/* HTML Display variables */
-		this.login_head_content = null;
-		this.navbar_content = null;
-		this.login_head_content_width = 0;
+		this.login_head = null;
+		this.navbar = null;
+
+		this.login_head__width = 0;
+		this.prev_login_head__display = "";
 	}
 
 	componentDidMount() {
 
 		/************** TODO         If unlogged only *****************/
 
-		this.login_head_content = $( "#login-head-content" );
-		this.navbar_content = $( "#navbar-content" );
-		this.login_head_content_width = this.login_head_content.width();
+		/* ::L_NOTE::
+		 * React's 'refs' feature cannot be used cross-components. This is due to the fact that the function to run
+		 * only execute AFTER the source class has been mounted, so when the render method is finished (before
+		 * source class is considered mounted), all child components will have already gotten the value of the
+		 * references, which at that time is null. */
 
-		this.navbar_content.css("width", ( this.navbar_content.width() - this.login_head_content_width ) + "px" );
-		this.login_head_content.hide();
+		this.login_head = document.getElementById("login-head-content");
+		this.navbar = document.getElementById("navbar-content");
+		// offsetWidth is used instead as it gets the actual width at the time, not from the CSS
+		this.login_head__width = this.login_head.offsetWidth;
+
+		this.navbar.style.width = ( ( this.navbar.offsetWidth - this.login_head__width ) + "px" );
+		/* 	*Dom element*.style.*CSS property* 	only retrieve and modify inline style attributes.
+		 * 	To work with CSS sheet values, window.getComputedStyle() must be used instead.	*/
+		this.prev_login_head__display = 	window.getComputedStyle( this.login_head ).getPropertyValue("display");
+
+		this.login_head.style.display = "none";
 	}
 
 	componentWillUnmount() {
 
 		/************** TODO         If unlogged only *****************/
-		this.navbar_content.css("width", ( this.navbar_content.width() + this.login_head_content_width ) + "px" );
-		this.login_head_content.show();
+		this.navbar.style.width = ( ( this.navbar.offsetWidth + this.login_head__width ) + "px" );
+		this.login_head.style.display = this.prev_login_head__display;
 	}
 
 	render(){
