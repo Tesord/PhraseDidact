@@ -35,10 +35,10 @@ class Register extends Component {
 
 				<loginTitle className="h-center">	Sign up	</loginTitle>
 
-				<desc className="h-center">
+				<p className="h-center">
 					Start by first creating an account here. <br/>
 					You will pick the type of the account later!
-				</desc>
+				</p>
 
 				<loginAnnon className="h-center">	Username		</loginAnnon>
 				<input name="username" type="text" className="loginField		h-center		form-control"

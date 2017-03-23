@@ -15,7 +15,7 @@ class Login extends Component {
       document.getElementById("login-content").style.transform = "rotateY(180deg)";
 
       // adjust bottom margin for new 'card' height
-      document.getElementById("login-content").style.height = "77rem";
+      document.getElementById("login-content").style.height = "74rem";
    }
 
    render(){
