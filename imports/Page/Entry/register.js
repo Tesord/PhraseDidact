@@ -1,49 +1,69 @@
 import React, {Component} from 'react';
-
-import RegisterEntr_C from './Register/registerEntr';
-import RegisterForm_C from './Register/registerForm';
+import { Accounts } from 'meteor/accounts-base';
 
 
 class Register extends Component {
 
-   static Page_Enum = {
-      ENTRANCE: Symbol('ENTRANCE'),
-      R_LEARNER: Symbol('R_LEARNER'),
-      R_INSTRUCTOR: Symbol('R_INSTRUCTOR'),
-   };
+	sre(){
+		e.preventDefault();
 
-   constructor(){
-      super();
+		let username = this.refs.username_field.value.trim();
+		let email = this.refs.email_field.value.trim();
+		let password = this.refs.pwd_field.value.trim();
 
-      this.state = {
-         page : Register.Page_Enum.ENTRANCE
-      };
+		Accounts.createUser({username, email, password}, (err) => {
+			console.log('Signup callback', err);
 
-      this.updateRegPage = this.setPage.bind(this);
-   }
+			// Client side will start to revert changes
+
+		});
+
+		// display loading UNTIL login method return ok status, then add user role
+	}
 
 
-   setPage(page_e){
-      this.setState( { page: page_e } );
-   }
+	flip(){
+		document.getElementById("login-content").style.transform = "rotateY(0deg)";
+		document.getElementById("login-content").style.height = "0rem";
+	}
 
-   render(){
-      /* Props explanation:
-       * - "updateRegPage" is for parent function callback, invokable by child components ( this.updateRegPage ).
-       *    passed in when callback is invoked.
-       * - "TODO"
-       */
+	render(){
 
-      switch(this.state.page) {
-         case     Register.Page_Enum.R_LEARNER :
-            return ( <RegisterForm_C  updateRegPage={ this.updateRegPage }  userType={ Register.Page_Enum.R_LEARNER }  /> );
-         case     Register.Page_Enum.R_INSTRUCTOR :
-            return ( <RegisterForm_C  updateRegPage={ this.updateRegPage }  userType={ Register.Page_Enum.R_INSTRUCTOR } /> );
-         default:
-            return ( <RegisterEntr_C  updateRegPage={ this.updateRegPage }    /> );
-      }
+		return (
+			<form id="register-form" className="_Theme_border_Default_ _Theme_register_Default_"
+					onSubmit={	this.sre.bind(this)	} >
 
-   }
-}
+				<loginTitle className="h-center">	Sign up	</loginTitle>
+
+				<desc className="h-center">
+					Start by first creating an account here. <br/>
+					You will pick the type of the account later!
+				</desc>
+
+				<loginAnnon className="h-center">	Username		</loginAnnon>
+				<input name="username" type="text" className="loginField		h-center		form-control"
+	   				 placeholder='e.g. david_smith72 '		ref={	(this_elem) => (this.username_field = this_elem) }/>
+
+				<loginAnnon className="h-center">	Email Address		</loginAnnon>
+				<input name="email" type="email" className="loginField	h-center		form-control"
+						 placeholder='e.g. " david.smith@example.com  '		ref={	(this_elem) => (this.email_field = this_elem) } />
+
+				<loginAnnon className="h-center">	Password		</loginAnnon>
+				<input name="password" type="password" className="loginField	h-center		form-control"
+						 ref={	(this_elem) => (this.pwd_field = this_elem) } />
+
+				<loginAnnon className="h-center">	Confirm Password		</loginAnnon>
+				<input name="password2" type="password" className="loginField	h-center		form-control"/>
+
+				<button onClick=""  className="bs-standard-btn 	rounded-border		btn-primary" >	Register	</button>
+
+				<a className="loginBigLink  h-center" href="javascript:void(0)" onClick={this.flip.bind(this)}>
+					Back to login
+				</a>
+			</form>
+		);
+	}
+};
+
 
 export default Register;
