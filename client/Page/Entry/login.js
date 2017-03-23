@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 import React, {Component} from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 // ****************** TODO        get FORGET PASSWORD working
 

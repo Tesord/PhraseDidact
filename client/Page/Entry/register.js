@@ -35,6 +35,7 @@ class Register extends Component {
 
 				<loginTitle className="h-center">	Sign up	</loginTitle>
 
+
 				<p className="h-center">
 					Start by first creating an account here. <br/>
 					You will pick the type of the account later!
