@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import React from 'react';
 import AccountHead from './accountHead';
+import LoadingCircle from './loadingCircle';
 
 
+/*
+ * USAGE: Should only be rendered in one location.
+ */
 const Header = () => {
 
 	/* ::L_NOTE::
@@ -14,6 +13,8 @@ const Header = () => {
 	 * In React components, "className" is used instead. */
 	return (
 		<nav className="_Theme_nav_Default_">
+			<LoadingCircle />
+
 			<div id="navbar-content" className="h-center">
 
 				<div className="align-left navbar-title">PhraseDidact</div>
@@ -23,6 +24,7 @@ const Header = () => {
 
 				<AccountHead />
 			</div>
+
 		</nav>
 	);
 };
