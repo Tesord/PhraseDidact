@@ -48,7 +48,8 @@ class Register extends Component {
 				console.log('Signup callback', err);
 			}
 
-			console.log("OK!")
+			// redirect using React-Router v4's method (instant)
+			this.context.router.history.push("selectAccount")
 
 		});
 
@@ -97,6 +98,12 @@ class Register extends Component {
 			</form>
 		);
 	}
+};
+
+
+// ask for `router` from context, helper for router-router Programatic Navigation
+Register.contextTypes = {
+	router: React.PropTypes.object
 };
 
 
