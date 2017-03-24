@@ -1,5 +1,7 @@
 import React from 'react';
-import AccountHead from './accountHead';
+
+import AccountHead_C from './accountHead';
+import NavHead_C from './navHead';
 
 
 /*
@@ -12,15 +14,11 @@ const Header = () => {
 	 * In React components, "className" is used instead. */
 	return (
 		<nav className="_Theme_nav_Default_">
-			
+
 			<div id="navbar-content" className="h-center">
 
-				<div className="align-left navbar-title">PhraseDidact</div>
-
-				<div className="align-left navbar-menu-items">Home</div>
-				<div className="align-left navbar-menu-items">SOMETHING</div>
-
-				<AccountHead />
+				<NavHead_C />
+				<AccountHead_C />
 			</div>
 
 		</nav>

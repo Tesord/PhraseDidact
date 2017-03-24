@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
 import { Accounts } from 'meteor/accounts-base';
 
-import Entry from '../entry';
+
+
+/* TODO Validation
+   - Email address format validation       {DONE}
+   - Non-empty form input           {DONE}
+   - Username avail
+   - Password matching
+   - Email avail
+* /
 
 
 /*
@@ -9,26 +17,49 @@ import Entry from '../entry';
  */
 class Register extends Component {
 
-	sre(){
+	constructor(){
+		super();
+
+		this.button__default = (
+			<button className="bs-standard-btn 	rounded-border		btn-primary" >	Register	</button>
+										)
+
+		this.state = {
+			button: this.button__default
+		};
+	}
+
+	loadingAnim(){
+		this.setState(	{ button:		(
+			<button className="bs-standard-btn 	rounded-border		btn-primary 	disabled" disabled aria-disabled="true">	Registering...	</button>
+												)	} );
+	}
+
+	sre(e){
 		e.preventDefault();
 
-		let username = this.refs.username_field.value.trim();
-		let email = this.refs.email_field.value.trim();
-		let password = this.refs.pwd_field.value.trim();
+		let username = this.username_field.value.trim();
+		let email = this.email_field.value.trim();
+		let password = this.pwd_field.value.trim();
 
 		Accounts.createUser({username, email, password}, (err) => {
-			console.log('Signup callback', err);
+			if(err){
+				// TODO   Client side will start to revert changes
+				console.log('Signup callback', err);
+			}
 
-			// TODO   Client side will start to revert changes
+			// redirect using React-Router v4's method (instant)
+			this.context.router.history.push("selectAccountType")
 
 		});
 
-		// display loading UNTIL login method return ok status, then add user role
+		this.loadingAnim();
 	}
 
 
 	flip(){
-		Entry.heightAdjFlip(0, "login-form");
+		document.getElementById("login-content").style.transform = "rotateY(0deg)";
+		document.getElementById("login-content").style.height = "0rem";
 	}
 
 	render(){
@@ -45,29 +76,34 @@ class Register extends Component {
 				</p>
 
 				<loginAnnon className="h-center">	Username		</loginAnnon>
-				<input name="username" type="text" className="loginField		h-center		form-control"
+				<input name="username" type="text" className="loginField		h-center		form-control"		required
 	   				 placeholder='e.g. david_smith72 '		ref={	(this_elem) => (this.username_field = this_elem) }/>
 
 				<loginAnnon className="h-center">	Email Address		</loginAnnon>
-				<input name="email" type="email" className="loginField	h-center		form-control"
+				<input name="email" type="email" className="loginField	h-center		form-control"			required
 						 placeholder='e.g. " david.smith@example.com  '		ref={	(this_elem) => (this.email_field = this_elem) } />
 
 				<loginAnnon className="h-center">	Password		</loginAnnon>
-				<input name="password" type="password" className="loginField	h-center		form-control"
+				<input name="password" type="password" className="loginField	h-center		form-control"	required
 						 ref={	(this_elem) => (this.pwd_field = this_elem) } />
 
 				<loginAnnon className="h-center">	Confirm Password		</loginAnnon>
-				<input name="password2" type="password" className="loginField	h-center		form-control"/>
+				<input name="password2" type="password" className="loginField	h-center		form-control"	required/>
 
-				<button onClick=""  className="bs-standard-btn 	rounded-border		btn-primary" >	Register	</button>
+				{this.state.button}
 
-				<a className="loginBigLink  h-center" href="javascript:void(0)" onClick={this.flip.bind(this)}>
+				<a className="loginBigLink  h-center" href="javascript:void(0)" onClick={this.flip.bind(this)} >
 					Back to login
 				</a>
-
 			</form>
 		);
 	}
+};
+
+
+// ask for `router` from context, helper for router-router Programatic Navigation
+Register.contextTypes = {
+	router: React.PropTypes.object
 };
 
 

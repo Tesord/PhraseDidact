@@ -12,6 +12,15 @@ label {
    top: -0.15em;
 }
 
+a {
+   text-decoration: none      !important;
+
+   &:hover, &:focus, &.focus, &:active, &.active {
+      text-decoration: none      !important;
+   }
+}
+
+
 input[type='checkbox'] {
    margin-left: 0.3em;
 
@@ -25,7 +34,8 @@ input[type='radio'] {
 
 
 .h-center {
-   /* i.e. horizontally center this component.  If component using this require custom margin,
+   /* ::L_NOTE::
+      i.e. horizontally center this component.  If component using this require custom margin,
       then  !important  should be applied to them. */
    margin: auto;
 }
@@ -95,6 +105,10 @@ input[type='radio'] {
    border: 1px solid #005bef;
    padding: 8px 55px;
    font-size: 1.7rem;
+
+   &.disabled, &.disabled:hover, &.disabled:focus, &.disabled.focus, &.disabled:active, &.disabled.active {
+      background-color: #5BA5E6;
+   }
 }
 
 .outline-btn {

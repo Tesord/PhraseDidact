@@ -6,7 +6,8 @@
 
 
 nav {
-   // Basically, this technique transfers the responsibility of displaying the scroll-bar (when "vw" < "width") onto the parent
+   /* ::L_NOTE::
+    * Basically, this technique transfers the responsibility of displaying the scroll-bar (when "vw" < "width") onto the parent */
    min-width: @min-nav-width;
 
    padding-top: 0.5rem;
@@ -17,16 +18,29 @@ nav {
    margin-bottom: 1rem;
 
    font-size: 2.4rem;
-   /* i.e. Automatically adjust header height */
+   // i.e. Automatically adjust header height
    overflow: auto;
 }
 
 #navbar-content {
    max-width: @min-nav-width;
 
-   // allow additional content to render outside of its conventional content area (innermost box of box model)
+   /* ::L_NOTE::
+    * allow additional content to render outside of its conventional content area (innermost box of box model) */
    overflow: visible;
 }
+
+#nav-head {
+   overflow-x: visible;
+
+   * {
+   /* It seems bootstrap's "border-sizing: border-box" might have messed up "display: inline-block"'s width calculation...
+    * But "display:inline" seems to be unaffected. */
+   display: inline;
+   vertical-align: middle;
+   }
+}
+
 
 .navbar-title {
    font-size: 4rem;
@@ -34,9 +48,6 @@ nav {
 }
 
 .navbar-menu-items {
-   /* Padding is applied to each item individually so that
-   the same padding remains applied if they stack on top of each other (on small screens) */
-   padding-top: 0.5em;
    margin-right: 4%;
 }
 

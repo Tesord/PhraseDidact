@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-import Entry from '../entry';
+
 
 // ****************** TODO        get FORGET PASSWORD working
 
@@ -12,7 +12,10 @@ import Entry from '../entry';
 class Login extends Component {
 
    flip(){
-      Entry.heightAdjFlip(180, "register-form");
+      document.getElementById("login-content").style.transform = "rotateY(180deg)";
+
+      // adjust bottom margin for new 'card' height
+      document.getElementById("login-content").style.height = "74rem";
    }
 
    render(){
@@ -21,11 +24,11 @@ class Login extends Component {
    			<loginTitle className="h-center">	Log in	</loginTitle>
 
    			<loginAnnon className="h-center">	Email Address / Username	</loginAnnon>
-   			<input name="username" type="text" className="loginField		h-center		form-control"
+   			<input name="username" type="text" className="loginField		h-center		form-control"         required
    					 placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '	/>
 
    			<loginAnnon className="h-center">	Password	</loginAnnon>
-   			<input name="password" type="password" className="loginField	h-center		form-control"/>
+   			<input name="password" type="password" className="loginField	h-center		form-control"      required/>
 
             <loginLine className="h-center">
                <label   className="align-left">

@@ -7,14 +7,11 @@
    position: relative;
 
    transition: all 0.4s ease-in;
-   /* Also set up a location for  #login-form & #register-form  to base their    "position:absolute"   coordinate
+   /* ::L_NOTE::
+    * Also set up a location for  #login-form & #register-form  to base their    "position:absolute"   coordinate
     * Same desired property from    "position: relative" */
    transform-style: preserve-3d;
 
-
-   a {
-      text-decoration: none;
-   }
 
    p {
       font-size: 1.2em;
@@ -37,7 +34,8 @@
    /* hide face when they are flipped over */
    backface-visibility: hidden;
 
-   /* allow both face to be placed onto the same coordinate */
+   /* ::L_NOTE::
+    * Allow both face to be placed onto the same coordinate */
 	position: absolute;
 	top: 10vh;
 	left: 0px;
@@ -66,7 +64,8 @@ loginLine {
    min-height: 2em;
 }
 .loginBigLink {
-   // Make width no more than the content
+   /* ::L_NOTE::
+    * Make width no more than the content */
    display: table;
 
    margin-top: 3rem     !important;
