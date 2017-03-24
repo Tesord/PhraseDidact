@@ -1,17 +1,12 @@
 #login-content {
    width: 35vw;
    min-width: 45rem;
-
-   padding-left: 1rem;
-   padding-right: 1rem;
-   padding-top: 10vh;
-   padding-bottom: 10vh;
-
-
-   // To give  .login-form & .register-form   a location to base their  display:absolute   coordinate
-   position: relative;
+   // allow additional content to render outside of its conventional content  (innermost box of box model)
+   overflow: visible;
 
    transition: all 0.4s ease-in;
+   /* Also set up a location for  #login-form & #register-form  to base their    "position:absolute"   coordinate
+    * Same desired property from    "position: relative" */
    transform-style: preserve-3d;
 
 

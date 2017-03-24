@@ -22,10 +22,13 @@ nav {
 
 #navbar-content {
    max-width: @min-nav-width;
+
+   // allow additional content to render outside of its conventional content area (innermost box of box model)
+   overflow: visible;
 }
 
 .navbar-title {
-   font-size: 40rem;
+   font-size: 4rem;
    margin-right: 5%;
 }
 
