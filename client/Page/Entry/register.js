@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import { Accounts } from 'meteor/accounts-base';
 
 
-/*
- * USAGE: Should only be rendered in one location.
- */
 class Register extends Component {
 
 	sre(){
@@ -17,7 +14,7 @@ class Register extends Component {
 		Accounts.createUser({username, email, password}, (err) => {
 			console.log('Signup callback', err);
 
-			// TODO   Client side will start to revert changes
+			// Client side will start to revert changes
 
 		});
 
@@ -37,6 +34,7 @@ class Register extends Component {
 					onSubmit={	this.sre.bind(this)	} >
 
 				<loginTitle className="h-center">	Sign up	</loginTitle>
+
 
 				<p className="h-center">
 					Start by first creating an account here. <br/>
@@ -63,7 +61,6 @@ class Register extends Component {
 				<a className="loginBigLink  h-center" href="javascript:void(0)" onClick={this.flip.bind(this)}>
 					Back to login
 				</a>
-
 			</form>
 		);
 	}

@@ -31,7 +31,6 @@ class Entry extends Component{
 		 * 	To work with CSS sheet values, window.getComputedStyle() must be used instead.	*/
 		this.prev_login_head__display = 	window.getComputedStyle( this.login_head ).getPropertyValue("display");
 
-		// simply hiding it would mean the navbar-content will be off-centre... so "display:none" removes it from the DOM temporary.
 		this.login_head.style.display = "none";
 	}
 
