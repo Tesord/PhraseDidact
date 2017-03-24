@@ -13,6 +13,9 @@ import Register_C from './Entry/register';
 class Entry extends Component{
 
 	static heightAdjFlip(flip_degree , idOfElement_ToAdjustTo){
+		//********************** TODO Check out this errorous code!!!!!!!!*************/
+
+
 		document.getElementById("login-content").style.transform = "rotateY(" + flip_degree +"deg)";
 
 		let element = document.getElementById( idOfElement_ToAdjustTo );
