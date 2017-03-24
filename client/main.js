@@ -1,29 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route, Switch, browserHistory } from 'react-router-dom';
 
-import App_C from '/imports/Page/app';
-import Home_C from '/imports/Page/home';
-import NotFound_C from '/imports/Page/notFound';
-import Entry_C from '/imports/Page/entry';
+
+import Header_C from './Page/Common/header';
+
+import Home_C from './Page/home';
+import NotFound_C from './Page/notFound';
+import Entry_C from './Page/entry';
+
+/*************** TODO WHEN FINISHED: comment out the below imports & delete above.
+ 					Move the 'Page' folder from 'client' to 'imports' **/
+
+// import Header_C from '/imports/Page/Common/header';
+
+// import Home_C from '/imports/Page/home';
+// import NotFound_C from '/imports/Page/notFound';
+// import Entry_C from '/imports/Page/entry';
 
 /****************** TODO ****************/
 
 /* ::L_NOTE::
- * - Each <Route /> represents a possible path in the website directory.
- * - When visiting a nested <Route /> (i.e. inside another <Route /> ), its component will be given as props to the
- * parent <Route /> 's component
- * - <IndexRoute /> represents the default component to pass as props when no sub <Route /> is triggered (i.e. nothing
- * come after the forward slash) */
+ * - The <Router /> represents the content that will be rendered in any page of the web app.
+ * - A <Route /> represents a possible web path.
+ * 	By default, the "path" property means any web path that begin with the string provided will render its component.
+ *		If "exact" is also written, then each character of the web path (after the domain) must match char-to-char.
+ *		If no "path" is given, then it is ALWAYS a match.
+ * - The <Switch /> indicates that when searching through the list of <Route />s (from top to bottom),
+ *		as soon as one matches, it will only render that one (exclusive).
+ */
 const routes = (
-	<Router history={browserHistory}>
-		<Route path="/" component={App_C}>
-			<IndexRoute component={Home_C} />
+	<Router>
+		<div>
+			<Header_C />
 
-			<Route path="login" component={Entry_C}></Route>
-
-			<Route path='*' component={NotFound_C} />
-		</Route>
+			<Switch>
+				<Route exact path="/" component={Home_C} />
+				<Route path="/login" component={Entry_C} />
+				<Route component={NotFound_C} />
+			</Switch>
+		</div>
 	</Router>
 );
 

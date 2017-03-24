@@ -1,43 +1,33 @@
 #login-content {
    width: 35vw;
    min-width: 45rem;
+   // allow additional content to render outside of its conventional content  (innermost box of box model)
+   overflow: visible;
 
-   padding-left: 1rem;
-   padding-right: 1rem;
-   padding-top: 10vh;
-   padding-bottom: 10vh;
-
-   /* To give  .login-form & .register-form   a location to base their  display:absolute   coordinate */
    position: relative;
 
    transition: all 0.4s ease-in;
-
+   /* Also set up a location for  #login-form & #register-form  to base their    "position:absolute"   coordinate
+    * Same desired property from    "position: relative" */
    transform-style: preserve-3d;
+
 
    a {
       text-decoration: none;
    }
 
-   .funkyradio{
-      margin-bottom: 1rem;
+   p {
+      font-size: 1.2em;
+      margin-bottom: 1.6rem;
    }
-   .funkyradio div {
-      width: 40%;
-   }
-   .funkyradio label {
-      width: 100%;
-   }
-   .funkyradio :first-child {
-      margin-right: 1rem      !important;
-   }
+
 }
 
 
 #register-form {
-   /* Start off as the 'Back' */
+   // Start off as the 'Back'
    transform: rotateY(180deg);
 }
-
 #login-form, #register-form {
    width: 100%;
    text-align: center;
@@ -59,11 +49,12 @@
 loginTitle {
    font-size: 3rem;
    /*  !important    allows overwritting of   "h-center" 's   margin: auto */
-   margin-bottom: 2.4rem   !important;
+   margin-bottom: 1.7rem   !important;
 }
 loginAnnon {
    text-align: left;
-   font-size: 2rem;
+   font-size: 1.7rem;
+   font-family: Lato, Arial, Helvetica, sans-serif;
 
    margin-top: 0.3rem      !important;
 }
@@ -75,7 +66,7 @@ loginLine {
    min-height: 2em;
 }
 .loginBigLink {
-   /* Make width no more than the content */
+   // Make width no more than the content
    display: table;
 
    margin-top: 3rem     !important;
@@ -86,16 +77,4 @@ loginLine {
 loginTitle, loginAnnon, .loginField, loginLine {
    display: block;
    width: 80%;
-}
-
-
-/* Register entrance comp. */
-
-registerDesc {
-   display: block;
-   font-size: 1.5rem;
-
-   margin-top: 1.5rem;
-   margin-left: 2rem;
-   margin-right: 2rem;
 }
