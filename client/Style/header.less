@@ -6,7 +6,8 @@
 
 
 nav {
-   // Basically, this technique transfers the responsibility of displaying the scroll-bar (when "vw" < "width") onto the parent
+   /* ::L_NOTE::
+    * Basically, this technique transfers the responsibility of displaying the scroll-bar (when "vw" < "width") onto the parent */
    min-width: @min-nav-width;
 
    padding-top: 0.5rem;
@@ -17,14 +18,15 @@ nav {
    margin-bottom: 1rem;
 
    font-size: 2.4rem;
-   /* i.e. Automatically adjust header height */
+   // i.e. Automatically adjust header height
    overflow: auto;
 }
 
 #navbar-content {
    max-width: @min-nav-width;
 
-   // allow additional content to render outside of its conventional content area (innermost box of box model)
+   /* ::L_NOTE::
+    * allow additional content to render outside of its conventional content area (innermost box of box model) */
    overflow: visible;
 }
 

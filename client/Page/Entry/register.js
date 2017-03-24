@@ -49,7 +49,7 @@ class Register extends Component {
 			}
 
 			// redirect using React-Router v4's method (instant)
-			this.context.router.history.push("selectAccount")
+			this.context.router.history.push("selectAccountType")
 
 		});
 
