@@ -23,14 +23,16 @@ class Entry extends Component{
 		 * references, which at that time is null. */
 		this.login_head = document.getElementById("login-head-content");
 		this.navbar = document.getElementById("navbar-content");
-		// offsetWidth is used instead as it gets the actual width at the time, not from the CSS
-		this.login_head__width = this.login_head.offsetWidth;
+		this.nav_head = document.getElementById("nav-head");
 
-		this.navbar.style.width = ( ( this.navbar.offsetWidth - this.login_head__width ) + "px" );
+		// offsetWidth is used instead as it gets the actual width at the time, not from the CSS
+		this.prev_navbar__widthPx = this.navbar.offsetWidth + "px";
 		/* 	*Dom element*.style.*CSS property* 	only retrieve and modify inline style attributes.
 		 * 	To work with CSS sheet values, window.getComputedStyle() must be used instead.	*/
 		this.prev_login_head__display = 	window.getComputedStyle( this.login_head ).getPropertyValue("display");
 
+
+		this.navbar.style.width = this.nav_head.offsetWidth + "px";
 		// simply hiding it would mean the navbar-content will be off-centre... so "display:none" removes it from the DOM temporary.
 		this.login_head.style.display = "none";
 	}
@@ -38,7 +40,7 @@ class Entry extends Component{
 	componentWillUnmount() {
 
 		/************** TODO         If unlogged only *****************/
-		this.navbar.style.width = ( ( this.navbar.offsetWidth + this.login_head__width ) + "px" );
+		this.navbar.style.width = this.prev_navbar__widthPx;
 		this.login_head.style.display = this.prev_login_head__display;
 	}
 

@@ -28,15 +28,24 @@ nav {
    overflow: visible;
 }
 
+#nav-head {
+   overflow-x: visible;
+
+   * {
+   /* It seems bootstrap's "border-sizing: border-box" might have messed up "display: inline-block"'s width calculation...
+    * But "display:inline" seems to be unaffected. */
+   display: inline;
+   vertical-align: middle;
+   }
+}
+
+
 .navbar-title {
    font-size: 4rem;
    margin-right: 5%;
 }
 
 .navbar-menu-items {
-   /* Padding is applied to each item individually so that
-   the same padding remains applied if they stack on top of each other (on small screens) */
-   padding-top: 0.5em;
    margin-right: 4%;
 }
 
