@@ -13,6 +13,8 @@ using Meteor.call()'s callback function **/
 /** TODO Make sure multiple userId is not inserted into database (unique) **/
 
 Meteor.methods({
+
+
    'userAccount.create': (isInstructor) => {
 
       // Will throw exception if unsuccessful. This method blocks until complete.
@@ -25,5 +27,17 @@ Meteor.methods({
       // TODO     Success, set account defaults
       console.log("Complete success");
 
-   }
+   },
+
+
+   'userAccount.checkIsInstructor': () => {
+
+      if( AccountConfigs.findOne( { userId : Meteor.userId() } ) ){
+         return true;
+      }
+
+      return false;
+
+   },
+
 });

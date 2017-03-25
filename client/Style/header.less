@@ -22,6 +22,25 @@ nav {
    overflow: auto;
 }
 
+
+#loading-circle {
+   border: 1rem solid #f3f3f3; /* Static sector */
+   border-top: 1rem solid #3498db; /* Moving sector*/
+   border-radius: 50%;
+   width: 4rem;
+   height: 4rem;
+   animation: spin 1s linear infinite;
+
+   margin-top: 0.7rem;
+   margin-left: 0.5rem;
+   margin-right: 2rem;
+}
+@keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+}
+
+
 #navbar-content {
    max-width: @min-nav-width;
 
@@ -29,6 +48,7 @@ nav {
     * allow additional content to render outside of its conventional content area (innermost box of box model) */
    overflow: visible;
 }
+
 
 #nav-head {
    overflow-x: visible;

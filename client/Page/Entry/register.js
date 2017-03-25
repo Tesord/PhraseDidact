@@ -103,7 +103,7 @@ class Register extends Component {
 							this.context.router.history.push("")
 						}
 						else{
-							this.context.router.history.push("fillLearnerProfile")
+							this.context.router.history.push("fillUserProfile")
 						}
 					}
 
