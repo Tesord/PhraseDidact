@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import Common from './Common/common';
 
 
 
@@ -42,7 +41,7 @@ class setAccountType extends Component {
 
       				<p>	Start learning languages completely free of charge!	</p>
 
-      				<button onClick= { this.setAccountType.bind( this, Common.AccountType.LEARNER ) }
+      				<button onClick= { this.setAccountType.bind( this, false) }
                      className="outline-btn     btn-whitebg-blue">
       					   Register as learner
       				</button>
@@ -54,7 +53,7 @@ class setAccountType extends Component {
 
       				<p>	Get access to learner data and design your own language learning course!		</p>
 
-      				<button onClick= { this.setAccountType.bind( this, Common.AccountType.INSTRUCTOR ) }
+      				<button onClick= { this.setAccountType.bind( this, true ) }
                      className="outline-btn     btn-whitebg-blue">
       					   Register as instructor
       				</button>
@@ -76,8 +75,10 @@ class setAccountType extends Component {
       }
    }
 
-   setAccountType(){
+   setAccountType(isInstructor){
+      /* TODO Handle redirection after finished + loading animation */
 
+      Meteor.call('userAccounts.setType', isInstructor);
    }
 
    render(){
