@@ -1,12 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 
-import UserAccounts from '/imports/collections/userAccounts';
+
+// import AccountConfigs from '/imports/collections/userAccount/accountConfigs';
+
 
 
 Meteor.startup(() => {
    // code to run on server at startup
 
 
-   // console.log(UserAccounts.find().fetch());
+   // console.log(AccountConfigs.find().fetch());
 
 });

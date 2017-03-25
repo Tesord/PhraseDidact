@@ -8,7 +8,6 @@ import Header_C from './Page/Common/header';
 import Home_C from './Page/home';
 import NotFound_C from './Page/notFound';
 import Entry_C from './Page/entry';
-import SetAccountType_C from './Page/setAccountType'
 
 /*************** TODO WHEN FINISHED: comment out the below imports & delete above.
  					Move the 'Page' folder from 'client' to 'imports' **/
@@ -38,7 +37,6 @@ const routes = (
 			<Switch>
 				<Route exact path="/" component={Home_C} />
 				<Route path="/login" component={Entry_C} />
-				<Route path="/selectAccountType" component={SetAccountType_C} />
 				<Route component={NotFound_C} />
 			</Switch>
 		</div>

@@ -1,4 +1,4 @@
-import UserAccounts from '/imports/collections/userAccounts';
+import AccountConfigs from '/imports/collections/userAccount/accountConfigs';
 
 
 /** TODO If Meteor method on server folder, then when it is called, the server runs it instead;
@@ -13,11 +13,17 @@ using Meteor.call()'s callback function **/
 /** TODO Make sure multiple userId is not inserted into database (unique) **/
 
 Meteor.methods({
-   'userAccounts.setType': (isInstructor) => {
+   'userAccount.create': (isInstructor) => {
 
-      return UserAccounts.insert({
+      // Will throw exception if unsuccessful. This method blocks until complete.
+      AccountConfigs.insert({
          userId: Meteor.userId(),
          isInstructor
       });
+
+
+      // TODO     Success, set account defaults
+      console.log("Complete success");
+
    }
 });

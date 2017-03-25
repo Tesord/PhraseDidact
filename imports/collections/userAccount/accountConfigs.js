@@ -1,7 +1,7 @@
 import {Mongo} from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-const userAccounts = new Mongo.Collection('userAccounts');
+const accountConfigs = new Mongo.Collection('accountConfigs');
 
 
 const Schemas = {};
@@ -14,7 +14,7 @@ before sending it to server (as double-safe). Method method Server errors will n
 ***************/
 
 
-Schemas.UserAccounts = new SimpleSchema({
+Schemas.AccountConfigs = new SimpleSchema({
    userId: {
       type: String,
       label: "userId",
@@ -28,6 +28,6 @@ Schemas.UserAccounts = new SimpleSchema({
    },
 });
 
-userAccounts.attachSchema(Schemas.UserAccounts);
+accountConfigs.attachSchema(Schemas.AccountConfigs);
 
-export default userAccounts;
+export default accountConfigs;
