@@ -1,26 +1,16 @@
-// import React, {Component} from 'react';
-//
-//
-// class Common extends Component {
-//
-//    /**
-//     * Call this in the componentDidMount() method of every component that have an initialisation animation.
-//     */
-//    static AccountType = {
-//       LEARNER: false,
-//       INSTRUCTOR: true,
-//    };
-//
-//
-//    /**
-//     * Call this in the componentWillUnmount() method of every component that have an initialisation animation.
-//     */
-//    static AccountType = {
-//       LEARNER: false,
-//       INSTRUCTOR: true,
-//    };
-//
-// }
-//
+import React, {Component} from 'react';
 
-// export default Common;
+
+class CommonUtil extends Component {
+
+
+
+   static validateEmail(email_address){
+      let email_reg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+
+      return email_reg.test( email_address ) ;
+   }
+
+}
+
+export default CommonUtil;

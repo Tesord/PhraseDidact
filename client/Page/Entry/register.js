@@ -3,7 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 
 
 /* TODO Validation
-   - Email address format validation       {DONE}
+   - Email address format validation
    - Non-empty form input           {DONE}
    - Username avail
    - Password matching
@@ -19,13 +19,7 @@ class Register extends Component {
 	constructor(){
 		super();
 
-		this.button__default = (
-			<button className="bs-standard-btn 	rounded-border		btn-primary" >	Register	</button>
-			);
-
-		this.state = {
-			button: this.button__default
-		};
+		this.state = {     button:    this.getReadyAnim()    };
 	}
 
 
@@ -34,6 +28,22 @@ class Register extends Component {
 
 		this.signup_learner_lbl.addEventListener('keypress', this.funkyRadio_Handler );
 		this.signup_instructor_lbl.addEventListener('keypress', this.funkyRadio_Handler );
+	}
+
+	getReadyAnim(){
+		return(
+
+		  	<button className="bs-standard-btn 	rounded-border		btn-primary" >	Register	</button>
+
+		);
+	}
+
+	getLoadingAnim(){
+		return(
+
+			<button className="bs-standard-btn 	rounded-border		btn-primary 	disabled" disabled aria-disabled="true">	Registering...	</button>
+
+		);
 	}
 
 	funkyRadio_Handler(e){
@@ -48,12 +58,6 @@ class Register extends Component {
 	}
 
 
-	loadingAnim(){
-		this.setState(	{ button:		(
-			<button className="bs-standard-btn 	rounded-border		btn-primary 	disabled" disabled aria-disabled="true">	Registering...	</button>
-												)	} );
-	}
-
 	handleErrors(err, isInitial){
 		// TODO   Client side will start to revert changes
 		console.log('Signup callback', err);
@@ -66,6 +70,10 @@ class Register extends Component {
 		 * This usual Delete account option in user account will delete entry from ALL folder: "UserAccount" collection, but this method
 		 * will only delete the entry from the TWO collections.
 		 */
+
+
+		this.setState( {     button:    this.getReadyAnim()    });
+
 	}
 
 
@@ -100,10 +108,10 @@ class Register extends Component {
 
 						// Redirect using React-Router v4's method (instant)
 						if(isInstructor){
-							this.context.router.history.push("")
+							this.context.router.history.push("");
 						}
 						else{
-							this.context.router.history.push("fillUserProfile")
+							this.context.router.history.push("fillLearnerProfile");
 						}
 					}
 
@@ -113,7 +121,7 @@ class Register extends Component {
 
 		});
 
-		this.loadingAnim();
+		this.setState( {     button:    this.getLoadingAnim()    });
 	}
 
 

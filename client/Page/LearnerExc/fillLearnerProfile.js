@@ -10,10 +10,8 @@ class FillLearnerProfile extends Component {
    constructor(){
 		super();
 
-		this.content__loading = ( <LoadingCircle /> );
-
 		this.state = {
-			content: this.content__loading
+			content: <LoadingCircle />
 		};
 	}
 
@@ -22,16 +20,23 @@ class FillLearnerProfile extends Component {
 
       Meteor.call('userAccount.checkIsInstructor', (err, result) => {
 
+         // !result = Learner
+         if(!result){
 
-         console.log(result);
+            // TODO
 
+         }  // else is Instructor
+         else{
+            // redirect without being recorded in Browser Back button history
+            window.location.replace("notFound");
+         }
 
       } );
 
-      this.loadingAnim();
+      this.loadingScreen();
    }
 
-   loadingAnim(){
+   loadingScreen(){
       LoadingCircle.show();
    }
    componentWillUnmount() {
