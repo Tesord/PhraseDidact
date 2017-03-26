@@ -25,7 +25,9 @@ class Entry extends Component{
 		this.navbar = document.getElementById("navbar-content");
 		this.nav_head = document.getElementById("nav-head");
 
-		// offsetWidth is used instead as it gets the actual width at the time, not from the CSS
+		/* ::L_NOTE::
+		 * OffsetWidth is used instead as it gets the actual width at the time, not from the CSS
+		 * Unlike Height, Width is consistent with Windows content scaling. */
 		this.prev_navbar__widthPx = this.navbar.offsetWidth + "px";
 		/* 	*Dom element*.style.*CSS property* 	only retrieve and modify inline style attributes.
 		 * 	To work with CSS sheet values, window.getComputedStyle() must be used instead.	*/

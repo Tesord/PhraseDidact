@@ -21,7 +21,7 @@ class Register extends Component {
 
 		this.button__default = (
 			<button className="bs-standard-btn 	rounded-border		btn-primary" >	Register	</button>
-										)
+			);
 
 		this.state = {
 			button: this.button__default

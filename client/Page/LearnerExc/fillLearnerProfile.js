@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
-import AccountConfigs from '/imports/collections/userAccount/accountConfigs'
+
+import LoadingCircle from '../Loading/loadingCircle';
+
+import AccountConfigs from '/imports/collections/userAccount/accountConfigs';
 
 
 class FillLearnerProfile extends Component {
 
-   constructor() {
-      super();
+   constructor(){
+		super();
+
+		this.content__loading = ( <LoadingCircle /> );
+
+		this.state = {
+			content: this.content__loading
+		};
+	}
+
+
+   componentDidMount() {
 
       Meteor.call('userAccount.checkIsInstructor', (err, result) => {
 
@@ -15,7 +28,14 @@ class FillLearnerProfile extends Component {
 
       } );
 
-      //
+      this.loadingAnim();
+   }
+
+   loadingAnim(){
+      LoadingCircle.show();
+   }
+   componentWillUnmount() {
+      LoadingCircle.hide();
    }
 
 
@@ -23,13 +43,11 @@ class FillLearnerProfile extends Component {
 
 		return (
 			<div>
-				<border>
-					fhjfhjfh
-				</border>
+            {this.state.content}
 			</div>
 		);
 	}
-};
+}
 
 
 export default FillLearnerProfile;

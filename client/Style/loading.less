@@ -1,0 +1,32 @@
+
+/* Variable declaration */
+
+@loading-bg-height: 100vh;
+@loading-bg-width: 100%;
+@loading-circle-wh: 8rem;
+
+
+#loading-bg {
+   width: @loading-bg-width;
+   height: @loading-bg-height;
+   background-color: #999999;
+}
+
+
+#loading-circle {
+   border: 1.6rem solid #f3f3f3; /* Static sector */
+   border-top: 1.6rem solid #3498db; /* Moving sector*/
+   border-radius: 50%;
+   width: @loading-circle-wh;
+   height: @loading-circle-wh;
+   animation: spin 1s linear infinite;
+
+   position: absolute;
+   top: calc( (@loading-bg-height / 2) - (@loading-circle-wh / 1.5) );
+   // border appears to add 1/4 of the content width/height...
+   left: calc( (@loading-bg-width / 2) - (@loading-circle-wh / 3) );
+}
+@keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+}
