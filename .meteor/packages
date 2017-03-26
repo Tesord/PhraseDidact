@@ -20,6 +20,5 @@ shell-server@0.2.3            # Server-side component of the `meteor shell` comm
 accounts-password
 flemay:less-autoprefixer
 aldeed:collection2-core
-insecure
-autopublish
 aldeed:schema-index
+alanning:roles

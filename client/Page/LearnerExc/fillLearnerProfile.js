@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import LoadingCircle from '../Loading/loadingCircle';
+import Circle_greyBG from '../Loading/circle_greyBG';
 
-import AccountConfigs from '/imports/collections/userAccount/accountConfigs';
 
 
 class FillLearnerProfile extends Component {
@@ -11,19 +10,25 @@ class FillLearnerProfile extends Component {
 		super();
 
 		this.state = {
-			content: <LoadingCircle />
+			content: <Circle_greyBG />
 		};
 	}
 
 
    componentDidMount() {
 
-      Meteor.call('userAccount.checkIsInstructor', (err, result) => {
+      Meteor.call('userAccount.checkIsLearner', (err, result) => {
 
-         // !result = Learner
-         if(!result){
+         // result = Learner
+         if(result){
 
-            // TODO
+            this.setState({ content: (
+
+               <div>
+                  FILL THIS IN PLEASE
+               </div>
+
+            )});
 
          }  // else is Instructor
          else{
@@ -33,14 +38,6 @@ class FillLearnerProfile extends Component {
 
       } );
 
-      this.loadingScreen();
-   }
-
-   loadingScreen(){
-      LoadingCircle.show();
-   }
-   componentWillUnmount() {
-      LoadingCircle.hide();
    }
 
 

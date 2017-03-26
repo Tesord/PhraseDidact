@@ -1,5 +1,3 @@
-import AccountConfigs from '/imports/collections/userAccount/accountConfigs';
-
 
 /** TODO If Meteor method on server folder, then when it is called, the server runs it instead;
  * but Client can run "expected" version through stub.
@@ -15,29 +13,24 @@ using Meteor.call()'s callback function **/
 Meteor.methods({
 
 
-   'userAccount.create': (isInstructor) => {
+   'userAccount.addRole': (isInstructor) => {
 
       // Will throw exception if unsuccessful. This method blocks until complete.
-      AccountConfigs.insert({
-         userId: Meteor.userId(),
-         isInstructor
-      });
-
-
-      // TODO     Success, set account defaults
-      console.log("Complete success");
-
-   },
-
-
-   'userAccount.checkIsInstructor': () => {
-
-      if( AccountConfigs.findOne( { userId : Meteor.userId() } ) ){
-         return true;
+      if(isInstructor){
+         Roles.addUsersToRoles(Meteor.userId(), 'instructor__Role');
+      }
+      else{
+         Roles.addUsersToRoles(Meteor.userId(), 'learner__Role');
       }
 
-      return false;
-
    },
+
+   // Roles.userIsInRole() does not work correctly in client [ specifically componentDidMount() ]
+   'userAccount.checkIsInstructor' : () => {
+      return Roles.userIsInRole( Meteor.userId(), 'instructor__Role' );
+   },
+   'userAccount.checkIsLearner' : () => {
+      return Roles.userIsInRole( Meteor.userId(), 'learner__Role' );
+   }
 
 });

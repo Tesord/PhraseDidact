@@ -96,7 +96,7 @@ class Register extends Component {
 			}
 			else{		// Account created, need to set type
 
-				Meteor.call('userAccount.create', isInstructor, (err, result) => {
+				Meteor.call('userAccount.addRole', isInstructor, (err, result) => {
 
 					if(err){
 						this.handleErrors(err, false);
