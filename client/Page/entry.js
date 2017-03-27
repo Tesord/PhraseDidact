@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 import React, {Component} from 'react';
+import DocumentTitle from 'react-document-title';
 
 import Login_C from './Entry/login';
 import Register_C from './Entry/register';
@@ -48,10 +49,14 @@ class Entry extends Component{
 
 	render(){
 		return (
-			<div id="login-content" className="h-center-margin">
-				<Login_C />
-				<Register_C />
-			</div>
+			<DocumentTitle title='Login - PhraseDidact'>
+
+				<div id="login-content" className="h-center-margin">
+					<Login_C />
+					<Register_C />
+				</div>
+
+			</DocumentTitle>
 		);
 	}
 }

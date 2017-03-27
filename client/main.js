@@ -37,8 +37,11 @@ const routes = (
 
 			<Switch>
 				<Route exact path="/" component={Home_C} />
+				<Route path="/home" component={Home_C} />
+
 				<Route path="/login" component={Entry_C} />
 				<Route path="/fillLearnerProfile" component={FillLearnerProfile_C} />
+				
 				<Route component={NotFound_C} />
 			</Switch>
 		</div>

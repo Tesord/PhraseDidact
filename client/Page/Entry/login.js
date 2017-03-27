@@ -87,29 +87,29 @@ class Login extends Component {
       return (
          <form id="login-form"  className="_Theme_border_Default_ _Theme_login_Default_"
                onSubmit={	this.login.bind(this)	} >
-   			<loginTitle className="h-center-margin">	Log in	</loginTitle>
+   			<contentTitle className="h-center-margin">	Log in	</contentTitle>
 
-   			<loginAnnon className="h-center-margin">	Email Address / Username	</loginAnnon>
-   			<input name="username" type="text" className="loginField		h-center-margin		form-control"         required
+   			<annotation className="h-center-margin">	Email Address / Username	</annotation>
+   			<input name="username" type="text" className="h-center-margin		form-control"         required
    					 placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '
                    ref={	(this_elem) => (this.username_email_field = this_elem) }/>
 
-   			<loginAnnon className="h-center-margin">	Password	</loginAnnon>
-   			<input name="password" type="password" className="loginField	h-center-margin		form-control"      required
+   			<annotation className="h-center-margin">	Password	</annotation>
+   			<input name="password" type="password" className="h-center-margin		form-control"      required
                    ref={	(this_elem) => (this.pwd_field = this_elem) } />
 
-            <loginLine className="h-center-margin">
+            <contentLine className="h-center-margin">
                <label   className="align-left">
                  Remember me
                  <input type="checkbox" name="remember" />
                </label>
 
                <Link to="/forgetPass" className="align-right" type="text/html">Forget Password?</Link>
-            </loginLine>
+            </contentLine>
 
             {this.state.button}
 
-            <a className="loginBigLink  h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)}>	I would like to join </a>
+            <a className="contentLink  h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)}>	I would like to join </a>
          </form>
       );
    }

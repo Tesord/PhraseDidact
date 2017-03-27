@@ -141,7 +141,7 @@ class Register extends Component {
 			<form id="register-form" className="_Theme_border_Default_ _Theme_register_Default_"
 					onSubmit={	this.sre.bind(this)	} >
 
-				<loginTitle className="h-center-margin">	Sign up	</loginTitle>
+				<contentTitle className="h-center-margin">	Sign up	</contentTitle>
 
 				<p className="h-center-margin">
 					Please pick your account type. <br/>
@@ -169,24 +169,24 @@ class Register extends Component {
 				</div>
 
 
-				<loginAnnon className="h-center-margin">	Username		</loginAnnon>
-				<input name="username" type="text" className="loginField		h-center-margin		form-control"		required
+				<annotation className="h-center-margin">	Username		</annotation>
+				<input name="username" type="text" className="h-center-margin		form-control"		required
 	   				 placeholder='e.g. david_smith72 '		ref={	(this_elem) => (this.username_field = this_elem) }/>
 
-				<loginAnnon className="h-center-margin">	Email Address		</loginAnnon>
-				<input name="email" type="email" className="loginField	h-center-margin		form-control"			required
+				<annotation className="h-center-margin">	Email Address		</annotation>
+				<input name="email" type="email" className="h-center-margin		form-control"			required
 						 placeholder='e.g. " david.smith@example.com  '		ref={	(this_elem) => (this.email_field = this_elem) } />
 
-				<loginAnnon className="h-center-margin">	Password		</loginAnnon>
-				<input name="password" type="password" className="loginField	h-center-margin		form-control"	required
+				<annotation className="h-center-margin">	Password		</annotation>
+				<input name="password" type="password" className="h-center-margin		form-control"	required
 						 ref={	(this_elem) => (this.pwd_field = this_elem) } />
 
-				<loginAnnon className="h-center-margin">	Confirm Password		</loginAnnon>
-				<input name="password2" type="password" className="loginField	h-center-margin		form-control"	required/>
+				<annotation className="h-center-margin">	Confirm Password		</annotation>
+				<input name="password2" type="password" className="h-center-margin		form-control"	required/>
 
 				{this.state.button}
 
-				<a className="loginBigLink  h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)} >
+				<a className="contentLink  h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)} >
 					Back to login
 				</a>
 			</form>
