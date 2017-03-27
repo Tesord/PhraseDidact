@@ -14,7 +14,7 @@ const Header = () => {
 	return (
 		<nav className="_Theme_nav_Default_">
 
-			<div id="navbar-content" className="h-center">
+			<div id="navbar-content" className="h-center-margin">
 				<NavHead_C />
 				<AccountHead_C />
 			</div>

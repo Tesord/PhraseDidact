@@ -1,3 +1,7 @@
+@import (reference) "header";
+
+
+
 body {
    /* Get rid of the default margin separating components from the very top of the window. */
    margin: 0px;
@@ -20,7 +24,6 @@ a {
    }
 }
 
-
 input[type='checkbox'] {
    margin-left: 0.3em;
 
@@ -33,7 +36,10 @@ input[type='radio'] {
 }
 
 
-.h-center {
+
+/* Add-on attributes for existing components */
+
+.h-center-margin {
    /* ::L_NOTE::
       i.e. horizontally center this component.  If component using this require custom margin,
       then  !important  should be applied to them. */
@@ -54,9 +60,30 @@ input[type='radio'] {
 }
 
 
+/* Base class for all main content sections */
+.standard-content {
+   .h-center-margin;
+
+   margin-top: 4rem     !important;
+   margin-bottom: 4rem     !important;
+
+   max-width: 110rem;
+}
+
+.standard-main {
+   margin-right: 2rem;
+}
+.standard-main, .standard-sidebar {
+   /* Padding is to keep content touching the very edge of screen in small displays */
+   padding-left: @nav-horiz-padding;
+   padding-right: @nav-horiz-padding;
+}
 
 
-/* Base class for all buttons */
+
+
+
+/* Base class for all buttons. Used by other sheets. */
 .pd-btn {
    /* Extract from Bootstrap */
    display: inline-block;

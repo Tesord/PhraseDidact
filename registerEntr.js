@@ -36,7 +36,7 @@
 // 					   Register as instructor
 // 				</button>
 //
-// 				<a className="loginBigLink  h-center" href="javascript:void(0)" onClick={this.flip.bind(this)}>
+// 				<a className="loginBigLink  h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)}>
 //                Back to login
 //             </a>
 // 			</div>

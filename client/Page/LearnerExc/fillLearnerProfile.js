@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Circle_greyBG from '../Loading/circle_greyBG';
+import Blue_Circle from '../Loading/blue_Circle';
 
 
 
@@ -10,7 +10,7 @@ class FillLearnerProfile extends Component {
 		super();
 
 		this.state = {
-			content: <Circle_greyBG />
+			content: <Blue_Circle />
 		};
 	}
 
@@ -24,8 +24,13 @@ class FillLearnerProfile extends Component {
 
             this.setState({ content: (
 
-               <div>
-                  FILL THIS IN PLEASE
+               <div className="standard-content">
+                  <form id="learner-profile-form" className="h-center-margin">
+
+                        FILL THIS IN PLEASE
+
+
+                  </form>
                </div>
 
             )});

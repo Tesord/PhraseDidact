@@ -34,7 +34,7 @@
 //
 //          this.content = (
 //
-//             <div id="setAccountType-content" className="h-center">
+//             <div id="setAccountType-content" className="h-center-margin">
 //
 //                <div  id="set-learner"   className="align-left  _Theme_border_Default_ _Theme_register_Default_">
 //       				<h4>	Are you a learner?	</h4>

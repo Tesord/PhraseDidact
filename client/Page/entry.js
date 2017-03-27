@@ -48,7 +48,7 @@ class Entry extends Component{
 
 	render(){
 		return (
-			<div id="login-content" className="h-center">
+			<div id="login-content" className="h-center-margin">
 				<Login_C />
 				<Register_C />
 			</div>
