@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
+import CommonUtil from '/imports/lib/commonUtil';
+
 
  /****************** TODO
 -  Get FORGET PASSWORD working
 -  Get Remember me working
+-  Check user is log OUT before rendering page
  */
 
 
@@ -64,7 +67,11 @@ class Login extends Component {
          if(err){
             this.handleErrors(err);
          }
-         else{
+         else{		// successful
+				CommonUtil.setLoginCache( Roles.getRolesForUser(Meteor.userId())[0] );
+
+				/* TODO Possible redirect based on last visited URL? */
+
             this.context.router.history.push("");
          }
 
@@ -72,6 +79,9 @@ class Login extends Component {
 
       this.setState( {     button:    this.getLoadingAnim()    });
    }
+
+
+	/* TODO Use React-Router's <Redirect/> here for already logged in? */
 
    render(){
       return (

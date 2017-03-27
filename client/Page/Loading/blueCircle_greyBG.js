@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-class Blue_Circle extends Component{
+class BlueCircle_greyBG extends Component{
 
 
    static show(){
@@ -28,10 +28,12 @@ class Blue_Circle extends Component{
 
 	render(){
 		return (
-         <div id="loading-circle" ></div>
+         <div id="loading-bg">
+            <div id="loading-circle" ></div>
+         </div>
 		);
 	}
 }
 
 
-export default Blue_Circle;
+export default BlueCircle_greyBG;

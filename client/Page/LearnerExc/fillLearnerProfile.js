@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import Blue_Circle from '../Loading/blue_Circle';
+import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
-
+import CommonUtil from '/imports/lib/commonUtil';
+import LearnerExc from '/imports/lib/learnerExc';
 
 class FillLearnerProfile extends Component {
 
@@ -10,38 +11,50 @@ class FillLearnerProfile extends Component {
 		super();
 
 		this.state = {
-			content: <Blue_Circle />
+			content: <BlueCircle_greyBG />
 		};
 	}
 
 
-   componentDidMount() {
+   isLearnerAction(){
+      this.state = { content: (
 
-      Meteor.call('userAccount.checkIsLearner', (err, result) => {
+         <div className="standard-content">
+            <form id="learner-profile-form" className="h-center-margin">
 
-         // result = Learner
-         if(result){
-
-            this.setState({ content: (
-
-               <div className="standard-content">
-                  <form id="learner-profile-form" className="h-center-margin">
-
-                        FILL THIS IN PLEASE
+                  FILL THIS IN PLEASE
 
 
-                  </form>
-               </div>
+            </form>
+         </div>
 
-            )});
+      )};
+   }
 
-         }  // else is Instructor
-         else{
-            // redirect without being recorded in Browser Back button history
-            window.location.replace("notFound");
+   isOtherAction(){
+
+      /* TODO change to "You are not Learner" or something page */
+
+
+      /* Redirect without being recorded in Browser Back button history. However, doing so seems to
+       * cancel any earlier localStorage setItem() calls... So this function will be delayed a bit. */
+      setTimeout( () => { window.location.replace("notFound"); }, 500);
+   }
+
+
+   componentWillMount() {
+
+      let result = LearnerExc.checkExc();
+
+      if( result !== LearnerExc.checkExc_return.NOT_LOG &&
+         result !== LearnerExc.checkExc_return.ERROR ){
+
+         if( result === LearnerExc.checkExc_return.LEARNER){
+            this.isLearnerAction();
+         }else{
+            this.isOtherAction();
          }
-
-      } );
+      }
 
    }
 
