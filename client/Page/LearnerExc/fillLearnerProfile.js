@@ -3,6 +3,8 @@ import DocumentTitle from 'react-document-title';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
+import CountrySelect from './FillLearnerProfile/countrySelect';
+
 import CommonUtil from '/imports/lib/commonUtil';
 import LearnerExc from '/imports/lib/learnerExc';
 
@@ -22,6 +24,24 @@ class FillLearnerProfile extends Component {
 
          <div className="standard-content">
             <form id="learner-profile-form" className="h-center-margin">
+
+               <p>
+                  Before you get started, please take a moment of your time to fill out this <b>Learner Profile </b>. <br/>
+                  All information you fill in will be used by language specialists for research purposes. <br/>
+                  <br/>
+                  Filling in this form is not mandatory, but any contribution would greatly help out
+                  language researchers in their mission to improve the learning process. <br/>
+                  Thank you.
+               </p>
+
+               <annotation className="h-center-margin">	Gender	</annotation>
+
+               <annotation className="h-center-margin">	Age	</annotation>
+
+
+
+               <annotation className="h-center-margin">	Country of residence	</annotation>
+               <CountrySelect/>
 
                <annotation className="h-center-margin">	Email Address / Username	</annotation>
                <input name="username" type="text" className="h-center-margin		form-control"         required

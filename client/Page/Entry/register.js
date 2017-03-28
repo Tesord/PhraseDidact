@@ -8,7 +8,7 @@ import CommonUtil from '/imports/lib/commonUtil';
    - Email address format validation
    - Non-empty form input           {DONE}
    - Username avail
-   - Password matching
+   - Confirm Password matching
    - Email avail
 * /
 
