@@ -16,4 +16,7 @@
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.23.0"
   }
+  "engines": {
+	"node": "4.7.3"
+  }
 }
