@@ -70,12 +70,10 @@ class FillLearnerProfile extends Component {
 
    componentWillMount() {
 
-      let result = LearnerExc.checkExc();
+      let result = LearnerExc.checkExcAndRespond();
+      if( result !== 0 ){
 
-      if( result !== LearnerExc.checkExc_return.NOT_LOG &&
-         result !== LearnerExc.checkExc_return.ERROR ){
-
-         if( result === LearnerExc.checkExc_return.LEARNER){
+         if( result > 0){
             this.isLearnerAction();
          }else{
             this.isOtherAction();

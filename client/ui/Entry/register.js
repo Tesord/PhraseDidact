@@ -110,11 +110,11 @@ class Register extends Component {
 
 						// Redirect using React-Router v4's method (instant)
 						if(isInstructor){
-							Func_Util.setLoginCache("instructor__Role");
+							Func_Util.setLoginCache( "INSTR" );
 							this.context.router.history.push("");
 						}
 						else{
-							Func_Util.setLoginCache("learner__Role");
+							Func_Util.setLoginCache( "LEARN" );
 							this.context.router.history.push("fillLearnerProfile");
 						}
 					}

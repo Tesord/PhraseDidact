@@ -2,22 +2,17 @@ import React, {Component} from 'react';
 
 import Func_Util from './func_Util';
 
+
 class LearnerExc extends Component {
 
-   static checkExc_return = {
-      LEARNER: Symbol('LEARNER'),
-      OTHER: Symbol('OTHER'),
-      NOT_LOG: Symbol('NOT_LOG'),
-      ERROR: Symbol('ERROR'),
-   }
-
    static handleErrors(err){
-      // TODO   Popup error or something...
+      // TODO   Redirect to error page and Popup error or something...
       console.log('Error' + err);
    }
 
-   /* TODO document this method */
-   static checkExc(){
+   /* TODO document this method. Return 1 if cache indicates is Learner, -1 if cache indicates it is not.
+    * 0 if database check is required */
+   static checkExcAndRespond(){
 
       if(Meteor.userId()){
          let insCache = Func_Util.getLoginCache_Role();
@@ -25,11 +20,11 @@ class LearnerExc extends Component {
          // Try reading cache first
          if( insCache !== null ){
 
-            if( insCache === "learner__Role"){
-               return LearnerExc.checkExc_return.LEARNER;
+            if( insCache === "LEARN" ){
+               return 1;
             }
             else{
-               return LearnerExc.checkExc_return.OTHER;
+               return -1;
             }
 
          }
@@ -38,19 +33,20 @@ class LearnerExc extends Component {
             Meteor.call('userAccount.checkIsLearner', (err, isLearner) => {
                if(err){
                   LearnerExc.handleErrors(err);
-                  return LearnerExc.checkExc_return.ERROR;
                }
                else{
                   if(isLearner){
-                     Func_Util.setLoginCache("learner__Role");
-                     return LearnerExc.checkExc_return.LEARNER;
+                     Func_Util.setLoginCache( "LEARN" );
                   }
                   else{
-                     Func_Util.setLoginCache("instructor__Role");
-                     return LearnerExc.checkExc_return.OTHER;
+                     Func_Util.setLoginCache( "INSTR" );
                   }
+
+                  location.reload();
                }
             } );
+
+            return 0;
          }
 
       }
@@ -59,7 +55,7 @@ class LearnerExc extends Component {
          window.location.replace("login");
 
          // Since redirect is not instant, result must be fed back
-         return LearnerExc.checkExc_return.NOT_LOG;
+         return 0;
       }
 
    }

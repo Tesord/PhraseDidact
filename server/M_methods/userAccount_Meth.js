@@ -1,5 +1,4 @@
 
-
 /** TODO If Meteor method on server folder, then when it is called, the server runs it instead;
  * but Client can run "expected" version through stub.
  * If on "imports" folder, then both server & client runs it (client run miniMongo version).
@@ -18,20 +17,20 @@ Meteor.methods({
 
       // Will throw exception if unsuccessful. This method blocks until complete.
       if(isInstructor){
-         Roles.addUsersToRoles(Meteor.userId(), 'instructor__Role');
+         Roles.addUsersToRoles(Meteor.userId(), "INSTR" );
       }
       else{
-         Roles.addUsersToRoles(Meteor.userId(), 'learner__Role');
+         Roles.addUsersToRoles(Meteor.userId(), "LEARN" );
       }
 
    },
 
    // Roles.userIsInRole() does not work correctly in client [ specifically componentDidMount() ]
    'userAccount.checkIsInstructor' : () => {
-      return Roles.userIsInRole( Meteor.userId(), 'instructor__Role' );
+      return Roles.userIsInRole( Meteor.userId(), "INSTR" );
    },
    'userAccount.checkIsLearner' : () => {
-      return Roles.userIsInRole( Meteor.userId(), 'learner__Role' );
+      return Roles.userIsInRole( Meteor.userId(), "LEARN" );
    }
 
 });

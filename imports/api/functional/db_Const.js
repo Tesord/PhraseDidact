@@ -1,17 +1,36 @@
 import React, {Component} from 'react';
 
 
+/* ::IMPORTANT::
+ * Any changes to the KEY part of any mapping must also be reflected on existing MongoDB documents.
+ * (Mass MongDB replacing command must be used):
+
+e.g. (for single Role architecture only, Meteor Mongo)
+
+db.users.update(
+   {"roles" : ["learner__Role"] },
+   { $set: { "roles": ["LEARN"] } },
+   {"multi": true}
+);
+
+ */
 class DB_Const extends Component {
 
+/* Account Configs */
+   static ROLE_ACCOUNT = {
+      "LEARN" : "Learner",
+      "INSTR" : "Instructor"
+   }
 
-   static genderMapping = {
+/* Learner Profile Configs */
+   static GENDER_LEARNPROF = {
       "M" : "Male",
       "F" : "Female",
       "O" : "Other",
       "PNS" : "Prefer not to say"
    }
 
-   static countryMapping = {
+   static COUNTRY_LEARNPROF = {
 
       "AFG" : "Afghanistan",
       "ALA" : "Åland Islands",
