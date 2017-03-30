@@ -3,10 +3,11 @@ import DocumentTitle from 'react-document-title';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
-import CountrySelect from './FillLearnerProfile/countrySelect';
+import CountrySelect__C from './FillLearnerProfile/countrySelect';
+import GenderSelect__C from './FillLearnerProfile/genderSelect';
 
-import CommonUtil from '/imports/lib/commonUtil';
-import LearnerExc from '/imports/lib/learnerExc';
+import Func_Util from '/imports/api/functional/func_Util';
+import LearnerExc from '/imports/api/functional/learnerExc';
 
 class FillLearnerProfile extends Component {
 
@@ -35,23 +36,14 @@ class FillLearnerProfile extends Component {
                </p>
 
                <annotation className="h-center-margin">	Gender	</annotation>
-                  <div className="h-center-margin    pure-css-select-style theme-default">
-
-                     <select     ref={(this_elem) => {this.gender = this_elem;} }>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                        <option value="O">Other</option>
-                        <option value="PNS">Prefer not to say</option>
-                     </select>
-
-                  </div>
+               <GenderSelect__C />
 
                <annotation className="h-center-margin">	Age	</annotation>
 
 
 
                <annotation className="h-center-margin">	Country of residence	</annotation>
-               <CountrySelect/>
+               <CountrySelect__C />
 
                <annotation className="h-center-margin">	Email Address / Username	</annotation>
                <input name="username" type="text" className="h-center-margin		form-control"         required

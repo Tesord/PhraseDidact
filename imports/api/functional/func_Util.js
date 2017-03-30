@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
 
-class CommonUtil extends Component {
-   
+class Func_Util extends Component {
+
 
    static setLoginCache(role_String){
       localStorage.setItem("Role", role_String);
@@ -20,4 +20,4 @@ class CommonUtil extends Component {
 
 }
 
-export default CommonUtil;
+export default Func_Util;

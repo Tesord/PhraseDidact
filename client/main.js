@@ -3,21 +3,21 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
-import Header_C from './Page/Common/header';
+import Header__C from './ui/Common/header';
 
-import Home_C from './Page/home';
-import NotFound_C from './Page/notFound';
-import Entry_C from './Page/entry';
-import FillLearnerProfile_C from './Page/LearnerExc/fillLearnerProfile';
+import Home__C from './ui/home';
+import NotFound__C from './ui/notFound';
+import Entry__C from './ui/entry';
+import FillLearnerProfile__C from './ui/LearnerExc/fillLearnerProfile';
 
 /*************** TODO WHEN FINISHED: comment out the below imports & delete above.
- 					Move the 'Page' folder from 'client' to 'imports' **/
+ 					Move the 'ui' folder from 'client' to 'imports' **/
 
-// import Header_C from '/imports/Page/Common/header';
+// import Header__C from '/imports/ui/Common/header';
 
-// import Home_C from '/imports/Page/home';
-// import NotFound_C from '/imports/Page/notFound';
-// import Entry_C from '/imports/Page/entry';
+// import Home__C from '/imports/ui/home';
+// import NotFound__C from '/imports/ui/notFound';
+// import Entry__C from '/imports/ui/entry';
 
 /****************** TODO ****************/
 
@@ -33,16 +33,16 @@ import FillLearnerProfile_C from './Page/LearnerExc/fillLearnerProfile';
 const routes = (
 	<Router>
 		<div>
-			<Header_C />
+			<Header__C />
 
 			<Switch>
-				<Route exact path="/" component={Home_C} />
-				<Route path="/home" component={Home_C} />
+				<Route exact path="/" component={Home__C} />
+				<Route path="/home" component={Home__C} />
 
-				<Route path="/login" component={Entry_C} />
-				<Route path="/fillLearnerProfile" component={FillLearnerProfile_C} />
-				
-				<Route component={NotFound_C} />
+				<Route path="/login" component={Entry__C} />
+				<Route path="/fillLearnerProfile" component={FillLearnerProfile__C} />
+
+				<Route component={NotFound__C} />
 			</Switch>
 		</div>
 	</Router>

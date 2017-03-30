@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Accounts } from 'meteor/accounts-base';
 
-import CommonUtil from '/imports/lib/commonUtil';
+import Func_Util from '/imports/api/functional/func_Util';
 
 
 /* TODO Validation
@@ -110,11 +110,11 @@ class Register extends Component {
 
 						// Redirect using React-Router v4's method (instant)
 						if(isInstructor){
-							CommonUtil.setLoginCache("instructor__Role");
+							Func_Util.setLoginCache("instructor__Role");
 							this.context.router.history.push("");
 						}
 						else{
-							CommonUtil.setLoginCache("learner__Role");
+							Func_Util.setLoginCache("learner__Role");
 							this.context.router.history.push("fillLearnerProfile");
 						}
 					}

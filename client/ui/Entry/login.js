@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-import CommonUtil from '/imports/lib/commonUtil';
+import Func_Util from '/imports/api/functional/func_Util';
 
 
  /****************** TODO
@@ -68,7 +68,7 @@ class Login extends Component {
             this.handleErrors(err);
          }
          else{		// successful
-				CommonUtil.setLoginCache( Roles.getRolesForUser(Meteor.userId())[0] );
+				Func_Util.setLoginCache( Roles.getRolesForUser(Meteor.userId())[0] );
 
 				/* TODO Possible redirect based on last visited URL? */
 

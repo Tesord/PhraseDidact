@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
 
 
-class CountrySelect extends Component {
+class DB_Const extends Component {
+
+
+   static genderMapping = {
+      "M" : "Male",
+      "F" : "Female",
+      "O" : "Other",
+      "PNS" : "Prefer not to say"
+   }
 
    static countryMapping = {
 
@@ -257,31 +265,7 @@ class CountrySelect extends Component {
 
    }
 
-
-
-   render(){
-
-      var country_options = [];
-
-      for (country in CountrySelect.countryMapping) {
-         country_options.push(
-
-            <option value={country}  key={country}> { CountrySelect.countryMapping[country] } </option>
-
-         );
-      }
-
-      return (
-         <div className="h-center-margin    pure-css-select-style theme-default">
-
-            <select     ref={(this_elem) => {this.countrySelect = this_elem;} }>
-               {country_options}
-            </select>
-
-         </div>
-      );
-   }
-
 }
 
-export default CountrySelect;
+
+export default DB_Const;

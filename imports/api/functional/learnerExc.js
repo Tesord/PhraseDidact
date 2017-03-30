@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import CommonUtil from './commonUtil';
+import Func_Util from './func_Util';
 
 class LearnerExc extends Component {
 
@@ -16,10 +16,11 @@ class LearnerExc extends Component {
       console.log('Error' + err);
    }
 
+   /* TODO document this method */
    static checkExc(){
 
       if(Meteor.userId()){
-         let insCache = CommonUtil.getLoginCache_Role();
+         let insCache = Func_Util.getLoginCache_Role();
 
          // Try reading cache first
          if( insCache !== null ){
@@ -41,11 +42,11 @@ class LearnerExc extends Component {
                }
                else{
                   if(isLearner){
-                     CommonUtil.setLoginCache("learner__Role");
+                     Func_Util.setLoginCache("learner__Role");
                      return LearnerExc.checkExc_return.LEARNER;
                   }
                   else{
-                     CommonUtil.setLoginCache("instructor__Role");
+                     Func_Util.setLoginCache("instructor__Role");
                      return LearnerExc.checkExc_return.OTHER;
                   }
                }
