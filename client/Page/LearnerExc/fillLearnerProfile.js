@@ -35,6 +35,16 @@ class FillLearnerProfile extends Component {
                </p>
 
                <annotation className="h-center-margin">	Gender	</annotation>
+                  <div className="h-center-margin    pure-css-select-style theme-default">
+
+                     <select     ref={(this_elem) => {this.gender = this_elem;} }>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="O">Other</option>
+                        <option value="PNS">Prefer not to say</option>
+                     </select>
+
+                  </div>
 
                <annotation className="h-center-margin">	Age	</annotation>
 
