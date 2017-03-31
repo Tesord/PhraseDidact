@@ -138,7 +138,7 @@ class Register extends Component {
 	render(){
 
 		return (
-			<form id="register-form" className="_Theme_border_Default_ _Theme_register_Default_"
+			<form id="register-card" className="_Theme_border_Default_ _Theme_register_Default_"
 					onSubmit={	this.sre.bind(this)	} >
 
 				<contentTitle className="h-center-margin">	Sign up	</contentTitle>
@@ -156,7 +156,7 @@ class Register extends Component {
 							ref={ (this_elem) => {this.signup_learner_lbl = this_elem;} } >
 								Learner
 						</label>
-		        	</div>
+		      	</div>
 
 					<div className="funkyradio-primary">
 		            <input type="radio" name="radio" id="signup-instructor"
@@ -168,27 +168,29 @@ class Register extends Component {
 		        	</div>
 				</div>
 
+				<div id="register-form" className="h-center-margin">
+					<annotation>	Username		</annotation>
+					<input name="username" type="text" className="form-control"		required
+		   				 placeholder='e.g. david_smith72 '		ref={	(this_elem) => (this.username_field = this_elem) }/>
 
-				<annotation className="h-center-margin">	Username		</annotation>
-				<input name="username" type="text" className="h-center-margin		form-control"		required
-	   				 placeholder='e.g. david_smith72 '		ref={	(this_elem) => (this.username_field = this_elem) }/>
+					<annotation>	Email Address		</annotation>
+					<input name="email" type="email" className="form-control"			required
+							 placeholder='e.g. " david.smith@example.com  '		ref={	(this_elem) => (this.email_field = this_elem) } />
 
-				<annotation className="h-center-margin">	Email Address		</annotation>
-				<input name="email" type="email" className="h-center-margin		form-control"			required
-						 placeholder='e.g. " david.smith@example.com  '		ref={	(this_elem) => (this.email_field = this_elem) } />
+					<annotation>	Password		</annotation>
+					<input name="password" type="password" className="form-control"	required
+							 ref={	(this_elem) => (this.pwd_field = this_elem) } />
 
-				<annotation className="h-center-margin">	Password		</annotation>
-				<input name="password" type="password" className="h-center-margin		form-control"	required
-						 ref={	(this_elem) => (this.pwd_field = this_elem) } />
+					<annotation>	Confirm Password		</annotation>
+					<input name="password2" type="password" className="form-control"	required/>
 
-				<annotation className="h-center-margin">	Confirm Password		</annotation>
-				<input name="password2" type="password" className="h-center-margin		form-control"	required/>
+					{this.state.button}
 
-				{this.state.button}
+					<a className="contentLink		h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)} >
+						Back to login
+					</a>
 
-				<a className="contentLink  h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)} >
-					Back to login
-				</a>
+				</div>
 			</form>
 		);
 	}

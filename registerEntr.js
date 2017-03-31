@@ -14,7 +14,7 @@
 // 	render(){
 //
 // 		return (
-// 			<div id="register-form" className="_Theme_border_Default_ _Theme_register_Default_">
+// 			<div id="register-card" className="_Theme_border_Default_ _Theme_register_Default_">
 // 				<h3>	Don't have an account? <br/>
 // 						Create one now!</h3>
 //

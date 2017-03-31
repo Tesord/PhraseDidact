@@ -4,7 +4,6 @@
 */
 
 .pure-css-select-style {
-  width: 80%;    /* CUSTOM:	changed, so the width is in line with the rest of the components in 'contents.less' */
   overflow: hidden;
 
   /* CUSTOM:	changed */

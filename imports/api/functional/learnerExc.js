@@ -42,7 +42,11 @@ class LearnerExc extends Component {
                      Func_Util.setLoginCache( "INSTR" );
                   }
 
-                  location.reload();
+                  if( Func_Util.isLocalStorageSupported() ){
+                     location.reload();
+                  } else{
+                     this.context.router.history.push("");     // prevent infinite loop
+                  }
                }
             } );
 
@@ -60,7 +64,11 @@ class LearnerExc extends Component {
 
    }
 
-
 }
+
+// ask for `router` from context, helper for router-router Programatic Navigation
+LearnerExc.contextTypes = {
+	router: React.PropTypes.object
+};
 
 export default LearnerExc;

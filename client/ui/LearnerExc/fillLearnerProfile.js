@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
+import { DateField } from 'react-date-picker';
+import 'react-date-picker/index.css';
+
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
@@ -8,6 +11,8 @@ import GenderSelect__C from './FillLearnerProfile/genderSelect';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
+
+
 
 class FillLearnerProfile extends Component {
 
@@ -24,7 +29,7 @@ class FillLearnerProfile extends Component {
       this.state = { content: (
 
          <div className="standard-content">
-            <form id="learner-profile-form" className="h-center-margin">
+            <form id="learner-profile-section" className="h-center-margin">
 
                <p>
                   Before you get started, please take a moment of your time to fill out this <b>Learner Profile </b>. <br/>
@@ -35,22 +40,24 @@ class FillLearnerProfile extends Component {
                   Thank you.
                </p>
 
-               <annotation className="h-center-margin">	Gender	</annotation>
+               <div id="learner-profile-form" className="h-center-margin">
+
+               <annotation>	Gender	</annotation>
                <GenderSelect__C />
 
-               <annotation className="h-center-margin">	Age	</annotation>
+               <annotation>	Birthday	</annotation>
+               <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
 
-
-
-               <annotation className="h-center-margin">	Country of residence	</annotation>
+               <annotation>	Country of residence	</annotation>
                <CountrySelect__C />
 
-               <annotation className="h-center-margin">	Email Address / Username	</annotation>
+               <annotation>	Email Address / Username	</annotation>
                <input name="username" type="text" className="h-center-margin		form-control"         required
                       placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '
                       ref={	(this_elem) => (this.username_email_field = this_elem) }/>
 
 
+                </div>
             </form>
          </div>
 

@@ -85,32 +85,38 @@ class Login extends Component {
 
    render(){
       return (
-         <form id="login-form"  className="_Theme_border_Default_ _Theme_login_Default_"
+         <form id="login-card"  className="_Theme_border_Default_ _Theme_login_Default_"
                onSubmit={	this.login.bind(this)	} >
-   			<contentTitle className="h-center-margin">	Log in	</contentTitle>
 
-   			<annotation className="h-center-margin">	Email Address / Username	</annotation>
-   			<input name="username" type="text" className="h-center-margin		form-control"         required
-   					 placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '
-                   ref={	(this_elem) => (this.username_email_field = this_elem) }/>
+				<div id="login-form"	className="h-center-margin">
 
-   			<annotation className="h-center-margin">	Password	</annotation>
-   			<input name="password" type="password" className="h-center-margin		form-control"      required
-                   ref={	(this_elem) => (this.pwd_field = this_elem) } />
+	   			<contentTitle>	Log in	</contentTitle>
 
-            <contentLine className="h-center-margin">
-               <label   className="align-left">
-                 Remember me
-                 <input type="checkbox" name="remember" />
-               </label>
+	   			<annotation>	Email Address / Username	</annotation>
+	   			<input name="username" type="text" className="form-control"         required
+	   					 placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '
+	                   ref={	(this_elem) => (this.username_email_field = this_elem) }/>
 
-               <Link to="/forgetPass" className="align-right" type="text/html">Forget Password?</Link>
-            </contentLine>
+	   			<annotation>	Password	</annotation>
+	   			<input name="password" type="password" className="form-control"      required
+	                   ref={	(this_elem) => (this.pwd_field = this_elem) } />
 
-            {this.state.button}
+	            <contentLine>
+	               <label   className="align-left">
+	                 Remember me
+	                 <input type="checkbox" name="remember" />
+	               </label>
 
-            <a className="contentLink  h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)}>	I would like to join </a>
-         </form>
+	               <Link to="/forgetPass" className="align-right" type="text/html">Forget Password?</Link>
+	            </contentLine>
+
+	            {this.state.button}
+
+	            <a className="contentLink		h-center-margin" href="javascript:void(0)" onClick={this.flip.bind(this)}>	I would like to join </a>
+
+				</div>
+
+			</form>
       );
    }
 };
