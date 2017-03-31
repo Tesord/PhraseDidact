@@ -5,7 +5,7 @@ import DB_Const from '/imports/api/functional/db_Const';
 
 
 /* TODO document how you can get ref from this class instance in fillLearnerProfile */
-class CountrySelect extends Component {
+class Country_Select extends Component {
 
    render(){
       let result = Ui_Util.create_SingleSelect_fromObj( DB_Const.COUNTRY_LEARNPROF, "Select a Country" );
@@ -16,4 +16,4 @@ class CountrySelect extends Component {
 
 }
 
-export default CountrySelect;
+export default Country_Select;

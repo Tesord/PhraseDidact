@@ -5,8 +5,9 @@ import { DateField } from 'react-date-picker';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
-import CountrySelect__C from './FillLearnerProfile/countrySelect';
-import GenderSelect__C from './FillLearnerProfile/genderSelect';
+import Country_Select__C from './FillLearnerProfile/country_Select';
+import Gender_Select__C from './FillLearnerProfile/gender_Select';
+import LanguageBG_Select__C from '.FillLearnerProfile/LanguageBG_Select';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
@@ -42,18 +43,16 @@ class FillLearnerProfile extends Component {
                <div id="learner-profile-form" className="h-center-margin">
 
                <annotation>	Gender	</annotation>
-               <GenderSelect__C />
+               <Gender_Select__C />
 
                <annotation>	Birthday (YYYY-MM-DD)	</annotation>
                <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
 
                <annotation>	Country of residence	</annotation>
-               <CountrySelect__C />
+               <Country_Select__C />
 
                <annotation>	Fluent/Native languages	</annotation>
-               <input name="username" type="text" className="h-center-margin		form-control"         required
-                      placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '
-                      ref={	(this_elem) => (this.username_email_field = this_elem) }/>
+               <LanguageBG_Select__C />
 
 
                 </div>

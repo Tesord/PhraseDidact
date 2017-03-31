@@ -43,6 +43,37 @@ class Ui_Util extends Component {
       };
    }
 
+
+   /* TODO document this method */
+   static create_MultiSelect_fromObj (obj, initText){
+      let selects = [];
+
+
+      for (var key in obj) {
+         selects.push(
+
+            <option value={key}  key={key}> { obj[key] } </option>
+
+         );
+      }
+
+
+      let selectRef = null;
+
+      let jsx = (
+         <select  data-placeholder={initText}    multiple   className="chosen-multiselect"
+            ref={(this_elem) => {selectRef = this_elem;}} >
+               {selects}
+         </select>
+      );
+
+
+      return {
+         jsx,
+         selectRef
+      };
+   }
+
 }
 
 export default Ui_Util;

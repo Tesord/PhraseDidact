@@ -5,7 +5,7 @@ import DB_Const from '/imports/api/functional/db_Const';
 
 
 /* TODO document how you can get ref from this class instance in fillLearnerProfile */
-class GenderSelect extends Component {
+class Gender_Select extends Component {
 
    render(){
       let result = Ui_Util.create_SingleSelect_fromObj( DB_Const.GENDER_LEARNPROF, "Select a Gender" );
@@ -16,4 +16,4 @@ class GenderSelect extends Component {
 
 }
 
-export default GenderSelect;
+export default Gender_Select;
