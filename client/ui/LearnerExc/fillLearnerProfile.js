@@ -44,13 +44,13 @@ class FillLearnerProfile extends Component {
                <annotation>	Gender	</annotation>
                <GenderSelect__C />
 
-               <annotation>	Birthday	</annotation>
+               <annotation>	Birthday (YYYY-MM-DD)	</annotation>
                <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
 
                <annotation>	Country of residence	</annotation>
                <CountrySelect__C />
 
-               <annotation>	Email Address / Username	</annotation>
+               <annotation>	Fluent/Native languages	</annotation>
                <input name="username" type="text" className="h-center-margin		form-control"         required
                       placeholder='e.g. " david.smith@example.com ", " david_smith72 "... '
                       ref={	(this_elem) => (this.username_email_field = this_elem) }/>
@@ -86,6 +86,14 @@ class FillLearnerProfile extends Component {
          }
       }
 
+   }
+
+   componentDidMount() {
+      // ok to do so as in exceptional cases, the page will be redirected/reloaded
+      $('.chosen-select').chosen({
+         width: '50%',
+         allow_single_deselect: true
+      });
    }
 
 

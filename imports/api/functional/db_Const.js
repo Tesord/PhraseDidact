@@ -27,11 +27,9 @@ class DB_Const extends Component {
       "M" : "Male",
       "F" : "Female",
       "O" : "Other",
-      "PNS" : "Prefer not to say"
    }
 
    static COUNTRY_LEARNPROF = {
-
       "AFG" : "Afghanistan",
       "ALA" : "Åland Islands",
       "ALB" : "Albania",

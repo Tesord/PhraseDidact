@@ -1,0 +1,3 @@
+Please note that all image files inside these folders are depended by code/css files of the website.
+If they were to be moved/renamed, a project-wide find-and-replace operation must be conducted for
+*old-directory* -> *new-directory*

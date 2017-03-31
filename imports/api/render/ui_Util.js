@@ -4,8 +4,19 @@ import React, {Component} from 'react';
 class Ui_Util extends Component {
 
    /* TODO document this method */
-   static create_SelectOptions_fromObj (obj){
+   static create_SingleSelect_fromObj (obj, initText){
       let selects = [];
+
+      if(initText){
+         // Allow Chosen (jQuery select boxes) to initiate a select with a default value of *blank*.
+
+         selects.push(
+
+            <option value=""  key=" "> </option>
+
+         );
+      }
+
 
       for (var key in obj) {
          selects.push(
@@ -19,13 +30,10 @@ class Ui_Util extends Component {
       let selectRef = null;
 
       let jsx = (
-         <div className="h-center-margin    pure-css-select-style theme-default">
-
-            <select     ref={(this_elem) => {selectRef = this_elem;} }>
+         <select  data-placeholder={initText}    className="chosen-select"
+            ref={(this_elem) => {selectRef = this_elem;}} >
                {selects}
-            </select>
-
-         </div>
+         </select>
       );
 
 
