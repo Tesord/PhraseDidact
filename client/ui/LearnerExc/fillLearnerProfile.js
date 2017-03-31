@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { DateField } from 'react-date-picker';
-import 'react-date-picker/index.css';
 
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
