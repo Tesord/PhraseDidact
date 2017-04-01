@@ -7,7 +7,7 @@ import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
 import Country_Select__C from './FillLearnerProfile/country_Select';
 import Gender_Select__C from './FillLearnerProfile/gender_Select';
-import LanguageBG_Select__C from '.FillLearnerProfile/LanguageBG_Select';
+import LanguageBG_Select__C from './FillLearnerProfile/languageBG_Select';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
@@ -24,6 +24,7 @@ class FillLearnerProfile extends Component {
 		};
 	}
 
+   /* TODO  Add REF to all components */
 
    isLearnerAction(){
       this.state = { content: (
@@ -92,6 +93,9 @@ class FillLearnerProfile extends Component {
       $('.chosen-select').chosen({
          width: '50%',
          allow_single_deselect: true
+      });
+      $('.chosen-multiselect').chosen({
+         width: '100%'
       });
    }
 

@@ -8,10 +8,10 @@ import DB_Const from '/imports/api/functional/db_Const';
 class LanguageBG_Select extends Component {
 
    render(){
-      // let result = Ui_Util.create_SingleSelect_fromObj( DB_Const.GENDER_LEARNPROF, "Select a Gender" );
-      //
-      // this.selectRef = result.selectRef;
-      // return result.jsx;
+      let result = Ui_Util.create_MultiSelect_fromObj( DB_Const.LANGUAGE_LEARNPROF, "Select Languages..." );
+
+      this.selectRef = result.selectRef;
+      return result.jsx;
    }
 
 }
