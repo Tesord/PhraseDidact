@@ -8,7 +8,7 @@ import DB_Const from '/imports/api/functional/db_Const';
 class Gender_Select extends Component {
 
    render(){
-      let result = Ui_Util.create_SingleSelect_fromObj( DB_Const.GENDER_LEARNPROF, "Select a Gender" );
+      let result = Ui_Util.create_SingleSelect_fromObj( DB_Const.GENDER_LEARNPROF, this.props.classNameOfSelect, "Select a Gender" );
 
       this.selectRef = result.selectRef;
       return result.jsx;

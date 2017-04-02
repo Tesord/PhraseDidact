@@ -18,7 +18,7 @@ function create_OptionArray_fromObj(obj){
 
 
    /* TODO document this method (only works if " allow_single_deselect: true " is turned on in jQuery) */
-export function create_SingleSelect_fromObj (obj, initText){
+export function create_SingleSelect_fromObj (obj, className, initText){
    let selects = [];
 
    if(initText){
@@ -34,7 +34,7 @@ export function create_SingleSelect_fromObj (obj, initText){
    let selectRef = null;
    let jsx = (
 
-      <select  data-placeholder={initText}    className="chosen-select"
+      <select  data-placeholder={initText}    className={className}
          ref={(this_elem) => {selectRef = this_elem;}} >
             {selects}
       </select>
@@ -48,9 +48,10 @@ export function create_SingleSelect_fromObj (obj, initText){
    };
 }
 
+export const no_result_text_create_option = 'No match. To add a new option, press "Tab" after typing. Or press "Enter" now to add:';
 
    /* TODO document this method */
-export function create_MultiSelect_fromObj (obj, initText, className){
+export function create_MultiSelect_fromObj (obj, className, initText){
    let selects = create_OptionArray_fromObj(obj);
    let selectRef = null;
 

@@ -11,7 +11,7 @@ import Language_Select__C from './FillLearnerProfile/language_Select';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
-
+import Ui_Util from '/imports/api/render/ui_Util';
 
 
 class FillLearnerProfile extends Component {
@@ -44,17 +44,19 @@ class FillLearnerProfile extends Component {
                <div id="learner-profile-form" className="h-center-margin">
 
                <annotation>	Gender	</annotation>
-               <Gender_Select__C />
+               <Gender_Select__C    classNameOfSelect="chosen-select" />
 
                <annotation>	Birthday (YYYY-MM-DD)	</annotation>
                <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
 
                <annotation>	Current Country of residence	</annotation>
-               <Country_Select__C />
+               <Country_Select__C   classNameOfSelect="chosen-select" />
 
-               <annotation>	What are the official language(s) of your country?	</annotation>
-               <Language_Select__C />
+               <annotation>	What is the official language(s) of your country?	</annotation>
+               <Language_Select__C  classNameOfSelect="chosen-multiselect-Lang"   isSingle={false}/>
 
+               <annotation>   What is the dominant language of the city where you currently reside? 	</annotation>
+               <Language_Select__C  classNameOfSelect="chosen-select-create-option"   isSingle={true}/>
 
                 </div>
             </form>
@@ -95,10 +97,18 @@ class FillLearnerProfile extends Component {
          allow_single_deselect: true
       });
 
+      $('.chosen-select-create-option').chosen({
+         width: '100%',
+         allow_single_deselect: true,
+
+         no_results_text: Ui_Util.no_result_text_create_option ,
+         create_option: true
+      });
+
       $('.chosen-multiselect-Lang').chosen({
          width: '100%',
 
-         no_results_text: 'No match. You can press "Tab" when typing to add a new language, or press "Enter" now to add:',
+         no_results_text: Ui_Util.no_result_text_create_option ,
          max_selected_options: 10,   // Max select limit
          single_backstroke_delete: false,
 

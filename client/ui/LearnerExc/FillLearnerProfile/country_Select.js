@@ -8,7 +8,7 @@ import DB_Const from '/imports/api/functional/db_Const';
 class Country_Select extends Component {
 
    render(){
-      let result = Ui_Util.create_SingleSelect_fromObj( DB_Const.COUNTRY_LEARNPROF, "Select a Country" );
+      let result = Ui_Util.create_SingleSelect_fromObj( DB_Const.COUNTRY_LEARNPROF, this.props.classNameOfSelect, "Select a Country" );
 
       this.selectRef = result.selectRef;
       return result.jsx;

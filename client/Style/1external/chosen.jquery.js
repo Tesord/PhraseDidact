@@ -462,7 +462,8 @@
     };
 
 /* CUSTOM: changed, so that pressing the "Tab" key (any time at the search result screen) will add new option into the Select */
-/* TODO for all CUSTOM here:: testing... + refactor */
+/* TODO for all CUSTOM here:: testing... + refactor
+   Could add remove custom options..., but will be difficult  */
 
     AbstractChosen.prototype.keydown_checker = function(evt) {
       var stroke, _ref;
