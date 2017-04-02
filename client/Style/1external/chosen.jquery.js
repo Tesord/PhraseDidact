@@ -462,7 +462,7 @@
     };
 
 /* CUSTOM: changed, so that pressing the "Tab" key (any time at the search result screen) will add new option into the Select */
-/* TODO testing... */
+/* TODO for all CUSTOM here:: testing... + refactor */
 
     AbstractChosen.prototype.keydown_checker = function(evt) {
       var stroke, _ref;
@@ -475,12 +475,10 @@
         case 8:
           this.backstroke_length = this.get_search_field_value().length;
           break;
+
         case 9:
           if (this.results_showing){
-            if(!this.is_multiple) {
-               this.result_select(evt);
-            }
-            else if( this.create_option ){
+            if( this.create_option ){
                // i.e. this is the case where no matching word is found / all existing match has been used
                var entered_word = $(evt.target).val().trim();
 
@@ -502,6 +500,9 @@
                   return this.result_select(evt);
 
                }
+            }
+            else{
+               this.result_select(evt);
             }
          }
 
@@ -554,7 +555,7 @@
 
            evt.preventDefault();
            if (this.results_showing) {
-             if (!this.is_multiple || this.result_highlight) {
+             if (this.result_highlight) {       // i.e. Blue-bar selected any option...
                return this.result_select(evt);
              }
 
