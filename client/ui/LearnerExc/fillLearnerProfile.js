@@ -7,7 +7,7 @@ import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
 import Country_Select__C from './FillLearnerProfile/country_Select';
 import Gender_Select__C from './FillLearnerProfile/gender_Select';
-import LanguageBG_Select__C from './FillLearnerProfile/languageBG_Select';
+import Language_Select__C from './FillLearnerProfile/language_Select';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
@@ -49,11 +49,11 @@ class FillLearnerProfile extends Component {
                <annotation>	Birthday (YYYY-MM-DD)	</annotation>
                <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
 
-               <annotation>	Country of residence	</annotation>
+               <annotation>	Current Country of residence	</annotation>
                <Country_Select__C />
 
-               <annotation>	Fluent/Native languages	</annotation>
-               <LanguageBG_Select__C />
+               <annotation>	What are the official language(s) of your country?	</annotation>
+               <Language_Select__C />
 
 
                 </div>
@@ -94,8 +94,15 @@ class FillLearnerProfile extends Component {
          width: '50%',
          allow_single_deselect: true
       });
-      $('.chosen-multiselect').chosen({
-         width: '100%'
+
+      $('.chosen-multiselect-Lang').chosen({
+         width: '100%',
+
+         no_results_text: 'No match. You can press "Tab" when typing to add a new language, or press "Enter" now to add:',
+         max_selected_options: 10,   // Max select limit
+         single_backstroke_delete: false,
+
+         create_option: true
       });
    }
 

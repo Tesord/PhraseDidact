@@ -150,6 +150,11 @@
       this.include_group_label_in_selected = this.options.include_group_label_in_selected || false;
       this.max_shown_results = this.options.max_shown_results || Number.POSITIVE_INFINITY;
       this.case_sensitive_search = this.options.case_sensitive_search || false;
+
+/* CUSTOM: changed, allow config option */
+
+      this.create_option = this.options.create_option || false;
+
       return this.hide_results_on_select = this.options.hide_results_on_select != null ? this.options.hide_results_on_select : true;
     };
 
@@ -456,6 +461,9 @@
       }
     };
 
+/* CUSTOM: changed, so that pressing the "Tab" key (any time at the search result screen) will add new option into the Select */
+/* TODO testing... */
+
     AbstractChosen.prototype.keydown_checker = function(evt) {
       var stroke, _ref;
       stroke = (_ref = evt.which) != null ? _ref : evt.keyCode;
@@ -468,11 +476,38 @@
           this.backstroke_length = this.get_search_field_value().length;
           break;
         case 9:
-          if (this.results_showing && !this.is_multiple) {
-            this.result_select(evt);
-          }
-          this.mouse_on_container = false;
-          break;
+          if (this.results_showing){
+            if(!this.is_multiple) {
+               this.result_select(evt);
+            }
+            else if( this.create_option ){
+               // i.e. this is the case where no matching word is found / all existing match has been used
+               var entered_word = $(evt.target).val().trim();
+
+               // check whether if option already exist first to avoid duplicates (in the case of "all existing match has been used")
+               var alreadyExist = false;
+               $.each( $(this.form_field).prop('options'), function () {
+                  if( this.value.toUpperCase() === entered_word.toUpperCase() || this.text.toUpperCase() === entered_word.toUpperCase() ){
+                     alreadyExist = true;
+                  }
+               });
+
+               if( !alreadyExist ){
+
+                  entered_word = entered_word.toLowerCase();
+                  entered_word = entered_word.charAt(0).toUpperCase() + entered_word.substring(1);
+                  $(this.form_field).append('<option value=\"' + entered_word + '\">' + entered_word + '</option>');
+                  $(this.form_field).trigger('chosen:updated');
+                  this.result_highlight = this.search_results.find('li.active-result').last();
+                  return this.result_select(evt);
+
+               }
+            }
+         }
+
+         this.mouse_on_container = false;
+         break;
+
         case 13:
           if (this.results_showing) {
             evt.preventDefault();
@@ -499,6 +534,8 @@
       }
     };
 
+/* CUSTOM: changed, so that pressing the "Enter" key (on a "no match found" screen) add new option into the Select */
+
     AbstractChosen.prototype.keyup_checker = function(evt) {
       var stroke, _ref;
       stroke = (_ref = evt.which) != null ? _ref : evt.keyCode;
@@ -512,12 +549,41 @@
             this.results_search();
           }
           break;
+
         case 13:
-          evt.preventDefault();
-          if (this.results_showing) {
-            this.result_select(evt);
-          }
-          break;
+
+           evt.preventDefault();
+           if (this.results_showing) {
+             if (!this.is_multiple || this.result_highlight) {
+               return this.result_select(evt);
+             }
+
+             if( this.create_option ){
+                // i.e. this is the case where no matching word is found / all existing match has been used
+                var entered_word = $(evt.target).val().trim();
+
+                // check whether if option already exist first to avoid duplicates (in the case of "all existing match has been used")
+                var alreadyExist = false;
+                $.each( $(this.form_field).prop('options'), function () {
+                   if( this.value.toUpperCase() === entered_word.toUpperCase() || this.text.toUpperCase() === entered_word.toUpperCase() ){
+                      alreadyExist = true;
+                   }
+                });
+
+                if( !alreadyExist ){
+
+                   entered_word = entered_word.toLowerCase();
+                   entered_word = entered_word.charAt(0).toUpperCase() + entered_word.substring(1);
+                   $(this.form_field).append('<option value=\"' + entered_word + '\">' + entered_word + '</option>');
+                   $(this.form_field).trigger('chosen:updated');
+                   this.result_highlight = this.search_results.find('li.active-result').last();
+                   return this.result_select(evt);
+
+                }
+             }
+           }
+           break;
+
         case 27:
           if (this.results_showing) {
             this.results_hide();
@@ -620,7 +686,9 @@
 
     AbstractChosen.default_single_text = "Select an Option";
 
-    AbstractChosen.default_no_result_text = "No results match";
+/* CUSTOM: changed, below message is now more user-friendly */
+
+    AbstractChosen.default_no_result_text = "No results match:";
 
     return AbstractChosen;
 

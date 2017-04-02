@@ -317,7 +317,7 @@ export const LANGUAGE_LEARNPROF = {
    "chi" : "Chinese (except Mandarin and Cantonese)",
    "chu" : "Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic",
    "chv" : "Chuvash",
-   "cmn" : "Mandarin (Chinese)",
+   "cmn" : "Mandarin ( Chinese )",
    "cor" : "Cornish",
    "cos" : "Corsican",
    "cre" : "Cree",
@@ -468,7 +468,7 @@ export const LANGUAGE_LEARNPROF = {
    "xho" : "Xhosa",
    "yid" : "Yiddish",
    "yor" : "Yoruba",
-   "yue" : "Cantonese (Chinese)",
+   "yue" : "Cantonese ( Chinese )",
    "zha" : "Zhuang; Chuang",
    "zul" : "Zulu"
 

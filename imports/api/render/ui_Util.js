@@ -22,12 +22,9 @@ export function create_SingleSelect_fromObj (obj, initText){
    let selects = [];
 
    if(initText){
-
       // Allow Chosen (jQuery select boxes) to initiate a select with a default value of *blank*.
       selects.push(
-
          <option value=""  key=" "> </option>
-
       );
    }
 
@@ -53,12 +50,18 @@ export function create_SingleSelect_fromObj (obj, initText){
 
 
    /* TODO document this method */
-export function create_MultiSelect_fromObj (obj, initText){
+export function create_MultiSelect_fromObj (obj, initText, className){
    let selects = create_OptionArray_fromObj(obj);
    let selectRef = null;
 
+   /* Prevent a bug (of a custom-implemented feature) where pressing "tab" on a fresh multi-select
+    * would automatically choose the last option. (Chosen ignores blank Options) */
+   selects.push(
+      <option value=""  key=" "> </option>
+   );
+
    let jsx = (
-      <select  data-placeholder={initText}    multiple   className="chosen-multiselect"
+      <select  data-placeholder={initText}    multiple   className={className}
          ref={(this_elem) => {selectRef = this_elem;}} >
             {selects}
       </select>
