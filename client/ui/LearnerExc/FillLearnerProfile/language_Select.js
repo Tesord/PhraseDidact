@@ -11,10 +11,10 @@ class Language_Select extends Component {
       let result = null;
 
       if(this.props.isSingle){
-         result = Ui_Util.create_SingleSelect_fromObj( DB_Const.LANGUAGE_LEARNPROF, this.props.classNameOfSelect, "Select or type a Language");
+         result = Ui_Util.create_SingleSelect_fromObj( DB_Const.LANGUAGE__LEARNPROF, this.props.classNameOfSelect, "Select or type a Language");
       }
       else{
-         result = Ui_Util.create_MultiSelect_fromObj( DB_Const.LANGUAGE_LEARNPROF, this.props.classNameOfSelect, "Select or type Languages...");
+         result = Ui_Util.create_MultiSelect_fromObj( DB_Const.LANGUAGE__LEARNPROF, this.props.classNameOfSelect, "Select or type Languages...");
       }
 
       this.selectRef = result.selectRef;

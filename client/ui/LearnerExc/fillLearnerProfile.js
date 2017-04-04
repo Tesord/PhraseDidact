@@ -13,6 +13,7 @@ import Language_Select__C from './FillLearnerProfile/language_Select';
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
 import Ui_Util from '/imports/api/render/ui_Util';
+import DB_Const from '/imports/api/functional/db_Const';
 
 
 class FillLearnerProfile extends Component {
@@ -76,8 +77,8 @@ class FillLearnerProfile extends Component {
                   <annotation>  How long did you live in the location where you were born?   </annotation>
                   <label> <input type="number" className="single-date-or-month-field      form-control-spinner" min="0" /> years </label>
 
-                  <annotation>  How long did you live in the location where you were born?   </annotation>
-                  
+                  <annotation>  Spoken proficiency in first language   </annotation>
+                  <div id="langProfic_Slider"></div>
 
                </div>
             </form>
@@ -136,7 +137,25 @@ class FillLearnerProfile extends Component {
          create_option: true
       });
 
-   }
+      /* TODO Action Listener on change = linear-gradient(90deg, *color* *left of slider*, transparent 0px)
+       * for background: of .ui-widget-content
+       * Perhaps add this to theme-default? And remove existing background setting for .ui-widget-content of jquery-ui*/
+      $('#langProfic_Slider').labeledslider({
+         min: 0,
+         max: 5,
+         tickInterval: 1,
+         tickArray: [0, 1, 2, 3, 4, 5],
+           tickLabels: {
+               0 : DB_Const.LANG_PROFIC__LEARNPROF[0].replace(/\s+/g, '<br />') ,
+               1 : DB_Const.LANG_PROFIC__LEARNPROF[1].replace(/\s+/g, '<br />') ,
+               2 : DB_Const.LANG_PROFIC__LEARNPROF[2].replace(/\s+/g, '<br />') ,
+               3 : DB_Const.LANG_PROFIC__LEARNPROF[3].replace(/\s+/g, '<br />') ,
+               4 : DB_Const.LANG_PROFIC__LEARNPROF[4].replace(/\s+/g, '<br />') ,
+               5 : DB_Const.LANG_PROFIC__LEARNPROF[5].replace(/\s+/g, '<br />') ,
+            }
+         });
+
+      }
 
 
 	render() {

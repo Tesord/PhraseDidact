@@ -17,19 +17,19 @@ db.users.update(
 
 
 /* Account Configs */
-export const ROLE_ACCOUNT = {
+export const ROLE__ACCOUNT = {
    "LEARN" : "Learner",
    "INSTR" : "Instructor"
 };
 
 /* Learner Profile Configs */
-export const GENDER_LEARNPROF = {
+export const GENDER__LEARNPROF = {
    "M" : "Male",
    "F" : "Female",
    "O" : "Other",
 };
 
-export const COUNTRY_LEARNPROF = {
+export const COUNTRY__LEARNPROF = {
 
    "USA" : "United States",
    "GBR" : "United Kingdom",
@@ -283,7 +283,7 @@ export const COUNTRY_LEARNPROF = {
 
 };
 
-export const LANGUAGE_LEARNPROF = {
+export const LANGUAGE__LEARNPROF = {
 
    "eng" : "English",
    "aar" : "Afar",
@@ -471,5 +471,16 @@ export const LANGUAGE_LEARNPROF = {
    "yue" : "Cantonese ( Chinese )",
    "zha" : "Zhuang; Chuang",
    "zul" : "Zulu"
+
+};
+
+export const LANG_PROFIC__LEARNPROF = {
+
+   0 : "No Proficiency",
+   1 : "Elementary Proficiency",
+   2 : "Limited Working Proficiency",
+   3 : "Professional Working Proficiency",
+   4 : "Full Professional Proficiency",
+   5 : "Native or Bilingual Proficiency"
 
 };
