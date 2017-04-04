@@ -3,6 +3,7 @@ import DocumentTitle from 'react-document-title';
 import { DateField } from 'react-date-picker';
 
 
+
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
 import Country_Select__C from './FillLearnerProfile/country_Select';
@@ -36,29 +37,49 @@ class FillLearnerProfile extends Component {
                   Before you get started, please take a moment of your time to fill out this <b>Learner Profile </b>. <br/>
                   All information you fill in will be used by language specialists for research purposes. <br/>
                   <br/>
-                  Filling in this form is not mandatory, but any contribution would greatly help out
+                  Filling in / completing this form is not mandatory, but any contribution would greatly help out
                   language researchers in their mission to improve the learning process. <br/>
-                  Thank you.
+                  Thank you. <br/><br/>
+                  (<i>This form auto-saves</i>)
                </p>
 
                <div id="learner-profile-form" className="h-center-margin">
 
-               <annotation>	Gender	</annotation>
-               <Gender_Select__C    classNameOfSelect="chosen-select" />
+                  <annotation>	Gender	</annotation>
+                  <Gender_Select__C    classNameOfSelect="chosen-select" />
 
-               <annotation>	Birthday (YYYY-MM-DD)	</annotation>
-               <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
+                  <annotation>	Birthday (YYYY-MM-DD)	</annotation>
+                  <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
 
-               <annotation>	Current Country of residence	</annotation>
-               <Country_Select__C   classNameOfSelect="chosen-select" />
 
-               <annotation>	What is the official language(s) of your country?	</annotation>
-               <Language_Select__C  classNameOfSelect="chosen-multiselect-Lang"   isSingle={false}/>
+                  <hr className="_Theme_hr_Default_"/>
+                  <h3> Residence </h3>
+                  <br />
 
-               <annotation>   What is the dominant language of the city where you currently reside? 	</annotation>
-               <Language_Select__C  classNameOfSelect="chosen-select-create-option"   isSingle={true}/>
+                  <annotation>	Current Country of residence	</annotation>
+                  <Country_Select__C   classNameOfSelect="chosen-select" />
 
-                </div>
+                  <annotation>	What is the official Language(s) of your country?	</annotation>
+                  <Language_Select__C  classNameOfSelect="chosen-multiselect-Lang"   isSingle={false}/>
+
+                  <annotation>   What is the dominant Language of the city where you currently reside? 	</annotation>
+                  <Language_Select__C  classNameOfSelect="chosen-select-create-option"   isSingle={true}/>
+
+
+                  <hr className="_Theme_hr_Default_"/>
+                  <h3> First Language and Educational History </h3>
+                  <br />
+
+                  <annotation>  Where were you born?  	</annotation>
+                  <Country_Select__C  classNameOfSelect="chosen-select"/>
+
+                  <annotation>  How long did you live in the location where you were born?   </annotation>
+                  <label> <input type="number" className="single-date-or-month-field      form-control-spinner" min="0" /> years </label>
+
+                  <annotation>  How long did you live in the location where you were born?   </annotation>
+                  
+
+               </div>
             </form>
          </div>
 
@@ -114,6 +135,7 @@ class FillLearnerProfile extends Component {
 
          create_option: true
       });
+
    }
 
 
