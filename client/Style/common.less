@@ -1,3 +1,7 @@
+@import (reference) "header";
+
+
+
 body {
    /* Get rid of the default margin separating components from the very top of the window. */
    margin: 0px;
@@ -14,6 +18,7 @@ label {
 
 a {
    text-decoration: none      !important;
+<<<<<<< HEAD
 
    &:hover, &:focus, &.focus, &:active, &.active {
       text-decoration: none      !important;
@@ -23,17 +28,28 @@ a {
 
 input[type='checkbox'] {
    margin-left: 0.3em;
+=======
+>>>>>>> da9362323b5ac475c5098d9317fa8c3794353bc2
 
-   /* Line "checkbox" up with its "label" */
-   position: relative;
-   top: 0.15em;
+   &:hover, &:focus, &.focus, &:active, &.active {
+      text-decoration: none      !important;
+   }
 }
-input[type='radio'] {
-   margin-right: 0.5em;
+
+
+p {
+   font-size: 1.2em;
+   margin-bottom: 2rem;
 }
 
 
+<<<<<<< HEAD
 .h-center {
+=======
+/* Add-on attributes for existing components */
+
+.h-center-margin {
+>>>>>>> da9362323b5ac475c5098d9317fa8c3794353bc2
    /* ::L_NOTE::
       i.e. horizontally center this component.  If component using this require custom margin,
       then  !important  should be applied to them. */
@@ -54,7 +70,34 @@ input[type='radio'] {
 }
 
 
+<<<<<<< HEAD
 /* Base class for all buttons */
+=======
+/* Base class for all main content sections */
+.standard-content {
+   .h-center-margin;
+
+   margin-top: 4rem     !important;
+   margin-bottom: 4rem     !important;
+
+   max-width: 110rem;
+}
+
+.standard-main {
+   margin-right: 2rem;
+}
+.standard-main, .standard-sidebar {
+   /* Padding is to keep content touching the very edge of screen in small displays */
+   padding-left: @nav-horiz-padding;
+   padding-right: @nav-horiz-padding;
+}
+
+
+
+
+
+/* Base class for all buttons. Used by other sheets. */
+>>>>>>> da9362323b5ac475c5098d9317fa8c3794353bc2
 .pd-btn {
    /* Extract from Bootstrap */
    display: inline-block;
@@ -74,7 +117,8 @@ input[type='radio'] {
    background-image: none;
 
    text-decoration: none;
-   margin-top: 1rem;
+   margin-top: 1rem  !important;
+   margin-bottom: 1rem     !important;
 
 
    &:focus, &.focus, &:active, &.active {

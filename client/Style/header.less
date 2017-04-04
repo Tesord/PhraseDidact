@@ -3,6 +3,7 @@
 
 /* Variable declaration */
 @min-nav-width: 80rem;
+@nav-horiz-padding: 1rem;     // used by other sheets
 
 
 nav {
@@ -13,14 +14,14 @@ nav {
    padding-top: 0.5rem;
    padding-bottom: 0.7rem;
    /* " padding-right/left " is required to stop .navbar-content from touching the edge of the window (on small screens) */
-   padding-right: 1rem;
-   padding-left: 1rem;
-   margin-bottom: 1rem;
+   padding-right: @nav-horiz-padding;
+   padding-left: @nav-horiz-padding;
 
    font-size: 2.4rem;
    // i.e. Automatically adjust header height
    overflow: auto;
 }
+
 
 #navbar-content {
    max-width: @min-nav-width;
@@ -30,6 +31,10 @@ nav {
    overflow: visible;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> da9362323b5ac475c5098d9317fa8c3794353bc2
 #nav-head {
    overflow-x: visible;
 

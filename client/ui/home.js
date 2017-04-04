@@ -1,7 +1,10 @@
 import React from 'react';
+import DocumentTitle from 'react-document-title';
 
 
-/*********** TODO ******************/
+
+/****** TODO *************
+* Add content      **/
 
 
 /* ::L_NOTE::
@@ -11,9 +14,13 @@ import React from 'react';
  */
 const Home = () => {
    return (
-		<div>
-			DJDJD;
-		</div>
+		<DocumentTitle title='Home - PhraseDidact'>
+
+         <div>
+            SAMPLE TEXT
+         </div>
+
+		</DocumentTitle>
    );
 };
 

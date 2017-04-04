@@ -8,6 +8,7 @@
 
    transition: all 0.4s ease-in;
    /* ::L_NOTE::
+<<<<<<< HEAD
     * Also set up a location for  #login-form & #register-form  to base their    "position:absolute"   coordinate
     * Same desired property from    "position: relative" */
    transform-style: preserve-3d;
@@ -16,16 +17,49 @@
    p {
       font-size: 1.2em;
       margin-bottom: 1.6rem;
+=======
+    * Also set up a location for  #login-card & #register-card  to base their    "position:absolute"   coordinate
+    * Same desired property from    "position: relative" */
+   transform-style: preserve-3d;
+
+   /* The following 'funkyradio' selectors are depended on by  " 1funky-radio-checkbox.css "  */
+   .funkyradio {
+      margin-bottom: 1rem;
+   }
+   .funkyradio div {
+      width: 38%;
+   }
+   .funkyradio label {
+      width: 100%;
+   }
+   .funkyradio :first-child {
+      margin-right: 1rem      !important;
+>>>>>>> da9362323b5ac475c5098d9317fa8c3794353bc2
    }
 
 }
+#login-form {
+   width: 80%;
+}
 
 
+<<<<<<< HEAD
 #register-form {
    // Start off as the 'Back'
    transform: rotateY(180deg);
 }
 #login-form, #register-form {
+=======
+#register-card {
+   // Start off as the 'Back'
+   transform: rotateY(180deg);
+}
+#register-form {
+   width: 80%;
+}
+
+#login-card, #register-card {
+>>>>>>> da9362323b5ac475c5098d9317fa8c3794353bc2
    width: 100%;
    text-align: center;
 
@@ -40,6 +74,7 @@
 	top: 10vh;
 	left: 0px;
 }
+<<<<<<< HEAD
 
 
 /* Login form comp. */
@@ -77,3 +112,5 @@ loginTitle, loginAnnon, .loginField, loginLine {
    display: block;
    width: 80%;
 }
+=======
+>>>>>>> da9362323b5ac475c5098d9317fa8c3794353bc2
