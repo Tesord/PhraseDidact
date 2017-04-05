@@ -1222,7 +1222,7 @@ h2,
 .h2,
 h3,
 .h3 {
-  margin-top: 20px;
+  margin-top: 15px;     /* CUSTOM: changed, make top & bottom margin close to each other */
   margin-bottom: 10px;
 }
 h1 small,

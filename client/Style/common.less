@@ -37,8 +37,6 @@ p {
 input[type='text'], input[type='email'], input[type='password'] {
    margin-top: 0.3rem;
    margin-bottom: 1.5rem;
-
-   .single-line-element;
 }
 
 input[type='radio'] {
@@ -72,6 +70,8 @@ input[type='checkbox'] {
 
 .single-line-element {
    display: block;
+   // automatically adjust height according to float-induced height
+   overflow-y: auto;
 }
 
 .single-date-or-month-field {
@@ -129,6 +129,9 @@ input[type='checkbox'] {
    user-select: none;
    background-image: none;
 
+   padding: 8px 55px;
+   font-size: 1.7rem;
+
    text-decoration: none;
    margin-top: 1rem  !important;
    margin-bottom: 1rem     !important;
@@ -154,19 +157,27 @@ input[type='checkbox'] {
 
 
 /* Rectangular button instances */
-.bs-standard-btn, .outline-btn, {
+.bs-standard-btn, .bs-secondary-btn, .outline-btn, {
    .pd-btn
 }
 
 .bs-standard-btn {
-   border: 1px solid #005bef;
-   padding: 8px 55px;
-   font-size: 1.7rem;
+   border: none;
 
    &.disabled, &.disabled:hover, &.disabled:focus, &.disabled.focus, &.disabled:active, &.disabled.active {
       background-color: #5BA5E6;
    }
 }
+
+.bs-secondary-btn {
+   border: 1px solid #CCCCCC;
+
+   &.disabled, &.disabled:hover, &.disabled:focus, &.disabled.focus, &.disabled:active, &.disabled.active {
+      color: #747576;
+   }
+}
+
+
 
 .outline-btn {
    padding: 5px 18px;

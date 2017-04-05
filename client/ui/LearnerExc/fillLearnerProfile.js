@@ -1,91 +1,165 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
-import { DateField } from 'react-date-picker';
+import { Line } from 'rc-progress';
 
-
-
-import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
-
-import Country_Select__C from './FillLearnerProfile/country_Select';
-import Gender_Select__C from './FillLearnerProfile/gender_Select';
-import Language_Select__C from './FillLearnerProfile/language_Select';
+import BlueCircle_greyBG__C from '../Loading/blueCircle_greyBG';
+import LearnProf_page1__C from './FillLearnerProfile/learnProf_page1';
+import LearnProf_page2__C from './FillLearnerProfile/learnProf_page2';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
-import Ui_Util from '/imports/api/render/ui_Util';
-import DB_Const from '/imports/api/functional/db_Const';
+
+
+
+/* TODO
+ * - Autosave in background (save again when Next/Back button is pressed)
+ * - Fill existing information in whenever a page is opened from DB
+ */
 
 
 class FillLearnerProfile extends Component {
 
+   // The maximum number of pages in the Learner Profile. CHANGE this when more pages are added/removed.
+   static LEARNPROF_MAXPAGE_NO = 7;
+
+
    constructor(){
 		super();
 
+      /* TODO use Session to store page user has got to? */
+
 		this.state = {
-			content: <BlueCircle_greyBG />
+			content: <BlueCircle_greyBG__C />,
+         pageNo: 1,
+         percentage: 0
 		};
 	}
 
-   /* TODO  Add REF to all components */
 
-   isLearnerAction(){
-      this.state = { content: (
+   getBackButton(pageNo){
+      if( pageNo <= 1 ){
+         return "";
+      }
+      else{
+         return(
+
+            <button className="bs-secondary-btn rounded-border	   align-left   btn-default"
+               onClick={this.backPage.bind(this)} >
+               Back
+            </button>
+
+         );
+      }
+
+   }
+
+   getNextButton(pageNo){
+      // TODO , onClick to finish
+      if( pageNo >= FillLearnerProfile.LEARNPROF_MAXPAGE_NO ){
+         return(
+
+            <button className="bs-standard-btn rounded-border	   align-right   btn-primary">Finish</button>
+
+         );
+      }
+      else{
+         return(
+
+            <button className="bs-standard-btn rounded-border	   align-right   btn-primary"
+               onClick={this.nextPage.bind(this)} >
+               Next
+            </button>
+
+         );
+      }
+   }
+
+   /* TODO  Add REF to all components inside the pages */
+   getLearnProf_page(pageNo){
+
+      switch( pageNo ) {
+         case 2:
+            return <LearnProf_page2__C /> ;
+         case 3:
+         //   code block
+            break;
+         default:
+            return <LearnProf_page1__C /> ;
+      }
+
+   }
+
+   getLearnProf_Main(pageNo, percentage){
+
+      return (
 
          <div className="standard-content">
             <form id="learner-profile-section" className="h-center-margin">
 
-               <p>
-                  Before you get started, please take a moment of your time to fill out this <b>Learner Profile </b>. <br/>
-                  All information you fill in will be used by language specialists for research purposes. <br/>
-                  <br/>
-                  Filling in / completing this form is not mandatory, but any contribution would greatly help out
-                  language researchers in their mission to improve the learning process. <br/>
-                  Thank you. <br/><br/>
-                  (<i>This form auto-saves</i>)
-               </p>
+               { this.getLearnProf_page(pageNo) }
 
-               <div id="learner-profile-form" className="h-center-margin">
-
-                  <annotation>	Gender	</annotation>
-                  <Gender_Select__C    classNameOfSelect="chosen-select" />
-
-                  <annotation>	Birthday (YYYY-MM-DD)	</annotation>
-                  <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
-
-
-                  <hr className="_Theme_hr_Default_"/>
-                  <h3> Residence </h3>
-                  <br />
-
-                  <annotation>	Current Country of residence	</annotation>
-                  <Country_Select__C   classNameOfSelect="chosen-select" />
-
-                  <annotation>	What is the official Language(s) of your country?	</annotation>
-                  <Language_Select__C  classNameOfSelect="chosen-multiselect-Lang"   isSingle={false}/>
-
-                  <annotation>   What is the dominant Language of the city where you currently reside? 	</annotation>
-                  <Language_Select__C  classNameOfSelect="chosen-select-create-option"   isSingle={true}/>
-
-
-                  <hr className="_Theme_hr_Default_"/>
-                  <h3> First Language and Educational History </h3>
-                  <br />
-
-                  <annotation>  Where were you born?  	</annotation>
-                  <Country_Select__C  classNameOfSelect="chosen-select"/>
-
-                  <annotation>  How long did you live in the location where you were born?   </annotation>
-                  <label> <input type="number" className="single-date-or-month-field      form-control-spinner" min="0" /> years </label>
-
-                  <annotation>  Spoken proficiency in first language   </annotation>
-                  <div id="langProfic_Slider"></div>
-
+               <div className="single-line-element">
+                  { this.getBackButton(pageNo) }
+                  { this.getNextButton(pageNo) }
                </div>
+
+               <h3 className="single-line-element">
+                  <div className="align-left"> Page { pageNo } of { FillLearnerProfile.LEARNPROF_MAXPAGE_NO } </div>
+                  <div className="align-right"> { percentage }% </div>
+               </h3>
+               <Line percent={ percentage } strokeWidth="2" trailWidth="2" strokeColor={'#3FC7FA'} />
+
             </form>
          </div>
 
-      )};
+      );
    }
+
+
+   backPage(e){
+      e.preventDefault();
+
+      /* TODO send form information to DB again*/
+
+
+      let newPageNo = this.state.pageNo - 1;
+      let newPercentage = Math.round( (newPageNo - 1) * 100 / FillLearnerProfile.LEARNPROF_MAXPAGE_NO );
+
+
+      this.setState({
+			content: this.getLearnProf_Main(newPageNo, newPercentage),
+         pageNo: newPageNo,
+         percentage: newPercentage
+		});
+   }
+
+
+   nextPage(e){
+      e.preventDefault();
+
+      /* TODO send form information to DB again*/
+
+
+      let newPercentage = Math.round( this.state.pageNo * 100 / FillLearnerProfile.LEARNPROF_MAXPAGE_NO );
+      let newPageNo = this.state.pageNo + 1;
+
+
+      this.setState({
+			content: this.getLearnProf_Main(newPageNo, newPercentage),
+         pageNo: newPageNo,
+         percentage: newPercentage
+		});
+   }
+
+
+   isLearnerAction(){
+      this.state = {
+         content: this.getLearnProf_Main( this.state.pageNo, this.state.percentage ),
+         pageNo: this.state.pageNo,
+         percentage: this.state.percentage
+      };
+   }
+
 
    isOtherAction(){
 
@@ -112,51 +186,6 @@ class FillLearnerProfile extends Component {
 
    }
 
-   componentDidMount() {
-      // ok to do so as in exceptional cases, the page will be redirected/reloaded
-      $('.chosen-select').chosen({
-         width: '50%',
-         allow_single_deselect: true
-      });
-
-      $('.chosen-select-create-option').chosen({
-         width: '100%',
-         allow_single_deselect: true,
-
-         no_results_text: Ui_Util.no_result_text_create_option ,
-         create_option: true
-      });
-
-      $('.chosen-multiselect-Lang').chosen({
-         width: '100%',
-
-         no_results_text: Ui_Util.no_result_text_create_option ,
-         max_selected_options: 10,   // Max select limit
-         single_backstroke_delete: false,
-
-         create_option: true
-      });
-
-      /* TODO Action Listener on change = linear-gradient(90deg, *color* *left of slider*, transparent 0px)
-       * for background: of .ui-widget-content
-       * Perhaps add this to theme-default? And remove existing background setting for .ui-widget-content of jquery-ui*/
-      $('#langProfic_Slider').labeledslider({
-         min: 0,
-         max: 5,
-         tickInterval: 1,
-         tickArray: [0, 1, 2, 3, 4, 5],
-           tickLabels: {
-               0 : DB_Const.LANG_PROFIC__LEARNPROF[0].replace(/\s+/g, '<br />') ,
-               1 : DB_Const.LANG_PROFIC__LEARNPROF[1].replace(/\s+/g, '<br />') ,
-               2 : DB_Const.LANG_PROFIC__LEARNPROF[2].replace(/\s+/g, '<br />') ,
-               3 : DB_Const.LANG_PROFIC__LEARNPROF[3].replace(/\s+/g, '<br />') ,
-               4 : DB_Const.LANG_PROFIC__LEARNPROF[4].replace(/\s+/g, '<br />') ,
-               5 : DB_Const.LANG_PROFIC__LEARNPROF[5].replace(/\s+/g, '<br />') ,
-            }
-         });
-
-      }
-
 
 	render() {
 
@@ -165,6 +194,7 @@ class FillLearnerProfile extends Component {
             {this.state.content}
 			</DocumentTitle>
 		);
+
 	}
 }
 
