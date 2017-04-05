@@ -19,6 +19,10 @@ label {
       margin-right: 1rem;
    }
 }
+.funkyradio label {
+   // so that any funkyradio's label fill up its full length
+   width: 100%;
+}
 
 a {
    text-decoration: none      !important;
@@ -33,6 +37,13 @@ p {
    margin-bottom: 2rem;
 }
 
+table {
+   width: 100%;
+
+}
+tr, th, td {
+   border: 1px solid #a2a9b5;
+}
 
 input[type='text'], input[type='email'], input[type='password'] {
    margin-top: 0.3rem;
@@ -137,13 +148,9 @@ input[type='checkbox'] {
    margin-bottom: 1rem     !important;
 
 
-   &:focus, &.focus, &:active, &.active {
-      /* ::L_NOTE::       .pd-btn.active  =  when clicked by mouse */
-      outline: none;
-   }
-
    &:hover, &:focus, &.focus, &:active, &.active {
-      /* ::L_NOTE::       .pd-btn:focus  =  particularly when select by keyboard*/
+      /* ::L_NOTE::     .pd-btn.active  =  when clicked by mouse
+                        .pd-btn:focus  =  particularly when select by keyboard*/
       text-decoration: none   !important;
    }
 }

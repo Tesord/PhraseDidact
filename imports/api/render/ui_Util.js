@@ -1,6 +1,24 @@
 import React from 'react';
 
 
+
+export function funkyRadio_Handler(e){
+   // Space Bar + Enter key toggle
+   if (e.keyCode === 0 || e.keyCode === 32 || e.keyCode === 13) {
+      // prevent bar-scrolling when space bar is clicked
+      e.preventDefault();
+
+      let forElementID = e.target.getAttribute("for");
+      document.getElementById(forElementID).checked = true;
+   }
+}
+
+export function makeFunkyRadio_Deselectable(arrayOfElementID){
+   // TODO
+
+}
+
+
 /* TODO document this method (a private method) */
 function create_OptionArray_fromObj(obj){
    let selects = [];

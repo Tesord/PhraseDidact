@@ -476,11 +476,23 @@ export const LANGUAGE__LEARNPROF = {
 
 export const LANG_PROFIC__LEARNPROF = {
 
-   0 : "No Proficiency",
-   1 : "Elementary Proficiency",
-   2 : "Limited Working Proficiency",
-   3 : "Professional Working Proficiency",
-   4 : "Full Professional Proficiency",
-   5 : "Native or Bilingual Proficiency"
+   0 : "No proficiency",
+   1 : "Elementary proficiency",
+   2 : "Limited Working proficiency",
+   3 : "Professional Working proficiency",
+   4 : "Full Professional proficiency",
+   5 : "Native <i>or</i> Bilingual proficiency"
+
+};
+
+export const EDUC_LEVEL__LEARNPROF = {
+
+   0 : "Elementary / Primary school",
+   1 : "Lower Secondary / High school",
+   2 : "Upper Secondary / High school",
+   3 : "College education <i>or equal.</i>",
+   4 : "Bachelor education <i>or equal.</i>",
+   5 : "Master / Postgraduate education <i>or equal.</i>",
+   6 : "PhD (Doctorate)"
 
 };

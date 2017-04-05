@@ -3064,8 +3064,8 @@ fieldset[disabled] a.btn {
 .btn-default:focus,
 .btn-default.focus {
   color: #333;
-  background-color: #e6e6e6;
-  border-color: #8c8c8c;
+  /* CUSTOM: removed, so that button doesn't look 'depressed' after clicking */
+  /* CUSTOM: removed, so that the button border doesn't change when focused */
 }
 .btn-default:hover {
   color: #333;
@@ -3121,7 +3121,7 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #286090;
+  /* CUSTOM: removed, so that button doesn't look 'depressed' after clicking */
   border-color: #122b40;
 }
 .btn-primary:hover {

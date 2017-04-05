@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 
 import Country_Select__C from './country_Select';
 
-import Ui_Util from '/imports/api/render/ui_Util';
 import DB_Const from '/imports/api/functional/db_Const';
 
 
+/* TODO If slider is not moved, treat as NOT answered */
 
 /* TODO document how you can get ref from this class instance in fillLearnerProfile */
 class LearnProf_page2 extends Component {
@@ -28,6 +28,15 @@ class LearnProf_page2 extends Component {
 
             <annotation>  Spoken proficiency in first language   </annotation>
             <div id="langProfic_Slider"></div>
+            <br /><br /><br />
+
+            <annotation>  Highest level of education completed in first language  </annotation>
+            <div id="educLevel_Slider"></div>
+            <br /><br /><br /><br /><br /><br />
+
+            <annotation> 	If you went to university, what field did you specialize in?   </annotation>
+            <input className="form-control" />
+            <br /><br />
 
          </div>
 
@@ -47,16 +56,34 @@ class LearnProf_page2 extends Component {
        * Perhaps add this to theme-default? And remove existing background setting for .ui-widget-content of jquery-ui*/
       $('#langProfic_Slider').labeledslider({
          min: 0,
-         max: 5,
+         max: 6,
          tickInterval: 1,
-         tickArray: [0, 1, 2, 3, 4, 5],
+         tickArray: [0, 1, 2, 3, 4, 5, 6],
            tickLabels: {
-               0 : DB_Const.LANG_PROFIC__LEARNPROF[0].replace(/\s+/g, '<br />') ,
-               1 : DB_Const.LANG_PROFIC__LEARNPROF[1].replace(/\s+/g, '<br />') ,
-               2 : DB_Const.LANG_PROFIC__LEARNPROF[2].replace(/\s+/g, '<br />') ,
-               3 : DB_Const.LANG_PROFIC__LEARNPROF[3].replace(/\s+/g, '<br />') ,
-               4 : DB_Const.LANG_PROFIC__LEARNPROF[4].replace(/\s+/g, '<br />') ,
-               5 : DB_Const.LANG_PROFIC__LEARNPROF[5].replace(/\s+/g, '<br />') ,
+               0 : "<i>No answer<i/>",
+               1 : DB_Const.LANG_PROFIC__LEARNPROF[0].replace(/\s+/g, '<br />') ,
+               2 : DB_Const.LANG_PROFIC__LEARNPROF[1].replace(/\s+/g, '<br />') ,
+               3 : DB_Const.LANG_PROFIC__LEARNPROF[2].replace(/\s+/g, '<br />') ,
+               4 : DB_Const.LANG_PROFIC__LEARNPROF[3].replace(/\s+/g, '<br />') ,
+               5 : DB_Const.LANG_PROFIC__LEARNPROF[4].replace(/\s+/g, '<br />') ,
+               6 : DB_Const.LANG_PROFIC__LEARNPROF[5].replace(/\s+/g, '<br />') ,
+            }
+      });
+
+      $('#educLevel_Slider').labeledslider({
+         min: 0,
+         max: 7,
+         tickInterval: 1,
+         tickArray: [0, 1, 2, 3, 4, 5, 6, 7],
+           tickLabels: {
+               0 : "<i>No answer<i/>",
+               1 : DB_Const.EDUC_LEVEL__LEARNPROF[0].replace(/\s+/g, '<br />') ,
+               2 : DB_Const.EDUC_LEVEL__LEARNPROF[1].replace(/\s+/g, '<br />') ,
+               3 : DB_Const.EDUC_LEVEL__LEARNPROF[2].replace(/\s+/g, '<br />') ,
+               4 : DB_Const.EDUC_LEVEL__LEARNPROF[3].replace(/\s+/g, '<br />') ,
+               5 : DB_Const.EDUC_LEVEL__LEARNPROF[4].replace(/\s+/g, '<br />') ,
+               6 : DB_Const.EDUC_LEVEL__LEARNPROF[5].replace(/\s+/g, '<br />') ,
+               7 : DB_Const.EDUC_LEVEL__LEARNPROF[6].replace(/\s+/g, '<br />')
             }
       });
 

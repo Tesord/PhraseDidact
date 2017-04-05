@@ -3,8 +3,10 @@ import DocumentTitle from 'react-document-title';
 import { Line } from 'rc-progress';
 
 import BlueCircle_greyBG__C from '../Loading/blueCircle_greyBG';
+
 import LearnProf_page1__C from './FillLearnerProfile/learnProf_page1';
 import LearnProf_page2__C from './FillLearnerProfile/learnProf_page2';
+import LearnProf_page3__C from './FillLearnerProfile/learnProf_page3';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
@@ -16,7 +18,13 @@ import LearnerExc from '/imports/api/functional/learnerExc';
  * - Fill existing information in whenever a page is opened from DB
  */
 
-
+/*
+ * To add/remove Learn Profile pages:
+ * - If adding, create a new " learnProf_page*number.* " js file in ./FillLearnerProfile, along with the code for the component.
+ * - Add new case / remove case in this.getLearnProf_page()'s switch statement. Don't forget the import statement at the top
+ *   of this file!
+ * - Adjust this.LEARNPROF_MAXPAGE_NO as appropriate
+ */
 class FillLearnerProfile extends Component {
 
    // The maximum number of pages in the Learner Profile. CHANGE this when more pages are added/removed.
@@ -43,10 +51,10 @@ class FillLearnerProfile extends Component {
       else{
          return(
 
-            <button className="bs-secondary-btn rounded-border	   align-left   btn-default"
+            <a className="bs-secondary-btn rounded-border	   align-left   btn-default" href="javascript:void(0)"
                onClick={this.backPage.bind(this)} >
                Back
-            </button>
+            </a>
 
          );
       }
@@ -58,17 +66,18 @@ class FillLearnerProfile extends Component {
       if( pageNo >= FillLearnerProfile.LEARNPROF_MAXPAGE_NO ){
          return(
 
-            <button className="bs-standard-btn rounded-border	   align-right   btn-primary">Finish</button>
-
+            <a className="bs-standard-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)">
+               Finish
+            </a>
          );
       }
       else{
          return(
 
-            <button className="bs-standard-btn rounded-border	   align-right   btn-primary"
+            <a className="bs-standard-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)"
                onClick={this.nextPage.bind(this)} >
                Next
-            </button>
+            </a>
 
          );
       }
@@ -81,8 +90,7 @@ class FillLearnerProfile extends Component {
          case 2:
             return <LearnProf_page2__C /> ;
          case 3:
-         //   code block
-            break;
+            return <LearnProf_page3__C /> ;
          default:
             return <LearnProf_page1__C /> ;
       }
@@ -94,7 +102,7 @@ class FillLearnerProfile extends Component {
       return (
 
          <div className="standard-content">
-            <form id="learner-profile-section" className="h-center-margin">
+            <div id="learner-profile-section" className="h-center-margin">
 
                { this.getLearnProf_page(pageNo) }
 
@@ -109,7 +117,7 @@ class FillLearnerProfile extends Component {
                </h3>
                <Line percent={ percentage } strokeWidth="2" trailWidth="2" strokeColor={'#3FC7FA'} />
 
-            </form>
+            </div>
          </div>
 
       );

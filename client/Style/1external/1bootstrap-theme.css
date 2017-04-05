@@ -75,7 +75,7 @@ fieldset[disabled] .btn-danger {
 }
 .btn-default:hover,
 .btn-default:focus {
-  background-color: #e0e0e0;
+  /* CUSTOM: removed, so that button doesn't look 'depressed' after clicking */
   background-position: 0 -15px;
 }
 .btn-default:active,
@@ -116,7 +116,7 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary:hover,
 .btn-primary:focus {
-  background-color: #265a88;
+  /* CUSTOM: removed, so that button doesn't look 'depressed' after clicking */
   background-position: 0 -15px;
 }
 .btn-primary:active,

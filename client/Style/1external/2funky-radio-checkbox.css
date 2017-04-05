@@ -1,5 +1,6 @@
 .funkyradio div {
-  display: inline-block;        /* CUSTOM:	changed so that multiple instances can be on the same line */
+  display: inline-block;        /* CUSTOM:	changed, so that multiple instances can be on the same line */
+  text-align: center;      /* CUSTOM:	changed, so that text next to the tick box is centered */
 }
 
 .funkyradio label {
@@ -20,8 +21,8 @@
 .funkyradio input[type="checkbox"]:empty ~ label {
   position: relative;
   line-height: 2.5em;
-  text-indent: 1.5em;      /* CUSTOM:	Text position changed */
-  margin-top: 0.33em;		/* CUSTOM:	margin-top (in general) changed */
+  text-indent: 3rem;      /* CUSTOM:	Text position inside label changed */
+  margin-top: 0.33rem;		/* CUSTOM:	margin-top (in general) changed */
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -37,7 +38,7 @@
   bottom: 0;
   left: 0;
   content: '';
-  width: 2.5em;
+  width: 3.7rem;        /* CUSTOM:	changed, so that the tick box is bigger in width */
   background: #D1D3D4;
   border-radius: 3px 0 0 3px;
 }
