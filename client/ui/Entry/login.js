@@ -26,7 +26,7 @@ class Login extends Component {
    getReadyAnim(){
       return (
 
-         <button className="bs-standard-btn   rounded-border	   btn-primary">Login</button>
+         <button className="pd-btn   rounded-border	   btn-primary">Login</button>
 
       );
    }
@@ -34,7 +34,7 @@ class Login extends Component {
 	getLoadingAnim(){
 		return (
 
-         <button className="bs-standard-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Logging in...</button>
+         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Logging in...</button>
 
       );
 	}

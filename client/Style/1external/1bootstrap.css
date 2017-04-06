@@ -3059,7 +3059,7 @@ fieldset[disabled] a.btn {
 .btn-default {
   color: #333;
   background-color: #fff;
-  border-color: #ccc;
+  border: 1px solid #CCCCCC;     /* CUSTOM: changed, fixed broken border? */
 }
 .btn-default:focus,
 .btn-default.focus {

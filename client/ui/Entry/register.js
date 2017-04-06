@@ -36,7 +36,7 @@ class Register extends Component {
 	getReadyAnim(){
 		return(
 
-		  	<button className="bs-standard-btn 	rounded-border		btn-primary" >	Register	</button>
+		  	<button className="pd-btn 	rounded-border		btn-primary" >	Register	</button>
 
 		);
 	}
@@ -44,7 +44,7 @@ class Register extends Component {
 	getLoadingAnim(){
 		return(
 
-			<button className="bs-standard-btn 	rounded-border		btn-primary 	disabled" disabled aria-disabled="true">	Registering...	</button>
+			<button className="pd-btn 	rounded-border		btn-primary 	disabled" disabled aria-disabled="true">	Registering...	</button>
 
 		);
 	}

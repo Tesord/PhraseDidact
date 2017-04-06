@@ -24,6 +24,9 @@ import LearnerExc from '/imports/api/functional/learnerExc';
  * - Add new case / remove case in this.getLearnProf_page()'s switch statement. Don't forget the import statement at the top
  *   of this file!
  * - Adjust this.LEARNPROF_MAXPAGE_NO as appropriate
+ *
+ * NOTE: The "get" functions of this class have parameter due to the fact that setState() must be called with all the changes
+ * together at the same time, so the new values would not have been set yet when the "get" methods are called.
  */
 class FillLearnerProfile extends Component {
 
@@ -43,59 +46,6 @@ class FillLearnerProfile extends Component {
 		};
 	}
 
-
-   getBackButton(pageNo){
-      if( pageNo <= 1 ){
-         return "";
-      }
-      else{
-         return(
-
-            <a className="bs-secondary-btn rounded-border	   align-left   btn-default" href="javascript:void(0)"
-               onClick={this.backPage.bind(this)} >
-               Back
-            </a>
-
-         );
-      }
-
-   }
-
-   getNextButton(pageNo){
-      // TODO , onClick to finish
-      if( pageNo >= FillLearnerProfile.LEARNPROF_MAXPAGE_NO ){
-         return(
-
-            <a className="bs-standard-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)">
-               Finish
-            </a>
-         );
-      }
-      else{
-         return(
-
-            <a className="bs-standard-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)"
-               onClick={this.nextPage.bind(this)} >
-               Next
-            </a>
-
-         );
-      }
-   }
-
-   /* TODO  Add REF to all components inside the pages */
-   getLearnProf_page(pageNo){
-
-      switch( pageNo ) {
-         case 2:
-            return <LearnProf_page2__C /> ;
-         case 3:
-            return <LearnProf_page3__C /> ;
-         default:
-            return <LearnProf_page1__C /> ;
-      }
-
-   }
 
    getLearnProf_Main(pageNo, percentage){
 
@@ -121,6 +71,61 @@ class FillLearnerProfile extends Component {
          </div>
 
       );
+   }
+
+   /* HELPER of getLearnProf_Main() */
+   getLearnProf_page(pageNo){
+
+      switch( pageNo ) {
+         case 2:
+            return <LearnProf_page2__C /> ;
+         case 3:
+            return <LearnProf_page3__C /> ;
+         default:
+            return <LearnProf_page1__C /> ;
+      }
+
+   }
+
+   /* HELPER of getLearnProf_Main() */
+   getBackButton(pageNo){
+      if( pageNo <= 1 ){
+         return "";
+      }
+      else{
+         return(
+
+            <a className="pd-btn rounded-border	   align-left   btn-default" href="javascript:void(0)"
+               onClick={this.backPage.bind(this)} >
+               Back
+            </a>
+
+         );
+      }
+
+   }
+
+   /* HELPER of getLearnProf_Main() */
+   getNextButton(pageNo){
+      // TODO , onClick to finish
+      if( pageNo >= FillLearnerProfile.LEARNPROF_MAXPAGE_NO ){
+         return(
+
+            <a className="pd-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)">
+               Finish
+            </a>
+         );
+      }
+      else{
+         return(
+
+            <a className="pd-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)"
+               onClick={this.nextPage.bind(this)} >
+               Next
+            </a>
+
+         );
+      }
    }
 
 
