@@ -29,8 +29,8 @@ class Register extends Component {
 	componentDidMount(){
 	/* Keyboard accessibility */
 
-		this.signup_learner_lbl.addEventListener('keypress', Ui_Util.funkyRadio_Handler );
-		this.signup_instructor_lbl.addEventListener('keypress', Ui_Util.funkyRadio_Handler );
+		this.signup_learner_lbl.addEventListener('keypress', Ui_Util.funkyRadio_KBstandardSelect_Handler );
+		this.signup_instructor_lbl.addEventListener('keypress', Ui_Util.funkyRadio_KBstandardSelect_Handler );
 	}
 
 	getReadyAnim(){

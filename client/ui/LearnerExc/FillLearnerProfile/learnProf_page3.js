@@ -46,10 +46,11 @@ class LearnProf_page3 extends Component {
    }
 
    componentDidMount() {
-
-   	/* Keyboard accessibility */
-   		this.diff_first_lang_Yes_lbl.addEventListener('keypress', Ui_Util.funkyRadio_Handler );
-   		this.diff_first_lang_No_lbl.addEventListener('keypress', Ui_Util.funkyRadio_Handler );
+      /* Keyboard accessibility  + Deselect compatibility */
+         this.diff_first_lang_Yes_lbl.addEventListener('keypress', Ui_Util.funkyRadio_KBdeSelectable_Handler );
+         this.diff_first_lang_No_lbl.addEventListener('keypress', Ui_Util.funkyRadio_KBdeSelectable_Handler );
+         this.diff_first_lang_Yes_lbl.addEventListener('click', Ui_Util.funkyRadio_MouseDeSelectable_Handler );
+         this.diff_first_lang_No_lbl.addEventListener('click', Ui_Util.funkyRadio_MouseDeSelectable_Handler );
    }
 
 }

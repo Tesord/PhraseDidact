@@ -1,10 +1,13 @@
 import React from 'react';
 
 
+// Space Bar + Enter key toggle
+const standardKB_Toggle_KeyCode = [0, 32, 13];
 
-export function funkyRadio_Handler(e){
-   // Space Bar + Enter key toggle
-   if (e.keyCode === 0 || e.keyCode === 32 || e.keyCode === 13) {
+
+export function funkyRadio_KBstandardSelect_Handler(e){
+
+   if ( standardKB_Toggle_KeyCode.indexOf(e.keyCode) > -1 ) {
       // prevent bar-scrolling when space bar is clicked
       e.preventDefault();
 
@@ -13,8 +16,29 @@ export function funkyRadio_Handler(e){
    }
 }
 
-export function makeFunkyRadio_Deselectable(arrayOfElementID){
-   // TODO
+
+export function funkyRadio_KBdeSelectable_Handler(e){
+
+   if ( standardKB_Toggle_KeyCode.indexOf(e.keyCode) > -1 ) {
+      e.preventDefault();
+      funkyRadio_MouseDeSelectable_Handler(e);
+   }
+}
+
+
+export function funkyRadio_MouseDeSelectable_Handler(e){
+      // overwrite regular click "For" event
+      e.preventDefault();
+
+      let forElementID = e.target.getAttribute("for");
+      let forElement = document.getElementById(forElementID);
+
+      if( forElement.checked ){
+         forElement.checked = false;
+      }
+      else{
+         forElement.checked = true;
+      }
 
 }
 
