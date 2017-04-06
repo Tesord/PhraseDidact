@@ -72,12 +72,11 @@ export function create_SingleSelect_fromObj (obj, className, initText){
 
    selects = selects.concat( create_OptionArray_fromObj(obj) );
 
-
-   let selectRef = null;
+   // React's ref system does not work, since the component has not been mounted yet. So elementId is used instead
+   let elementId = "ssfo" + new Date().getTime();
    let jsx = (
 
-      <select  data-placeholder={initText}    className={className}
-         ref={(this_elem) => {selectRef = this_elem;}} >
+      <select  data-placeholder={initText}    className={className}  id={ elementId } >
             {selects}
       </select>
 
@@ -86,9 +85,10 @@ export function create_SingleSelect_fromObj (obj, className, initText){
 
    return {
       jsx,
-      selectRef
+      elementId
    };
 }
+
 
 export const no_result_text_create_option = 'No match. To add a new option, press "Tab" after typing. Or press "Enter" now to add:';
 
@@ -103,9 +103,10 @@ export function create_MultiSelect_fromObj (obj, className, initText){
       <option value=""  key=" "> </option>
    );
 
+
+   let elementId = "msfo" + new Date().getTime();
    let jsx = (
-      <select  data-placeholder={initText}    multiple   className={className}
-         ref={(this_elem) => {selectRef = this_elem;}} >
+      <select  data-placeholder={initText}    multiple   className={className}  id={ elementId } >
             {selects}
       </select>
    );
@@ -113,6 +114,6 @@ export function create_MultiSelect_fromObj (obj, className, initText){
 
    return {
       jsx,
-      selectRef
+      elementId
    };
 }

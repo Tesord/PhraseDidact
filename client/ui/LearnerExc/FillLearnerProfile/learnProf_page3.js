@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 
 import Country_Select__C from './country_Select';
+import Language_Select__C from './language_Select';
 
 import DB_Const from '/imports/api/functional/db_Const';
 import Ui_Util from '/imports/api/render/ui_Util';
@@ -20,56 +21,92 @@ class LearnProf_page3 extends Component {
    }
 
 
-/* TODO Remember, setState() is async! So this method must be modified to allow parameter pre-determined values */
+/* TODO Remember, setState() is async! So this method must be modified to allow parameter pre-determined values
+ * TODO perhaps give  a warning message when limit is reached?
+ */
    addAnotherLangBlock(){
-      if( this.anotherLangBlockRefs === undefined ){
-         this.anotherLangBlockRefs = [];
+
+      // maximum block restriction
+      if( this.state.anotherLangSection.length < 10){
+
+         if( this.langName_Refs === undefined ){
+            this.langName_Refs = [];
+         }
+         if( this.educLevel_Refs === undefined ){
+            this.educLevel_Refs = [];
+         }
+         if( this.specField_Refs === undefined ){
+            this.specField_Refs = [];
+         }
+
+
+         let uniqueNumber = new Date().getTime();     // Unless you can travel back in time!
+
+         let newBlock = (
+
+            <div  key={ uniqueNumber } >
+               <br />
+
+               <annotation>   What language is it? 	</annotation>
+               <Language_Select__C  classNameOfSelect="chosen-select-create-option"   isSingle={true}
+                  ref={(this_elem) => { this.langName_Refs.push(this_elem); } } />
+
+               <annotation>  Highest level of education completed in this language  </annotation>
+               <div className="educLevel_Slider"  ref={(this_elem) => { this.educLevel_Refs.push(this_elem); } }  ></div>
+               <br /><br /><br /><br /><br /><br />
+
+               <annotation> 	If you went to university in this language, what field did you specialize in?   </annotation>
+               <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push(this_elem); } }  />
+
+
+               <br />
+               <hr className="_Theme_hr_Default_"/>
+
+            </div>
+
+         );
+
+
+         this.setState({
+            anotherLangSection : this.state.anotherLangSection.concat([newBlock])
+         })
+
       }
-
-      let newBlock = (
-
-         <div ref={(this_elem) => { this.anotherLangBlockRefs.push(this_elem); } }     key={this.state.anotherLangSection.length} >
-            <br />
-
-            <annotation>  Highest level of education completed in this language  </annotation>
-            <div className="anotherLangEducLevel_Slider"></div>
-            <br /><br /><br /><br /><br /><br />
-
-            <annotation> 	If you went to university in this language, what field did you specialize in?   </annotation>
-            <input className="form-control" />
-
-
-            <br />
-            <hr className="_Theme_hr_Default_"/>
-
-         </div>
-
-      );
-
-
-      this.setState({
-         anotherLangSection : this.state.anotherLangSection.concat([newBlock])
-      })
    }
 
-
-   showAnotherLangBlock(){
-      // if(){
-      //
-      // }
-   }
-
-   hideAnotherLangBlock(){
-
-   }
 
    componentDidUpdate(){
+      this.updateSelectCreateOption();
+      this.updateSliders();
+   }
 
-      let sliders_Selector = $(".anotherLangEducLevel_Slider");
+   /* HELPER of componentDidUpdate() */
+   updateSelectCreateOption(){
 
-      if( sliders_Selector.length > 0 ){
+      let len = this.langName_Refs.length;
 
-         sliders_Selector.labeledslider({
+      if( len > 0 ){
+
+         // only need to apply settings to the most recent one!
+         $( "#" + this.langName_Refs[len - 1].getSelectElementId() ).chosen({
+            width: '50%',
+            allow_single_deselect: true,
+
+            no_results_text: Ui_Util.no_result_text_create_option ,
+            create_option: true
+         });
+
+      }
+   }
+
+   /* HELPER of componentDidUpdate() */
+   updateSliders(){
+
+      let len = this.educLevel_Refs.length;
+
+      if( len > 0 ){
+
+         $( this.educLevel_Refs[len - 1] ).labeledslider({
             min: 0,
             max: 7,
             tickInterval: 1,
@@ -87,7 +124,6 @@ class LearnProf_page3 extends Component {
          });
 
       }
-
    }
 
 
@@ -97,27 +133,10 @@ class LearnProf_page3 extends Component {
          <div id="learner-profile-form" className="h-center-margin">
 
             <h3> Other languages and educational history  </h3>
-            <hr className="_Theme_hr_Default_"/>
             <br />
 
             <annotation>  Did you every go to school where school subjects were taught in a language other than your first language?   	</annotation>
-            <div className="funkyradio">
-					<div className="funkyradio-success">
-		            <input type="radio" name="radio" id="diff-first-lang-Yes" />
-                  <label htmlFor="diff-first-lang-Yes"	tabIndex="0"
-							 ref={ (this_elem) => {this.diff_first_lang_Yes_lbl = this_elem;} } >
-								Yes
-						</label>
-		      	</div>
-
-					<div className="funkyradio-danger">
-		            <input type="radio" name="radio" id="diff-first-lang-No"  />
-                  <label htmlFor="diff-first-lang-No"	tabIndex="0"
-							 ref={ (this_elem) => {this.diff_first_lang_No_lbl = this_elem;} }>
-								No
-						</label>
-		        	</div>
-				</div>
+            <annotation>  If yes, please click the "<b>Add new language</b>" button below. </annotation>
 
             <hr className="_Theme_hr_Default_"/>
 
@@ -133,20 +152,6 @@ class LearnProf_page3 extends Component {
       );
    }
 
-   componentDidMount() {
-      /* Keyboard accessibility + Deselect compatibility for FunkyRadio */
-      this.diff_first_lang_Yes_lbl.addEventListener('keypress', Ui_Util.funkyRadio_KBdeSelectable_Handler );
-      this.diff_first_lang_No_lbl.addEventListener('keypress', Ui_Util.funkyRadio_KBdeSelectable_Handler );
-      this.diff_first_lang_Yes_lbl.addEventListener('click', Ui_Util.funkyRadio_MouseDeSelectable_Handler );
-      this.diff_first_lang_No_lbl.addEventListener('click', Ui_Util.funkyRadio_MouseDeSelectable_Handler );
-
-      /* Toggle additional info block */
-      // this.diff_first_lang_Yes_lbl.addEventListener('keypress', this.showAnotherLangBlock );
-      // this.diff_first_lang_No_lbl.addEventListener('keypress', this.hideAnotherLangBlock );
-      // this.diff_first_lang_Yes_lbl.addEventListener('click', this.showAnotherLangBlock );
-      // this.diff_first_lang_No_lbl.addEventListener('click', this.hideAnotherLangBlock );
-
-   }
 
 }
 
