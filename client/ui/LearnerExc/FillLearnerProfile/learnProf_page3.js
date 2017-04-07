@@ -3,9 +3,11 @@ import shortid from 'shortid';
 
 import Chosen_SingleSelect from '/imports/ui/chosen_SingleSelect';
 import JQueryUiExtensions_LabeledSlider from '/imports/ui/jQueryUiExtensions_LabeledSlider';
+import Corner_Button from '/imports/ui/corner_Button';
 
 import DB_Const from '/imports/api/functional/db_Const';
 import Ui_Util from '/imports/api/render/ui_Util';
+import Func_Util from '/imports/api/functional/func_Util';
 
 
 
@@ -16,7 +18,7 @@ class LearnProf_page3 extends Component {
       super();
 
       this.state = {
-         anotherLangSection: []
+         langSection: []
       }
    }
 
@@ -24,11 +26,13 @@ class LearnProf_page3 extends Component {
 /* TODO Remember, setState() is async! So this method must be modified to allow parameter pre-determined values
  * TODO perhaps give  a warning message when limit is reached?
  */
-   addAnotherLangBlock(){
+   addLangBlock(){
 
       // maximum block restriction
-      if( this.state.anotherLangSection.length < 10){
+      if( this.state.langSection.length < 10){
 
+         /* REF: Edit when database field increases
+          */
          if( this.langName_Refs === undefined ){
             this.langName_Refs = [];
          }
@@ -44,16 +48,24 @@ class LearnProf_page3 extends Component {
 
          let newBlock = (
 
-            <div  key={ uniqueNumber } >
+            <div  key={ uniqueNumber }    className="learnProf-page3-block">
                <br />
 
+                  <Corner_Button imgURL="/img/ui/close_cross_in_circular_outlined_interface.svg"
+                     type="TR"            width="40rem" height="40rem"
+                     actFunction={this.removeLangBlock}
+                     actFuncParams={ uniqueNumber }
+                     functionContext={this}
+                  />
+
+
                <annotation>   What language is it? 	</annotation>
-               <Chosen_SingleSelect             ref={(this_elem) => { this.langName_Refs.push(this_elem); } }
+               <Chosen_SingleSelect             ref={(this_elem) => { this.langName_Refs.push( this_elem ); } }
                   dbDataset={ DB_Const.LANGUAGE__LEARNPROF }
                   defaultText="Select or type a Language"
 
                   width="50%"
-                  
+
                   allow_single_deselect={true}
 
                   no_results_text={ Ui_Util.no_result_text_create_option }
@@ -61,7 +73,7 @@ class LearnProf_page3 extends Component {
                />
 
                <annotation>  Highest level of education completed in this language  </annotation>
-               <JQueryUiExtensions_LabeledSlider      ref={(this_elem) => { this.educLevel_Refs.push(this_elem); } }
+               <JQueryUiExtensions_LabeledSlider      ref={(this_elem) => { this.educLevel_Refs.push( this_elem ); } }
                   min={0}
                   max={7}
                   tickInterval={1}
@@ -82,8 +94,7 @@ class LearnProf_page3 extends Component {
                <br /><br /><br /><br /><br /><br />
 
                <annotation> 	If you went to university in this language, what field did you specialize in?   </annotation>
-               <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push(this_elem); } }  />
-
+               <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push( this_elem ); } } />
 
                <br />
                <hr className="_Theme_hr_Default_"/>
@@ -94,10 +105,37 @@ class LearnProf_page3 extends Component {
 
 
          this.setState({
-            anotherLangSection : this.state.anotherLangSection.concat([newBlock])
+            langSection : this.state.langSection.concat([newBlock])
          })
 
       }
+   }
+
+   removeLangBlock(reactListKeyOfBlock){
+      var r = confirm("Remove this block?");
+         if (r == true) {
+
+            let langSection = this.state.langSection;
+
+            let matchIndex = -1;
+
+            for(var i = 0; i < langSection.length; i++){
+               if( langSection[i].key == reactListKeyOfBlock ){
+                  matchIndex = i;
+               }
+            }
+
+            /* REF: Edit when database field increases */
+            this.langName_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.langName_Refs );
+            this.educLevel_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.educLevel_Refs );
+            this.specField_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.specField_Refs );
+
+            this.setState({
+               langSection : Func_Util.removeFromArrayByIndex_ARNI( matchIndex, langSection )
+            });
+
+         }
+
    }
 
 
@@ -114,10 +152,10 @@ class LearnProf_page3 extends Component {
 
             <hr className="_Theme_hr_Default_"/>
 
-            {this.state.anotherLangSection}
+            {this.state.langSection}
 
             <a className="pd-btn rounded-border	   single-line-element   btn-info" href="javascript:void(0)"
-               onClick={this.addAnotherLangBlock.bind(this)} >
+               onClick={this.addLangBlock.bind(this)} >
                Add new language
             </a>
             <hr className="_Theme_hr_Default_"/>

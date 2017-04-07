@@ -119,6 +119,7 @@ textarea {
 }
 button {
   overflow: visible;
+  border: 0px;       /* CUSTOM: changed, flat button by default */
 }
 button,
 select {
