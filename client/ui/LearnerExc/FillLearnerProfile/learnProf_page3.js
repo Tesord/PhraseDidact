@@ -3,6 +3,7 @@ import shortid from 'shortid';
 
 import Chosen_SingleSelect from '/imports/ui/chosen_SingleSelect';
 import JQueryUiExtensions_LabeledSlider from '/imports/ui/jQueryUiExtensions_LabeledSlider';
+import Corner_Button from '/imports/ui/corner_Button';
 
 import DB_Const from '/imports/api/functional/db_Const';
 import Ui_Util from '/imports/api/render/ui_Util';
@@ -16,7 +17,7 @@ class LearnProf_page3 extends Component {
       super();
 
       this.state = {
-         anotherLangSection: []
+         langSection: []
       }
    }
 
@@ -24,10 +25,10 @@ class LearnProf_page3 extends Component {
 /* TODO Remember, setState() is async! So this method must be modified to allow parameter pre-determined values
  * TODO perhaps give  a warning message when limit is reached?
  */
-   addAnotherLangBlock(){
+   addLangBlock(){
 
       // maximum block restriction
-      if( this.state.anotherLangSection.length < 10){
+      if( this.state.langSection.length < 10){
 
          if( this.langName_Refs === undefined ){
             this.langName_Refs = [];
@@ -44,8 +45,15 @@ class LearnProf_page3 extends Component {
 
          let newBlock = (
 
-            <div  key={ uniqueNumber } >
+            <div  key={ uniqueNumber }  id="learnProf-page3-block">
                <br />
+
+                  <Corner_Button imgURL="/img/ui/close_cross_in_circular_outlined_interface.svg"
+                     type="TR"            width="40rem" height="40rem"
+                     actFunction={this.removeLangBlock}     actFuncParams={this.state.langSection.length}
+                     functionContext={this}
+                  />
+
 
                <annotation>   What language is it? 	</annotation>
                <Chosen_SingleSelect             ref={(this_elem) => { this.langName_Refs.push(this_elem); } }
@@ -53,7 +61,7 @@ class LearnProf_page3 extends Component {
                   defaultText="Select or type a Language"
 
                   width="50%"
-                  
+
                   allow_single_deselect={true}
 
                   no_results_text={ Ui_Util.no_result_text_create_option }
@@ -84,7 +92,6 @@ class LearnProf_page3 extends Component {
                <annotation> 	If you went to university in this language, what field did you specialize in?   </annotation>
                <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push(this_elem); } }  />
 
-
                <br />
                <hr className="_Theme_hr_Default_"/>
 
@@ -94,10 +101,17 @@ class LearnProf_page3 extends Component {
 
 
          this.setState({
-            anotherLangSection : this.state.anotherLangSection.concat([newBlock])
+            langSection : this.state.langSection.concat([newBlock])
          })
 
       }
+   }
+
+   removeLangBlock(langBlock_Index){
+      this.setState({
+         langSection : this.state.langSection.slice(0, langBlock_Index).concat(
+                                                            this.state.langSection.slice(langBlock_Index + 1) )
+      })
    }
 
 
@@ -114,10 +128,10 @@ class LearnProf_page3 extends Component {
 
             <hr className="_Theme_hr_Default_"/>
 
-            {this.state.anotherLangSection}
+            {this.state.langSection}
 
             <a className="pd-btn rounded-border	   single-line-element   btn-info" href="javascript:void(0)"
-               onClick={this.addAnotherLangBlock.bind(this)} >
+               onClick={this.addLangBlock.bind(this)} >
                Add new language
             </a>
             <hr className="_Theme_hr_Default_"/>

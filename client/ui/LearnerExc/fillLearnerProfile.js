@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { Line } from 'rc-progress';
 
-
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
 import LearnProf_page1 from './FillLearnerProfile/learnProf_page1';
@@ -55,64 +54,13 @@ class FillLearnerProfile extends Component {
          <div className="standard-content">
             <div id="learner-profile-section" className="h-center-margin">
 
-<<<<<<< HEAD
-               <p>
-                  Before you get started, please take a moment of your time to fill out this <b>Learner Profile </b>. <br/>
-                  All information you fill in will be used by language specialists for research purposes. <br/>
-                  <br/>
-                  Filling in / completing this form is not mandatory, but any contribution would greatly help out
-                  language researchers in their mission to improve the learning process. <br/>
-                  Thank you. <br/><br/>
-                  (<i>This form auto-saves</i>)
-               </p>
-=======
                { this.getLearnProf_page(pageNo) }
->>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 
                <div className="single-line-element">
                   { this.getBackButton(pageNo) }
                   { this.getNextButton(pageNo) }
                </div>
 
-<<<<<<< HEAD
-                  <annotation>	Gender	</annotation>
-                  <Gender_Select__C    classNameOfSelect="chosen-select" />
-
-                  <annotation>	Birthday (YYYY-MM-DD)	</annotation>
-                  <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
-
-
-                  <hr className="_Theme_hr_Default_"/>
-                  <h3> Residence </h3>
-                  <br />
-
-                  <annotation>	Current Country of residence	</annotation>
-                  <Country_Select__C   classNameOfSelect="chosen-select" />
-
-                  <annotation>	What is the official Language(s) of your country?	</annotation>
-                  <Language_Select__C  classNameOfSelect="chosen-multiselect-Lang"   isSingle={false}/>
-
-                  <annotation>   What is the dominant Language of the city where you currently reside? 	</annotation>
-                  <Language_Select__C  classNameOfSelect="chosen-select-create-option"   isSingle={true}/>
-
-
-                  <hr className="_Theme_hr_Default_"/>
-                  <h3> First Language and Educational History </h3>
-                  <br />
-
-                  <annotation>  Where were you born?  	</annotation>
-                  <Country_Select__C  classNameOfSelect="chosen-select"/>
-
-                  <annotation>  How long did you live in the location where you were born?   </annotation>
-                  <label> <input type="number" className="single-date-or-month-field      form-control-spinner" min="0" /> years </label>
-
-                  <annotation>  How long did you live in the location where you were born?   </annotation>
-                  <div id="slider1"></div>
-
-               </div>
-            </form>
-         </div>
-=======
                <h3 className="single-line-element">
                   <div className="align-left"> Page { pageNo } of { FillLearnerProfile.LEARNPROF_MAXPAGE_NO } </div>
                   <div className="align-right"> { percentage }% </div>
@@ -179,7 +127,6 @@ class FillLearnerProfile extends Component {
          );
       }
    }
->>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 
 
    backPage(e){
@@ -252,37 +199,6 @@ class FillLearnerProfile extends Component {
 
    }
 
-<<<<<<< HEAD
-   componentDidMount() {
-      // ok to do so as in exceptional cases, the page will be redirected/reloaded
-      $('.chosen-select').chosen({
-         width: '50%',
-         allow_single_deselect: true
-      });
-
-      $('.chosen-select-create-option').chosen({
-         width: '100%',
-         allow_single_deselect: true,
-
-         no_results_text: Ui_Util.no_result_text_create_option ,
-         create_option: true
-      });
-
-      $('.chosen-multiselect-Lang').chosen({
-         width: '100%',
-
-         no_results_text: Ui_Util.no_result_text_create_option ,
-         max_selected_options: 10,   // Max select limit
-         single_backstroke_delete: false,
-
-         create_option: true
-      });
-
-      $('#slider1').labeledslider({ max: 6, tickInterval: 1 });
-   }
-
-=======
->>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 
 	render() {
 

@@ -24,11 +24,7 @@
  *
  */
 
-<<<<<<< HEAD
-.ui-slider-wrapper { position: relative;     margin-top: 1rem; }        /* CUSTOM:	changed */
-=======
 .ui-slider-wrapper { position: relative;   margin: auto;   margin-top: 1rem  !important; }        /* CUSTOM:	changed */
->>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 .ui-slider-wrapper .ui-slider-horizontal { width: 100%; }
 
 .ui-slider-labels { position: absolute; border: 1px solid transparent; }
@@ -38,11 +34,7 @@
 .ui-slider-wrapper.horizontal { height: 4.5em; }
 .horizontal .ui-slider-labels { left: 0; right: 0; top: 1.6rem }        /* CUSTOM:	changed, so that the slider tick labels' position are adjusted with the increase in slider bar height */
 .horizontal .ui-slider-label-ticks { width: 1.2em; height: .8em; text-align: center; border-left: 1px solid #999; }
-<<<<<<< HEAD
-.horizontal .ui-slider-label-ticks span { position: relative; display: inline-block; margin-left: -1.5rem; top: .8em; }     /* CUSTOM:	changed, so adjust to slider tick labels' increase in font-size */
-=======
 .horizontal .ui-slider-label-ticks span { position: relative; display: inline-block; margin-left: -4rem; top: .8em; }     /* CUSTOM:	changed, so adjust to slider tick labels' increase in font-size + many letter labels */
->>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 
 .ui-slider-wrapper.vertical { width: 4.5em; }
 .vertical .ui-slider-labels { top: 1px; bottom: 0; left: 0.7em; }
