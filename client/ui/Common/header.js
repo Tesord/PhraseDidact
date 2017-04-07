@@ -1,7 +1,7 @@
 import React from 'react';
 
-import AccountHead__C from './accountHead';
-import NavHead__C from './navHead';
+import AccountHead from './accountHead';
+import NavHead from './navHead';
 
 /*
  * USAGE: Should only be rendered in one location.
@@ -15,8 +15,8 @@ const Header = () => {
 		<nav className="_Theme_nav_Default_">
 
 			<div id="navbar-content" className="h-center-margin">
-				<NavHead__C />
-				<AccountHead__C />
+				<NavHead />
+				<AccountHead />
 			</div>
 
 		</nav>

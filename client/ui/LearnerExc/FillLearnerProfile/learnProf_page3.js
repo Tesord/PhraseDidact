@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
+import shortid from 'shortid';
 
-
-import Country_Select__C from './country_Select';
-import Language_Select__C from './language_Select';
+import Chosen_SingleSelect from '/imports/ui/chosen_SingleSelect';
+import JQueryUiExtensions_LabeledSlider from '/imports/ui/jQueryUiExtensions_LabeledSlider';
 
 import DB_Const from '/imports/api/functional/db_Const';
 import Ui_Util from '/imports/api/render/ui_Util';
@@ -40,7 +40,7 @@ class LearnProf_page3 extends Component {
          }
 
 
-         let uniqueNumber = new Date().getTime();     // Unless you can travel back in time!
+         let uniqueNumber = shortid.generate();
 
          let newBlock = (
 
@@ -48,11 +48,37 @@ class LearnProf_page3 extends Component {
                <br />
 
                <annotation>   What language is it? 	</annotation>
-               <Language_Select__C  classNameOfSelect="chosen-select-create-option"   isSingle={true}
-                  ref={(this_elem) => { this.langName_Refs.push(this_elem); } } />
+               <Chosen_SingleSelect             ref={(this_elem) => { this.langName_Refs.push(this_elem); } }
+                  dbDataset={ DB_Const.LANGUAGE__LEARNPROF }
+                  defaultText="Select or type a Language"
+
+                  width="50%"
+                  
+                  allow_single_deselect={true}
+
+                  no_results_text={ Ui_Util.no_result_text_create_option }
+                  create_option={true}
+               />
 
                <annotation>  Highest level of education completed in this language  </annotation>
-               <div className="educLevel_Slider"  ref={(this_elem) => { this.educLevel_Refs.push(this_elem); } }  ></div>
+               <JQueryUiExtensions_LabeledSlider      ref={(this_elem) => { this.educLevel_Refs.push(this_elem); } }
+                  min={0}
+                  max={7}
+                  tickInterval={1}
+                  tickArray={ [0, 1, 2, 3, 4, 5, 6, 7] }
+                  tickLabels={
+                     {
+                        0 : "<i>No answer<i/>",
+                        1 : DB_Const.EDUC_LEVEL__LEARNPROF[0].replace(/\s+/g, '<br />') ,
+                        2 : DB_Const.EDUC_LEVEL__LEARNPROF[1].replace(/\s+/g, '<br />') ,
+                        3 : DB_Const.EDUC_LEVEL__LEARNPROF[2].replace(/\s+/g, '<br />') ,
+                        4 : DB_Const.EDUC_LEVEL__LEARNPROF[3].replace(/\s+/g, '<br />') ,
+                        5 : DB_Const.EDUC_LEVEL__LEARNPROF[4].replace(/\s+/g, '<br />') ,
+                        6 : DB_Const.EDUC_LEVEL__LEARNPROF[5].replace(/\s+/g, '<br />') ,
+                        7 : DB_Const.EDUC_LEVEL__LEARNPROF[6].replace(/\s+/g, '<br />')
+                     }
+                  }
+               />
                <br /><br /><br /><br /><br /><br />
 
                <annotation> 	If you went to university in this language, what field did you specialize in?   </annotation>
@@ -70,58 +96,6 @@ class LearnProf_page3 extends Component {
          this.setState({
             anotherLangSection : this.state.anotherLangSection.concat([newBlock])
          })
-
-      }
-   }
-
-
-   componentDidUpdate(){
-      this.updateSelectCreateOption();
-      this.updateSliders();
-   }
-
-   /* HELPER of componentDidUpdate() */
-   updateSelectCreateOption(){
-
-      let len = this.langName_Refs.length;
-
-      if( len > 0 ){
-
-         // only need to apply settings to the most recent one!
-         $( "#" + this.langName_Refs[len - 1].getSelectElementId() ).chosen({
-            width: '50%',
-            allow_single_deselect: true,
-
-            no_results_text: Ui_Util.no_result_text_create_option ,
-            create_option: true
-         });
-
-      }
-   }
-
-   /* HELPER of componentDidUpdate() */
-   updateSliders(){
-
-      let len = this.educLevel_Refs.length;
-
-      if( len > 0 ){
-
-         $( this.educLevel_Refs[len - 1] ).labeledslider({
-            min: 0,
-            max: 7,
-            tickInterval: 1,
-            tickArray: [0, 1, 2, 3, 4, 5, 6, 7],
-              tickLabels: {
-                  0 : "<i>No answer<i/>",
-                  1 : DB_Const.EDUC_LEVEL__LEARNPROF[0].replace(/\s+/g, '<br />') ,
-                  2 : DB_Const.EDUC_LEVEL__LEARNPROF[1].replace(/\s+/g, '<br />') ,
-                  3 : DB_Const.EDUC_LEVEL__LEARNPROF[2].replace(/\s+/g, '<br />') ,
-                  4 : DB_Const.EDUC_LEVEL__LEARNPROF[3].replace(/\s+/g, '<br />') ,
-                  5 : DB_Const.EDUC_LEVEL__LEARNPROF[4].replace(/\s+/g, '<br />') ,
-                  6 : DB_Const.EDUC_LEVEL__LEARNPROF[5].replace(/\s+/g, '<br />') ,
-                  7 : DB_Const.EDUC_LEVEL__LEARNPROF[6].replace(/\s+/g, '<br />')
-               }
-         });
 
       }
    }

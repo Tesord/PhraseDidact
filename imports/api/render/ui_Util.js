@@ -1,4 +1,5 @@
 import React from 'react';
+import shortid from 'shortid';
 
 
 // Space Bar + Enter key toggle
@@ -60,7 +61,7 @@ function create_OptionArray_fromObj(obj){
 
 
    /* TODO document this method (only works if " allow_single_deselect: true " is turned on in jQuery) */
-export function create_SingleSelect_fromObj (obj, className, initText){
+export function create_SingleSelect_fromObj (obj, initText){
    let selects = [];
 
    if(initText){
@@ -73,10 +74,10 @@ export function create_SingleSelect_fromObj (obj, className, initText){
    selects = selects.concat( create_OptionArray_fromObj(obj) );
 
    // React's ref system does not work, since the component has not been mounted yet. So elementId is used instead
-   let elementId = "ssfo" + new Date().getTime();
+   let elementId = "ssfo" + shortid.generate();
    let jsx = (
 
-      <select  data-placeholder={initText}    className={className}  id={ elementId } >
+      <select  data-placeholder={initText}   id={ elementId } >
             {selects}
       </select>
 
@@ -93,7 +94,7 @@ export function create_SingleSelect_fromObj (obj, className, initText){
 export const no_result_text_create_option = 'No match. To add a new option, press "Tab" after typing. Or press "Enter" now to add:';
 
    /* TODO document this method */
-export function create_MultiSelect_fromObj (obj, className, initText){
+export function create_MultiSelect_fromObj (obj, initText){
    let selects = create_OptionArray_fromObj(obj);
    let selectRef = null;
 
@@ -104,9 +105,9 @@ export function create_MultiSelect_fromObj (obj, className, initText){
    );
 
 
-   let elementId = "msfo" + new Date().getTime();
+   let elementId = "msfo" + shortid.generate();
    let jsx = (
-      <select  data-placeholder={initText}    multiple   className={className}  id={ elementId } >
+      <select  data-placeholder={initText}    multiple   id={ elementId } >
             {selects}
       </select>
    );

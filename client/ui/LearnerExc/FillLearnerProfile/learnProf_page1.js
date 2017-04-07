@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import { DateField } from 'react-date-picker';
 
 
-import Country_Select__C from './country_Select';
-import Gender_Select__C from './gender_Select';
-import Language_Select__C from './language_Select';
+import Chosen_SingleSelect from '/imports/ui/chosen_SingleSelect';
+import Chosen_MultiSelect from '/imports/ui/chosen_MultiSelect';
 
 import Ui_Util from '/imports/api/render/ui_Util';
+import DB_Const from '/imports/api/functional/db_Const';
 
 
 /* TODO document how you can get ref from this class instance in fillLearnerProfile */
@@ -30,7 +30,14 @@ class LearnProf_page1 extends Component {
             <div id="learner-profile-form" className="h-center-margin">
 
                <annotation>	Gender	</annotation>
-               <Gender_Select__C    classNameOfSelect="chosen-select" />
+               <Chosen_SingleSelect
+                  dbDataset={ DB_Const.GENDER__LEARNPROF }
+                  defaultText="Select a Gender"
+
+                  width="50%"
+
+                  allow_single_deselect={true}
+               />
 
                <annotation>	Birthday (YYYY-MM-DD)	</annotation>
                <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
@@ -41,13 +48,41 @@ class LearnProf_page1 extends Component {
                <br />
 
                <annotation>	Current Country of residence	</annotation>
-               <Country_Select__C   classNameOfSelect="chosen-select" />
+               <Chosen_SingleSelect
+                  dbDataset={ DB_Const.COUNTRY__LEARNPROF }
+                  defaultText="Select a Country"
+
+                  width="50%"
+
+                  allow_single_deselect={true}
+               />
 
                <annotation>	What is the official Language(s) of your country?	</annotation>
-               <Language_Select__C  classNameOfSelect="chosen-multiselect-Lang"   isSingle={false}/>
+               <Chosen_MultiSelect
+                  dbDataset={ DB_Const.LANGUAGE__LEARNPROF }
+                  defaultText="Select or type Languages..."
+
+                  width="100%"
+                  
+                  max_selected_options={10}
+                  single_backstroke_delete={false}
+
+                  no_results_text={ Ui_Util.no_result_text_create_option }
+                  create_option={true}
+               />
 
                <annotation>   What is the dominant Language of the city where you currently reside? 	</annotation>
-               <Language_Select__C  classNameOfSelect="chosen-select-create-option"   isSingle={true}/>
+               <Chosen_SingleSelect
+                  dbDataset={ DB_Const.LANGUAGE__LEARNPROF }
+                  defaultText="Select or type a Language"
+
+                  width="50%"
+
+                  allow_single_deselect={true}
+
+                  no_results_text={ Ui_Util.no_result_text_create_option }
+                  create_option={true}
+               />
 
                <br /><br /><br /><br /><br /><br /><br />
 
@@ -59,29 +94,6 @@ class LearnProf_page1 extends Component {
 
    componentDidMount() {
 
-      // ok to do so as in exceptional cases, the page will be redirected/reloaded
-      $('.chosen-select').chosen({
-         width: '50%',
-         allow_single_deselect: true
-      });
-
-      $('.chosen-select-create-option').chosen({
-         width: '50%',
-         allow_single_deselect: true,
-
-         no_results_text: Ui_Util.no_result_text_create_option ,
-         create_option: true
-      });
-
-      $('.chosen-multiselect-Lang').chosen({
-         width: '100%',
-
-         no_results_text: Ui_Util.no_result_text_create_option ,
-         max_selected_options: 10,   // Max select limit
-         single_backstroke_delete: false,
-
-         create_option: true
-      });
 
    }
 

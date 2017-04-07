@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { Line } from 'rc-progress';
 
-import BlueCircle_greyBG__C from '../Loading/blueCircle_greyBG';
+import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
-import LearnProf_page1__C from './FillLearnerProfile/learnProf_page1';
-import LearnProf_page2__C from './FillLearnerProfile/learnProf_page2';
-import LearnProf_page3__C from './FillLearnerProfile/learnProf_page3';
+import LearnProf_page1 from './FillLearnerProfile/learnProf_page1';
+import LearnProf_page2 from './FillLearnerProfile/learnProf_page2';
+import LearnProf_page3 from './FillLearnerProfile/learnProf_page3';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
@@ -40,7 +40,7 @@ class FillLearnerProfile extends Component {
       /* TODO use Session to store page user has got to? */
 
 		this.state = {
-			content: <BlueCircle_greyBG__C />,
+			content: <BlueCircle_greyBG />,
          pageNo: 1,
          percentage: 0
 		};
@@ -78,11 +78,11 @@ class FillLearnerProfile extends Component {
 
       switch( pageNo ) {
          case 2:
-            return <LearnProf_page2__C /> ;
+            return <LearnProf_page2 /> ;
          case 3:
-            return <LearnProf_page3__C /> ;
+            return <LearnProf_page3 /> ;
          default:
-            return <LearnProf_page1__C /> ;
+            return <LearnProf_page1 /> ;
       }
 
    }

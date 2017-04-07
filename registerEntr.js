@@ -1,7 +1,7 @@
 // import React, {Component} from 'react';
 // import { Link } from 'react-router-dom';
 //
-// import Register__C from '../register';
+// import Register from '../register';
 //
 //
 // class RegisterEntr extends Component {
@@ -22,7 +22,7 @@
 //
 // 				<h4>	Are you a learner?	</h4>
 // 				<registerDesc>	Start learning languages completely free of charge!	</registerDesc>
-// 				<button onClick= { this.props.updateRegPage.bind( this, Register__C.Page_Enum.R_LEARNER ) }
+// 				<button onClick= { this.props.updateRegPage.bind( this, Register.Page_Enum.R_LEARNER ) }
 //                className="outline-btn     btn-whitebg-blue">
 // 					   Register as learner
 // 				</button>
@@ -31,7 +31,7 @@
 //
 // 				<h4>	Are you a language instructor / researcher?</h4>
 // 				<registerDesc>	Get access to learner data and design your own language learning course!		</registerDesc>
-// 				<button onClick= { this.props.updateRegPage.bind( this, Register__C.Page_Enum.R_INSTRUCTOR ) }
+// 				<button onClick= { this.props.updateRegPage.bind( this, Register.Page_Enum.R_INSTRUCTOR ) }
 //                className="outline-btn     btn-whitebg-blue">
 // 					   Register as instructor
 // 				</button>
