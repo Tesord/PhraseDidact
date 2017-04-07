@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Accounts } from 'meteor/accounts-base';
 
 import Func_Util from '/imports/api/functional/func_Util';
+import Ui_Util from '/imports/api/render/ui_Util';
 
 
 /* TODO Validation
@@ -28,14 +29,14 @@ class Register extends Component {
 	componentDidMount(){
 	/* Keyboard accessibility */
 
-		this.signup_learner_lbl.addEventListener('keypress', this.funkyRadio_Handler );
-		this.signup_instructor_lbl.addEventListener('keypress', this.funkyRadio_Handler );
+		this.signup_learner_lbl.addEventListener('keypress', Ui_Util.funkyRadio_KBstandardSelect_Handler );
+		this.signup_instructor_lbl.addEventListener('keypress', Ui_Util.funkyRadio_KBstandardSelect_Handler );
 	}
 
 	getReadyAnim(){
 		return(
 
-		  	<button className="bs-standard-btn 	rounded-border		btn-primary" >	Register	</button>
+		  	<button className="pd-btn 	rounded-border		btn-primary" >	Register	</button>
 
 		);
 	}
@@ -43,21 +44,11 @@ class Register extends Component {
 	getLoadingAnim(){
 		return(
 
-			<button className="bs-standard-btn 	rounded-border		btn-primary 	disabled" disabled aria-disabled="true">	Registering...	</button>
+			<button className="pd-btn 	rounded-border		btn-primary 	disabled" disabled aria-disabled="true">	Registering...	</button>
 
 		);
 	}
 
-	funkyRadio_Handler(e){
-		// Space Bar + Enter key toggle
-		if (e.keyCode == 0 || e.keyCode == 32 || e.keyCode == 13) {
-			// prevent bar-scrolling when space bar is clicked
-			e.preventDefault();
-
-			let forElementID = e.target.getAttribute("for");
-			document.getElementById(forElementID).checked = true;
-		}
-	}
 
 
 	handleErrors(err, isInitial){

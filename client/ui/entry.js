@@ -6,8 +6,8 @@
 import React, {Component} from 'react';
 import DocumentTitle from 'react-document-title';
 
-import Login__C from './Entry/login';
-import Register__C from './Entry/register';
+import Login from './Entry/login';
+import Register from './Entry/register';
 
 
 
@@ -52,8 +52,8 @@ class Entry extends Component{
 			<DocumentTitle title='Login - PhraseDidact'>
 
 				<div id="login-content" className="h-center-margin">
-					<Login__C />
-					<Register__C />
+					<Login />
+					<Register />
 				</div>
 
 			</DocumentTitle>

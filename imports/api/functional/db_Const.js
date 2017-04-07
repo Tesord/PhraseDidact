@@ -17,19 +17,19 @@ db.users.update(
 
 
 /* Account Configs */
-export const ROLE_ACCOUNT = {
+export const ROLE__ACCOUNT = {
    "LEARN" : "Learner",
    "INSTR" : "Instructor"
 };
 
 /* Learner Profile Configs */
-export const GENDER_LEARNPROF = {
+export const GENDER__LEARNPROF = {
    "M" : "Male",
    "F" : "Female",
    "O" : "Other",
 };
 
-export const COUNTRY_LEARNPROF = {
+export const COUNTRY__LEARNPROF = {
 
    "USA" : "United States",
    "GBR" : "United Kingdom",
@@ -283,7 +283,7 @@ export const COUNTRY_LEARNPROF = {
 
 };
 
-export const LANGUAGE_LEARNPROF = {
+export const LANGUAGE__LEARNPROF = {
 
    "eng" : "English",
    "aar" : "Afar",
@@ -471,5 +471,28 @@ export const LANGUAGE_LEARNPROF = {
    "yue" : "Cantonese ( Chinese )",
    "zha" : "Zhuang; Chuang",
    "zul" : "Zulu"
+
+};
+
+export const LANG_PROFIC__LEARNPROF = {
+
+   0 : "No proficiency",
+   1 : "Elementary proficiency",
+   2 : "Limited Working proficiency",
+   3 : "Professional Working proficiency",
+   4 : "Full Professional proficiency",
+   5 : "Native <i>or</i> Bilingual proficiency"
+
+};
+
+export const EDUC_LEVEL__LEARNPROF = {
+
+   0 : "Elementary / Primary school",
+   1 : "Lower Secondary / High school",
+   2 : "Upper Secondary / High school",
+   3 : "College education <i>or equal.</i>",
+   4 : "Bachelor education <i>or equal.</i>",
+   5 : "Master / Postgraduate education <i>or equal.</i>",
+   6 : "PhD (Doctorate)"
 
 };

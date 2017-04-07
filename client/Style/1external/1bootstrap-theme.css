@@ -75,7 +75,11 @@ fieldset[disabled] .btn-danger {
 }
 .btn-default:hover,
 .btn-default:focus {
+<<<<<<< HEAD
   background-color: #e0e0e0;
+=======
+  /* CUSTOM: removed, so that button doesn't look 'depressed' after clicking */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
   background-position: 0 -15px;
 }
 .btn-default:active,
@@ -116,7 +120,11 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary:hover,
 .btn-primary:focus {
+<<<<<<< HEAD
   background-color: #265a88;
+=======
+  /* CUSTOM: removed, so that button doesn't look 'depressed' after clicking */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
   background-position: 0 -15px;
 }
 .btn-primary:active,
@@ -142,7 +150,11 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
+<<<<<<< HEAD
   background-color: #265a88;
+=======
+  background-color: #5BA5E6;     /* CUSTOM: changed */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
   background-image: none;
 }
 .btn-success {

@@ -1222,7 +1222,11 @@ h2,
 .h2,
 h3,
 .h3 {
+<<<<<<< HEAD
   margin-top: 20px;
+=======
+  margin-top: 15px;     /* CUSTOM: changed, make top & bottom margin close to each other */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
   margin-bottom: 10px;
 }
 h1 small,
@@ -2508,7 +2512,11 @@ legend {
 label {
   display: inline-block;
   max-width: 100%;
+<<<<<<< HEAD
   margin-bottom: 5px;
+=======
+  margin-bottom: 1rem;     /* CUSTOM: changed */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
   font-weight: bold;
 }
 input[type="search"] {
@@ -3059,13 +3067,22 @@ fieldset[disabled] a.btn {
 .btn-default {
   color: #333;
   background-color: #fff;
+<<<<<<< HEAD
   border-color: #ccc;
+=======
+  border: 1px solid #CCCCCC;     /* CUSTOM: changed, fixed broken border? */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 }
 .btn-default:focus,
 .btn-default.focus {
   color: #333;
+<<<<<<< HEAD
   background-color: #e6e6e6;
   border-color: #8c8c8c;
+=======
+  /* CUSTOM: removed, so that button doesn't look 'depressed' after clicking */
+  /* CUSTOM: removed, so that the button border doesn't change when focused */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 }
 .btn-default:hover {
   color: #333;
@@ -3121,7 +3138,11 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
+<<<<<<< HEAD
   background-color: #286090;
+=======
+  /* CUSTOM: removed, so that button doesn't look 'depressed' after clicking */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
   border-color: #122b40;
 }
 .btn-primary:hover {

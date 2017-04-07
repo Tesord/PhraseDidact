@@ -18,6 +18,13 @@ label {
       margin-top: 1rem;
       margin-right: 1rem;
    }
+<<<<<<< HEAD
+=======
+}
+.funkyradio label {
+   // so that any funkyradio's label fill up its full length
+   width: 100%;
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 }
 
 a {
@@ -31,6 +38,30 @@ a {
 p {
    font-size: 1.2em;
    margin-bottom: 2rem;
+}
+
+table {
+   width: 100%;
+
+}
+tr, th, td {
+   border: 1px solid #a2a9b5;
+}
+
+input[type='text'], input[type='email'], input[type='password'] {
+   margin-top: 0.3rem;
+   margin-bottom: 1.5rem;
+}
+
+input[type='radio'] {
+   margin-right: 0.5em;
+}
+input[type='checkbox'] {
+   margin-left: 0.3em;
+
+   /* Line "checkbox" up with its "label" */
+   position: relative;
+   top: 0.15em;
 }
 
 
@@ -72,6 +103,11 @@ input[type='checkbox'] {
 
 .single-line-element {
    display: block;
+<<<<<<< HEAD
+=======
+   // automatically adjust height according to float-induced height
+   overflow-y: auto;
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
 }
 
 .single-date-or-month-field {
@@ -129,18 +165,17 @@ input[type='checkbox'] {
    user-select: none;
    background-image: none;
 
+   padding: 8px 55px;
+   font-size: 1.7rem;
+
    text-decoration: none;
    margin-top: 1rem  !important;
    margin-bottom: 1rem     !important;
 
 
-   &:focus, &.focus, &:active, &.active {
-      /* ::L_NOTE::       .pd-btn.active  =  when clicked by mouse */
-      outline: none;
-   }
-
    &:hover, &:focus, &.focus, &:active, &.active {
-      /* ::L_NOTE::       .pd-btn:focus  =  particularly when select by keyboard*/
+      /* ::L_NOTE::     .pd-btn.active  =  when clicked by mouse
+                        .pd-btn:focus  =  particularly when select by keyboard*/
       text-decoration: none   !important;
    }
 }
@@ -154,19 +189,10 @@ input[type='checkbox'] {
 
 
 /* Rectangular button instances */
-.bs-standard-btn, .outline-btn, {
-   .pd-btn
+.outline-btn {
+   .pd-btn;
 }
 
-.bs-standard-btn {
-   border: 1px solid #005bef;
-   padding: 8px 55px;
-   font-size: 1.7rem;
-
-   &.disabled, &.disabled:hover, &.disabled:focus, &.disabled.focus, &.disabled:active, &.disabled.active {
-      background-color: #5BA5E6;
-   }
-}
 
 .outline-btn {
    padding: 5px 18px;

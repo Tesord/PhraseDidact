@@ -68,7 +68,11 @@
 
          if ( this.orientation == 'horizontal' ) {
             this.uiSlider
+<<<<<<< HEAD
                .width( this.element.css('width') );
+=======
+               .width( "90%" );        /* CUSTOM: changed, so that the slider won't go out of bound (when combined with margin: auto) */
+>>>>>>> c19c33124f2834b7524bd68fdbef91b04bfbaf0d
          } else {
             this.uiSlider
                .height( this.element.css('height') );
