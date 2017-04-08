@@ -7,6 +7,7 @@ import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import LearnProf_page1 from './FillLearnerProfile/learnProf_page1';
 import LearnProf_page2 from './FillLearnerProfile/learnProf_page2';
 import LearnProf_page3 from './FillLearnerProfile/learnProf_page3';
+import LearnProf_page4 from './FillLearnerProfile/learnProf_page4';
 
 import Func_Util from '/imports/api/functional/func_Util';
 import LearnerExc from '/imports/api/functional/learnerExc';
@@ -81,6 +82,8 @@ class FillLearnerProfile extends Component {
             return <LearnProf_page2 /> ;
          case 3:
             return <LearnProf_page3 /> ;
+         case 4:
+            return <LearnProf_page4 /> ;
          default:
             return <LearnProf_page1 /> ;
       }

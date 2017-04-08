@@ -9,6 +9,10 @@ class Corner_Button extends Component {
          <img src={ this.props.imgURL }    width={ this.props.width }    height={ this.props.height }
             tabIndex="0"
             onClick={ this.props.actFunction.bind(this.props.functionContext, this.props.actFuncParams )	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
             ref={ (this_elem) => {this.corner_button = this_elem;} }/>
 
       );

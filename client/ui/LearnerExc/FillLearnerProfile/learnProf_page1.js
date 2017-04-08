@@ -63,7 +63,7 @@ class LearnProf_page1 extends Component {
                   defaultText="Select or type Languages..."
 
                   width="100%"
-                  
+
                   max_selected_options={10}
                   single_backstroke_delete={false}
 
@@ -84,8 +84,8 @@ class LearnProf_page1 extends Component {
                   create_option={true}
                />
 
-               <br /><br /><br /><br /><br /><br /><br />
 
+               <br /><br /><br /><br /><br /><br /><br />
             </div>
          </div>
 

@@ -27,7 +27,7 @@ class LearnProf_page2 extends Component {
                defaultText="Select a Country"
 
                width="50%"
-               
+
                allow_single_deselect={true}
             />
 
@@ -77,8 +77,8 @@ class LearnProf_page2 extends Component {
 
             <annotation> 	If you went to university, what field did you specialize in?   </annotation>
             <input className="form-control" />
-            <br /><br />
 
+            <br /><br />
          </div>
 
       );

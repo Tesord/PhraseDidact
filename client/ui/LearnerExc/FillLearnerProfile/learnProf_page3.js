@@ -7,6 +7,7 @@ import Corner_Button from '/imports/ui/corner_Button';
 
 import DB_Const from '/imports/api/functional/db_Const';
 import Ui_Util from '/imports/api/render/ui_Util';
+import Func_Util from '/imports/api/functional/func_Util';
 
 
 
@@ -30,6 +31,8 @@ class LearnProf_page3 extends Component {
       // maximum block restriction
       if( this.state.langSection.length < 10){
 
+         /* REF: Edit when database field increases
+          */
          if( this.langName_Refs === undefined ){
             this.langName_Refs = [];
          }
@@ -45,18 +48,27 @@ class LearnProf_page3 extends Component {
 
          let newBlock = (
 
+<<<<<<< HEAD
             <div  key={ uniqueNumber }  id="learnProf-page3-block">
+=======
+            <div  key={ uniqueNumber }    className="learnProf-page3-block">
+>>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
                <br />
 
                   <Corner_Button imgURL="/img/ui/close_cross_in_circular_outlined_interface.svg"
                      type="TR"            width="40rem" height="40rem"
+<<<<<<< HEAD
                      actFunction={this.removeLangBlock}     actFuncParams={this.state.langSection.length}
+=======
+                     actFunction={this.removeLangBlock}
+                     actFuncParams={ uniqueNumber }
+>>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
                      functionContext={this}
                   />
 
 
                <annotation>   What language is it? 	</annotation>
-               <Chosen_SingleSelect             ref={(this_elem) => { this.langName_Refs.push(this_elem); } }
+               <Chosen_SingleSelect             ref={(this_elem) => { this.langName_Refs.push( this_elem ); } }
                   dbDataset={ DB_Const.LANGUAGE__LEARNPROF }
                   defaultText="Select or type a Language"
 
@@ -69,7 +81,7 @@ class LearnProf_page3 extends Component {
                />
 
                <annotation>  Highest level of education completed in this language  </annotation>
-               <JQueryUiExtensions_LabeledSlider      ref={(this_elem) => { this.educLevel_Refs.push(this_elem); } }
+               <JQueryUiExtensions_LabeledSlider      ref={(this_elem) => { this.educLevel_Refs.push( this_elem ); } }
                   min={0}
                   max={7}
                   tickInterval={1}
@@ -90,7 +102,11 @@ class LearnProf_page3 extends Component {
                <br /><br /><br /><br /><br /><br />
 
                <annotation> 	If you went to university in this language, what field did you specialize in?   </annotation>
+<<<<<<< HEAD
                <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push(this_elem); } }  />
+=======
+               <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push( this_elem ); } } />
+>>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
 
                <br />
                <hr className="_Theme_hr_Default_"/>
@@ -107,11 +123,39 @@ class LearnProf_page3 extends Component {
       }
    }
 
+<<<<<<< HEAD
    removeLangBlock(langBlock_Index){
       this.setState({
          langSection : this.state.langSection.slice(0, langBlock_Index).concat(
                                                             this.state.langSection.slice(langBlock_Index + 1) )
       })
+=======
+   removeLangBlock(reactListKeyOfBlock){
+      var r = confirm("Remove this block?");
+         if (r == true) {
+
+            let langSection = this.state.langSection;
+
+            let matchIndex = -1;
+
+            for(var i = 0; i < langSection.length; i++){
+               if( langSection[i].key == reactListKeyOfBlock ){
+                  matchIndex = i;
+               }
+            }
+
+            /* REF: Edit when database field increases */
+            this.langName_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.langName_Refs );
+            this.educLevel_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.educLevel_Refs );
+            this.specField_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.specField_Refs );
+
+            this.setState({
+               langSection : Func_Util.removeFromArrayByIndex_ARNI( matchIndex, langSection )
+            });
+
+         }
+
+>>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
    }
 
 

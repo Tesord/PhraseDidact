@@ -3,7 +3,7 @@ import shortid from 'shortid';
 
 
 // Space Bar + Enter key toggle
-const standardKB_Toggle_KeyCode = [0, 32, 13];
+export const standardKB_Toggle_KeyCode = [0, 32, 13];
 
 
 export function funkyRadio_KBstandardSelect_Handler(e){
@@ -73,7 +73,7 @@ export function create_SingleSelect_fromObj (obj, initText){
 
    selects = selects.concat( create_OptionArray_fromObj(obj) );
 
-   // React's ref system does not work, since the component has not been mounted yet. So elementId is used instead
+   // React's ref system does not work, since the component has not been mounted yet. So elementId is used instead [See chosen_SingleSelect.js].
    let elementId = "ssfo" + shortid.generate();
    let jsx = (
 
