@@ -496,3 +496,22 @@ export const EDUC_LEVEL__LEARNPROF = {
    6 : "PhD (Doctorate)"
 
 };
+
+export const REASON__LEARNPROF = {
+
+   travel_0 : "For travels: I have no plans, but I think it would be a good idea",
+   travel_1 : "I have plans: I will travel to a place where this language is spoken in: ",
+
+   education_0 : "For education: I have no plans, but I think it would be a good idea",
+   education_1 : "I have plans: I will study at a school where this language is used as the language of instruction. The level of education will be: ",
+
+   employment_0 : "Current employment requires this language",
+   employment_1 : "Future employment requires this language",
+   employment_2 : "I want to make my CV more competitive",
+
+   residence_0 : "I have recently moved to a place where this language is dominant",
+   residence_1 : "I want to move to a place where this place is dominant",
+
+   personal_0 : "My partner/spouse/wife/family members speak this language and I want to communicate with him/her/them",
+   personal_1 : "My children are learning this language"
+};

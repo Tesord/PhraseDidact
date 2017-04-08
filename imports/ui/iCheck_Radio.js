@@ -9,13 +9,14 @@ class ICheck_Radio extends Component {
 
 
    render(){
-      return ( <input type="radio"     name={this.props.radioName}
+      return ( <input type="radio"     name={this.props.radioName}      value={this.props.value}
                   ref={ (this_elem) => {this.radio = this_elem; } }  /> );
    }
 
 
    componentDidMount() {
 
+      /* Styling assign */
       let radioClass = "";
 
       if( !this.props.radioClass ){
@@ -29,6 +30,17 @@ class ICheck_Radio extends Component {
          radioClass: radioClass
       });
 
+
+      /* DeSelectable functionality */
+      if(this.props.isDeSelectable){
+         let radioSelector = $(this.radio);
+
+         radioSelector.on('ifClicked', function(event){
+            if( radioSelector.iCheck('update')[0].checked ){
+               radioSelector.iCheck('uncheck');
+            }
+         });
+      }
    }
 
 }

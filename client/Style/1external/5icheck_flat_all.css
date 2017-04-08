@@ -2,12 +2,14 @@
 ----------------------------------- */
 
 /* CUSTOM: usual " background: url " change */
+/* CUSTOM: "vertical-align" changed, it seems to better line up vertically with any text next to it this way */
+
 
 .icheckbox_flat,
 .iradio_flat {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -60,7 +62,7 @@
 .iradio_flat-red {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -113,7 +115,7 @@
 .iradio_flat-green {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -166,7 +168,7 @@
 .iradio_flat-blue {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -219,7 +221,7 @@
 .iradio_flat-aero {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -272,7 +274,7 @@
 .iradio_flat-grey {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -325,7 +327,7 @@
 .iradio_flat-orange {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -378,7 +380,7 @@
 .iradio_flat-yellow {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -431,7 +433,7 @@
 .iradio_flat-pink {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -484,7 +486,7 @@
 .iradio_flat-purple {
     display: inline-block;
     *display: inline;
-    vertical-align: middle;
+    vertical-align: top;
     margin: 0;
     padding: 0;
     width: 20px;
