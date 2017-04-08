@@ -48,21 +48,13 @@ class LearnProf_page3 extends Component {
 
          let newBlock = (
 
-<<<<<<< HEAD
-            <div  key={ uniqueNumber }  id="learnProf-page3-block">
-=======
             <div  key={ uniqueNumber }    className="learnProf-page3-block">
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
                <br />
 
                   <Corner_Button imgURL="/img/ui/close_cross_in_circular_outlined_interface.svg"
                      type="TR"            width="40rem" height="40rem"
-<<<<<<< HEAD
-                     actFunction={this.removeLangBlock}     actFuncParams={this.state.langSection.length}
-=======
                      actFunction={this.removeLangBlock}
                      actFuncParams={ uniqueNumber }
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
                      functionContext={this}
                   />
 
@@ -102,11 +94,7 @@ class LearnProf_page3 extends Component {
                <br /><br /><br /><br /><br /><br />
 
                <annotation> 	If you went to university in this language, what field did you specialize in?   </annotation>
-<<<<<<< HEAD
-               <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push(this_elem); } }  />
-=======
                <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push( this_elem ); } } />
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
 
                <br />
                <hr className="_Theme_hr_Default_"/>
@@ -123,13 +111,6 @@ class LearnProf_page3 extends Component {
       }
    }
 
-<<<<<<< HEAD
-   removeLangBlock(langBlock_Index){
-      this.setState({
-         langSection : this.state.langSection.slice(0, langBlock_Index).concat(
-                                                            this.state.langSection.slice(langBlock_Index + 1) )
-      })
-=======
    removeLangBlock(reactListKeyOfBlock){
       var r = confirm("Remove this block?");
          if (r == true) {
@@ -155,7 +136,6 @@ class LearnProf_page3 extends Component {
 
          }
 
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
    }
 
 

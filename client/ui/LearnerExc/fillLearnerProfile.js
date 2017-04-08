@@ -32,7 +32,7 @@ import LearnerExc from '/imports/api/functional/learnerExc';
 class FillLearnerProfile extends Component {
 
    // The maximum number of pages in the Learner Profile. CHANGE this when more pages are added/removed.
-   static LEARNPROF_MAXPAGE_NO = 7;
+   static LEARNPROF_MAXPAGE_NO = 4;
 
 
    constructor(){
@@ -154,6 +154,7 @@ class FillLearnerProfile extends Component {
       e.preventDefault();
 
       /* TODO send form information to DB again*/
+      
 
 
       let newPercentage = Math.round( this.state.pageNo * 100 / FillLearnerProfile.LEARNPROF_MAXPAGE_NO );

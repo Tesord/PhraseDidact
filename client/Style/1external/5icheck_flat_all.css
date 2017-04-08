@@ -2,21 +2,14 @@
 ----------------------------------- */
 
 /* CUSTOM: usual " background: url " change */
-<<<<<<< HEAD
-=======
 /* CUSTOM: "vertical-align" changed, it seems to better line up vertically with any text next to it this way */
 
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
 
 .icheckbox_flat,
 .iradio_flat {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -69,11 +62,7 @@
 .iradio_flat-red {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -126,11 +115,7 @@
 .iradio_flat-green {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -183,11 +168,7 @@
 .iradio_flat-blue {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -240,11 +221,7 @@
 .iradio_flat-aero {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -297,11 +274,7 @@
 .iradio_flat-grey {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -354,11 +327,7 @@
 .iradio_flat-orange {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -411,11 +380,7 @@
 .iradio_flat-yellow {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -468,11 +433,7 @@
 .iradio_flat-pink {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
@@ -525,11 +486,7 @@
 .iradio_flat-purple {
     display: inline-block;
     *display: inline;
-<<<<<<< HEAD
-    vertical-align: middle;
-=======
     vertical-align: top;
->>>>>>> 7a9db7844928b37709a5db1e01139fdea4916c9a
     margin: 0;
     padding: 0;
     width: 20px;
