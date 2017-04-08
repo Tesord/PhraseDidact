@@ -7,6 +7,11 @@ import DB_Const from '../api/functional/db_Const';
 /* TODO document how you can get ref from this class instance in fillLearnerProfile */
 class Chosen_MultiSelect extends Component {
 
+   getSelectedValueArray(){
+      return $("#" + this.selectElementId).val();
+   }
+
+
    render(){
       let result = Ui_Util.create_MultiSelect_fromObj( this.props.dbDataset, this.props.defaultText);
 

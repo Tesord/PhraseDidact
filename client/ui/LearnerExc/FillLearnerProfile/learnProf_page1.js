@@ -12,6 +12,26 @@ import DB_Const from '/imports/api/functional/db_Const';
 /* TODO document how you can get ref from this class instance in fillLearnerProfile */
 class LearnProf_page1 extends Component {
 
+   save(){
+      let fieldNameArray = [];
+      let valueArray = [];
+
+      fieldNameArray.push("gender");
+      valueArray.push( this.gender_Ref.getSelectedValue() );
+
+
+
+      Meteor.call('learner.saveLearningProfile', fieldNameArray, valueArray, (err, result) => {
+
+         /* TODO Standardlised error handling method in Ui_Util? */
+
+         }
+
+      );
+
+   }
+
+
    render() {
       return(
 
@@ -24,13 +44,12 @@ class LearnProf_page1 extends Component {
                Filling in / completing this form is not mandatory, but any contribution would greatly help out
                language researchers in their mission to improve the learning process. <br/>
                Thank you. <br/><br/>
-               (<i>This form auto-saves</i>)
             </p>
 
             <div id="learner-profile-form" className="h-center-margin">
 
                <annotation>	Gender	</annotation>
-               <Chosen_SingleSelect
+               <Chosen_SingleSelect       ref={(this_elem) => { this.gender_Ref = ( this_elem ); } }
                   dbDataset={ DB_Const.GENDER__LEARNPROF }
                   defaultText="Select a Gender"
 
@@ -90,11 +109,6 @@ class LearnProf_page1 extends Component {
          </div>
 
       );
-   }
-
-   componentDidMount() {
-
-
    }
 
 };

@@ -32,7 +32,7 @@ import LearnerExc from '/imports/api/functional/learnerExc';
 class FillLearnerProfile extends Component {
 
    // The maximum number of pages in the Learner Profile. CHANGE this when more pages are added/removed.
-   static LEARNPROF_MAXPAGE_NO = 7;
+   static LEARNPROF_MAXPAGE_NO = 4;
 
 
    constructor(){
@@ -79,13 +79,13 @@ class FillLearnerProfile extends Component {
 
       switch( pageNo ) {
          case 2:
-            return <LearnProf_page2 /> ;
+            return <LearnProf_page2    ref={ (this_elem) => {this.currentPage = this_elem} } /> ;
          case 3:
-            return <LearnProf_page3 /> ;
+            return <LearnProf_page3    ref={ (this_elem) => {this.currentPage = this_elem} } /> ;
          case 4:
-            return <LearnProf_page4 /> ;
+            return <LearnProf_page4    ref={ (this_elem) => {this.currentPage = this_elem} } /> ;
          default:
-            return <LearnProf_page1 /> ;
+            return <LearnProf_page1    ref={ (this_elem) => {this.currentPage = this_elem} } /> ;
       }
 
    }
@@ -132,10 +132,15 @@ class FillLearnerProfile extends Component {
    }
 
 
+   save(){
+      this.currentPage.save();
+   }
+
+
    backPage(e){
       e.preventDefault();
 
-      /* TODO send form information to DB again*/
+      this.save();
 
 
       let newPageNo = this.state.pageNo - 1;
@@ -153,7 +158,7 @@ class FillLearnerProfile extends Component {
    nextPage(e){
       e.preventDefault();
 
-      /* TODO send form information to DB again*/
+      this.save();
 
 
       let newPercentage = Math.round( this.state.pageNo * 100 / FillLearnerProfile.LEARNPROF_MAXPAGE_NO );

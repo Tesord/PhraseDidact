@@ -6,6 +6,11 @@ import Ui_Util from '../api/render/ui_Util';
 /* TODO document how you can get ref from this class instance in fillLearnerProfile */
 class Chosen_SingleSelect extends Component {
 
+   getSelectedValue(){
+      return $("#" + this.selectElementId).val();
+   }
+
+
    render(){
       let result = Ui_Util.create_SingleSelect_fromObj( this.props.dbDataset, this.props.defaultText );
 

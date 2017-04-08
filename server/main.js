@@ -7,8 +7,9 @@ import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
    // code to run on server at startup
-
-
-   // console.log(AccountConfigs.find().fetch());
+   
+   // Meteor.publish('learnerProfile', function() {
+   //    return Bins.find({ ownerId: this.userId });
+   // });
 
 });
