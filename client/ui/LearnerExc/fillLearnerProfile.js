@@ -114,7 +114,8 @@ class FillLearnerProfile extends Component {
       if( pageNo >= FillLearnerProfile.LEARNPROF_MAXPAGE_NO ){
          return(
 
-            <a className="pd-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)">
+            <a className="pd-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)"
+               onClick={this.finish.bind(this)} >
                Finish
             </a>
          );
@@ -139,7 +140,6 @@ class FillLearnerProfile extends Component {
 
    backPage(e){
       e.preventDefault();
-
       this.save();
 
 
@@ -157,7 +157,6 @@ class FillLearnerProfile extends Component {
 
    nextPage(e){
       e.preventDefault();
-
       this.save();
 
 
@@ -170,6 +169,13 @@ class FillLearnerProfile extends Component {
          pageNo: newPageNo,
          percentage: newPercentage
 		});
+   }
+
+   finish(e){
+      e.preventDefault();
+      this.save();
+
+      this.context.router.history.push("user/" + Meteor.user().username + "/profile/");
    }
 
 
@@ -219,5 +225,9 @@ class FillLearnerProfile extends Component {
 	}
 }
 
+
+FillLearnerProfile.contextTypes = {
+	router: React.PropTypes.object
+};
 
 export default FillLearnerProfile;

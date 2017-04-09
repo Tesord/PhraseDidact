@@ -50,7 +50,7 @@ class Login extends Component {
 
    handleErrors(err){
       // TODO   Client side will start to revert changes
-      console.log('Login error' + err);
+      window.alert(err);
 
 
       this.setState( {     button:    this.getReadyAnim()    });

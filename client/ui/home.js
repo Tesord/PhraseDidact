@@ -17,7 +17,7 @@ const Home = () => {
 		<DocumentTitle title='Home - PhraseDidact'>
 
          <div>
-            SAMPLE TEXT
+            Welcome to PhraseDidact!
          </div>
 
 		</DocumentTitle>

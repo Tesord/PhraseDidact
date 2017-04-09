@@ -9,6 +9,7 @@ import Home from './ui/home';
 import NotFound from './ui/notFound';
 import Entry from './ui/entry';
 import FillLearnerProfile from './ui/LearnerExc/fillLearnerProfile';
+import Profile from './ui/profile';
 
 /*************** TODO WHEN FINISHED: comment out the below imports & delete above.
  					Move the 'ui' folder from 'client' to 'imports' **/
@@ -41,6 +42,7 @@ const routes = (
 
 				<Route path="/login" component={Entry} />
 				<Route path="/fillLearnerProfile" component={FillLearnerProfile} />
+				<Route path="/user/:username/profile" component={Profile} />
 
 				<Route component={NotFound} />
 			</Switch>

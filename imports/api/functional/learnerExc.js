@@ -7,7 +7,7 @@ class LearnerExc extends Component {
 
    static handleErrors(err){
       // TODO   Redirect to error page and Popup error or something...
-      console.log('Error' + err);
+      window.alert(err);
    }
 
    /* TODO document this method. Return 1 if cache indicates is Learner, -1 if cache indicates it is not.

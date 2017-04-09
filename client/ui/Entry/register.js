@@ -53,7 +53,7 @@ class Register extends Component {
 
 	handleErrors(err, isInitial){
 		// TODO   Client side will start to revert changes
-		console.log('Signup callback', err);
+		window.alert(err);
 
 
 		/* If an exception occurs during Set Account Type stage (e.g. Set Account Type returns NOT UNIQUE),
