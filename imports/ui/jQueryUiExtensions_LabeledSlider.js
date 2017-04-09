@@ -3,6 +3,11 @@ import React, {Component} from 'react';
 
 class JQueryUiExtensions_LabeledSlider extends Component {
 
+   getSelectedValue(){
+      return $(this.slider).labeledslider("option", "value");
+   }
+
+
    render(){
       return ( <div ref={ (this_elem) => {this.slider = this_elem; } }></div> );
    }

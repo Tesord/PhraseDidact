@@ -16,9 +16,27 @@ class LearnProf_page1 extends Component {
       let fieldNameArray = [];
       let valueArray = [];
 
+      /* REF: Edit when database field increases
+       */
       fieldNameArray.push("gender");
       valueArray.push( this.gender_Ref.getSelectedValue() );
 
+      fieldNameArray.push("birthday");
+      if( this.birthday_Ref.getInput().value === ""){
+         valueArray.push( null );
+      }
+      else{
+         valueArray.push( new Date( this.birthday_Ref.getInput().value ) );
+      }
+
+      fieldNameArray.push("country");
+      valueArray.push( this.country_Ref.getSelectedValue() );
+
+      fieldNameArray.push("countryOffiLangs");
+      valueArray.push( this.countryOffiLangs_Ref.getSelectedValueArray() );
+
+      fieldNameArray.push("cityDominLangs");
+      valueArray.push( this.cityDominLangs_Ref.getSelectedValue() );
 
 
       Meteor.call('learner.saveLearningProfile', fieldNameArray, valueArray, (err, result) => {
@@ -59,7 +77,9 @@ class LearnProf_page1 extends Component {
                />
 
                <annotation>	Birthday (YYYY-MM-DD)	</annotation>
-               <DateField  dateFormat="YYYY-MM-DD" className="h-center-margin" />
+               <DateField  dateFormat="YYYY-MM-DD"
+                           className="h-center-margin"
+                           ref={(this_elem) => { this.birthday_Ref = ( this_elem ); } }  />
 
 
                <hr className="_Theme_hr_Default_"/>
@@ -67,7 +87,7 @@ class LearnProf_page1 extends Component {
                <br />
 
                <annotation>	Current Country of residence	</annotation>
-               <Chosen_SingleSelect
+               <Chosen_SingleSelect          ref={(this_elem) => { this.country_Ref = ( this_elem ); } }
                   dbDataset={ DB_Const.COUNTRY__LEARNPROF }
                   defaultText="Select a Country"
 
@@ -77,7 +97,7 @@ class LearnProf_page1 extends Component {
                />
 
                <annotation>	What is the official Language(s) of your country?	</annotation>
-               <Chosen_MultiSelect
+               <Chosen_MultiSelect           ref={(this_elem) => { this.countryOffiLangs_Ref = ( this_elem ); } }
                   dbDataset={ DB_Const.LANGUAGE__LEARNPROF }
                   defaultText="Select or type Languages..."
 
@@ -91,7 +111,7 @@ class LearnProf_page1 extends Component {
                />
 
                <annotation>   What is the dominant Language of the city where you currently reside? 	</annotation>
-               <Chosen_SingleSelect
+               <Chosen_SingleSelect          ref={(this_elem) => { this.cityDominLangs_Ref = ( this_elem ); } }
                   dbDataset={ DB_Const.LANGUAGE__LEARNPROF }
                   defaultText="Select or type a Language"
 

@@ -7,7 +7,7 @@ import Ui_Util from '../api/render/ui_Util';
 class Chosen_SingleSelect extends Component {
 
    getSelectedValue(){
-      return $("#" + this.selectElementId).val();
+      return document.getElementById(this.selectElementId).value;
    }
 
 

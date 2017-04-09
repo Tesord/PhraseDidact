@@ -23,6 +23,56 @@ class LearnProf_page3 extends Component {
    }
 
 
+   save(){
+
+      if(this.state.langSection.length > 0){
+
+         let fieldNameArray = [];
+         let valueArray = [];
+
+
+         /* REF: Edit when database field increases
+          */
+         fieldNameArray.push("addiLangNames");
+
+         let all_FNA_ValueArray = [];
+         for (let currElement    of    this.addiLangName_Refs) {
+            all_FNA_ValueArray.push( currElement.getSelectedValue() );
+         }
+         valueArray.push( all_FNA_ValueArray );
+
+
+         fieldNameArray.push("addiLangEducLevels");
+
+         let all_EL_ValueArray = [];
+         for (let currElement    of    this.addiLangEducLevel_Refs) {
+            all_EL_ValueArray.push( currElement.getSelectedValue() - 1 );
+         }
+         valueArray.push( all_EL_ValueArray );
+
+
+         fieldNameArray.push("addiLangUnivSpecs");
+
+         let all_BCY_ValueArray = [];
+         for (let currElement    of    this.addiLangUnivSpec_Refs) {
+            all_BCY_ValueArray.push( currElement.value );
+         }
+         valueArray.push( all_BCY_ValueArray );
+
+
+         Meteor.call('learner.saveLearningProfile', fieldNameArray, valueArray, (err, result) => {
+
+            /* TODO Standardlised error handling method in Ui_Util? */
+
+            }
+
+         );
+
+      }
+
+   }
+
+
 /* TODO Remember, setState() is async! So this method must be modified to allow parameter pre-determined values
  * TODO perhaps give  a warning message when limit is reached?
  */
@@ -33,14 +83,14 @@ class LearnProf_page3 extends Component {
 
          /* REF: Edit when database field increases
           */
-         if( this.langName_Refs === undefined ){
-            this.langName_Refs = [];
+         if( this.addiLangName_Refs === undefined ){
+            this.addiLangName_Refs = [];
          }
-         if( this.educLevel_Refs === undefined ){
-            this.educLevel_Refs = [];
+         if( this.addiLangEducLevel_Refs === undefined ){
+            this.addiLangEducLevel_Refs = [];
          }
-         if( this.specField_Refs === undefined ){
-            this.specField_Refs = [];
+         if( this.addiLangUnivSpec_Refs === undefined ){
+            this.addiLangUnivSpec_Refs = [];
          }
 
 
@@ -60,7 +110,7 @@ class LearnProf_page3 extends Component {
 
 
                <annotation>   What language is it? 	</annotation>
-               <Chosen_SingleSelect             ref={(this_elem) => { this.langName_Refs.push( this_elem ); } }
+               <Chosen_SingleSelect             ref={(this_elem) => { if(this_elem){ this.addiLangName_Refs.push( this_elem ); } } }
                   dbDataset={ DB_Const.LANGUAGE__LEARNPROF }
                   defaultText="Select or type a Language"
 
@@ -73,7 +123,7 @@ class LearnProf_page3 extends Component {
                />
 
                <annotation>  Highest level of education completed in this language  </annotation>
-               <JQueryUiExtensions_LabeledSlider      ref={(this_elem) => { this.educLevel_Refs.push( this_elem ); } }
+               <JQueryUiExtensions_LabeledSlider      ref={(this_elem) => { if(this_elem){ this.addiLangEducLevel_Refs.push( this_elem ) } } }
                   min={0}
                   max={7}
                   tickInterval={1}
@@ -94,7 +144,7 @@ class LearnProf_page3 extends Component {
                <br /><br /><br /><br /><br /><br />
 
                <annotation> 	If you went to university in this language, what field did you specialize in?   </annotation>
-               <input className="form-control"  ref={(this_elem) => { this.specField_Refs.push( this_elem ); } } />
+               <input className="form-control"  ref={(this_elem) => { if(this_elem){ this.addiLangUnivSpec_Refs.push( this_elem ); } } } />
 
                <br />
                <hr className="_Theme_hr_Default_"/>
@@ -126,9 +176,9 @@ class LearnProf_page3 extends Component {
             }
 
             /* REF: Edit when database field increases */
-            this.langName_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.langName_Refs );
-            this.educLevel_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.educLevel_Refs );
-            this.specField_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.specField_Refs );
+            this.addiLangName_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.addiLangName_Refs );
+            this.addiLangEducLevel_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.addiLangEducLevel_Refs );
+            this.addiLangUnivSpec_Refs = Func_Util.removeFromArrayByIndex_ARNI( matchIndex, this.addiLangUnivSpec_Refs );
 
             this.setState({
                langSection : Func_Util.removeFromArrayByIndex_ARNI( matchIndex, langSection )
