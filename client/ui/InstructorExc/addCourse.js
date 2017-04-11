@@ -35,27 +35,18 @@ class AddCourse extends Component {
 
    componentWillMount() {
 
-      let result = Func_Util.fetchIsInstructor_OnLoad();
-      if( result !== 0 ){
-
-         if( result > 0){
-            this.isInstructorAction();
-         }else{
-            this.isOtherAction();
-         }
-      }
+      Func_Util.excluPageCheck_OnLoad(this, false, this.isInstructorAction, this.isOtherAction);
 
    }
 
 
-
-      render(){
-         return(
-            <DocumentTitle title='Add Course - PhraseDidact'>
-               {this.state.content}
-            </DocumentTitle>
-         );
-      }
+   render(){
+      return(
+         <DocumentTitle title='Add Course - PhraseDidact'>
+            {this.state.content}
+         </DocumentTitle>
+      );
+   }
 
 }
 

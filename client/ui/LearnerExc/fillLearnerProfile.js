@@ -198,15 +198,7 @@ class FillLearnerProfile extends Component {
 
    componentWillMount() {
 
-      let result = Func_Util.fetchIsLearner_OnLoad();
-      if( result !== 0 ){
-
-         if( result > 0){
-            this.isLearnerAction();
-         }else{
-            this.isOtherAction();
-         }
-      }
+      Func_Util.excluPageCheck_OnLoad(this, true, this.isLearnerAction, this.isOtherAction)
 
    }
 

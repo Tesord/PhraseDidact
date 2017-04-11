@@ -29,55 +29,66 @@ export function handleDBErrors(err){
 }
 
 
-/* TODO document this method. Return 1 if cache indicates is Learner, -1 if cache indicates it is not.
- * 0 if database check is required
+
+/* TODO document this method.
  *
- * IMPORTANT: Will redirect to login if user is not logged in! + Will refresh page if check with database is required!
+ * IMPORTANT: Will redirect to login if user is not logged in + Will refresh page if check with database is required!
  * Modify localStorage
  */
-export function fetchIsLearner_OnLoad(){
+export function excluPageCheck_OnLoad(context, isLearner, isRoleAction_Func, isOtherAction_Func){
 
    if(Meteor.userId()){
-      return fetchAccountType_OnLoad();
+
+      let result = null;
+
+      if( isLearner ){
+         result = fetchAccountType_OnLoad();
+      }
+      else{
+         result = fetchIsInstructor();
+      }
+
+      if( result !== 0 ){
+         let bindedFunc = null;
+
+         if( result > 0){
+            bindedFunc = isRoleAction_Func.bind( context );
+         }else{
+            bindedFunc = isOtherAction_Func.bind( context );
+         }
+
+         bindedFunc();
+      }
+
+      // "error occured" case is handled by     fetchAccountType_OnLoad() / fetchIsInstructor()
+
    }
    else{
       /* TODO Possible putting redirect references for /login page to go back to last visited URL (AFTER login)? */
       window.location.replace("login");
-
-      // Since redirect is not instant, result must be fed back
-      return 0;
    }
 
 }
+/* HELPER of excluPageCheck_OnLoad() */
+function fetchIsInstructor(){
 
-export function fetchIsInstructor_OnLoad(){
+   let result = fetchAccountType_OnLoad();
 
-   if(Meteor.userId()){
-      let result = fetchAccountType_OnLoad();
-
-      if(result > 0){
-         return -1;
-      }
-      else if(result < 0){
-         return 1;
-      }
-
-      return result;
+   if(result > 0){
+      return -1;
    }
-   else{
-      /* TODO Possible putting redirect references for /login page to go back to last visited URL (AFTER login)? */
-      window.location.replace("login");
-
-      // Since redirect is not instant, result must be fed back
-      return 0;
+   else if(result < 0){
+      return 1;
    }
+
+   return result;
 
 }
 
 
 /* TODO
  * A faster way to check Account Type, when the user first enter a Learner/Instructor exclusive page
- * -1 = Instuctor, 1 = Learner, 0 = unknown
+ * -1 = Instuctor, 1 = Learner, 0 = not logged in / error occured
  *
  * IMPORTANT: Will refresh page if check with database is required!
  */

@@ -42,23 +42,20 @@ class Home extends Component {
 
       let result = Func_Util.fetchAccountType_OnLoad();
 
-      if( result === 0 ){
+      if( result > 0 ){
          this.state = {
-            content: this.getUnloggedPage()
+            content: <Learner_Home />
+         };
+      }
+      else if( result < 0 ){
+         this.state = {
+            content: <Instructor_Home />
          };
       }
       else{
-
-         if( result < 0 ){
-            this.state = {
-               content: <Instructor_Home />
-            };
-         }
-         else{
-            this.state = {
-               content: <Learner_Home />
-            };
-         }
+         this.state = {
+            content: this.getUnloggedPage()
+         };
       }
 
    }
