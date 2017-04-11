@@ -10,7 +10,6 @@ import LearnProf_page3 from './FillLearnerProfile/learnProf_page3';
 import LearnProf_page4 from './FillLearnerProfile/learnProf_page4';
 
 import Func_Util from '/imports/api/functional/func_Util';
-import LearnerExc from '/imports/api/functional/learnerExc';
 
 
 
@@ -52,8 +51,7 @@ class FillLearnerProfile extends Component {
 
       return (
 
-         <div className="standard-content">
-            <div id="learner-profile-section" className="h-center-margin">
+         <div id="learner-profile-section">
 
                { this.getLearnProf_page(pageNo) }
 
@@ -68,7 +66,6 @@ class FillLearnerProfile extends Component {
                </h3>
                <Line percent={ percentage } strokeWidth="2" trailWidth="2" strokeColor={'#3FC7FA'} />
 
-            </div>
          </div>
 
       );
@@ -201,7 +198,7 @@ class FillLearnerProfile extends Component {
 
    componentWillMount() {
 
-      let result = LearnerExc.checkExcAndRespond();
+      let result = Func_Util.fetchIsLearner_AndRespond();
       if( result !== 0 ){
 
          if( result > 0){

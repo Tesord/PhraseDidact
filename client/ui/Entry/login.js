@@ -68,6 +68,7 @@ class Login extends Component {
             this.handleErrors(err);
          }
          else{		// successful
+				// "LEARN" / "INSTR" should always be the first item
 				Func_Util.setLoginCache( Roles.getRolesForUser(Meteor.userId())[0] );
 
 				/* TODO Possible redirect based on last visited URL? */
