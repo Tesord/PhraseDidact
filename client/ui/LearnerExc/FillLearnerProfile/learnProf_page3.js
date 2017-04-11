@@ -101,7 +101,7 @@ class LearnProf_page3 extends Component {
             <div  key={ uniqueNumber }    className="learnProf-page3-block">
                <br />
 
-                  <Corner_Button imgURL="/img/ui/close_cross_in_circular_outlined_interface.svg"
+                  <Corner_Button imgURL="/ui/img/close_cross_in_circular_outlined_interface.svg"
                      type="TR"            width="40rem" height="40rem"
                      actFunction={this.removeLangBlock}
                      actFuncParams={ uniqueNumber }

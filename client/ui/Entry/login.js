@@ -86,7 +86,7 @@ class Login extends Component {
 
    render(){
       return (
-         <form id="login-card"  className="_Theme_border_Default_ _Theme_login_Default_"
+         <form id="login-card"  className="_Theme_outerBorder_Default_ _Theme_login_Default_"
                onSubmit={	this.login.bind(this)	} >
 
 				<div id="login-form"	className="h-center-margin">

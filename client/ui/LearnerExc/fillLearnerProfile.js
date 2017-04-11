@@ -198,7 +198,7 @@ class FillLearnerProfile extends Component {
 
    componentWillMount() {
 
-      let result = Func_Util.fetchIsLearner_AndRespond();
+      let result = Func_Util.fetchIsLearner_OnLoad();
       if( result !== 0 ){
 
          if( result > 0){

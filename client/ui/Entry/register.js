@@ -129,7 +129,7 @@ class Register extends Component {
 	render(){
 
 		return (
-			<form id="register-card" className="_Theme_border_Default_ _Theme_register_Default_"
+			<form id="register-card" className="_Theme_outerBorder_Default_ _Theme_register_Default_"
 					onSubmit={	this.sre.bind(this)	} >
 
 				<contentTitle className="h-center-margin">	Sign up	</contentTitle>

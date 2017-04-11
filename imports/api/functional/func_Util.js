@@ -32,13 +32,37 @@ export function handleDBErrors(err){
 /* TODO document this method. Return 1 if cache indicates is Learner, -1 if cache indicates it is not.
  * 0 if database check is required
  *
- * IMPORTANT: Will redirect to login if user is not logged in!
+ * IMPORTANT: Will redirect to login if user is not logged in! + Will refresh page if check with database is required!
  * Modify localStorage
  */
-export function fetchIsLearner_AndRespond(){
+export function fetchIsLearner_OnLoad(){
 
    if(Meteor.userId()){
       return fetchAccountType_OnLoad();
+   }
+   else{
+      /* TODO Possible putting redirect references for /login page to go back to last visited URL (AFTER login)? */
+      window.location.replace("login");
+
+      // Since redirect is not instant, result must be fed back
+      return 0;
+   }
+
+}
+
+export function fetchIsInstructor_OnLoad(){
+
+   if(Meteor.userId()){
+      let result = fetchAccountType_OnLoad();
+
+      if(result > 0){
+         return -1;
+      }
+      else if(result < 0){
+         return 1;
+      }
+
+      return result;
    }
    else{
       /* TODO Possible putting redirect references for /login page to go back to last visited URL (AFTER login)? */

@@ -1,0 +1,26 @@
+import React, {Component} from 'react';
+
+
+/* TODO document how you can get ref from this class instance in fillLearnerProfile */
+class Bootstrap_InputGlyphicon extends Component {
+
+   render(){
+      return (
+
+         <div className="form-group has-feedback">
+            <input type="text" className="form-control"        ref={ (this_elem) => {this.input = this_elem;} } />
+            <span className={"glyphicon " + this.props.glyphiconClassName +  " form-control-feedback"} ></span>
+         </div>
+
+      );
+   }
+
+   componentDidMount(){
+      if( this.props.typingFunction && this.props.typingFuncContext ){
+         this.corner_button.addEventListener('keypress', this.props.typingFunction);
+      }
+   }
+
+}
+
+export default Bootstrap_InputGlyphicon;

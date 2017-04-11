@@ -9,9 +9,14 @@ and open the template in the editor.
     border-top: 2px solid #bec6d3       !important;
 }
 
-._Theme_border_Default_ {
+._Theme_outerBorder_Default_ {
     border-radius: 15px;
     border: 2px solid #6aaf08;
+    padding: 20px;
+}
+._Theme_innerBorder_Default_ {
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
     padding: 20px;
 }
 

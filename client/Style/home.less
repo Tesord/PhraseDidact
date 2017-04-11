@@ -6,29 +6,36 @@
 #unlogged-page-section {
    .standard-content;
 
-   padding-left: @nav-horiz-padding;
-   padding-right: @nav-horiz-padding;
-
-   min-width: 40rem;
 
 }
 
 #learner-dashboard-section {
    .standard-content;
 
-   padding-left: @nav-horiz-padding;
-   padding-right: @nav-horiz-padding;
-
-   min-width: 40rem;
 
 }
 
 #instructor-dashboard-section {
    .standard-content;
 
-   padding-left: @nav-horiz-padding;
-   padding-right: @nav-horiz-padding;
 
-   min-width: 40rem;
+}
+#instructor-main {
+   .standard-content;
 
+   width: 60%;
+}
+
+@instructor-course-width: 60%;
+
+#instructor-courses {
+   .standard-main;
+
+   width: @instructor-course-width;
+}
+#instructor-students {
+   .standard-sidebar;
+
+   // 1% is rounding fail-safe
+   width: calc(100% - @instructor-course-width - @standard-main-margin-right - 1%);
 }

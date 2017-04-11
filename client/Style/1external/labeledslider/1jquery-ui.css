@@ -930,7 +930,7 @@ works properly when clicked or hovered */
 html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
 	border: 1px solid #c5c5c5;
-	background: #f6f6f6 url(/img/ui/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;			/* CUSTOM:	changed, so that the slider looks like the one from 1.10.3/jquery-ui.js  */
+	background: #f6f6f6 url(/ui/img/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;			/* CUSTOM:	changed, so that the slider looks like the one from 1.10.3/jquery-ui.js  */
 	font-weight: normal;
 	color: #454545;
 }
@@ -953,7 +953,7 @@ a:visited.ui-button,
 .ui-button:hover,
 .ui-button:focus {
 	border: 1px solid #cccccc;
-	background: #f6f6f6 url(/img/ui/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;			/* CUSTOM:	changed, so that the slider looks like the one from 1.10.3/jquery-ui.js  */
+	background: #f6f6f6 url(/ui/img/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;			/* CUSTOM:	changed, so that the slider looks like the one from 1.10.3/jquery-ui.js  */
 	font-weight: normal;
 	color: #2b2b2b;
 }

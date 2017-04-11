@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import DocumentTitle from 'react-document-title';
 
 import BlueCircle_greyBG from './Loading/blueCircle_greyBG';
+import Learner_Home from './Home/learner_Home';
+import Instructor_Home from './Home/instructor_Home';
 
 import Func_Util from '/imports/api/functional/func_Util';
 
@@ -36,25 +38,6 @@ class Home extends Component {
    }
 
 
-   getLearnerDashboard(){
-      return(
-         <div id="learner-dashboard-section">
-            THIS IS LEARNER
-         </div>
-      );
-   }
-
-
-   getInstructorDashboard(){
-      return(
-         <div id="instructor-dashboard-section">
-            THIS IS INSTRUCTOR
-         </div>
-      );
-   }
-
-
-
    componentWillMount() {
 
       let result = Func_Util.fetchAccountType_OnLoad();
@@ -68,12 +51,12 @@ class Home extends Component {
 
          if( result < 0 ){
             this.state = {
-               content: this.getInstructorDashboard()
+               content: <Instructor_Home />
             };
          }
          else{
             this.state = {
-               content: this.getLearnerDashboard()
+               content: <Learner_Home />
             };
          }
       }
