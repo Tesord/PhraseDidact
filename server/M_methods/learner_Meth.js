@@ -7,8 +7,8 @@ Meteor.methods({
 
       if( Roles.userIsInRole( Meteor.userId(), "LEARN" ) ){
 
-         if(  !LearnerProfile.findOne({userId : Meteor.userId()})  ){
-            LearnerProfile.insert({
+         if(  !Learner_LProfile.findOne({userId : Meteor.userId()})  ){
+            Learner_LProfile.insert({
                userId: Meteor.userId()
             });
          }
@@ -21,7 +21,7 @@ Meteor.methods({
             currentFieldNameVal = fieldNameArray[i];
             currentValueArrayVal = valueArray[i];
 
-            LearnerProfile.update( {userId :  Meteor.userId() } , {$set: {  [currentFieldNameVal]  : currentValueArrayVal }});
+            Learner_LProfile.update( {userId :  Meteor.userId() } , {$set: {  [currentFieldNameVal]  : currentValueArrayVal }});
          }
 
       }

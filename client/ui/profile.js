@@ -19,7 +19,7 @@ class Profile extends Component{
 
       Meteor.subscribe("learner_LProfile",  {
          onReady: () => {
-            let result = LearnerProfile.findOne();
+            let result = Learner_LProfile.findOne();
 
             let array = [];
 

@@ -29,7 +29,10 @@ Schemas.Instructor_Courses = new SimpleSchema({
    },
    tags: {
       type: Array,
-      label: "access"
+      label: "tags"
+   },
+   'tags.$': {
+      type: String
    }
 });
 
