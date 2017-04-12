@@ -15,24 +15,13 @@ Schemas.Instructor_Courses = new SimpleSchema({
       label: "userId",
       max: 20,
    },
-   courseName: {
+   courseId: {
       type: String,
-      label: "courseName",
-      max: 150,
+      label: "courseId",
+      max: 20,
 
       index: true,
       unique: true
-   },
-   access: {
-      type: String,
-      label: "access"
-   },
-   tags: {
-      type: Array,
-      label: "tags"
-   },
-   'tags.$': {
-      type: String
    }
 });
 

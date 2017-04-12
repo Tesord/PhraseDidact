@@ -28,9 +28,7 @@ class BlueCircle_greyBG extends Component{
 
 	render(){
 		return (
-         <div id="loading-bg">
-            <div id="loading-circle" ></div>
-         </div>
+         <div id="loading-circle" ></div>
 		);
 	}
 }

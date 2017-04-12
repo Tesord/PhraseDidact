@@ -116,7 +116,7 @@ class AddCourse extends Component {
 
       /* Redirect without being recorded in Browser Back button history. However, doing so seems to
        * cancel any earlier localStorage setItem() calls... So this function will be delayed a bit. */
-      setTimeout( () => { window.location.replace("notFound"); }, 500);
+      setTimeout( () => { window.location.replace("/notFound"); }, 500);
    }
 
    componentWillMount() {

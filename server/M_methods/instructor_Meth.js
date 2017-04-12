@@ -1,4 +1,7 @@
+import shortid from 'shortid';
+
 import Instructor_Courses from '/imports/collections/instructor_Courses';
+import Course_Configs from '/imports/collections/courses_Configs';
 
 
 Meteor.methods({
@@ -10,11 +13,17 @@ Meteor.methods({
          ){
 
          let tagArray = tags.replace( /\n/g, " " ).split( " " );
+         let courseId = shortid.generate();
 
          try{
 
             Instructor_Courses.insert({
                userId : Meteor.userId(),
+               courseId
+            });
+
+            Course_Configs.insert({
+               courseId,
                courseName,
                access,
                tags : tagArray
@@ -36,19 +45,34 @@ Meteor.methods({
       }
    },
 
-   // TODO not implemented function yet
-   'instructor.addGroup': (groupName) => {
+   'instructor.checkCourseBelong': (courseName) => {
+      let courseByUserArray = Instructor_Courses.find( { userId : Meteor.userId() } ).fetch();
 
-      if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
+      // forEach() in this context is async for some reason...
+      for( var i = 0; i < courseByUserArray.length; i++){
 
-         Instructor_Courses.insert({
-            userId : Meteor.userId(),
-            groupName
-
-         });
-
+         if( Course_Configs.findOne( {courseId : courseByUserArray[i].courseId, courseName} ) ){
+            return true;
+         }
       }
 
-   }
+      return false;
+
+   },
+
+   // // TODO not implemented function yet
+   // 'instructor.addGroup': (groupName) => {
+   //
+   //    if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
+   //
+   //       Instructor_Courses.insert({
+   //          userId : Meteor.userId(),
+   //          groupName
+   //
+   //       });
+   //
+   //    }
+   //
+   // }
 
 });

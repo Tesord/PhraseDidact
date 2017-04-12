@@ -43,14 +43,16 @@ class AddWord extends Component {
    save(e){
       e.preventDefault();
 
-      // let courseName = this.courseName_Ref.value;
-      // let access = this.access_Ref.getSelectedValue_OfRadioGroup();
+      let l2_wordName = this.l2_wordName_Ref.value;
+      let l2_examples = this.l2_examples_Ref.value;
+
+      let l1_wordName = this.l1_wordName_Ref.value;
+      let l1_examples = this.l1_examples_Ref.value;
+
+
+      // courseId
       //
-      //
-      // let tags = this.tags_Ref.value;
-      //
-      //
-      // Meteor.call('instructor.addCourse', courseName, access, tags, (err, result) => {
+      // Meteor.call('instructor.addWord', courseName, access, tags, (err, result) => {
       //
       //    if(err){
       //       this.handleErrors(err);
@@ -59,18 +61,18 @@ class AddWord extends Component {
       //       this.context.router.history.push("editCourse/" + courseName);
       //    }
       // });
-      //
-      //
-      // this.setState( {     content:    this.getCourseAdd( this.getLoadingAnim() )    });
+
+
+      this.setState( {     content:    this.getCourseAdd( this.getLoadingAnim() )    });
 
    }
 
    handleErrors(err){
       window.alert(err);
 
-      // let button = this.getReadyAnim();
-      //
-      // this.setState( {     content:    this.getCourseAdd( this.getReadyAnim() )    });
+      let button = this.getReadyAnim();
+
+      this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
    }
 
 
@@ -124,9 +126,26 @@ class AddWord extends Component {
    }
 
    isInstructorAction(){
-      this.state = {
-         content: this.getMainContent( this.getReadyAnim() )
-      };
+
+      Meteor.call('instructor.checkCourseBelong', this.props.match.params.courseName, (err, result) => {
+         if(result){
+            this.setState( {
+               content: this.getMainContent( this.getReadyAnim() )
+            } );
+         }
+         else{
+            /* TODO change to "Access denied" or something page */
+
+            setTimeout( () => { window.location.replace("/notFound"); }, 500);
+         }
+
+      });
+
+      // makes mandatory transition appears seamless
+      this.setState( {
+         content: <div></div>
+      } );
+
    }
 
    isOtherAction(){
@@ -136,7 +155,7 @@ class AddWord extends Component {
 
       /* Redirect without being recorded in Browser Back button history. However, doing so seems to
        * cancel any earlier localStorage setItem() calls... So this function will be delayed a bit. */
-      setTimeout( () => { window.location.replace("notFound"); }, 500);
+      setTimeout( () => { window.location.replace("/notFound"); }, 500);
    }
 
    componentWillMount() {

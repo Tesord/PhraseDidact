@@ -65,7 +65,7 @@ export function excluPageCheck_OnLoad(context, isLearner, isRoleAction_Func, isO
    }
    else{
       /* TODO Possible putting redirect references for /login page to go back to last visited URL (AFTER login)? */
-      window.location.replace("login");
+      window.location.replace("/login");
    }
 
 }
