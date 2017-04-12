@@ -51,12 +51,12 @@ class AddCourse extends Component {
             this.handleErrors(err);
          }
          else{		// successful
-            this.context.router.history.push("editCourse/" + courseName);
+            this.context.router.history.push("/course/" + courseName + "/edit");
          }
       });
 
 
-      this.setState( {     content:    this.getCourseAdd( this.getLoadingAnim() )    });
+      this.setState( {     content:    this.getMainContent( this.getLoadingAnim() )    });
 
    }
 
@@ -65,11 +65,11 @@ class AddCourse extends Component {
 
       let button = this.getReadyAnim();
 
-      this.setState( {     content:    this.getCourseAdd( this.getReadyAnim() )    });
+      this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
    }
 
 
-   getCourseAdd( button ){
+   getMainContent( button ){
 
       return (
          <div id="add-course-section">
@@ -96,7 +96,7 @@ class AddCourse extends Component {
                <br /><br />
 
                {button}
-             </form>
+            </form>
          </div>
 
       );
@@ -105,7 +105,7 @@ class AddCourse extends Component {
 
    isInstructorAction(){
       this.state = {
-         content: this.getCourseAdd( this.getReadyAnim() )
+         content: this.getMainContent( this.getReadyAnim() )
       };
    }
 

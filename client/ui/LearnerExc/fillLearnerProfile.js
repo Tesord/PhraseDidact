@@ -47,7 +47,7 @@ class FillLearnerProfile extends Component {
 	}
 
 
-   getLearnProf_Main(pageNo, percentage){
+   getMainContent(pageNo, percentage){
 
       return (
 
@@ -71,7 +71,7 @@ class FillLearnerProfile extends Component {
       );
    }
 
-   /* HELPER of getLearnProf_Main() */
+   /* HELPER of getMainContent() */
    getLearnProf_page(pageNo){
 
       switch( pageNo ) {
@@ -87,7 +87,7 @@ class FillLearnerProfile extends Component {
 
    }
 
-   /* HELPER of getLearnProf_Main() */
+   /* HELPER of getMainContent() */
    getBackButton(pageNo){
       if( pageNo <= 1 ){
          return "";
@@ -105,7 +105,7 @@ class FillLearnerProfile extends Component {
 
    }
 
-   /* HELPER of getLearnProf_Main() */
+   /* HELPER of getMainContent() */
    getNextButton(pageNo){
       // TODO , onClick to finish
       if( pageNo >= FillLearnerProfile.LEARNPROF_MAXPAGE_NO ){
@@ -145,7 +145,7 @@ class FillLearnerProfile extends Component {
 
 
       this.setState({
-			content: this.getLearnProf_Main(newPageNo, newPercentage),
+			content: this.getMainContent(newPageNo, newPercentage),
          pageNo: newPageNo,
          percentage: newPercentage
 		});
@@ -162,7 +162,7 @@ class FillLearnerProfile extends Component {
 
 
       this.setState({
-			content: this.getLearnProf_Main(newPageNo, newPercentage),
+			content: this.getMainContent(newPageNo, newPercentage),
          pageNo: newPageNo,
          percentage: newPercentage
 		});
@@ -172,13 +172,13 @@ class FillLearnerProfile extends Component {
       e.preventDefault();
       this.save();
 
-      this.context.router.history.push("user/" + Meteor.user().username + "/profile/");
+      this.context.router.history.push("/user/" + Meteor.user().username + "/profile/");
    }
 
 
    isLearnerAction(){
       this.state = {
-         content: this.getLearnProf_Main( this.state.pageNo, this.state.percentage ),
+         content: this.getMainContent( this.state.pageNo, this.state.percentage ),
          pageNo: this.state.pageNo,
          percentage: this.state.percentage
       };

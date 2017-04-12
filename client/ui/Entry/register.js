@@ -106,7 +106,7 @@ class Register extends Component {
 						}
 						else{
 							Func_Util.setLoginCache( "LEARN" );
-							this.context.router.history.push("fillLearnerProfile");
+							this.context.router.history.push("/fillLearnerProfile");
 						}
 					}
 
