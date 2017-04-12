@@ -14,7 +14,7 @@ class ICheck_Radio extends Component {
 
 
    render(){
-      return ( <input type="radio"     name={this.props.radioName}      value={this.props.value}
+      return ( <input type="radio"     name={this.props.radioName}      value={this.props.value}   defaultChecked={this.props.checked}
                   ref={ (this_elem) => {this.radio = this_elem; } }  /> );
    }
 
