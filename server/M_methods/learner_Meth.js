@@ -1,4 +1,4 @@
-import LearnerProfile from '/imports/collections/learnerProfile';
+import Learner_LProfile from '/imports/collections/learner_LProfile';
 
 
 Meteor.methods({

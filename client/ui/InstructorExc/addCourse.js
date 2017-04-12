@@ -15,27 +15,75 @@ class AddCourse extends Component {
 		super();
 
 		this.state = {
-			content: <BlueCircle_greyBG />
+			content: <BlueCircle_greyBG />,
 		};
 	}
 
-   getCourseAdd(){
+   getReadyAnim(){
+      return (
+
+         <button className="pd-btn  rounded-border	   btn-primary">Next</button>
+
+      );
+   }
+
+   getLoadingAnim(){
+      return (
+
+         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Creating...</button>
+
+      );
+   }
+
+   save(e){
+      e.preventDefault();
+
+      let courseName = this.courseName_Ref.value;
+      let access = this.access_Ref.getSelectedValue_OfRadioGroup();
+
+
+      let tags = this.tags_Ref.value;
+
+
+      Meteor.call('instructor.addCourse', courseName, access, tags, (err, result) => {
+
+         if(err){
+            this.handleErrors(err);
+         }
+         else{		// successful
+            this.context.router.history.push("editCourse/" + courseName);
+         }
+      });
+
+
+      this.setState( {     content:    this.getCourseAdd( this.getLoadingAnim() )    });
+
+   }
+
+   handleErrors(err){
+      window.alert(err);
+
+      let button = this.getReadyAnim();
+
+      this.setState( {     content:    this.getCourseAdd( this.getReadyAnim() )    });
+   }
+
+
+   getCourseAdd( button ){
 
       return (
          <div id="add-course-section">
-            <form>
+            <form onSubmit={	this.save.bind(this)	}>
                <contentTitle>	Create Course	</contentTitle>
 
                <annotation>	Name	</annotation>
-               <input type="text" className="form-control"         required
-                      ref={	(this_elem) => (this.courseName = this_elem) }/>
+               <input type="text" className="form-control"   maxLength="150"     required
+                      ref={	(this_elem) => (this.courseName_Ref = this_elem) } />
 
                <annotation>	Access	</annotation>
                <label className="moderate-right-margin">
-                  <ICheck_Radio radioName="access" value="public"  checked={true} /> Public
-               </label>
-               <label className="moderate-right-margin">
-                  <ICheck_Radio radioName="access" value="group"/> Group
+                  <ICheck_Radio radioName="access" value="public"  checked={true}
+                     ref={(this_elem) => { this.access_Ref = ( this_elem ); } }   /> Public
                </label>
                <label className="moderate-right-margin">
                   <ICheck_Radio radioName="access" value="private"/> Private
@@ -43,10 +91,11 @@ class AddCourse extends Component {
                <br /><br />
 
                <annotation>	Tags (separate each one by space)	</annotation>
-               <textarea className="form-control" rows="2"></textarea>
+               <textarea rows="3"    maxLength="1000"
+                  ref={	(this_elem) => (this.tags_Ref = this_elem) } ></textarea>
                <br /><br />
 
-               <button className="pd-btn  rounded-border	   btn-primary">Next</button>
+               {button}
              </form>
          </div>
 
@@ -56,7 +105,7 @@ class AddCourse extends Component {
 
    isInstructorAction(){
       this.state = {
-         content: this.getCourseAdd()
+         content: this.getCourseAdd( this.getReadyAnim() )
       };
    }
 
@@ -86,5 +135,10 @@ class AddCourse extends Component {
    }
 
 }
+
+// ask for `router` from context, helper for router-router Programatic Navigation
+AddCourse.contextTypes = {
+	router: React.PropTypes.object
+};
 
 export default AddCourse;

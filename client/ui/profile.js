@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title';
 
 import BlueCircle_greyBG from './Loading/blueCircle_greyBG';
 
-import LearnerProfile from '/imports/collections/learnerProfile';
+import Learner_LProfile from '/imports/collections/learner_LProfile';
 
 
 
@@ -17,7 +17,7 @@ class Profile extends Component{
       };
 
 
-      Meteor.subscribe("learnerProfile",  {
+      Meteor.subscribe("learner_LProfile",  {
          onReady: () => {
             let result = LearnerProfile.findOne();
 
