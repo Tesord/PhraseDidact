@@ -41,11 +41,11 @@ class AddCourse extends Component {
       let courseName = this.courseName_Ref.value;
       let access = this.access_Ref.getSelectedValue_OfRadioGroup();
 
-
+      let description = this.description_Ref.value;
       let tags = this.tags_Ref.value;
 
 
-      Meteor.call('instructor.addCourse', courseName, access, tags, (err, result) => {
+      Meteor.call('instructor.addCourse', courseName, access, description, tags, (err, result) => {
 
          if(err){
             this.handleErrors(err);
@@ -89,6 +89,10 @@ class AddCourse extends Component {
                   <ICheck_Radio radioName="access" value="private"/> Private
                </label>
                <br /><br />
+
+               <annotation>	Description	</annotation>
+               <textarea rows="6"    maxLength="5000"
+                  ref={	(this_elem) => (this.description_Ref = this_elem) } ></textarea>
 
                <annotation>	Tags (separate each one by space)	</annotation>
                <textarea rows="3"    maxLength="1000"

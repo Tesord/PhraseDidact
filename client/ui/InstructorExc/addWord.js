@@ -9,6 +9,7 @@ import Func_Util from '/imports/api/functional/func_Util';
 
 class AddWord extends Component {
 
+
    constructor(){
 		super();
 
@@ -36,7 +37,7 @@ class AddWord extends Component {
    backToCourse(){
       var r = confirm("Discard this edit?");
       if (r == true) {
-         this.context.router.history.push("/course/" + this.props.match.params.courseName + "/edit");
+         this.context.router.history.push( "/course/" + this.props.match.params.courseName  + "/edit" );
       }
    }
 
@@ -50,20 +51,18 @@ class AddWord extends Component {
       let l1_examples = this.l1_examples_Ref.value;
 
 
-      // courseId
-      //
-      // Meteor.call('instructor.addWord', courseName, access, tags, (err, result) => {
-      //
-      //    if(err){
-      //       this.handleErrors(err);
-      //    }
-      //    else{		// successful
-      //       this.context.router.history.push("editCourse/" + courseName);
-      //    }
-      // });
+      Meteor.call('instructor.addWord', this.props.match.params.courseName, l2_wordName, l2_examples, l1_wordName, l1_examples, (err, result) => {
+
+         if(err){
+            this.handleErrors(err);
+         }
+         else{		// successful
+            this.context.router.history.push( "/course/" + this.props.match.params.courseName  + "/edit" );
+         }
+      });
 
 
-      this.setState( {     content:    this.getCourseAdd( this.getLoadingAnim() )    });
+      this.setState( {     content:    this.getMainContent( this.getLoadingAnim() )    });
 
    }
 
@@ -127,7 +126,7 @@ class AddWord extends Component {
 
    isInstructorAction(){
 
-      Meteor.call('instructor.checkCourseBelong', this.props.match.params.courseName, (err, result) => {
+      Meteor.call('instructor.fetchCourseByUser', this.props.match.params.courseName, (err, result) => {
          if(result){
             this.setState( {
                content: this.getMainContent( this.getReadyAnim() )

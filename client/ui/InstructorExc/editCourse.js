@@ -74,7 +74,7 @@ class EditCourse extends Component {
 
       return (
          <div id="edit-course-section">
-            <contentTitle>	{"Editing: " + this.props.match.params.courseName} 	</contentTitle>
+            <contentTitle>	Editing: <b> {this.props.match.params.courseName} </b> 	</contentTitle>
             <hr className="_Theme_hr_Default_"/>
 
             <Link to={ "/course/" + this.props.match.params.courseName + "/addWord" }  type="button"
@@ -116,7 +116,7 @@ class EditCourse extends Component {
 
    isInstructorAction(){
 
-      Meteor.call('instructor.checkCourseBelong', this.props.match.params.courseName, (err, result) => {
+      Meteor.call('instructor.fetchCourseByUser', this.props.match.params.courseName, (err, result) => {
          if(result){
             this.setState( {
                content: this.getMainContent( this.getReadyAnim() )

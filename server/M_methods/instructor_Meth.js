@@ -1,12 +1,12 @@
 import shortid from 'shortid';
 
-import Instructor_Courses from '/imports/collections/instructor_Courses';
 import Course_Configs from '/imports/collections/courses_Configs';
+import Course_Words from '/imports/collections/courses_Words';
 
 
 Meteor.methods({
 
-   'instructor.addCourse': (courseName, access, tags) => {
+   'instructor.addCourse': (courseName, access, description, tags) => {
 
       if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) &&
             tags.length <= 1000
@@ -17,24 +17,21 @@ Meteor.methods({
 
          try{
 
-            Instructor_Courses.insert({
-               userId : Meteor.userId(),
-               courseId
-            });
-
             Course_Configs.insert({
+               userId : Meteor.userId(),
                courseId,
                courseName,
                access,
+               description,
                tags : tagArray
             });
 
          }
          catch(err) {
-            // Useful error messages
 
+            // Useful error messages
             if( err.message.lastIndexOf("E11000", 0) === 0 ){
-               throw new Meteor.Error("E11000", "Course with this name already exists!");
+               throw new Meteor.Error("E11000", "Course with this name already exists! Please pick another one or add an unique identifer such as (*username*) ");
             }
             else{
                throw err;
@@ -45,20 +42,39 @@ Meteor.methods({
       }
    },
 
-   'instructor.checkCourseBelong': (courseName) => {
-      let courseByUserArray = Instructor_Courses.find( { userId : Meteor.userId() } ).fetch();
 
-      // forEach() in this context is async for some reason...
-      for( var i = 0; i < courseByUserArray.length; i++){
+   'instructor.fetchCourseByUser': (courseName) => {
 
-         if( Course_Configs.findOne( {courseId : courseByUserArray[i].courseId, courseName} ) ){
-            return true;
-         }
-      }
-
-      return false;
+      return Course_Configs.findOne( { userId : Meteor.userId(), courseName } );
 
    },
+
+
+   'instructor.addWord': (courseName, l2_wordName, l2_examples, l1_wordName, l1_examples) => {
+
+      if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) &&
+            l2_examples.length <= 1000 && l1_examples.length <= 1000
+         ){
+
+         let course = Meteor.call('instructor.fetchCourseByUser', courseName);
+
+         let l2_example_Array = l2_examples.split( "\n" );
+         let l1_example_Array = l1_examples.split( "\n" );
+
+
+         if(course){
+            Course_Words.insert({
+               courseId : course.courseId,
+               l2_wordName,
+               l2_examples : l2_example_Array,
+               l1_wordName,
+               l1_examples : l1_example_Array
+            });
+         }
+
+      }
+
+   }
 
    // // TODO not implemented function yet
    // 'instructor.addGroup': (groupName) => {

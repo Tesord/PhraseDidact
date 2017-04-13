@@ -7,7 +7,9 @@ const courses_Configs = new Mongo.Collection('courses_Configs');
 const Schemas = {};
 
 
-/* TODO Maybe make allowed values for access? */
+/* TODO Maybe make allowed values for access?
+ * NOTE:    Max ARRAY length (kinda) check is performed by Meteor add methods
+ */
 
 Schemas.Courses_Configs = new SimpleSchema({
    courseId: {
@@ -18,14 +20,27 @@ Schemas.Courses_Configs = new SimpleSchema({
       index: true,
       unique: true
    },
+   userId: {
+      type: String,
+      label: "userId",
+      max: 20,
+   },
    courseName: {
       type: String,
       label: "courseName",
       max: 150,
+
+      index: true,
+      unique: true
    },
    access: {
       type: String,
       label: "access"
+   },
+   description: {
+      type: String,
+      label: "description",
+      max: 5000
    },
    tags: {
       type: Array,
