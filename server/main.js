@@ -1,10 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
 import Learner_LProfile from '/imports/collections/learner_LProfile';
-import Instructor_Courses from '/imports/collections/instructor_Courses';
-
-// import AccountConfigs from '/imports/collections/userAccount/accountConfigs';
-
+import Courses_Configs from '/imports/collections/courses_Configs';
+import Courses_Words from '/imports/collections/courses_Words';
 
 
 Meteor.startup(() => {
@@ -14,8 +12,48 @@ Meteor.startup(() => {
       return Learner_LProfile.find({ userId: this.userId });
    });
 
-   Meteor.publish('instructor_Courses', function() {
-      return Instructor_Courses.find({ userId: this.userId });
+   // TODO add permission system
+   Meteor.publish('courses_Configs', function() {
+      return Courses_Configs.find( { $or: [ { userId:  this.userId  }, { access: "public" } ] } );
+   });
+
+   // TODO add permission system
+   Meteor.publish('view_Course_Words', function(courseName) {
+
+      let course = Courses_Configs.findOne( { courseName } );
+
+      if(course){
+         // course exists, but do user have permission to access it?
+         if(course.userId === this.userId  ||
+            course.access === "public"){
+            return Courses_Words.find({ courseId : course.courseId });
+         }
+         else{
+            throw new Meteor.Error("403", "This course is private.");
+         }
+      }
+      else{
+         throw new Meteor.Error("404", "Course not found.");
+      }
+   });
+
+   // TODO add permission system
+   Meteor.publish('edit_Course_Words', function(courseName) {
+
+      let course = Courses_Configs.findOne( { courseName } );
+
+      if(course){
+         // course exists, but do user have permission to edit it?
+         if(course.userId === this.userId){
+            return Courses_Words.find({ courseId : course.courseId });
+         }
+         else{
+            throw new Meteor.Error("401", "Unauthorized access to course.");
+         }
+      }
+      else{
+         throw new Meteor.Error("404", "Course not found.");
+      }
    });
 
 });

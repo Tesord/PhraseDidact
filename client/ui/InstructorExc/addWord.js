@@ -50,8 +50,10 @@ class AddWord extends Component {
       let l1_wordName = this.l1_wordName_Ref.value;
       let l1_examples = this.l1_examples_Ref.value;
 
+      let difficultyLevel = this.difficultyLevel_Ref.value;
 
-      Meteor.call('instructor.addWord', this.props.match.params.courseName, l2_wordName, l2_examples, l1_wordName, l1_examples, (err, result) => {
+
+      Meteor.call('instructor.addWord', this.props.match.params.courseName, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel, (err, result) => {
 
          if(err){
             this.handleErrors(err);
@@ -110,6 +112,14 @@ class AddWord extends Component {
 
                <hr className="_Theme_hr_Default_"/>
 
+               <annotation>  Level of difficulty   </annotation>
+               <label>
+                  <input type="number" className="single-date-or-month-field      form-control-spinner" min="0"
+                     ref={(this_elem) => { this.difficultyLevel_Ref = ( this_elem ); } }      />
+               </label>
+
+               <hr className="_Theme_hr_Default_"/>
+
                <div className="single-line-element">
                   { button }
                   <button className="pd-btn rounded-border	   align-right   btn-default"
@@ -126,6 +136,7 @@ class AddWord extends Component {
 
    isInstructorAction(){
 
+      // get required material, while also check if course is really made by user
       Meteor.call('instructor.fetchCourseByUser', this.props.match.params.courseName, (err, result) => {
          if(result){
             this.setState( {

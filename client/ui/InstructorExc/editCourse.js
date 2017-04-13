@@ -7,6 +7,8 @@ import Bootstrap_InputGlyphicon from '/imports/ui/bootstrap_InputGlyphicon';
 
 import Func_Util from '/imports/api/functional/func_Util';
 
+import Courses_Words from '/imports/collections/courses_Words';
+
 
 
 class EditCourse extends Component {
@@ -70,7 +72,7 @@ class EditCourse extends Component {
 
 
    /* TODO display content & search content */
-   getMainContent( button ){
+   getMainContent( button, wordLearnList, nativeWordList ){
 
       return (
          <div id="edit-course-section">
@@ -90,7 +92,7 @@ class EditCourse extends Component {
                         typingFuncContext={this} />
                   <hr className="_Theme_hr_Default_"/>
 
-                  {this.state.wordLearnList}
+                  {wordLearnList}
 
                </div>
             </div>
@@ -103,7 +105,7 @@ class EditCourse extends Component {
                         typingFuncContext={this} />
                   <hr className="_Theme_hr_Default_"/>
 
-                  {this.state.nativeWordList}
+                  {nativeWordList}
 
                </div>
             </div>
@@ -116,22 +118,26 @@ class EditCourse extends Component {
 
    isInstructorAction(){
 
-      Meteor.call('instructor.fetchCourseByUser', this.props.match.params.courseName, (err, result) => {
-         if(result){
+      // also checks whether user actually owns the course
+      Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
+         onReady: () => {     // matched, user actually owns the course
+            let result = Courses_Words.find().fetch();
+
             this.setState( {
-               content: this.getMainContent( this.getReadyAnim() )
+               content: this.getMainContent( this.getReadyAnim(), this.renderWordLearnList(), this.renderNativeWordList() )
             } );
-         }
-         else{
+
+         },
+         onStop: () => {      // no match, user doesn't own the course!
+
             /* TODO change to "Access denied" or something page */
 
             setTimeout( () => { window.location.replace("/notFound"); }, 500);
          }
-
-      });
+      } );
 
       // makes mandatory transition appears seamless
-      this.setState( {
+      this.state = ( {
          content: <div></div>
       } );
    }
@@ -150,6 +156,14 @@ class EditCourse extends Component {
 
       Func_Util.excluPageCheck_OnLoad(this, false, this.isInstructorAction, this.isOtherAction);
 
+   }
+
+
+   renderWordLearnList(){
+      return (<div> YES </div>);
+   }
+   renderNativeWordList(){
+      return (<div> NO </div>);
    }
 
 

@@ -43,6 +43,9 @@ Schemas.Courses_Words = new SimpleSchema({
    },
    'l1_examples.$': {
       type: String
+   },
+   'difficultyLevel': {
+      type: Number
    }
 });
 

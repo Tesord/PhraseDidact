@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 
-import Course_Configs from '/imports/collections/courses_Configs';
-import Course_Words from '/imports/collections/courses_Words';
+import Courses_Configs from '/imports/collections/courses_Configs';
+import Courses_Words from '/imports/collections/courses_Words';
 
 
 Meteor.methods({
@@ -17,7 +17,7 @@ Meteor.methods({
 
          try{
 
-            Course_Configs.insert({
+            Courses_Configs.insert({
                userId : Meteor.userId(),
                courseId,
                courseName,
@@ -45,12 +45,12 @@ Meteor.methods({
 
    'instructor.fetchCourseByUser': (courseName) => {
 
-      return Course_Configs.findOne( { userId : Meteor.userId(), courseName } );
+      return Courses_Configs.findOne( { userId : Meteor.userId(), courseName } );
 
    },
 
 
-   'instructor.addWord': (courseName, l2_wordName, l2_examples, l1_wordName, l1_examples) => {
+   'instructor.addWord': (courseName, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel) => {
 
       if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) &&
             l2_examples.length <= 1000 && l1_examples.length <= 1000
@@ -63,12 +63,13 @@ Meteor.methods({
 
 
          if(course){
-            Course_Words.insert({
+            Courses_Words.insert({
                courseId : course.courseId,
                l2_wordName,
                l2_examples : l2_example_Array,
                l1_wordName,
-               l1_examples : l1_example_Array
+               l1_examples : l1_example_Array,
+               difficultyLevel
             });
          }
 
