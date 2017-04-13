@@ -3,7 +3,7 @@ import shortid from 'shortid';
 
 import Chosen_SingleSelect from '/imports/ui/chosen_SingleSelect';
 import JQueryUiExtensions_LabeledSlider from '/imports/ui/jQueryUiExtensions_LabeledSlider';
-import Corner_Button from '/imports/ui/corner_Button';
+import Picture_Button from '/imports/ui/picture_Button';
 
 import DB_Const from '/imports/api/functional/db_Const';
 import Ui_Util from '/imports/api/render/ui_Util';
@@ -101,13 +101,12 @@ class LearnProf_page3 extends Component {
             <div  key={ uniqueNumber }    className="learnProf-page3-block">
                <br />
 
-                  <Corner_Button imgURL="/ui/img/close_cross_in_circular_outlined_interface.svg"
-                     type="TR"            width="40rem" height="40rem"
-                     actFunction={this.removeLangBlock}
-                     actFuncParams={ uniqueNumber }
-                     functionContext={this}
-                  />
-
+               <Picture_Button imgURL="/ui/img/close_cross_in_circular_outlined_interface.svg"
+                  className="top-right-corner-button"    width="40rem"     height="40rem"
+                  actFunction={this.removeLangBlock}
+                  actFuncParams={ uniqueNumber }
+                  functionContext={this}
+               />
 
                <annotation>   What language is it? 	</annotation>
                <Chosen_SingleSelect             ref={(this_elem) => { if(this_elem){ this.addiLangName_Refs.push( this_elem ); } } }

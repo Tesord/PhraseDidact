@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
+import Instructor_Meth from '/imports/M_methods/instructor_Meth';
+
 import Learner_LProfile from '/imports/collections/learner_LProfile';
 import Courses_Configs from '/imports/collections/courses_Configs';
 import Courses_Words from '/imports/collections/courses_Words';

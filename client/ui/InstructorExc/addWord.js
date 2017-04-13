@@ -114,7 +114,8 @@ class AddWord extends Component {
 
                <annotation>  Level of difficulty   </annotation>
                <label>
-                  <input type="number" className="single-date-or-month-field      form-control-spinner" min="0"
+                  <input type="number" className="single-date-or-month-field      form-control-spinner"
+                     defaultValue="0"     min="0"  max="999"
                      ref={(this_elem) => { this.difficultyLevel_Ref = ( this_elem ); } }      />
                </label>
 

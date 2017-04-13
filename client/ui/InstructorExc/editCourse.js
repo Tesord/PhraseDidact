@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 
+import Instructor_Meth from '/imports/M_methods/instructor_Meth';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Bootstrap_InputGlyphicon from '/imports/ui/bootstrap_InputGlyphicon';
@@ -24,33 +25,14 @@ class EditCourse extends Component {
 		};
 	}
 
-   getReadyAnim(){
-      return (
-
-         <button className="pd-btn  rounded-border	   btn-primary">Save</button>
-
-      );
-   }
-
-   getLoadingAnim(){
-      return (
-
-         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Saving...</button>
-
-      );
-   }
 
    handleErrors(err){
       window.alert(err);
-
-      // let button = this.getReadyAnim();
-      //
-      // this.setState( {     content:    this.getCourseAdd( this.getReadyAnim() )    });
    }
 
 
    /* TODO display content & search content */
-   getMainContent( button, wordLearnList, nativeWordList ){
+   getMainContent( wordLearnList, nativeWordList ){
 
       return (
          <div id="edit-course-section">
@@ -98,41 +80,40 @@ class EditCourse extends Component {
       this.course_Words = Courses_Words.find().fetch();
 
       this.setState( {
-         content: this.getMainContent( this.getReadyAnim(), this.renderWordLearnList(), this.renderNativeWordList() )
+         content: this.getMainContent( this.renderWordLearnList(), this.renderNativeWordList() )
       } );
    }
    renderWordLearnList(){
-      return ( Ui_Util.create_EditingWordBlock(this.course_Words, true) );
+      return ( Ui_Util.create_EditingWordBlock(this.course_Words, true, this, this.editBlock, this.removeBlock) );
    }
    renderNativeWordList(){
-      return ( Ui_Util.create_EditingWordBlock(this.course_Words, false) );
+      return ( Ui_Util.create_EditingWordBlock(this.course_Words, false, this, this.editBlock, this.removeBlock) );
    }
-   
 
-   save(e){
-      e.preventDefault();
 
-      // let courseName = this.courseName_Ref.value;
-      // let access = this.access_Ref.getSelectedValue_OfRadioGroup();
-      //
-      //
-      // let tags = this.tags_Ref.value;
-      //
-      //
-      // Meteor.call('instructor.addCourse', courseName, access, tags, (err, result) => {
-      //
-      //    if(err){
-      //       this.handleErrors(err);
-      //    }
-      //    else{		// successful
-      //       this.context.router.history.push("editCourse/" + courseName);
-      //    }
-      // });
-      //
-      //
-      // this.setState( {     content:    this.getCourseAdd( this.getLoadingAnim() )    });
+   editBlock(word_pair_id){
+
+      // TODO finish
+
+      this.load();
+   }
+
+   removeBlock(word_pair_id){
+
+      var r = confirm("Remove this word pair (L2 + L1)?");
+
+      if (r == true) {
+         try {
+            Meteor.call('instructor.removeWord', word_pair_id);
+         } catch (err) {
+            this.handleErrors(err);
+         }
+
+         this.load();
+      }
 
    }
+
 
    isInstructorAction(){
 

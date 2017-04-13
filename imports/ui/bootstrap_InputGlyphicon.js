@@ -17,7 +17,7 @@ class Bootstrap_InputGlyphicon extends Component {
 
    componentDidMount(){
       if( this.props.typingFunction && this.props.typingFuncContext ){
-         this.corner_button.addEventListener('keypress', this.props.typingFunction);
+         this.input.addEventListener('keypress', this.props.typingFunction);
       }
    }
 
