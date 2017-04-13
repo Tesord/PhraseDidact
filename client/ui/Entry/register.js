@@ -53,7 +53,7 @@ class Register extends Component {
 
 	handleErrors(err, isInitial){
 		// TODO   Client side will start to revert changes
-		console.log('Signup callback', err);
+		window.alert(err);
 
 
 		/* If an exception occurs during Set Account Type stage (e.g. Set Account Type returns NOT UNIQUE),
@@ -89,7 +89,7 @@ class Register extends Component {
 			}
 			else{		// Account created, need to set type
 
-				Meteor.call('userAccount.addRole', isInstructor, (err, result) => {
+				Meteor.call('userAccount.setAccountType', isInstructor, (err, result) => {
 
 					if(err){
 						this.handleErrors(err, false);
@@ -106,7 +106,7 @@ class Register extends Component {
 						}
 						else{
 							Func_Util.setLoginCache( "LEARN" );
-							this.context.router.history.push("fillLearnerProfile");
+							this.context.router.history.push("/fillLearnerProfile");
 						}
 					}
 
@@ -129,7 +129,7 @@ class Register extends Component {
 	render(){
 
 		return (
-			<form id="register-card" className="_Theme_border_Default_ _Theme_register_Default_"
+			<form id="register-card" className="_Theme_outerBorder_Default_ _Theme_register_Default_"
 					onSubmit={	this.sre.bind(this)	} >
 
 				<contentTitle className="h-center-margin">	Sign up	</contentTitle>

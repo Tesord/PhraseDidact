@@ -1,0 +1,34 @@
+@import (reference) "1common";
+
+
+#edit-course-section {
+   .standard-content;
+
+   h4 {
+      margin-bottom: 0.5rem   !important;
+   }
+}
+
+
+@instructor-course-width: 50%;
+
+#l2-word-section {
+   .standard-main;
+
+   width: @instructor-course-width;
+}
+
+#l1-word-section {
+   .standard-sidebar;
+
+   // 1% is rounding fail-safe
+   width: calc(100% - @instructor-course-width - @standard-main-margin-right - 1%);
+}
+
+.editing-word-block {
+   margin-bottom: 2rem;
+   height: 16rem;
+
+   display: block;
+   overflow: hidden;
+}

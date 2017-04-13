@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import DocumentTitle from 'react-document-title';
 
+import BlueCircle_greyBG from './Loading/blueCircle_greyBG';
+import Learner_Home from './Home/learner_Home';
+import Instructor_Home from './Home/instructor_Home';
+
+import Func_Util from '/imports/api/functional/func_Util';
 
 
 /****** TODO *************
@@ -12,17 +17,59 @@ import DocumentTitle from 'react-document-title';
  * The words inside the () brackets are the parameter,
  * The words inside the {} brackets are the function's execution code.
  */
-const Home = () => {
-   return (
-		<DocumentTitle title='Home - PhraseDidact'>
+class Home extends Component {
 
-         <div>
-            SAMPLE TEXT
+   constructor(){
+      super();
+
+
+      this.state = {
+         content: <BlueCircle_greyBG />,
+      };
+   }
+
+
+   getUnloggedPage(){
+      return(
+         <div id="unlogged-page-section">
+            WELCOME TO PHRASEDIDACT!
          </div>
+      );
+   }
 
-		</DocumentTitle>
-   );
-};
+
+   componentWillMount() {
+
+      let result = Func_Util.fetchAccountType_OnLoad();
+
+      if( result > 0 ){
+         this.state = {
+            content: <Learner_Home />
+         };
+      }
+      else if( result < 0 ){
+         this.state = {
+            content: <Instructor_Home />
+         };
+      }
+      else{
+         this.state = {
+            content: this.getUnloggedPage()
+         };
+      }
+
+   }
+
+   render(){
+      return (
+   		<DocumentTitle title='Home - PhraseDidact'>
+
+            {this.state.content}
+
+   		</DocumentTitle>
+      );
+   }
+}
 
 
 /* ::L_NOTE::

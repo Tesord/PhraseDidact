@@ -10,7 +10,6 @@ import LearnProf_page3 from './FillLearnerProfile/learnProf_page3';
 import LearnProf_page4 from './FillLearnerProfile/learnProf_page4';
 
 import Func_Util from '/imports/api/functional/func_Util';
-import LearnerExc from '/imports/api/functional/learnerExc';
 
 
 
@@ -48,12 +47,11 @@ class FillLearnerProfile extends Component {
 	}
 
 
-   getLearnProf_Main(pageNo, percentage){
+   getMainContent(pageNo, percentage){
 
       return (
 
-         <div className="standard-content">
-            <div id="learner-profile-section" className="h-center-margin">
+         <div id="learner-profile-section">
 
                { this.getLearnProf_page(pageNo) }
 
@@ -68,29 +66,28 @@ class FillLearnerProfile extends Component {
                </h3>
                <Line percent={ percentage } strokeWidth="2" trailWidth="2" strokeColor={'#3FC7FA'} />
 
-            </div>
          </div>
 
       );
    }
 
-   /* HELPER of getLearnProf_Main() */
+   /* HELPER of getMainContent() */
    getLearnProf_page(pageNo){
 
       switch( pageNo ) {
          case 2:
-            return <LearnProf_page2 /> ;
+            return <LearnProf_page2    ref={ (this_elem) => {this.currentPage = this_elem} } /> ;
          case 3:
-            return <LearnProf_page3 /> ;
+            return <LearnProf_page3    ref={ (this_elem) => {this.currentPage = this_elem} } /> ;
          case 4:
-            return <LearnProf_page4 /> ;
+            return <LearnProf_page4    ref={ (this_elem) => {this.currentPage = this_elem} } /> ;
          default:
-            return <LearnProf_page1 /> ;
+            return <LearnProf_page1    ref={ (this_elem) => {this.currentPage = this_elem} } /> ;
       }
 
    }
 
-   /* HELPER of getLearnProf_Main() */
+   /* HELPER of getMainContent() */
    getBackButton(pageNo){
       if( pageNo <= 1 ){
          return "";
@@ -108,13 +105,14 @@ class FillLearnerProfile extends Component {
 
    }
 
-   /* HELPER of getLearnProf_Main() */
+   /* HELPER of getMainContent() */
    getNextButton(pageNo){
       // TODO , onClick to finish
       if( pageNo >= FillLearnerProfile.LEARNPROF_MAXPAGE_NO ){
          return(
 
-            <a className="pd-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)">
+            <a className="pd-btn rounded-border	   align-right   btn-primary" href="javascript:void(0)"
+               onClick={this.finish.bind(this)} >
                Finish
             </a>
          );
@@ -132,10 +130,14 @@ class FillLearnerProfile extends Component {
    }
 
 
+   save(){
+      this.currentPage.save();
+   }
+
+
    backPage(e){
       e.preventDefault();
-
-      /* TODO send form information to DB again*/
+      this.save();
 
 
       let newPageNo = this.state.pageNo - 1;
@@ -143,7 +145,7 @@ class FillLearnerProfile extends Component {
 
 
       this.setState({
-			content: this.getLearnProf_Main(newPageNo, newPercentage),
+			content: this.getMainContent(newPageNo, newPercentage),
          pageNo: newPageNo,
          percentage: newPercentage
 		});
@@ -152,9 +154,13 @@ class FillLearnerProfile extends Component {
 
    nextPage(e){
       e.preventDefault();
+<<<<<<< HEAD
 
       /* TODO send form information to DB again*/
       
+=======
+      this.save();
+>>>>>>> dea9931475086c8f7f8e7d00dec35a1fe4efb54e
 
 
       let newPercentage = Math.round( this.state.pageNo * 100 / FillLearnerProfile.LEARNPROF_MAXPAGE_NO );
@@ -162,16 +168,23 @@ class FillLearnerProfile extends Component {
 
 
       this.setState({
-			content: this.getLearnProf_Main(newPageNo, newPercentage),
+			content: this.getMainContent(newPageNo, newPercentage),
          pageNo: newPageNo,
          percentage: newPercentage
 		});
    }
 
+   finish(e){
+      e.preventDefault();
+      this.save();
+
+      this.context.router.history.push("/user/" + Meteor.user().username + "/profile/");
+   }
+
 
    isLearnerAction(){
       this.state = {
-         content: this.getLearnProf_Main( this.state.pageNo, this.state.percentage ),
+         content: this.getMainContent( this.state.pageNo, this.state.percentage ),
          pageNo: this.state.pageNo,
          percentage: this.state.percentage
       };
@@ -185,21 +198,13 @@ class FillLearnerProfile extends Component {
 
       /* Redirect without being recorded in Browser Back button history. However, doing so seems to
        * cancel any earlier localStorage setItem() calls... So this function will be delayed a bit. */
-      setTimeout( () => { window.location.replace("notFound"); }, 500);
+      setTimeout( () => { window.location.replace("/notFound"); }, 500);
    }
 
 
    componentWillMount() {
 
-      let result = LearnerExc.checkExcAndRespond();
-      if( result !== 0 ){
-
-         if( result > 0){
-            this.isLearnerAction();
-         }else{
-            this.isOtherAction();
-         }
-      }
+      Func_Util.excluPageCheck_OnLoad(this, true, this.isLearnerAction, this.isOtherAction)
 
    }
 
@@ -215,5 +220,9 @@ class FillLearnerProfile extends Component {
 	}
 }
 
+
+FillLearnerProfile.contextTypes = {
+	router: React.PropTypes.object
+};
 
 export default FillLearnerProfile;

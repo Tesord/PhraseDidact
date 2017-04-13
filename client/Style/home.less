@@ -1,0 +1,36 @@
+@import (reference) "header";
+@import (reference) "1common";
+
+
+
+#unlogged-page-section {
+   .standard-content;
+
+
+}
+
+#learner-dashboard-section {
+   .standard-content;
+
+
+}
+
+#instructor-dashboard-section {
+   .standard-content;
+
+
+}
+
+@instructor-course-width: 60%;
+
+#instructor-courses {
+   .standard-main;
+
+   width: @instructor-course-width;
+}
+#instructor-students {
+   .standard-sidebar;
+
+   // 1% is rounding fail-safe
+   width: calc(100% - @instructor-course-width - @standard-main-margin-right - 1%);
+}

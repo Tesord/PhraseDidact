@@ -13,14 +13,18 @@ using Meteor.call()'s callback function **/
 Meteor.methods({
 
 
-   'userAccount.addRole': (isInstructor) => {
+   'userAccount.setAccountType': (isInstructor) => {
 
-      // Will throw exception if unsuccessful. This method blocks until complete.
-      if(isInstructor){
-         Roles.addUsersToRoles(Meteor.userId(), "INSTR" );
-      }
-      else{
-         Roles.addUsersToRoles(Meteor.userId(), "LEARN" );
+      if( !Roles.userIsInRole( Meteor.userId(), "LEARN" ) && !Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
+
+         // Will throw exception if unsuccessful. This method blocks until complete.
+         if(isInstructor){
+            Roles.addUsersToRoles(Meteor.userId(), "INSTR" );
+         }
+         else{
+            Roles.addUsersToRoles(Meteor.userId(), "LEARN" );
+         }
+         
       }
 
    },

@@ -8,8 +8,13 @@ class ICheck_Radio extends Component {
    static defaultRadioClass = "iradio_flat-green";
 
 
+   getSelectedValue_OfRadioGroup(){
+      return $('input[name=' + this.props.radioName + ']:checked').val();
+   }
+
+
    render(){
-      return ( <input type="radio"     name={this.props.radioName}      value={this.props.value}
+      return ( <input type="radio"     name={this.props.radioName}      value={this.props.value}   defaultChecked={this.props.checked}
                   ref={ (this_elem) => {this.radio = this_elem; } }  /> );
    }
 
@@ -30,17 +35,6 @@ class ICheck_Radio extends Component {
          radioClass: radioClass
       });
 
-
-      /* DeSelectable functionality */
-      if(this.props.isDeSelectable){
-         let radioSelector = $(this.radio);
-
-         radioSelector.on('ifClicked', function(event){
-            if( radioSelector.iCheck('update')[0].checked ){
-               radioSelector.iCheck('uncheck');
-            }
-         });
-      }
    }
 
 }

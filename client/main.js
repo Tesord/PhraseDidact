@@ -8,7 +8,14 @@ import Header from './ui/Common/header';
 import Home from './ui/home';
 import NotFound from './ui/notFound';
 import Entry from './ui/entry';
+
 import FillLearnerProfile from './ui/LearnerExc/fillLearnerProfile';
+import Profile from './ui/profile';
+
+import AddCourse from './ui/InstructorExc/addCourse';
+import EditCourse from './ui/InstructorExc/editCourse';
+import AddWord from './ui/InstructorExc/addWord';
+
 
 /*************** TODO WHEN FINISHED: comment out the below imports & delete above.
  					Move the 'ui' folder from 'client' to 'imports' **/
@@ -40,7 +47,14 @@ const routes = (
 				<Route path="/home" component={Home} />
 
 				<Route path="/login" component={Entry} />
+
 				<Route path="/fillLearnerProfile" component={FillLearnerProfile} />
+				<Route path="/user/:username/profile" component={Profile} />
+
+				<Route path="/addCourse" component={AddCourse} />
+				<Route path="/course/:courseName/edit" component={EditCourse} />
+				<Route path="/course/:courseName/addWord" component={AddWord} />
+
 
 				<Route component={NotFound} />
 			</Switch>

@@ -50,7 +50,7 @@ class Login extends Component {
 
    handleErrors(err){
       // TODO   Client side will start to revert changes
-      console.log('Login error' + err);
+      window.alert(err);
 
 
       this.setState( {     button:    this.getReadyAnim()    });
@@ -68,6 +68,7 @@ class Login extends Component {
             this.handleErrors(err);
          }
          else{		// successful
+				// "LEARN" / "INSTR" should always be the first item
 				Func_Util.setLoginCache( Roles.getRolesForUser(Meteor.userId())[0] );
 
 				/* TODO Possible redirect based on last visited URL? */
@@ -85,7 +86,7 @@ class Login extends Component {
 
    render(){
       return (
-         <form id="login-card"  className="_Theme_border_Default_ _Theme_login_Default_"
+         <form id="login-card"  className="_Theme_outerBorder_Default_ _Theme_login_Default_"
                onSubmit={	this.login.bind(this)	} >
 
 				<div id="login-form"	className="h-center-margin">
