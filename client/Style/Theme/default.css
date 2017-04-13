@@ -19,6 +19,16 @@ and open the template in the editor.
     border: 1px solid #d1d1d1;
     padding: 20px;
 }
+._Theme_innerItem_Default_ {
+    border-radius: 4px;
+    border: 2px solid #617491;
+    padding: 20px;
+    box-shadow: 1px 1px 5px 0px #141414;
+    background-color: #fcfcfc;
+}
+._Theme_exampleText_Default_ {
+   color: #7c7c7c;
+}
 
 
 /* header.js */

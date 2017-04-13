@@ -118,3 +118,49 @@ export function create_MultiSelect_fromObj (obj, initText){
       elementId
    };
 }
+
+
+/* PhraseDidact specific */
+
+export function create_EditingWordBlock(course_Words, isL2){
+
+   let resultList = [];
+
+   let html_Ver_Examples = [];
+   let wordName = "";
+   let uniqueId = "";
+
+   for(let word_pair   of    course_Words){
+      if( isL2 ){
+         html_Ver_Examples = word_pair.l2_examples.map(
+            create_EditingWordBlock__MapFunc
+         );
+
+         wordName = word_pair.l2_wordName;
+      }
+      else{
+         html_Ver_Examples = word_pair.l1_examples.map(
+            create_EditingWordBlock__MapFunc
+         );
+
+         wordName = word_pair.l1_wordName;
+      }
+
+      uniqueId = shortid.generate();
+
+      resultList.push(
+         <div key={uniqueId}  className="editing-word-block    _Theme_innerItem_Default_">
+            <h4>{ wordName }</h4>
+            <div className="_Theme_exampleText_Default_">{ html_Ver_Examples }</div>
+         </div>
+      );
+   }
+
+   return resultList;
+}
+/* HELPER function of create_EditingWordBlock() */
+function create_EditingWordBlock__MapFunc(line_Of_Example){
+   uniqueId = shortid.generate();
+
+   return ( <div     key={uniqueId}> - {line_Of_Example} <br/></div> );
+}

@@ -15,10 +15,7 @@ Schemas.Courses_Words = new SimpleSchema({
    courseId: {
       type: String,
       label: "courseId",
-      max: 20,
-
-      index: true,
-      unique: true
+      max: 20
    },
    l2_wordName : {
       type: String,

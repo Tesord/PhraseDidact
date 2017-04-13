@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 
+
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Bootstrap_InputGlyphicon from '/imports/ui/bootstrap_InputGlyphicon';
 
 import Func_Util from '/imports/api/functional/func_Util';
+import Ui_Util from '/imports/api/render/ui_Util';
+
 
 import Courses_Words from '/imports/collections/courses_Words';
 
@@ -35,31 +38,6 @@ class EditCourse extends Component {
          <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Saving...</button>
 
       );
-   }
-
-   save(e){
-      e.preventDefault();
-
-      // let courseName = this.courseName_Ref.value;
-      // let access = this.access_Ref.getSelectedValue_OfRadioGroup();
-      //
-      //
-      // let tags = this.tags_Ref.value;
-      //
-      //
-      // Meteor.call('instructor.addCourse', courseName, access, tags, (err, result) => {
-      //
-      //    if(err){
-      //       this.handleErrors(err);
-      //    }
-      //    else{		// successful
-      //       this.context.router.history.push("editCourse/" + courseName);
-      //    }
-      // });
-      //
-      //
-      // this.setState( {     content:    this.getCourseAdd( this.getLoadingAnim() )    });
-
    }
 
    handleErrors(err){
@@ -116,17 +94,52 @@ class EditCourse extends Component {
 
    }
 
+   load(){
+      this.course_Words = Courses_Words.find().fetch();
+
+      this.setState( {
+         content: this.getMainContent( this.getReadyAnim(), this.renderWordLearnList(), this.renderNativeWordList() )
+      } );
+   }
+   renderWordLearnList(){
+      return ( Ui_Util.create_EditingWordBlock(this.course_Words, true) );
+   }
+   renderNativeWordList(){
+      return ( Ui_Util.create_EditingWordBlock(this.course_Words, false) );
+   }
+   
+
+   save(e){
+      e.preventDefault();
+
+      // let courseName = this.courseName_Ref.value;
+      // let access = this.access_Ref.getSelectedValue_OfRadioGroup();
+      //
+      //
+      // let tags = this.tags_Ref.value;
+      //
+      //
+      // Meteor.call('instructor.addCourse', courseName, access, tags, (err, result) => {
+      //
+      //    if(err){
+      //       this.handleErrors(err);
+      //    }
+      //    else{		// successful
+      //       this.context.router.history.push("editCourse/" + courseName);
+      //    }
+      // });
+      //
+      //
+      // this.setState( {     content:    this.getCourseAdd( this.getLoadingAnim() )    });
+
+   }
+
    isInstructorAction(){
 
       // also checks whether user actually owns the course
       Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
          onReady: () => {     // matched, user actually owns the course
-            let result = Courses_Words.find().fetch();
-
-            this.setState( {
-               content: this.getMainContent( this.getReadyAnim(), this.renderWordLearnList(), this.renderNativeWordList() )
-            } );
-
+            this.load();
          },
          onStop: () => {      // no match, user doesn't own the course!
 
@@ -141,6 +154,7 @@ class EditCourse extends Component {
          content: <div></div>
       } );
    }
+
 
    isOtherAction(){
 
@@ -157,15 +171,6 @@ class EditCourse extends Component {
       Func_Util.excluPageCheck_OnLoad(this, false, this.isInstructorAction, this.isOtherAction);
 
    }
-
-
-   renderWordLearnList(){
-      return (<div> YES </div>);
-   }
-   renderNativeWordList(){
-      return (<div> NO </div>);
-   }
-
 
    render(){
       return(

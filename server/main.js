@@ -18,24 +18,28 @@ Meteor.startup(() => {
    });
 
    // TODO add permission system
-   Meteor.publish('view_Course_Words', function(courseName) {
 
-      let course = Courses_Configs.findOne( { courseName } );
+   /* TODO this method should be restricted, learner should NOT be able to view every word of the course
+    * only to LEARN side */
 
-      if(course){
-         // course exists, but do user have permission to access it?
-         if(course.userId === this.userId  ||
-            course.access === "public"){
-            return Courses_Words.find({ courseId : course.courseId });
-         }
-         else{
-            throw new Meteor.Error("403", "This course is private.");
-         }
-      }
-      else{
-         throw new Meteor.Error("404", "Course not found.");
-      }
-   });
+   // Meteor.publish('view_Course_Words', function(courseName) {
+   //
+   //    let course = Courses_Configs.findOne( { courseName } );
+   //
+   //    if(course){
+   //       // course exists, but do user have permission to access it?
+   //       if(course.userId === this.userId  ||
+   //          course.access === "public"){
+   //          return Courses_Words.find({ courseId : course.courseId });
+   //       }
+   //       else{
+   //          throw new Meteor.Error("403", "This course is private.");
+   //       }
+   //    }
+   //    else{
+   //       throw new Meteor.Error("404", "Course not found.");
+   //    }
+   // });
 
    // TODO add permission system
    Meteor.publish('edit_Course_Words', function(courseName) {
