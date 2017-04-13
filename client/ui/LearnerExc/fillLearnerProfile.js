@@ -154,13 +154,7 @@ class FillLearnerProfile extends Component {
 
    nextPage(e){
       e.preventDefault();
-<<<<<<< HEAD
-
-      /* TODO send form information to DB again*/
-      
-=======
       this.save();
->>>>>>> dea9931475086c8f7f8e7d00dec35a1fe4efb54e
 
 
       let newPercentage = Math.round( this.state.pageNo * 100 / FillLearnerProfile.LEARNPROF_MAXPAGE_NO );

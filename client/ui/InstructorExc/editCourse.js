@@ -4,12 +4,12 @@ import DocumentTitle from 'react-document-title';
 
 import Instructor_Meth from '/imports/M_methods/instructor_Meth';
 
+import WordList from './Course/wordList';
+
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Bootstrap_InputGlyphicon from '/imports/ui/bootstrap_InputGlyphicon';
 
 import Func_Util from '/imports/api/functional/func_Util';
-import Ui_Util from '/imports/api/render/ui_Util';
-
 
 import Courses_Words from '/imports/collections/courses_Words';
 
@@ -77,25 +77,39 @@ class EditCourse extends Component {
    }
 
    load(){
-      this.course_Words = Courses_Words.find().fetch();
+      let courseWords_List = Courses_Words.find().fetch();
 
       this.setState( {
-         content: this.getMainContent( this.renderWordLearnList(), this.renderNativeWordList() )
+         content: this.getMainContent( this.renderWordLearnList(courseWords_List), this.renderNativeWordList(courseWords_List) )
       } );
    }
-   renderWordLearnList(){
-      return ( Ui_Util.create_EditingWordBlock(this.course_Words, true, this, this.editBlock, this.removeBlock) );
+   renderWordLearnList(courseWords_List){
+      return (
+         <WordList
+            courseWords_List = {courseWords_List}
+            isL2 = {true}
+            funcContext = {this}
+            editBlock_func = {this.editBlock}
+            removeBlock_func = {this.removeBlock}
+         />
+      );
    }
-   renderNativeWordList(){
-      return ( Ui_Util.create_EditingWordBlock(this.course_Words, false, this, this.editBlock, this.removeBlock) );
+   renderNativeWordList(courseWords_List){
+      return (
+         <WordList
+            courseWords_List = {courseWords_List}
+            isL2 = {false}
+            funcContext = {this}
+            editBlock_func = {this.editBlock}
+            removeBlock_func = {this.removeBlock}
+         />
+      );
    }
 
 
    editBlock(word_pair_id){
 
-      // TODO finish
-
-      this.load();
+      this.context.router.history.push("/course/" + this.props.match.params.courseName + "/editWord/" + word_pair_id);
    }
 
    removeBlock(word_pair_id){
@@ -117,7 +131,7 @@ class EditCourse extends Component {
 
    isInstructorAction(){
 
-      // also checks whether user actually owns the course
+      // Get required data from DB, while also checks whether user actually owns the course
       Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
          onReady: () => {     // matched, user actually owns the course
             this.load();

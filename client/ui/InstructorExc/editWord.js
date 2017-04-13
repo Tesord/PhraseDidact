@@ -5,9 +5,11 @@ import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
 import Func_Util from '/imports/api/functional/func_Util';
 
+import Courses_Words from '/imports/collections/courses_Words';
 
 
-class AddWord extends Component {
+
+class EditWord extends Component {
 
 
    constructor(){
@@ -21,7 +23,7 @@ class AddWord extends Component {
    getReadyAnim(){
       return (
 
-         <button className="pd-btn  rounded-border	   btn-primary">Add</button>
+         <button className="pd-btn  rounded-border	   btn-primary">Save</button>
 
       );
    }
@@ -29,7 +31,7 @@ class AddWord extends Component {
    getLoadingAnim(){
       return (
 
-         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Adding...</button>
+         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Saving...</button>
 
       );
    }
@@ -40,6 +42,7 @@ class AddWord extends Component {
          this.context.router.history.push( "/course/" + this.props.match.params.courseName  + "/edit" );
       }
    }
+
 
    save(e){
       e.preventDefault();
@@ -76,12 +79,12 @@ class AddWord extends Component {
 
 
    /* TODO display content & search content */
-   getMainContent( button ){
+   getMainContent( button, word_Pair ){
 
       return (
          <div id="add-word-section">
             <form onSubmit={	this.save.bind(this)	}>
-               <contentTitle>	Add word pair	</contentTitle>
+               <contentTitle>	Edit word pair	</contentTitle>
 
                <hr className="_Theme_hr_Default_"/>
 
@@ -89,6 +92,7 @@ class AddWord extends Component {
 
                <annotation>	Word	</annotation>
                <input type="text" className="form-control"   maxLength="150"     required
+                     defaultValue={word_Pair.l2_wordName}
                      ref={	(this_elem) => (this.l2_wordName_Ref = this_elem) } />
 
                   <annotation>	Examples (separate each one by a new line)	</annotation>
@@ -102,6 +106,7 @@ class AddWord extends Component {
 
                <annotation>	Word	</annotation>
                <input type="text" className="form-control"   maxLength="150"     required
+                     defaultValue={word_Pair.l1_wordName}
                      ref={	(this_elem) => (this.l1_wordName_Ref = this_elem) } />
 
                   <annotation>	Examples (separate each one by a new line)	</annotation>
@@ -113,7 +118,7 @@ class AddWord extends Component {
                <annotation>  Level of difficulty   </annotation>
                <label>
                   <input type="number" className="single-date-or-month-field      form-control-spinner"
-                     defaultValue="0"     min="0"  max="999"
+                     defaultValue={word_Pair.difficultyLevel}     min="0"  max="999"
                      ref={(this_elem) => { this.difficultyLevel_Ref = ( this_elem ); } }      />
                </label>
 
@@ -135,23 +140,28 @@ class AddWord extends Component {
 
    isInstructorAction(){
 
-      // Check if course is really made by user first
-      Meteor.call('instructor.fetchCourseByUser', this.props.match.params.courseName, (err, result) => {
-         if(result){
+      // Get required data from DB, while also checks whether user actually owns the course
+      Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
+         onReady: () => {     // matched, user actually owns the course
+
+            let word_Pair = Courses_Words.findOne({ _id : this.props.match.params.wordPairId });
+
             this.setState( {
-               content: this.getMainContent( this.getReadyAnim() )
+               content: this.getMainContent( this.getReadyAnim(), word_Pair )
             } );
-         }
-         else{
+
+         },
+         onStop: () => {      // no match, user doesn't own the course!
+
             /* TODO change to "Access denied" or something page */
 
             setTimeout( () => { window.location.replace("/notFound"); }, 500);
          }
+      } );
 
-      });
 
       // makes mandatory transition appears seamless
-      this.state = ( {
+      this.setState( {
          content: <div></div>
       } );
 
@@ -167,7 +177,7 @@ class AddWord extends Component {
       setTimeout( () => { window.location.replace("/notFound"); }, 500);
    }
 
-   componentWillMount() {
+   componentDidMount() {
 
       Func_Util.excluPageCheck_OnLoad(this, false, this.isInstructorAction, this.isOtherAction);
 
@@ -176,7 +186,7 @@ class AddWord extends Component {
 
    render(){
       return(
-         <DocumentTitle title={"Add word pair: " + this.props.match.params.courseName + " - PhraseDidact"}  >
+         <DocumentTitle title={"Edit word pair: " + this.props.match.params.wordPairId + " - PhraseDidact"}  >
             {this.state.content}
          </DocumentTitle>
       );
@@ -185,8 +195,8 @@ class AddWord extends Component {
 }
 
 // ask for `router` from context, helper for router-router Programatic Navigation
-AddWord.contextTypes = {
+EditWord.contextTypes = {
 	router: React.PropTypes.object
 };
 
-export default AddWord;
+export default EditWord;
