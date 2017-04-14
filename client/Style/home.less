@@ -15,6 +15,24 @@
 
 }
 
+@learner-course-width: 60%;
+
+#learner-courses {
+   .standard-main;
+
+   width: @learner-course-width;
+}
+
+#learner-progress {
+   .standard-sidebar;
+
+   // 1% is rounding fail-safe
+   width: calc(100% - @learner-course-width - @standard-main-margin-right - 1%);
+
+}
+
+
+
 #instructor-dashboard-section {
    .standard-content;
 
@@ -37,7 +55,7 @@
 
 .course-block {
    margin-bottom: 2rem;
-   height: 16rem;
+   height: 18rem;
 
    display: block;
    overflow-y: hidden;

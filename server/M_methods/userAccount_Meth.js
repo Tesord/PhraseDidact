@@ -24,7 +24,7 @@ Meteor.methods({
          else{
             Roles.addUsersToRoles(Meteor.userId(), "LEARN" );
          }
-         
+
       }
 
    },
@@ -35,6 +35,43 @@ Meteor.methods({
    },
    'userAccount.checkIsLearner' : () => {
       return Roles.userIsInRole( Meteor.userId(), "LEARN" );
+   },
+
+   'userAccount.getUserDetails' : (userId) => {
+      let user = Meteor.users.find( {_id : userId} ).fetch();
+      return {
+         userId : user._id,
+         joinDate : user.createdAt,
+         username: user.username,
+      };
+   },
+
+
+   'userAccount.getCourseCreatorsDetails' : (courseList) => {
+      let userIdArray = [];
+      // get userId of the creators of all the courses
+      for(let course    of   courseList){
+         userIdArray.push( course.userId );
+      }
+
+      // get users DB record for each creator
+      let users = Meteor.users.find( { _id: { $in: userIdArray } } ).fetch();
+
+
+      let resultArray = [];
+
+      for(let userDetail    of    users){
+         resultArray.push(
+            {
+               userId : userDetail._id,
+               joinDate : userDetail.createdAt,
+               username: userDetail.username,
+            }
+         );
+      }
+
+      return resultArray;
    }
+
 
 });
