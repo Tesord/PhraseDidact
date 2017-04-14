@@ -58,7 +58,7 @@ class EditWord extends Component {
       let difficultyLevel = this.mainContent.difficultyLevel_Ref.value;
 
 
-      Meteor.call('instructor.addWord', this.props.match.params.courseName, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel, (err, result) => {
+      Meteor.call('instructor.editWord', this.props.match.params.wordPairId, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel, (err, result) => {
 
          if(err){
             this.handleErrors(err);

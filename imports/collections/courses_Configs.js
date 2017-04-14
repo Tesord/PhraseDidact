@@ -12,14 +12,6 @@ const Schemas = {};
  */
 
 Schemas.Courses_Configs = new SimpleSchema({
-   courseId: {
-      type: String,
-      label: "courseId",
-      max: 20,
-
-      index: true,
-      unique: true
-   },
    userId: {
       type: String,
       label: "userId",

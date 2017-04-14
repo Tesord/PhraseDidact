@@ -1,5 +1,3 @@
-import shortid from 'shortid';
-
 import Courses_Configs from '/imports/collections/courses_Configs';
 import Courses_Words from '/imports/collections/courses_Words';
 
@@ -13,13 +11,11 @@ Meteor.methods({
          ){
 
          let tagArray = tags.replace( /\n/g, " " ).split( " " );
-         let courseId = shortid.generate();
 
          try{
 
             Courses_Configs.insert({
                userId : Meteor.userId(),
-               courseId,
                courseName,
                access,
                description,
@@ -56,15 +52,15 @@ Meteor.methods({
             l2_examples.length <= 1000 && l1_examples.length <= 1000
          ){
 
+         // check the "course the words belong to it" is created by the user
          let course = Meteor.call('instructor.fetchCourseByUser', courseName);
 
-         let l2_example_Array = l2_examples.split( "\n" );
-         let l1_example_Array = l1_examples.split( "\n" );
-
-
          if(course){
+            let l2_example_Array = l2_examples.split( "\n" );
+            let l1_example_Array = l1_examples.split( "\n" );
+
             Courses_Words.insert({
-               courseId : course.courseId,
+               courseId : course._id,
                l2_wordName,
                l2_examples : l2_example_Array,
                l1_wordName,
@@ -75,6 +71,51 @@ Meteor.methods({
 
       }
 
+   },
+
+   'instructor.editWord': (word_pair_id, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel) => {
+
+      if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) &&
+            l2_examples.length <= 1000 && l1_examples.length <= 1000
+         ){
+
+         let courseId = Courses_Words.findOne( { _id : word_pair_id } ).courseId;
+         // check the "course the words belong to it" is created by the user
+         let course = Courses_Configs.findOne( { userId : Meteor.userId(), _id : courseId } );
+
+         if(course){
+            let l2_example_Array = l2_examples.split( "\n" );
+            let l1_example_Array = l1_examples.split( "\n" );
+
+            Courses_Words.update(
+               {_id :  word_pair_id } ,
+               {$set:
+                  {
+                     l2_wordName,
+                     l2_examples : l2_example_Array,
+                     l1_wordName,
+                     l1_examples : l1_example_Array,
+                     difficultyLevel
+                  }
+               }
+            );
+         }
+
+      }
+
+   },
+
+   'instructor.removeWord': (word_pair_id) => {
+      if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
+
+         let word_pair = Courses_Words.findOne( { "_id" : word_pair_id } );
+
+         // check word actually belongs to a user-created course
+         if( Courses_Configs.findOne( {userId : Meteor.userId(), _id : word_pair.courseId } ) ){
+            Courses_Words.remove( { "_id" : word_pair_id } );
+         }
+
+      }
    }
 
    // // TODO not implemented function yet

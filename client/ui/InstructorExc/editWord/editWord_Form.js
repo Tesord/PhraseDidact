@@ -35,7 +35,7 @@ class EditWord_Form extends Component{
                      defaultValue={ this.props.l2_wordName }
                      ref={	(this_elem) => (this.l2_wordName_Ref = this_elem) } />
 
-               <annotation>	Examples (separate each one by a new line)	</annotation>
+               <annotation>	Examples (separate each one by new line)	</annotation>
                <textarea rows="6"    maxLength="1000"    required
                      defaultValue={ this.props.l2_examples }
                      ref={	(this_elem) => (this.l2_examples_Ref = this_elem) } ></textarea>
@@ -50,7 +50,7 @@ class EditWord_Form extends Component{
                      defaultValue={ this.props.l1_wordName }
                      ref={	(this_elem) => (this.l1_wordName_Ref = this_elem) } />
 
-               <annotation>	Examples (separate each one by a new line)	</annotation>
+               <annotation>	Examples (separate each one by new line)	</annotation>
                <textarea rows="6"    maxLength="1000"    required
                      defaultValue={ this.props.l1_examples }
                      ref={	(this_elem) => (this.l1_examples_Ref = this_elem) } ></textarea>

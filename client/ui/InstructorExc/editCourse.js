@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import shortid from 'shortid';
 
-import Instructor_Meth from '/imports/M_methods/instructor_Meth';
-
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Bootstrap_InputGlyphicon from '/imports/ui/bootstrap_InputGlyphicon';
 import Picture_Button from '/imports/ui/picture_Button';

@@ -1,7 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 
-import Instructor_Meth from '/imports/M_methods/instructor_Meth';
-
 import Learner_LProfile from '/imports/collections/learner_LProfile';
 import Courses_Configs from '/imports/collections/courses_Configs';
 import Courses_Words from '/imports/collections/courses_Words';
@@ -32,7 +30,7 @@ Meteor.startup(() => {
    //       // course exists, but do user have permission to access it?
    //       if(course.userId === this.userId  ||
    //          course.access === "public"){
-   //          return Courses_Words.find({ courseId : course.courseId });
+   //          return Courses_Words.find({ courseId : course._Id });
    //       }
    //       else{
    //          throw new Meteor.Error("403", "This course is private.");
@@ -51,7 +49,7 @@ Meteor.startup(() => {
       if(course){
          // course exists, but do user have permission to edit it?
          if(course.userId === this.userId){
-            return Courses_Words.find({ courseId : course.courseId });
+            return Courses_Words.find({ courseId : course._id });
          }
          else{
             throw new Meteor.Error("401", "Unauthorized access to course.");
