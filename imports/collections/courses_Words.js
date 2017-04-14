@@ -42,7 +42,8 @@ Schemas.Courses_Words = new SimpleSchema({
       type: String
    },
    'difficultyLevel': {
-      type: Number
+      type: Number,
+      max: 99
    }
 });
 

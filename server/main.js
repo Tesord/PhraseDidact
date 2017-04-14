@@ -12,9 +12,22 @@ Meteor.startup(() => {
       return Learner_LProfile.find({ userId: this.userId });
    });
 
-   // TODO add permission system
-   Meteor.publish('courses_Configs', function() {
+   Meteor.publish('available_Courses', function() {
       return Courses_Configs.find( { $or: [ { userId:  this.userId  }, { access: "public" } ] } );
+   });
+
+   Meteor.publish('created_Courses', function() {
+      return Courses_Configs.find( { userId:  this.userId  } );
+   });
+
+   Meteor.publish('single_Public_Course', function( courseName ) {
+      return Courses_Configs.find( { courseName,  access: "public"  } );
+   });
+
+   // TODO private_Courses version
+
+   Meteor.publish('single_Created_Course', function( courseName ) {
+      return Courses_Configs.find( { courseName, userId:  this.userId } );
    });
 
    // TODO add permission system

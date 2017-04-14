@@ -57,10 +57,10 @@ class EditWord_Form extends Component{
 
                <hr className="_Theme_hr_Default_"/>
 
-               <annotation>  Level of difficulty   </annotation>
+               <annotation>  Level of difficulty (0 - 99)   </annotation>
                <label>
                   <input type="number" className="single-date-or-month-field      form-control-spinner"
-                     defaultValue={ difficulty }     min="0"  max="999"
+                     defaultValue={ difficulty }     min="0"  max="99"
                      ref={(this_elem) => { this.difficultyLevel_Ref = ( this_elem ); } }      />
                </label>
 

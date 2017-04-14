@@ -38,6 +38,18 @@ Meteor.methods({
       }
    },
 
+   'instructor.removeCourse': (courseName) => {
+      if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
+
+         // courseId required to access Courses_Words collection + validate course ownership
+         let courseId = Courses_Configs.findOne( {userId : Meteor.userId(), courseName} )._id;
+
+         Courses_Words.remove( { courseId } );
+         Courses_Configs.remove( { userId : Meteor.userId(), courseName } );
+
+      }
+   },
+
 
    'instructor.fetchCourseByUser': (courseName) => {
 

@@ -10,6 +10,7 @@ import Picture_Button from '/imports/ui/picture_Button';
 import Func_Util from '/imports/api/functional/func_Util';
 
 import Courses_Words from '/imports/collections/courses_Words';
+import Courses_Configs from '/imports/collections/courses_Configs';
 
 
 
@@ -76,7 +77,7 @@ class EditCourse extends Component {
 
 
    load(){
-      let courseWords_List = Courses_Words.find().fetch();
+      let courseWords_List = Courses_Words.find({ courseId : this.courseId }).fetch();
 
       this.setState( {
          content: this.getMainContent(
@@ -172,10 +173,24 @@ class EditCourse extends Component {
 
    isInstructorAction(){
 
-      // Get required data from DB, while also checks whether user actually owns the course
+      // Add required data from DB to local DB, this also checks whether user actually owns the course
       Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
          onReady: () => {     // matched, user actually owns the course
-            this.load();
+
+            // now just need to get courseId to further filter the words that belong to the currently displayed course
+            Meteor.subscribe("single_Created_Course", this.props.match.params.courseName, {
+
+               onReady: () => {
+                  this.courseId = Courses_Configs.findOne( { courseName : this.props.match.params.courseName} )._id;
+
+                  this.load();
+               },
+               onStop: () => {      // if error occurs here, it is some sort of technical error
+                  /* TODO change to "Something went wrong" or something page */
+                  setTimeout( () => { window.location.replace("/notFound"); }, 500);
+               }
+            });
+
          },
          onStop: () => {      // no match, user doesn't own the course!
 

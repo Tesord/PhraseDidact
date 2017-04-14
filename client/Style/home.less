@@ -34,3 +34,13 @@
    // 1% is rounding fail-safe
    width: calc(100% - @instructor-course-width - @standard-main-margin-right - 1%);
 }
+
+.course-block {
+   margin-bottom: 2rem;
+   height: 16rem;
+
+   display: block;
+   overflow-y: hidden;
+   // prevents long sentences from dropping a line when overflowing
+   white-space: nowrap;
+}
