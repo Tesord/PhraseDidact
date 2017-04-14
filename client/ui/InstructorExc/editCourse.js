@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
+import shortid from 'shortid';
 
 import Instructor_Meth from '/imports/M_methods/instructor_Meth';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Bootstrap_InputGlyphicon from '/imports/ui/bootstrap_InputGlyphicon';
+import Picture_Button from '/imports/ui/picture_Button';
 
 import Func_Util from '/imports/api/functional/func_Util';
-import Ui_Util from '/imports/api/render/ui_Util';
-
 
 import Courses_Words from '/imports/collections/courses_Words';
 
@@ -76,26 +76,83 @@ class EditCourse extends Component {
 
    }
 
+
    load(){
-      this.course_Words = Courses_Words.find().fetch();
+      let courseWords_List = Courses_Words.find().fetch();
 
       this.setState( {
-         content: this.getMainContent( this.renderWordLearnList(), this.renderNativeWordList() )
+         content: this.getMainContent(
+            this.create_EditingWordBlock(courseWords_List, true),
+            this.create_EditingWordBlock(courseWords_List, false)
+         )
       } );
    }
-   renderWordLearnList(){
-      return ( Ui_Util.create_EditingWordBlock(this.course_Words, true, this, this.editBlock, this.removeBlock) );
+   create_EditingWordBlock(courseWords_List, isL2){
+
+      let resultList = [];
+
+      let html_Ver_Examples = [];
+      let wordName = "";
+      let uniqueId = "";
+
+      for(let word_pair   of    courseWords_List){
+         if( isL2 ){
+            html_Ver_Examples = word_pair.l2_examples.map(
+               this.create_EditingWordBlock__MapFunc
+            );
+
+            wordName = word_pair.l2_wordName;
+         }
+         else{
+            html_Ver_Examples = word_pair.l1_examples.map(
+               this.create_EditingWordBlock__MapFunc
+            );
+
+            wordName = word_pair.l1_wordName;
+         }
+
+         uniqueId = shortid.generate();
+
+         resultList.push(
+            <div key={"ewb" + uniqueId}  className="editing-word-block    _Theme_innerItem_Default_">
+               <Picture_Button
+                  imgURL="/ui/img/close_cross_in_circular_outlined_interface.svg"
+                  className="align-right pointer-hover"      width="30rem" height="30rem"
+                  actFunction={ this.removeBlock }
+                  actFuncParams={ word_pair._id }
+                  functionContext={ this }
+               />
+               <Picture_Button
+                  imgURL="/ui/img/Edit_Notepad_Icon.svg"
+                  className="align-right pointer-hover  moderate-right-margin"      width="27rem" height="27rem"
+                  actFunction={ this.editBlock }
+                  actFuncParams={ word_pair._id }
+                  functionContext={ this }
+               />
+
+               <h4>{ wordName }</h4>
+               <div className="single-line-element align-right"> Difficulty: { word_pair.difficultyLevel } </div>
+               <br/>
+
+               <div className="_Theme_exampleText_Default_">{ html_Ver_Examples }</div>
+            </div>
+         );
+      }
+
+      return resultList;
    }
-   renderNativeWordList(){
-      return ( Ui_Util.create_EditingWordBlock(this.course_Words, false, this, this.editBlock, this.removeBlock) );
+   /* HELPER function of create_EditingWordBlock() */
+   create_EditingWordBlock__MapFunc(line_Of_Example){
+      uniqueId = shortid.generate();
+
+      return ( <div     key={"exam" + uniqueId}> - {line_Of_Example} <br/></div> );
    }
+
 
 
    editBlock(word_pair_id){
 
-      // TODO finish
-
-      this.load();
+      this.context.router.history.push("/course/" + this.props.match.params.courseName + "/editWord/" + word_pair_id);
    }
 
    removeBlock(word_pair_id){
@@ -117,7 +174,7 @@ class EditCourse extends Component {
 
    isInstructorAction(){
 
-      // also checks whether user actually owns the course
+      // Get required data from DB, while also checks whether user actually owns the course
       Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
          onReady: () => {     // matched, user actually owns the course
             this.load();

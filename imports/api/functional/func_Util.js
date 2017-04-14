@@ -15,6 +15,22 @@ export function removeFromArrayByIndex_ARNI(index, array){
 }
 
 
+export function createStringNewLineSep_FromArray(array){
+   let resultString = "";
+
+   for(let i = 0; i < array.length; i++){
+      if(i === (array.length - 1) ){
+         resultString = resultString + array[i];
+      }
+      else{
+         resultString = resultString + array[i] + '\n';
+      }
+   }
+
+   return resultString;
+}
+
+
 
 
 /* PhraseDidact specific */

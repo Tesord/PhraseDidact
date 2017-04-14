@@ -63,8 +63,6 @@ class AddCourse extends Component {
    handleErrors(err){
       window.alert(err);
 
-      let button = this.getReadyAnim();
-
       this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
    }
 

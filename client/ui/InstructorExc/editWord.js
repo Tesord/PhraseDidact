@@ -7,9 +7,11 @@ import EditWord_Form from './editWord/editWord_Form';
 
 import Func_Util from '/imports/api/functional/func_Util';
 
+import Courses_Words from '/imports/collections/courses_Words';
 
 
-class AddWord extends Component {
+
+class EditWord extends Component {
 
 
    constructor(){
@@ -23,7 +25,7 @@ class AddWord extends Component {
    getReadyAnim(){
       return (
 
-         <button className="pd-btn  rounded-border	   btn-primary">Add</button>
+         <button className="pd-btn  rounded-border	   btn-primary">Save</button>
 
       );
    }
@@ -31,7 +33,7 @@ class AddWord extends Component {
    getLoadingAnim(){
       return (
 
-         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Adding...</button>
+         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Saving...</button>
 
       );
    }
@@ -43,6 +45,7 @@ class AddWord extends Component {
       }
    }
 
+   // TODO
    save(e){
       e.preventDefault();
 
@@ -78,15 +81,20 @@ class AddWord extends Component {
 
 
    /* TODO display content & search content */
-   getMainContent( button ){
+   getMainContent( button, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel  ){
 
       return (
-         <EditWord_Form    ref={(this_elem) => {this.mainContent = this_elem;} }
-            isAdd = {true}
+         <EditWord_Form          ref={(this_elem) => {this.mainContent = this_elem;} }
+            isAdd = {false}
             funcContext = {this}
             save_Func = {this.save}
             backToCourse_Func = {this.backToCourse}
             button = { button }
+            l2_wordName = { l2_wordName }
+            l2_examples = { l2_examples }
+            l1_wordName = { l1_wordName }
+            l1_examples = { l1_examples }
+            difficultyLevel = { difficultyLevel }
          />
       );
 
@@ -94,23 +102,35 @@ class AddWord extends Component {
 
    isInstructorAction(){
 
-      // Check if course is really made by user first
-      Meteor.call('instructor.fetchCourseByUser', this.props.match.params.courseName, (err, result) => {
-         if(result){
+      // Get required data from DB, while also checks whether user actually owns the course
+      Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
+         onReady: () => {     // matched, user actually owns the course
+
+            let word_Pair = Courses_Words.findOne({ _id : this.props.match.params.wordPairId });
+
             this.setState( {
-               content: this.getMainContent( this.getReadyAnim() )
+               content: this.getMainContent(
+                  this.getReadyAnim(),
+                  word_Pair.l2_wordName,
+                  Func_Util.createStringNewLineSep_FromArray( word_Pair.l2_examples ),
+                  word_Pair.l1_wordName,
+                  Func_Util.createStringNewLineSep_FromArray( word_Pair.l1_examples ),
+                  word_Pair.difficultyLevel
+               )
             } );
-         }
-         else{
+
+         },
+         onStop: () => {      // no match, user doesn't own the course!
+
             /* TODO change to "Access denied" or something page */
 
             setTimeout( () => { window.location.replace("/notFound"); }, 500);
          }
+      } );
 
-      });
 
       // makes mandatory transition appears seamless
-      this.state = ( {
+      this.setState( {
          content: <div></div>
       } );
 
@@ -126,7 +146,7 @@ class AddWord extends Component {
       setTimeout( () => { window.location.replace("/notFound"); }, 500);
    }
 
-   componentWillMount() {
+   componentDidMount() {
 
       Func_Util.excluPageCheck_OnLoad(this, false, this.isInstructorAction, this.isOtherAction);
 
@@ -135,7 +155,7 @@ class AddWord extends Component {
 
    render(){
       return(
-         <DocumentTitle title={"Add word pair: " + this.props.match.params.courseName + " - PhraseDidact"}  >
+         <DocumentTitle title={"Edit word pair: " + this.props.match.params.wordPairId + " - PhraseDidact"}  >
             {this.state.content}
          </DocumentTitle>
       );
@@ -144,8 +164,8 @@ class AddWord extends Component {
 }
 
 // ask for `router` from context, helper for router-router Programatic Navigation
-AddWord.contextTypes = {
+EditWord.contextTypes = {
 	router: React.PropTypes.object
 };
 
-export default AddWord;
+export default EditWord;
