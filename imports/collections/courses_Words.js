@@ -12,6 +12,11 @@ const Schemas = {};
  */
 
 Schemas.Courses_Words = new SimpleSchema({
+   userId: {
+      type: String,
+      label: "userId",
+      max: 20
+   },
    courseId: {
       type: String,
       label: "courseId",

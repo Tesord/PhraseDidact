@@ -27,16 +27,21 @@ Schemas.Courses_Configs = new SimpleSchema({
    },
    access: {
       type: String,
-      label: "access"
+      label: "access",
+      max: 50
    },
    description: {
       type: String,
       label: "description",
-      max: 5000
+      max: 5000,
+
+      optional: true
    },
    tags: {
       type: Array,
-      label: "tags"
+      label: "tags",
+
+      optional: true
    },
    'tags.$': {
       type: String

@@ -181,9 +181,18 @@ class EditCourse extends Component {
             Meteor.subscribe("single_Created_Course", this.props.match.params.courseName, {
 
                onReady: () => {
-                  this.courseId = Courses_Configs.findOne( { courseName : this.props.match.params.courseName} )._id;
+                  let course = Courses_Configs.findOne( { courseName : this.props.match.params.courseName} );
 
-                  this.load();
+                  if( course ){
+                     this.courseId = course._id;
+
+                     this.load();
+                  }
+                  else{    // user does not own the course!
+                     /* TODO change to "Permission denied" or something */
+                     setTimeout( () => { window.location.replace("/notFound"); }, 500);
+                  }
+
                },
                onStop: () => {      // if error occurs here, it is some sort of technical error
                   /* TODO change to "Something went wrong" or something page */
@@ -192,10 +201,7 @@ class EditCourse extends Component {
             });
 
          },
-         onStop: () => {      // no match, user doesn't own the course!
-
-            /* TODO change to "Access denied" or something page */
-
+         onStop: () => {      // no match, course not found
             setTimeout( () => { window.location.replace("/notFound"); }, 500);
          }
       } );

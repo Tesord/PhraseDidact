@@ -72,6 +72,7 @@ Meteor.methods({
             let l1_example_Array = l1_examples.split( "\n" );
 
             Courses_Words.insert({
+               userId : Meteor.userId(),
                courseId : course._id,
                l2_wordName,
                l2_examples : l2_example_Array,
@@ -91,11 +92,8 @@ Meteor.methods({
             l2_examples.length <= 1000 && l1_examples.length <= 1000
          ){
 
-         let courseId = Courses_Words.findOne( { _id : word_pair_id } ).courseId;
-         // check the "course the words belong to it" is created by the user
-         let course = Courses_Configs.findOne( { userId : Meteor.userId(), _id : courseId } );
-
-         if(course){
+         // check word pair actually belongs to the user
+         if( Courses_Words.findOne( { userId : Meteor.userId(), _id : word_pair_id } ) ){
             let l2_example_Array = l2_examples.split( "\n" );
             let l1_example_Array = l1_examples.split( "\n" );
 
@@ -120,12 +118,8 @@ Meteor.methods({
    'instructor.removeWord': (word_pair_id) => {
       if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
 
-         let word_pair = Courses_Words.findOne( { "_id" : word_pair_id } );
-
-         // check word actually belongs to a user-created course
-         if( Courses_Configs.findOne( {userId : Meteor.userId(), _id : word_pair.courseId } ) ){
-            Courses_Words.remove( { "_id" : word_pair_id } );
-         }
+         // remove operation will only succeed if word have current user's userId associated with it
+         Courses_Words.remove( { userId : Meteor.userId(), "_id" : word_pair_id } );
 
       }
    }

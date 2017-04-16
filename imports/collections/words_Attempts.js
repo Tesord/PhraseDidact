@@ -12,6 +12,11 @@ Schemas.Words_Attempts = new SimpleSchema({
       label: "wordId",
       max: 20,
    },
+   courseId: {
+      type: String,
+      label: "courseId",
+      max: 20,
+   },
    userId: {
       type: String,
       label: "wordId",
@@ -20,7 +25,7 @@ Schemas.Words_Attempts = new SimpleSchema({
    learnScore: {
       type: Number,
       label: "learnScore",
-      defaultValue: 0
+      defaultValue: 0,
    },
    attempted: {
       type: Boolean,

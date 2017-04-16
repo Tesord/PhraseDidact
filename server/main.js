@@ -61,13 +61,7 @@ Meteor.startup(() => {
       let course = Courses_Configs.findOne( { courseName } );
 
       if(course){
-         // course exists, but do user have permission to edit it?
-         if(course.userId === this.userId){
-            return Courses_Words.find({ courseId : course._id });
-         }
-         else{
-            throw new Meteor.Error("401", "Unauthorized access to course.");
-         }
+         return Courses_Words.find({ userId : this.userId, courseId : course._id });
       }
       else{
          throw new Meteor.Error("404", "Course not found.");
