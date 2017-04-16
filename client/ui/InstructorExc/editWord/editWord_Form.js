@@ -22,7 +22,7 @@ class EditWord_Form extends Component{
 
 
       return (
-         <div id="add-word-section">
+         <div className="standard-content">
             <form onSubmit={	this.props.save_Func.bind( this.props.funcContext )	}>
                <contentTitle>	{title}	</contentTitle>
 

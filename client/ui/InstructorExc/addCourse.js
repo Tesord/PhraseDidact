@@ -70,7 +70,7 @@ class AddCourse extends Component {
    getMainContent( button ){
 
       return (
-         <div id="add-course-section">
+         <div className="standard-content">
             <form onSubmit={	this.save.bind(this)	}>
                <contentTitle>	Create Course	</contentTitle>
 

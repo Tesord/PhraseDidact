@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import Learner_LProfile from '/imports/collections/learner_LProfile';
 import Courses_Configs from '/imports/collections/courses_Configs';
 import Courses_Words from '/imports/collections/courses_Words';
+import Words_Attempts from '/imports/collections/words_Attempts';
 
 
 Meteor.startup(() => {
@@ -71,6 +72,44 @@ Meteor.startup(() => {
       else{
          throw new Meteor.Error("404", "Course not found.");
       }
+   });
+
+   // TODO permission, UNTESTED
+   Meteor.publish('words_Attempts', function(courseName, userIdOfLearner) {
+
+      let course = Courses_Configs.findOne( { courseName, access: "public" } );
+      if( course ){
+         // course exists, and user can indeed access the course
+
+         let wordPairArray = Courses_Words.find( course._id ).fetch();
+         // get the wordIds of all words in course
+         let wordIdArray = [];
+         for(let wordPair     of    wordPairArray){
+            wordIdArray.push( wordPair._id );
+         }
+
+
+         if( Roles.userIsInRole( this.userId, "LEARN" ) ){
+            return Words_Attempts.find( { userId : this.userId, wordId : { $in: wordIdArray } } );
+         }
+         else{
+            return Words_Attempts.find( { userId : userIdOfLearner, wordId : { $in: wordIdArray } } );
+         }
+      }
+      else{
+         throw new Meteor.Error("404/401", "Course not found or Unauthorized access");
+      }
+
+      // if(word){
+      //    // word-pair exists, but do user have permission to view record?
+      //    if(course.access === "public"){
+      //       return Words_Attempts.find({ courseId : course._id });
+      //    }
+      //    else{
+      //       throw new Meteor.Error("401", "Unauthorized access.");
+      //    }
+      // }
+
    });
 
 });

@@ -17,6 +17,8 @@ import EditCourse from './ui/InstructorExc/editCourse';
 import AddWord from './ui/InstructorExc/addWord';
 import EditWord from './ui/InstructorExc/editWord';
 
+import DoCourse from './ui/LearnerExc/doCourse';
+
 
 
 /*************** TODO WHEN FINISHED: comment out the below imports & delete above.
@@ -57,6 +59,8 @@ const routes = (
 				<Route path="/course/:courseName/edit" component={EditCourse} />
 				<Route path="/course/:courseName/addWord" component={AddWord} />
 				<Route path="/course/:courseName/editWord/:wordPairId" component={EditWord} />
+
+				<Route path="/course/:courseName/" component={DoCourse} />
 
 				<Route component={NotFound} />
 			</Switch>
