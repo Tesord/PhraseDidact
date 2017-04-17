@@ -2,7 +2,8 @@
   "name": "PhraseDidact",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "test": "meteor test --driver-package=practicalmeteor:mocha"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
@@ -18,7 +19,10 @@
     "simpl-schema": "^0.2.3"
   },
   "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.23.0"
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "chai": "^3.5.0",
+    "faker": "^4.1.0",
+    "sinon": "^2.1.0"
   },
   "engines": {
     "node": "4.7.3"

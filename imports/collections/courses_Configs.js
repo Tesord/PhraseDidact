@@ -28,7 +28,9 @@ Schemas.Courses_Configs = new SimpleSchema({
    access: {
       type: String,
       label: "access",
-      max: 50
+      max: 50,
+
+      allowedValues: ["public", "private"]
    },
    description: {
       type: String,
