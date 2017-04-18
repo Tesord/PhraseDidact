@@ -15,7 +15,10 @@ Meteor.methods({
 
    'userAccount.setAccountType': (isInstructor) => {
 
-      if( !Roles.userIsInRole( Meteor.userId(), "LEARN" ) && !Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
+      if( Meteor.userId() &&
+            !Roles.userIsInRole( Meteor.userId(), "LEARN" ) &&
+            !Roles.userIsInRole( Meteor.userId(), "INSTR" )
+         ){
 
          // Will throw exception if unsuccessful. This method blocks until complete.
          if(isInstructor){
@@ -38,12 +41,20 @@ Meteor.methods({
    },
 
    'userAccount.getUserDetails' : (userId) => {
-      let user = Meteor.users.find( {_id : userId} ).fetch();
-      return {
-         userId : user._id,
-         joinDate : user.createdAt,
-         username: user.username,
-      };
+      let user = Meteor.users.findOne( {_id : userId} );
+
+      if(user){
+         return {
+            userId : user._id,
+            joinDate : user.createdAt,
+            username: user.username,
+            role: Roles.getRolesForUser( userId )[0]
+         };
+      }
+      else{
+         return null;
+      }
+
    },
 
 

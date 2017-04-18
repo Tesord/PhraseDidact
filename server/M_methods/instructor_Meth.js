@@ -27,7 +27,7 @@ Meteor.methods({
 
             // Useful error messages
             if( err.message.lastIndexOf("E11000", 0) === 0 ){
-               throw new Meteor.Error("E11000", "Course with this name already exists! Please pick another one or add an unique identifer such as (*username*) ");
+               throw new Meteor.Error("E11000");
             }
             else{
                throw err;
@@ -42,10 +42,12 @@ Meteor.methods({
       if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
 
          // courseId required to access Courses_Words collection + validate course ownership
-         let courseId = Courses_Configs.findOne( {userId : Meteor.userId(), courseName} )._id;
+         let course = Courses_Configs.findOne( {userId : Meteor.userId(), courseName} );
 
-         Courses_Words.remove( { courseId } );
-         Courses_Configs.remove( { userId : Meteor.userId(), courseName } );
+         if(course){
+            Courses_Words.remove( { userId : course._id } );
+            Courses_Configs.remove( { userId : Meteor.userId(), courseName } );
+         }
 
       }
    },
