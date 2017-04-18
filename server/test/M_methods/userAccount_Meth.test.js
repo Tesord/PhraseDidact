@@ -1,6 +1,5 @@
 import { Random } from 'meteor/random';
 import chai, {expect} from 'chai';
-import sinon from 'sinon';
 
 import ServerCommon from './serverCommon.test';
 
@@ -10,46 +9,36 @@ import userAccount_Meth from '../../M_methods/userAccount_Meth';
 describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", function() {
 
    it("Setting a brand new account to LEARN type [success]", function () {
-      // setting up test data
-      ServerCommon.sim_LogInDefaultUser();
+      ServerCommon.sim_LogInDefaultUser(false);
 
-      // calling the method to test...
-      Meteor.call('userAccount.setAccountType', false);
-
-      let result = Roles.userIsInRole( userId, "LEARN" );
+      let result = Roles.userIsInRole( DEFAULT_userId, "LEARN" );
 
       // testing the result
       expect(result).to.be.true;
    });
 
    it("Setting a brand new account to INSTR type [success]", function () {
-      ServerCommon.sim_LogInDefaultUser();
+      ServerCommon.sim_LogInDefaultUser(true);
 
-      Meteor.call('userAccount.setAccountType', true);
-
-      let result = Roles.userIsInRole( userId, "INSTR" );
+      let result = Roles.userIsInRole( DEFAULT_userId, "INSTR" );
 
       expect(result).to.be.true;
    });
 
    it("Setting an account to LEARN when account type is already set to INSTR [reject]", function () {
-      ServerCommon.sim_LogInDefaultUser();
-
-      Meteor.call('userAccount.setAccountType', true);
+      ServerCommon.sim_LogInDefaultUser(true);
       Meteor.call('userAccount.setAccountType', false);
 
-      let result = Roles.userIsInRole( userId, "INSTR" );
+      let result = Roles.userIsInRole( DEFAULT_userId, "INSTR" );
 
       expect(result).to.be.true;
    });
 
    it("Setting an account to INSTR when account type is already set to LEARN [reject]", function () {
-      ServerCommon.sim_LogInDefaultUser();
-
-      Meteor.call('userAccount.setAccountType', false);
+      ServerCommon.sim_LogInDefaultUser(false);
       Meteor.call('userAccount.setAccountType', true);
 
-      let result = Roles.userIsInRole( userId, "LEARN" );
+      let result = Roles.userIsInRole( DEFAULT_userId, "LEARN" );
 
       expect(result).to.be.true;
    });
@@ -61,7 +50,7 @@ describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", fun
       // checking DB is not modified
       let allDBDocs = Meteor.users.find().fetch();
       expect( allDBDocs ).to.have.lengthOf(1);
-      expect( Roles.getRolesForUser(userId) ).to.be.empty;
+      expect( Roles.getRolesForUser(DEFAULT_userId) ).to.be.empty;
    });
 
 });
@@ -70,8 +59,7 @@ describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", fun
 describe("userAccount_Meth.js - userAccount.checkIsInstructor() Meteor method", function() {
 
    it("Checking if INSTR account returns TRUE", function () {
-      ServerCommon.sim_LogInDefaultUser();
-      Meteor.call('userAccount.setAccountType', true);
+      ServerCommon.sim_LogInDefaultUser(true);
 
       let result = Meteor.call('userAccount.checkIsInstructor');
 
@@ -79,8 +67,7 @@ describe("userAccount_Meth.js - userAccount.checkIsInstructor() Meteor method", 
    });
 
    it("Checking if LEARN account returns FALSE", function () {
-      ServerCommon.sim_LogInDefaultUser();
-      Meteor.call('userAccount.setAccountType', false);
+      ServerCommon.sim_LogInDefaultUser(false);
 
       let result = Meteor.call('userAccount.checkIsInstructor');
 
@@ -101,8 +88,7 @@ describe("userAccount_Meth.js - userAccount.checkIsInstructor() Meteor method", 
 describe("userAccount_Meth.js - userAccount.checkIsLearner() Meteor method", function() {
 
    it("Checking if LEARN account returns TRUE", function () {
-      ServerCommon.sim_LogInDefaultUser();
-      Meteor.call('userAccount.setAccountType', false);
+      ServerCommon.sim_LogInDefaultUser(false);
 
       let result = Meteor.call('userAccount.checkIsLearner');
 
@@ -110,8 +96,7 @@ describe("userAccount_Meth.js - userAccount.checkIsLearner() Meteor method", fun
    });
 
    it("Checking if INSTR account returns FALSE", function () {
-      ServerCommon.sim_LogInDefaultUser();
-      Meteor.call('userAccount.setAccountType', true);
+      ServerCommon.sim_LogInDefaultUser(true);
 
       let result = Meteor.call('userAccount.checkIsLearner');
 
@@ -133,23 +118,22 @@ describe("userAccount_Meth.js - userAccount.getUserDetails() Meteor method", fun
 
    // TODO this method might be replaced by a publish function instead
    it("Checking if returned details from an existing user matches what is expected", function () {
-      ServerCommon.sim_LogInDefaultUser();
-      Meteor.call('userAccount.setAccountType', true);
+      ServerCommon.sim_LogInDefaultUser(true);
 
-      let result = Meteor.call('userAccount.getUserDetails', userId);
+      let result = Meteor.call('userAccount.getUserDetails', DEFAULT_userId);
 
 
-      expect( result.userId ).to.equal( userId );
+      expect( result.userId ).to.equal( DEFAULT_userId );
 
-      let expectedJoinDate = Meteor.users.findOne( {_id : userId} ).createdAt;
+      let expectedJoinDate = Meteor.users.findOne( {_id : DEFAULT_userId} ).createdAt;
       expect( result.joinDate.toString() ).to.equal( expectedJoinDate.toString() );
 
-      expect( result.username ).to.equal( username );
+      expect( result.username ).to.equal( DEFAULT_username );
       expect( result.role ).to.equal( "INSTR" );
    });
 
    it("Checking if returned details from an non-existing user matches what is expected [null]", function () {
-      ServerCommon.sim_LogInDefaultUser();
+      ServerCommon.sim_LogInDefaultUser(true);
 
       let result = Meteor.call('userAccount.getUserDetails', Random.id() );
 
@@ -164,14 +148,13 @@ describe("userAccount_Meth.js - userAccount.getCourseCreatorsDetails() Meteor me
    // TODO
 
    // it("Checking if returned details from an existing user matches what is expected", function () {
-   //    ServerCommon.sim_LogInDefaultUser();
-   //    Meteor.call('userAccount.setAccountType', true);
+   //    ServerCommon.sim_LogInDefaultUser(true);
    //
-   //    let result = Meteor.call('userAccount.getCourseCreatorsDetails', userId);
+   //    let result = Meteor.call('userAccount.getCourseCreatorsDetails', DEFAULT_userId);
    //
-   //    expect( result.userId ).to.equal( userId );
+   //    expect( result.userId ).to.equal( DEFAULT_userId );
    //
-   //    let expectedJoinDate = Meteor.users.findOne( {_id : userId} ).createdAt;
+   //    let expectedJoinDate = Meteor.users.findOne( {_id : DEFAULT_userId} ).createdAt;
    //    expect( result.joinDate.toString() ).to.equal( expectedJoinDate.toString() );
    //
    //    expect( result.username ).to.equal( username );

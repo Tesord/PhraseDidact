@@ -54,9 +54,16 @@ Meteor.methods({
 
 
    'instructor.fetchCourseByUser': (courseName) => {
+      if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){
 
-      return Courses_Configs.findOne( { userId : Meteor.userId(), courseName } );
+         let result = Courses_Configs.findOne( { userId : Meteor.userId(), courseName } );
+         if(result){
+            return result;
+         }
 
+      }
+
+      return null;
    },
 
 

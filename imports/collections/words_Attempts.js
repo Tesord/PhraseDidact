@@ -27,10 +27,10 @@ Schemas.Words_Attempts = new SimpleSchema({
       label: "learnScore",
       defaultValue: 0,
    },
-   attempted: {
-      type: Boolean,
-      label: "attempted",
-      defaultValue: false
+   attempts: {
+      type: Number,
+      label: "attempts",
+      defaultValue: 0
    }
 });
 
