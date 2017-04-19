@@ -4,6 +4,7 @@ import faker from 'faker';
 
 import Courses_Words from '/imports/collections/courses_Words';
 import Courses_Configs from '/imports/collections/courses_Configs';
+import Words_Attempts from '/imports/collections/words_Attempts';
 
 
 // TODO For maintainability, there should be some sort of factory for creating test data and comparision...
@@ -58,6 +59,8 @@ export function genericCourse_Setup(){
    test_tags = faker.lorem.words();
    Meteor.call('instructor.addCourse', test_courseName, test_access, test_description, test_tags );
 
+   TEST_courseId = Courses_Configs.findOne({courseName : test_courseName})._id;
+
    sandbox.restore();
 }
 
@@ -82,16 +85,31 @@ export function genericWordPair_Setup(){
    test_l1_examples = faker.lorem.sentences();
    test_difficulyLevel = 0;
 
-   // calling the method to test...
    Meteor.call('instructor.addWord', test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel );
 
-   test_word_pair_id = Courses_Words.findOne({l2_wordName : test_l2_wordName})._id;
+   TEST_wordId = Courses_Words.findOne({l2_wordName : test_l2_wordName})._id;
+
+   sandbox.restore();
+}
+
+export function secondWordPair_Setup(){
+   sim_LogInDefaultUser(true);
+
+   SECOND_l2_wordName = faker.lorem.word();
+   SECOND_l2_examples = faker.lorem.sentences();
+   SECOND_l1_wordName = faker.lorem.word();
+   SECOND_l1_examples = faker.lorem.sentences();
+   SECOND_difficulyLevel = 1;
+
+   Meteor.call('instructor.addWord', test_courseName, SECOND_l2_wordName, SECOND_l2_examples, SECOND_l1_wordName, SECOND_l1_examples, SECOND_difficulyLevel );
+
+   SECOND_wordId = Courses_Words.findOne({l2_wordName : SECOND_l2_wordName})._id;
 
    sandbox.restore();
 }
 
 
-export function course_ComparisonChecker(courseName, access, description, tags){
+export function coursesConfigs_ContentRetriever(courseName, access, description, tags){
    let tagArray = tags.replace( /\n/g, " " ).split( " " );
 
    return Courses_Configs.findOne( {
@@ -103,7 +121,7 @@ export function course_ComparisonChecker(courseName, access, description, tags){
                             } );
 }
 
-export function word_ComparisonChecker(courseName, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel){
+export function coursesWords_ContentRetriever(courseName, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel){
    let l2_example_Array = l2_examples.split( "\n" );
    let l1_example_Array = l1_examples.split( "\n" );
 
@@ -115,4 +133,32 @@ export function word_ComparisonChecker(courseName, l2_wordName, l2_examples, l1_
                               l1_examples : l1_example_Array,
                               difficultyLevel
                             } );
+}
+
+export function wordsAttempts_ContentRetriever(courseId, userId){
+
+   return Words_Attempts.find( {
+                              userId,
+                              courseId
+                           } ).fetch();
+}
+
+export function wordsAttempts_ArrayChecker(wordsAttempts_Array, expectedLength){
+   let finalResult = true;
+
+   if(wordsAttempts_Array.length !== expectedLength){
+      finalResult = false;
+      return finalResult;
+   }
+
+   for(let wordAttempt   of    wordsAttempts_Array){
+      if(   wordAttempt.learnScore !== 0  ||
+            wordAttempt.attempts !== 0
+      ){
+         finalResult = false;
+         return finalResult;
+      }
+   }
+
+   return finalResult;
 }

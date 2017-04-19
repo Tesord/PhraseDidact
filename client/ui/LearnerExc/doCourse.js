@@ -77,9 +77,21 @@ class DoCourse extends Component {
    }
 
    isLearnerAction(){
-      this.state = {
-         content: this.getMainContent( this.getReadyAnim() )
-      };
+      Meteor.call("learner.doCourse", this.props.match.params.courseName , (err, result) => {
+         if(err){
+            /* TODO change to "Access denied" or something page */
+
+            setTimeout( () => { window.location.replace("/notFound"); }, 500);
+         }
+         else{
+            this.state = {
+               content: this.getMainContent( this.getReadyAnim() )
+            };
+         }
+
+      });
+
+      
    }
 
    isOtherAction(){

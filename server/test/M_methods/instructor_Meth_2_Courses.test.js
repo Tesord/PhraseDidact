@@ -6,7 +6,6 @@ import ServerCommon from './serverCommon.test';
 import Instructor_Meth from '../../M_methods/instructor_Meth';
 
 import Courses_Configs from '/imports/collections/courses_Configs';
-import Courses_Words from '/imports/collections/courses_Words';
 
 
 
@@ -27,7 +26,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       Meteor.call('instructor.addCourse', test_courseName, test_access, test_description, test_tags );
 
       // retrieving the result...
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
 
       // testing the result
       expect(result).to.exist;
@@ -39,7 +38,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       test_tags = faker.lorem.words();
 
       Meteor.call('instructor.addCourse', test_courseName, test_access, test_description, test_tags );
-      result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
    });
 
@@ -99,7 +98,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
 
       Meteor.call('instructor.addCourse', test_courseName, test_access, test_description, test_tags );
 
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
    });
 
@@ -141,11 +140,11 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       let test_courseName = "Limit Course 1";
       let test_access = "public";
       let test_description = 'a'.repeat(5000);
-      let test_tags = faker.lorem.words();;
+      let test_tags = faker.lorem.words();
 
       Meteor.call('instructor.addCourse', test_courseName, test_access, test_description, test_tags );
 
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
    });
 
@@ -175,7 +174,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
 
       Meteor.call('instructor.addCourse', test_courseName, test_access, test_description, test_tags );
 
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
    });
 
@@ -187,7 +186,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       let test_tags = faker.lorem.words();
 
       Meteor.call('instructor.addCourse', test_courseName, test_access, test_description, test_tags );
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
 
       let funcCall = function() { Meteor.call('instructor.addCourse', test_courseName, test_access, test_description, test_tags ); };
@@ -257,7 +256,6 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
 
    beforeEach(function(){
       ServerCommon.genericCourse_Setup();
-      ServerCommon.genericWordPair_Setup();
    });
 
    it("An instructor removing a simple course that he/she owns from DB [success]", function () {
@@ -267,8 +265,6 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
 
       let result = Courses_Configs.findOne( {} );
       expect(result).to.not.exist;
-      let result2 = Courses_Words.findOne( {} );
-      expect(result2).to.not.exist;
    });
 
    it("Another instructor removing a simple course that he/she does NOT own from DB [reject]", function () {
@@ -276,10 +272,8 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
 
       Meteor.call('instructor.removeCourse', test_courseName );
 
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
-      let result2 = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      expect(result2).to.exist;
    });
 
    it("A learner removing a course from DB [reject]", function () {
@@ -287,10 +281,8 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
 
       Meteor.call('instructor.removeCourse', test_courseName );
 
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
-      let result2 = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      expect(result2).to.exist;
    });
 
    it("An unlogged user removing a course from DB [reject]", function () {
@@ -298,10 +290,8 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
 
       Meteor.call('instructor.removeCourse', test_courseName );
 
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
-      let result2 = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      expect(result2).to.exist;
    });
 
    it("An instructor removing a course that does NOT exist [reject]", function () {
@@ -312,10 +302,8 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
       // checking DB is not modified
       let allDBDocs = Courses_Configs.find().fetch();
       expect( allDBDocs ).to.have.lengthOf(1);
-      let result = ServerCommon.course_ComparisonChecker(test_courseName, test_access, test_description, test_tags);
+      let result = ServerCommon.coursesConfigs_ContentRetriever(test_courseName, test_access, test_description, test_tags);
       expect(result).to.exist;
-      let result2 = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      expect(result2).to.exist;
    });
 
 });

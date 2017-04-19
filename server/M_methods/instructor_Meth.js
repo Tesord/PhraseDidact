@@ -20,7 +20,7 @@ Meteor.methods({
                access,
                description,
                tags : tagArray,
-               
+
                createdAt: new Date()
             });
 
@@ -47,7 +47,7 @@ Meteor.methods({
          let course = Courses_Configs.findOne( {userId : Meteor.userId(), courseName} );
 
          if(course){
-            Courses_Words.remove( { courseId : course._id } );
+            // associated database like Courses_Words & Words_Attempts are kept for Learner's record
             Courses_Configs.remove( { userId : Meteor.userId(), courseName } );
          }
 

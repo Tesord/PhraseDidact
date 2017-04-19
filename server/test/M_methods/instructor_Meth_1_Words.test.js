@@ -28,7 +28,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       Meteor.call('instructor.addWord', test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel );
 
       // retrieving the result...
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
 
       // testing the result
       expect(result).to.exist;
@@ -41,7 +41,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       test_difficulyLevel = 1;
 
       Meteor.call('instructor.addWord', test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel );
-      result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
@@ -122,7 +122,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
 
       Meteor.call('instructor.addWord', test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel );
 
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
@@ -154,7 +154,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
 
       Meteor.call('instructor.addWord', test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel );
 
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
@@ -188,7 +188,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
 
       Meteor.call('instructor.addWord', test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel );
 
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
@@ -220,7 +220,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
 
       Meteor.call('instructor.addWord', test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel );
 
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
@@ -238,7 +238,7 @@ describe("instructor_Meth.js - instructor.removeWord() Meteor method", function(
    it("An instructor removing a simple word pair that he/she owns from DB [success]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
-      Meteor.call('instructor.removeWord', test_word_pair_id );
+      Meteor.call('instructor.removeWord', TEST_wordId );
 
       let result = Courses_Words.findOne( {} );
       expect(result).to.not.exist;
@@ -247,27 +247,27 @@ describe("instructor_Meth.js - instructor.removeWord() Meteor method", function(
    it("Another instructor removing a simple word pair that he/she does NOT own from DB [reject]", function () {
       ServerCommon.sim_LogInDifferentUser(true);
 
-      Meteor.call('instructor.removeWord', test_word_pair_id );
+      Meteor.call('instructor.removeWord', TEST_wordId );
 
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
    it("A learner removing a word pair from DB [reject]", function () {
       ServerCommon.sim_LogInDifferentUser(false);
 
-      Meteor.call('instructor.removeWord', test_word_pair_id );
+      Meteor.call('instructor.removeWord', TEST_wordId );
 
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
    it("An unlogged user removing a word pair from DB [reject]", function () {
       ServerCommon.sim_UserIsUnlogged();
 
-      Meteor.call('instructor.removeWord', test_word_pair_id );
+      Meteor.call('instructor.removeWord', TEST_wordId );
 
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
@@ -279,7 +279,7 @@ describe("instructor_Meth.js - instructor.removeWord() Meteor method", function(
       // checking DB is not modified
       let allDBDocs = Courses_Words.find().fetch();
       expect( allDBDocs ).to.have.lengthOf(1);
-      let result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
       expect(result).to.exist;
    });
 
@@ -304,10 +304,10 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       // setting up test data
       ServerCommon.sim_LogInDefaultUser(true);
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
-      let old_result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      let new_result = ServerCommon.word_ComparisonChecker(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
 
       expect(old_result).to.not.exist;
       expect(new_result).to.exist;
@@ -318,8 +318,8 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
 
       Meteor.call('instructor.editWord', "wpidoesnotexist", EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
-      let old_result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      let new_result = ServerCommon.word_ComparisonChecker(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
 
       expect(old_result).to.exist;
       expect(new_result).to.not.exist;
@@ -328,10 +328,10 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
    it("A learner editing a simple word pair on DB [reject]", function () {
       ServerCommon.sim_LogInDifferentUser(false);
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
-      let old_result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      let new_result = ServerCommon.word_ComparisonChecker(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
 
       expect(old_result).to.exist;
       expect(new_result).to.not.exist;
@@ -340,10 +340,10 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
    it("A unlogged user editing a simple word pair on DB [reject]", function () {
       ServerCommon.sim_UserIsUnlogged();
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
-      let old_result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      let new_result = ServerCommon.word_ComparisonChecker(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
 
       expect(old_result).to.exist;
       expect(new_result).to.not.exist;
@@ -353,14 +353,14 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       ServerCommon.sim_LogInDefaultUser(true);
       let EDIT_l2_examples = 'a'.repeat(1001);
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
       EDIT_l2_examples = 'a'.repeat(1002);
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
-      let old_result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      let new_result = ServerCommon.word_ComparisonChecker(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
 
       expect(old_result).to.exist;
       expect(new_result).to.not.exist;
@@ -370,10 +370,10 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       ServerCommon.sim_LogInDefaultUser(true);
       let EDIT_l2_examples = 'a'.repeat(1000);
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
-      let old_result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      let new_result = ServerCommon.word_ComparisonChecker(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
 
       expect(old_result).to.not.exist;
       expect(new_result).to.exist;
@@ -383,14 +383,14 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       ServerCommon.sim_LogInDefaultUser(true);
       let EDIT_l1_examples = 'a'.repeat(1001);
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
       EDIT_l1_examples = 'a'.repeat(1002);
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
-      let old_result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      let new_result = ServerCommon.word_ComparisonChecker(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
 
       expect(old_result).to.exist;
       expect(new_result).to.not.exist;
@@ -400,10 +400,10 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       ServerCommon.sim_LogInDefaultUser(true);
       let EDIT_l1_examples = 'a'.repeat(1000);
 
-      Meteor.call('instructor.editWord', test_word_pair_id, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
 
-      let old_result = ServerCommon.word_ComparisonChecker(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
-      let new_result = ServerCommon.word_ComparisonChecker(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
 
       expect(old_result).to.not.exist;
       expect(new_result).to.exist;
