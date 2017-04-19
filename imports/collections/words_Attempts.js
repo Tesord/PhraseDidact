@@ -31,6 +31,10 @@ Schemas.Words_Attempts = new SimpleSchema({
       type: Number,
       label: "attempts",
       defaultValue: 0
+   },
+
+   createdAt: {
+      type: Date
    }
 });
 

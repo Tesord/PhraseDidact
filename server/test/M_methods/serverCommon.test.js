@@ -6,6 +6,9 @@ import Courses_Words from '/imports/collections/courses_Words';
 import Courses_Configs from '/imports/collections/courses_Configs';
 
 
+// TODO For maintainability, there should be some sort of factory for creating test data and comparision...
+
+
 beforeEach(function() {
    // setting up default test condition
    resetDatabase();

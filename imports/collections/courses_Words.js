@@ -48,6 +48,10 @@ Schemas.Courses_Words = new SimpleSchema({
    },
    'difficultyLevel': {
       type: Number,
+   },
+
+   createdAt: {
+      type: Date
    }
 });
 

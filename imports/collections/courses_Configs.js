@@ -47,6 +47,10 @@ Schemas.Courses_Configs = new SimpleSchema({
    },
    'tags.$': {
       type: String
+   },
+
+   createdAt: {
+      type: Date
    }
 });
 

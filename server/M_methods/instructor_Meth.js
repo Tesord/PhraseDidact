@@ -19,7 +19,9 @@ Meteor.methods({
                courseName,
                access,
                description,
-               tags : tagArray
+               tags : tagArray,
+               
+               createdAt: new Date()
             });
 
          }
@@ -87,7 +89,9 @@ Meteor.methods({
                l2_examples : l2_example_Array,
                l1_wordName,
                l1_examples : l1_example_Array,
-               difficultyLevel
+               difficultyLevel,
+
+               createdAt: new Date()
             });
          }
 

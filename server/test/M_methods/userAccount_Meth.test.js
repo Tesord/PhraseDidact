@@ -158,21 +158,23 @@ describe("userAccount_Meth.js - userAccount.getCourseCreatorsDetails() Meteor me
       let result = Meteor.call('userAccount.getCourseCreatorsDetails', courseList);
 
 
-      expect( result[0].userId ).to.equal( DEFAULT_userId );
+      let expected_userIds = [DEFAULT_userId, DIFF_userId];
 
-      let expectedJoinDate = Meteor.users.findOne( {_id : DEFAULT_userId} ).createdAt;
-      expect( result[0].joinDate.toString() ).to.equal( expectedJoinDate.toString() );
+      let expectedJoinDate = Meteor.users.findOne( {_id : DEFAULT_userId} ).createdAt.toString();
+      let expectedJoinDate_2 = Meteor.users.findOne( {_id : DIFF_userId} ).createdAt.toString();
+      let expected_JoinDates = [expectedJoinDate, expectedJoinDate_2];
 
-      expect( result[0].username ).to.equal( DEFAULT_username );
+      let expected_usernames = [DEFAULT_username, DIFF_username];
+
+
+      expect( result[0].userId ).to.be.oneOf( expected_userIds );
+      expect( result[0].joinDate.toString() ).to.be.oneOf( expected_JoinDates );
+      expect( result[0].username ).to.be.oneOf( expected_usernames );
       expect( result[0].role ).to.equal( "INSTR" );
 
-
-      expect( result[1].userId ).to.equal( DIFF_userId );
-
-      let expectedJoinDate_2 = Meteor.users.findOne( {_id : DIFF_userId} ).createdAt;
-      expect( result[1].joinDate.toString() ).to.equal( expectedJoinDate_2.toString() );
-
-      expect( result[1].username ).to.equal( DIFF_username );
+      expect( result[1].userId ).to.be.oneOf( expected_userIds );
+      expect( result[1].joinDate.toString() ).to.be.oneOf( expected_JoinDates );
+      expect( result[1].username ).to.be.oneOf( expected_usernames );
       expect( result[1].role ).to.equal( "INSTR" );
    });
 
