@@ -83,7 +83,7 @@ export function genericWordPair_Setup(){
    test_l2_examples = faker.lorem.sentences();
    test_l1_wordName = faker.lorem.word();
    test_l1_examples = faker.lorem.sentences();
-   test_difficulyLevel = 0;
+   test_difficulyLevel = 1;
 
    Meteor.call('instructor.addWord', test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel );
 
@@ -99,11 +99,27 @@ export function secondWordPair_Setup(){
    SECOND_l2_examples = faker.lorem.sentences();
    SECOND_l1_wordName = faker.lorem.word();
    SECOND_l1_examples = faker.lorem.sentences();
-   SECOND_difficulyLevel = 1;
+   SECOND_difficulyLevel = 0;
 
    Meteor.call('instructor.addWord', test_courseName, SECOND_l2_wordName, SECOND_l2_examples, SECOND_l1_wordName, SECOND_l1_examples, SECOND_difficulyLevel );
 
    SECOND_wordId = Courses_Words.findOne({l2_wordName : SECOND_l2_wordName})._id;
+
+   sandbox.restore();
+}
+
+export function thirdWordPair_Setup(){
+   sim_LogInDefaultUser(true);
+
+   THIRD_l2_wordName = faker.lorem.word();
+   THIRD_l2_examples = faker.lorem.sentences();
+   THIRD_l1_wordName = faker.lorem.word();
+   THIRD_l1_examples = faker.lorem.sentences();
+   THIRD_difficulyLevel = 5;
+
+   Meteor.call('instructor.addWord', test_courseName, THIRD_l2_wordName, THIRD_l2_examples, THIRD_l1_wordName, THIRD_l1_examples, THIRD_difficulyLevel );
+
+   THIRD_wordId = Courses_Words.findOne({l2_wordName : THIRD_l2_wordName})._id;
 
    sandbox.restore();
 }
@@ -135,30 +151,11 @@ export function coursesWords_ContentRetriever(courseName, l2_wordName, l2_exampl
                             } );
 }
 
-export function wordsAttempts_ContentRetriever(courseId, userId){
+export function wordsAttempts_ContentRetriever(courseId, wordId, userId){
 
-   return Words_Attempts.find( {
-                              userId,
-                              courseId
-                           } ).fetch();
-}
-
-export function wordsAttempts_ArrayChecker(wordsAttempts_Array, expectedLength){
-   let finalResult = true;
-
-   if(wordsAttempts_Array.length !== expectedLength){
-      finalResult = false;
-      return finalResult;
-   }
-
-   for(let wordAttempt   of    wordsAttempts_Array){
-      if(   wordAttempt.learnScore !== 0  ||
-            wordAttempt.attempts !== 0
-      ){
-         finalResult = false;
-         return finalResult;
-      }
-   }
-
-   return finalResult;
+   return Words_Attempts.findOne( {
+                              courseId,
+                              wordId,
+                              userId
+                           } );
 }

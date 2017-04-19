@@ -22,17 +22,20 @@ Schemas.Words_Attempts = new SimpleSchema({
       label: "wordId",
       max: 20,
    },
-   learnScore: {
-      type: Number,
-      label: "learnScore",
-      defaultValue: 0,
+   lastReviewDate: {
+      type: Date,
+      label: "lastReviewDate",
    },
+   nextReviewDate: {
+      type: Date,
+      label: "nextReviewDate",
+   },
+
    attempts: {
-      type: Number,
+      type: SimpleSchema.Integer,
       label: "attempts",
       defaultValue: 0
    },
-
    createdAt: {
       type: Date
    }

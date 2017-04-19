@@ -11,7 +11,7 @@ import Courses_Configs from '/imports/collections/courses_Configs';
 
 describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", function() {
 
-   it("Setting a brand new account to LEARN type [success]", function () {
+   it("Setting a brand new account to LEARN type [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(false);
 
       let result = Roles.userIsInRole( DEFAULT_userId, "LEARN" );
@@ -20,7 +20,7 @@ describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", fun
       expect(result).to.be.true;
    });
 
-   it("Setting a brand new account to INSTR type [success]", function () {
+   it("Setting a brand new account to INSTR type [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
       let result = Roles.userIsInRole( DEFAULT_userId, "INSTR" );
@@ -28,7 +28,7 @@ describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", fun
       expect(result).to.be.true;
    });
 
-   it("Setting an account to LEARN when account type is already set to INSTR [reject]", function () {
+   it("Setting an account to LEARN when account type is already set to INSTR [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       Meteor.call('userAccount.setAccountType', false);
 
@@ -37,7 +37,7 @@ describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", fun
       expect(result).to.be.true;
    });
 
-   it("Setting an account to INSTR when account type is already set to LEARN [reject]", function () {
+   it("Setting an account to INSTR when account type is already set to LEARN [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(false);
       Meteor.call('userAccount.setAccountType', true);
 
@@ -46,7 +46,7 @@ describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", fun
       expect(result).to.be.true;
    });
 
-   it("Unlogged user trying to set account type [reject]", function () {
+   it("Unlogged user trying to set account type [REJECT]", function () {
       ServerCommon.sim_UserIsUnlogged();
       Meteor.call('userAccount.setAccountType', false);
 
@@ -134,12 +134,12 @@ describe("userAccount_Meth.js - userAccount.getUserDetails() Meteor method", fun
       expect( result.role ).to.equal( "INSTR" );
    });
 
-   it("Checking if returned details from an non-existing user matches what is expected [null]", function () {
+   it("Checking if returned details from an non-existing user matches what is expected [undefined]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
       let result = Meteor.call('userAccount.getUserDetails', Random.id() );
 
-      expect( result ).to.be.null;
+      expect( result ).to.not.exist;
    });
 
 });
@@ -178,7 +178,7 @@ describe("userAccount_Meth.js - userAccount.getCourseCreatorsDetails() Meteor me
       expect( result[1].role ).to.equal( "INSTR" );
    });
 
-   it("Checking if returned details from a non-valid courseList match what is expected (null)", function () {
+   it("Checking if returned details from a non-valid courseList match what is expected [*empty*]", function () {
       let fake_courseList = [
          {userId: Random.id()},
          {userId: Random.id()}

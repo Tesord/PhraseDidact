@@ -15,7 +15,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       ServerCommon.genericCourse_Setup();
    });
 
-   it("An instructor adding simple word pairs to an existing course on DB [success]", function () {
+   it("An instructor adding simple word pairs to an existing course on DB [SUCCESS]", function () {
       // setting up test data
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = faker.lorem.word();
@@ -45,7 +45,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.exist;
    });
 
-   it("An instructor adding simple word pairs to a non-existing course on DB [reject]", function () {
+   it("An instructor adding simple word pairs to a non-existing course on DB [REJECT]", function () {
       // setting up test data
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = faker.lorem.word();
@@ -62,7 +62,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.not.exist;
    });
 
-   it("A learner adding a simple word pair to DB [reject]", function () {
+   it("A learner adding a simple word pair to DB [REJECT]", function () {
       ServerCommon.sim_LogInDifferentUser(false);
       let test_l2_wordName = faker.lorem.word();
       let test_l2_examples = faker.lorem.sentences();
@@ -76,7 +76,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.not.exist;
    });
 
-   it("A unlogged user adding a simple word pair to DB [reject]", function () {
+   it("A unlogged user adding a simple word pair to DB [REJECT]", function () {
       ServerCommon.sim_UserIsUnlogged();
       let test_l2_wordName = faker.lorem.word();
       let test_l2_examples = faker.lorem.sentences();
@@ -90,7 +90,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a word pair with too big (exceptional - 151, 152) L2 Word Name to DB [reject]", function () {
+   it("An instructor adding a word pair with too big (exceptional - 151, 152) L2 Word Name to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = 'a'.repeat(151);
       let test_l2_examples = faker.lorem.sentences();
@@ -112,7 +112,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a word pair with an on-limit (extreme - 150) L2 Word Name to DB [success]", function () {
+   it("An instructor adding a word pair with an on-limit (extreme - 150) L2 Word Name to DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = 'a'.repeat(150);
       let test_l2_examples = faker.lorem.sentences();
@@ -126,7 +126,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.exist;
    });
 
-   it("An instructor adding a word pair with too big (exceptional - 1001, 1002) L2 Examples section to DB [reject]", function () {
+   it("An instructor adding a word pair with too big (exceptional - 1001, 1002) L2 Examples section to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = faker.lorem.word();
       let test_l2_examples = 'a'.repeat(1001);
@@ -144,7 +144,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a word pair with an on-limit (extreme - 1000) L2 Examples section to DB [success]", function () {
+   it("An instructor adding a word pair with an on-limit (extreme - 1000) L2 Examples section to DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = faker.lorem.word();
       let test_l2_examples = 'a'.repeat(1000);
@@ -158,7 +158,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.exist;
    });
 
-   it("An instructor adding a word pair with too big (exceptional - 151, 152) L1 Word Name to DB [reject]", function () {
+   it("An instructor adding a word pair with too big (exceptional - 151, 152) L1 Word Name to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = faker.lorem.word();
       let test_l2_examples = faker.lorem.sentences();
@@ -178,7 +178,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a word pair with an on-limit (extreme - 150) L1 Word Name to DB [success]", function () {
+   it("An instructor adding a word pair with an on-limit (extreme - 150) L1 Word Name to DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = faker.lorem.word();
       let test_l2_examples = faker.lorem.sentences();
@@ -192,7 +192,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.exist;
    });
 
-   it("An instructor adding a word pair with too big (exceptional - 1001, 1002) L1 Examples section to DB [reject]", function () {
+   it("An instructor adding a word pair with too big (exceptional - 1001, 1002) L1 Examples section to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = faker.lorem.word();
       let test_l2_examples = faker.lorem.sentences();
@@ -210,7 +210,7 @@ describe("instructor_Meth.js - instructor.addWord() Meteor method", function() {
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a word pair with an on-limit (extreme - 1000) L1 Examples section to DB [success]", function () {
+   it("An instructor adding a word pair with an on-limit (extreme - 1000) L1 Examples section to DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_l2_wordName = faker.lorem.word();
       let test_l2_examples = faker.lorem.sentences();
@@ -235,7 +235,7 @@ describe("instructor_Meth.js - instructor.removeWord() Meteor method", function(
       ServerCommon.genericWordPair_Setup();
    });
 
-   it("An instructor removing a simple word pair that he/she owns from DB [success]", function () {
+   it("An instructor removing a simple word pair that he/she owns from DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
       Meteor.call('instructor.removeWord', TEST_wordId );
@@ -244,7 +244,7 @@ describe("instructor_Meth.js - instructor.removeWord() Meteor method", function(
       expect(result).to.not.exist;
    });
 
-   it("Another instructor removing a simple word pair that he/she does NOT own from DB [reject]", function () {
+   it("Another instructor removing a simple word pair that he/she does NOT own from DB [REJECT]", function () {
       ServerCommon.sim_LogInDifferentUser(true);
 
       Meteor.call('instructor.removeWord', TEST_wordId );
@@ -253,7 +253,7 @@ describe("instructor_Meth.js - instructor.removeWord() Meteor method", function(
       expect(result).to.exist;
    });
 
-   it("A learner removing a word pair from DB [reject]", function () {
+   it("A learner removing a word pair from DB [REJECT]", function () {
       ServerCommon.sim_LogInDifferentUser(false);
 
       Meteor.call('instructor.removeWord', TEST_wordId );
@@ -262,7 +262,7 @@ describe("instructor_Meth.js - instructor.removeWord() Meteor method", function(
       expect(result).to.exist;
    });
 
-   it("An unlogged user removing a word pair from DB [reject]", function () {
+   it("An unlogged user removing a word pair from DB [REJECT]", function () {
       ServerCommon.sim_UserIsUnlogged();
 
       Meteor.call('instructor.removeWord', TEST_wordId );
@@ -271,7 +271,7 @@ describe("instructor_Meth.js - instructor.removeWord() Meteor method", function(
       expect(result).to.exist;
    });
 
-   it("An instructor removing a word pair that does NOT exist [reject]", function () {
+   it("An instructor removing a word pair that does NOT exist [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
       Meteor.call('instructor.removeWord', "wpdoesnotexist" );
@@ -300,7 +300,7 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       EDIT_difficulyLevel = 1;
    });
 
-   it("An instructor editing an existing word pair [success]", function () {
+   it("An instructor editing an existing word pair that he/she owns on DB [SUCCESS]", function () {
       // setting up test data
       ServerCommon.sim_LogInDefaultUser(true);
 
@@ -313,7 +313,7 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       expect(new_result).to.exist;
    });
 
-   it("An instructor editing a non-existing word pair [reject]", function () {
+   it("An instructor editing a non-existing word pair [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
       Meteor.call('instructor.editWord', "wpidoesnotexist", EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
@@ -325,7 +325,20 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       expect(new_result).to.not.exist;
    });
 
-   it("A learner editing a simple word pair on DB [reject]", function () {
+   it("Another instructor editing an existing word pair that he/she does NOT own on DB [REJECT]", function () {
+      ServerCommon.sim_LogInDifferentUser(true);
+
+      Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
+
+      let old_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, test_l2_wordName, test_l2_examples, test_l1_wordName, test_l1_examples, test_difficulyLevel);
+      let new_result = ServerCommon.coursesWords_ContentRetriever(test_courseName, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel);
+
+      expect(old_result).to.exist;
+      expect(new_result).to.not.exist;
+   });
+
+
+   it("A learner editing a simple word pair on DB [REJECT]", function () {
       ServerCommon.sim_LogInDifferentUser(false);
 
       Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
@@ -337,7 +350,7 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       expect(new_result).to.not.exist;
    });
 
-   it("A unlogged user editing a simple word pair on DB [reject]", function () {
+   it("A unlogged user editing a simple word pair on DB [REJECT]", function () {
       ServerCommon.sim_UserIsUnlogged();
 
       Meteor.call('instructor.editWord', TEST_wordId, EDIT_l2_wordName, EDIT_l2_examples, EDIT_l1_wordName, EDIT_l1_examples, EDIT_difficulyLevel );
@@ -349,7 +362,7 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       expect(new_result).to.not.exist;
    });
 
-   it("An instructor editing a word pair with too big (exceptional - 1001, 1002) L2 Examples section on DB [reject]", function () {
+   it("An instructor editing a word pair with too big (exceptional - 1001, 1002) L2 Examples section on DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let EDIT_l2_examples = 'a'.repeat(1001);
 
@@ -366,7 +379,7 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       expect(new_result).to.not.exist;
    });
 
-   it("An instructor editing a word pair with an on-limit (extreme - 1000) L2 Examples section on DB [success]", function () {
+   it("An instructor editing a word pair with an on-limit (extreme - 1000) L2 Examples section on DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let EDIT_l2_examples = 'a'.repeat(1000);
 
@@ -379,7 +392,7 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       expect(new_result).to.exist;
    });
 
-   it("An instructor editing a word pair with too big (exceptional - 1001, 1002) L1 Examples section on DB [reject]", function () {
+   it("An instructor editing a word pair with too big (exceptional - 1001, 1002) L1 Examples section on DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let EDIT_l1_examples = 'a'.repeat(1001);
 
@@ -396,7 +409,7 @@ describe("instructor_Meth.js - instructor.editWord() Meteor method", function() 
       expect(new_result).to.not.exist;
    });
 
-   it("An instructor editing a word pair with an on-limit (extreme - 1000) L1 Examples section on DB [success]", function () {
+   it("An instructor editing a word pair with an on-limit (extreme - 1000) L1 Examples section on DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let EDIT_l1_examples = 'a'.repeat(1000);
 

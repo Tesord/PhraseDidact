@@ -14,7 +14,7 @@ import Courses_Configs from '/imports/collections/courses_Configs';
 
 describe("instructor_Meth.js - instructor.addCourse() Meteor method", function() {
 
-   it("An instructor adding simple courses to DB [success]", function () {
+   it("An instructor adding simple courses to DB [SUCCESS]", function () {
       // setting up test data
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = "Generic Course 1";
@@ -42,7 +42,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.exist;
    });
 
-   it("A learner adding a simple course to DB [reject]", function () {
+   it("A learner adding a simple course to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(false);
       let test_courseName = "Generic Course 1";
       let test_access = "public";
@@ -55,7 +55,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.not.exist;
    });
 
-   it("A unlogged user adding a simple course to DB [reject]", function () {
+   it("A unlogged user adding a simple course to DB [REJECT]", function () {
       ServerCommon.sim_UserIsUnlogged();
       let test_courseName = "Generic Course 1";
       let test_access = "public";
@@ -68,7 +68,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a course with too big (exceptional - 151, 152) Course Names to DB [reject]", function () {
+   it("An instructor adding a course with too big (exceptional - 151, 152) Course Names to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = 'a'.repeat(151);
       let test_access = "public";
@@ -89,7 +89,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a course with an on-limit (extreme - 150) Course Name to DB [success]", function () {
+   it("An instructor adding a course with an on-limit (extreme - 150) Course Name to DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = 'a'.repeat(150);
       let test_access = "public";
@@ -102,7 +102,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.exist;
    });
 
-   it("An instructor adding a course with an invalid (exceptional) Access to DB [reject]", function () {
+   it("An instructor adding a course with an invalid (exceptional) Access to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = "Error Course 1";
       let test_access = "vip";
@@ -116,7 +116,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a course with too big (exceptional - 5001, 5002) Description to DB [reject]", function () {
+   it("An instructor adding a course with too big (exceptional - 5001, 5002) Description to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = "Error Course 1";
       let test_access = "public";
@@ -135,7 +135,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a course with an on-limit (extreme - 5000) Description to DB [success]", function () {
+   it("An instructor adding a course with an on-limit (extreme - 5000) Description to DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = "Limit Course 1";
       let test_access = "public";
@@ -148,7 +148,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.exist;
    });
 
-   it("An instructor adding a course with too big (exceptional - 1001, 1002) Tag sections to DB [reject]", function () {
+   it("An instructor adding a course with too big (exceptional - 1001, 1002) Tag sections to DB [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = "Error Course 1";
       let test_access = "public";
@@ -165,7 +165,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.not.exist;
    });
 
-   it("An instructor adding a course with an on-limit (extreme - 1000) Tag section to DB [success]", function () {
+   it("An instructor adding a course with an on-limit (extreme - 1000) Tag section to DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = "Limit Course 1";
       let test_access = "public";
@@ -178,7 +178,7 @@ describe("instructor_Meth.js - instructor.addCourse() Meteor method", function()
       expect(result).to.exist;
    });
 
-   it("An instructor adding a course with a Course Name that already exists [reject]", function () {
+   it("An instructor adding a course with a Course Name that already exists [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
       let test_courseName = "Dup Course 1";
       let test_access = "public";
@@ -222,7 +222,7 @@ describe("instructor_Meth.js - instructor.fetchCourseByUser() Meteor method", fu
 
       let result = Meteor.call('instructor.fetchCourseByUser', "coursedoesnotexist");
 
-      expect( result ).to.be.null;
+      expect( result ).to.not.exist;
    });
 
    it("Checking if returned details from an existing course, called by an instructor that does NOT own it returns null", function () {
@@ -230,7 +230,7 @@ describe("instructor_Meth.js - instructor.fetchCourseByUser() Meteor method", fu
 
       let result = Meteor.call('instructor.fetchCourseByUser', "Generic Course 1");
 
-      expect( result ).to.be.null;
+      expect( result ).to.not.exist;
    });
 
    it("Checking if LEARN account returns null", function () {
@@ -238,7 +238,7 @@ describe("instructor_Meth.js - instructor.fetchCourseByUser() Meteor method", fu
 
       let result = Meteor.call('instructor.fetchCourseByUser', "Generic Course 1");
 
-      expect( result ).to.be.null;
+      expect( result ).to.not.exist;
    });
 
    it("Checking if unlogged user returns null", function () {
@@ -246,7 +246,7 @@ describe("instructor_Meth.js - instructor.fetchCourseByUser() Meteor method", fu
 
       let result = Meteor.call('instructor.fetchCourseByUser', "Generic Course 1");
 
-      expect( result ).to.be.null;
+      expect( result ).to.not.exist;
    });
 
 });
@@ -258,7 +258,7 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
       ServerCommon.genericCourse_Setup();
    });
 
-   it("An instructor removing a simple course that he/she owns from DB [success]", function () {
+   it("An instructor removing a simple course that he/she owns from DB [SUCCESS]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
       Meteor.call('instructor.removeCourse', test_courseName );
@@ -267,7 +267,7 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
       expect(result).to.not.exist;
    });
 
-   it("Another instructor removing a simple course that he/she does NOT own from DB [reject]", function () {
+   it("Another instructor removing a simple course that he/she does NOT own from DB [REJECT]", function () {
       ServerCommon.sim_LogInDifferentUser(true);
 
       Meteor.call('instructor.removeCourse', test_courseName );
@@ -276,7 +276,7 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
       expect(result).to.exist;
    });
 
-   it("A learner removing a course from DB [reject]", function () {
+   it("A learner removing a course from DB [REJECT]", function () {
       ServerCommon.sim_LogInDifferentUser(false);
 
       Meteor.call('instructor.removeCourse', test_courseName );
@@ -285,7 +285,7 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
       expect(result).to.exist;
    });
 
-   it("An unlogged user removing a course from DB [reject]", function () {
+   it("An unlogged user removing a course from DB [REJECT]", function () {
       ServerCommon.sim_UserIsUnlogged();
 
       Meteor.call('instructor.removeCourse', test_courseName );
@@ -294,7 +294,7 @@ describe("instructor_Meth.js - instructor.removeCourse() Meteor method", functio
       expect(result).to.exist;
    });
 
-   it("An instructor removing a course that does NOT exist [reject]", function () {
+   it("An instructor removing a course that does NOT exist [REJECT]", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
       Meteor.call('instructor.removeCourse', "coursedoesnotexist" );

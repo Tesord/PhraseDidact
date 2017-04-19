@@ -15,7 +15,7 @@ Meteor.methods({
       if( Meteor.userId() &&
             !Roles.userIsInRole( Meteor.userId(), "LEARN" ) &&
             !Roles.userIsInRole( Meteor.userId(), "INSTR" )
-         ){
+      ){
 
          // Will throw exception if unsuccessful. This method blocks until complete.
          if(isInstructor){
@@ -49,9 +49,6 @@ Meteor.methods({
             role: Roles.getRolesForUser( userId )[0]
          };
       }
-      else{
-         return null;
-      }
 
    },
 
@@ -84,6 +81,5 @@ Meteor.methods({
 
       return resultArray;
    }
-
 
 });

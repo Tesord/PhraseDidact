@@ -3,6 +3,11 @@ import React from 'react';
 
 /* General JS Helper functions */
 
+export function convert_ms_to_minutes(ms){
+   return ( ms / 1000 / 60);
+}
+
+
 export function removeFromArrayByIndex_ARNI(index, array){
 
    if(index >= 0 && index < array.length){

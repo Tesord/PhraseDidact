@@ -5,7 +5,7 @@ import ServerCommon from './serverCommon.test';
 import userAccount_Meth from '../../M_methods/learner_Meth';
 
 
-describe("learner_Meth.js - learner.doCourse Meteor method", function() {
+describe("learner_Meth.js - learner.addWordAttempt Meteor method", function() {
 
    beforeEach(function(){
       ServerCommon.genericCourse_Setup();
@@ -14,37 +14,74 @@ describe("learner_Meth.js - learner.doCourse Meteor method", function() {
       ServerCommon.secondWordPair_Setup();
    });
 
-   it("A learner starting a brand new course [success]", function () {
+   it("Initialising a learner's word_Attempt on a never-visitied-before course [SUCCESS]", function () {
       ServerCommon.sim_LogInDifferentUser(false);
 
-      Meteor.call('learner.doCourse', test_courseName );
+      Meteor.call('learner.addWordAttempt', TEST_wordId );
+      let result = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, TEST_wordId, DIFF_userId);
+      expect(result).to.exist;
 
-      let resultArray = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, DIFF_userId);
-      let finalResult = ServerCommon.wordsAttempts_ArrayChecker(resultArray, 2);
-
-      expect(finalResult).to.be.true;
+      Meteor.call('learner.addWordAttempt', SECOND_wordId );
+      result = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, SECOND_wordId, DIFF_userId);
+      expect(result).to.exist;
    });
 
-   it("An instructor starting a brand new course [reject]", function () {
-      ServerCommon.sim_LogInDifferentUser(true);
+   it("Initialising an instructor's word_Attempt [REJECT]", function () {
+      ServerCommon.sim_LogInDefaultUser(true);
 
-      Meteor.call('learner.doCourse', test_courseName );
+      Meteor.call('learner.addWordAttempt', TEST_wordId );
 
-      let resultArray = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, DIFF_userId);
-      let finalResult = ServerCommon.wordsAttempts_ArrayChecker(resultArray, 2);
-
-      expect(finalResult).to.be.false;
+      let result = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, TEST_wordId, DIFF_userId);
+      expect(result).to.not.exist;
    });
 
-   it("A unlogged user starting a brand new course [reject]", function () {
+   it("Initialising an unlogged user's word_Attempt [REJECT]", function () {
       ServerCommon.sim_UserIsUnlogged();
 
-      Meteor.call('learner.doCourse', test_courseName );
+      Meteor.call('learner.addWordAttempt', TEST_wordId );
 
-      let resultArray = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, DIFF_userId);
-      let finalResult = ServerCommon.wordsAttempts_ArrayChecker(resultArray, 2);
+      let result = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, TEST_wordId, DIFF_userId);
+      expect(result).to.not.exist;
+   });
 
-      expect(finalResult).to.be.false;
+});
+
+
+describe("learner_Meth.js - learner.getNextQuestion_Text Meteor method", function() {
+
+   beforeEach(function(){
+      ServerCommon.genericCourse_Setup();
+
+      ServerCommon.genericWordPair_Setup();
+      ServerCommon.secondWordPair_Setup();
+      ServerCommon.thirdWordPair_Setup();
+   });
+
+   it("Checking when a learner is starting the FIRST question from an existing course, the returned result matches what is expected", function () {
+      ServerCommon.sim_LogInDifferentUser(false);
+
+      let result = Meteor.call('learner.getNextQuestion_Text', test_courseName );
+
+      expect( result.l2_wordName ).to.equal( SECOND_l2_wordName );
+      let l2_example_Array = SECOND_l2_examples.split( "\n" );
+      expect( result.l2_examples ).to.eql( l2_example_Array );
+
+   });
+
+   it("Checking when an instructor is starting a question, the returned result matches what is expected [undefined]", function () {
+      ServerCommon.sim_LogInDifferentUser(true);
+
+      let result = Meteor.call('learner.getNextQuestion_Text', test_courseName );
+
+      expect( result ).to.not.exist;
+   });
+
+   it("Checking when an unlogged user is starting a question, the returned result matches what is expected [undefined]", function () {
+      ServerCommon.sim_UserIsUnlogged();
+
+      let result = Meteor.call('learner.getNextQuestion_Text', test_courseName );
+
+      expect( result ).to.not.exist;
    });
 
 });
