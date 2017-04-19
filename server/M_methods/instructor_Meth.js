@@ -45,7 +45,7 @@ Meteor.methods({
          let course = Courses_Configs.findOne( {userId : Meteor.userId(), courseName} );
 
          if(course){
-            Courses_Words.remove( { userId : course._id } );
+            Courses_Words.remove( { courseId : course._id } );
             Courses_Configs.remove( { userId : Meteor.userId(), courseName } );
          }
 
@@ -133,7 +133,7 @@ Meteor.methods({
       }
    }
 
-   // // TODO not implemented function yet
+   // // TODO not implemented group yet
    // 'instructor.addGroup': (groupName) => {
    //
    //    if( Roles.userIsInRole( Meteor.userId(), "INSTR" ) ){

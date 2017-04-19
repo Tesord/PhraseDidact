@@ -5,6 +5,9 @@ import ServerCommon from './serverCommon.test';
 
 import userAccount_Meth from '../../M_methods/userAccount_Meth';
 
+import Courses_Configs from '/imports/collections/courses_Configs';
+
+
 
 describe("userAccount_Meth.js - userAccount.setAccountType() Meteor method", function() {
 
@@ -116,7 +119,6 @@ describe("userAccount_Meth.js - userAccount.checkIsLearner() Meteor method", fun
 
 describe("userAccount_Meth.js - userAccount.getUserDetails() Meteor method", function() {
 
-   // TODO this method might be replaced by a publish function instead
    it("Checking if returned details from an existing user matches what is expected", function () {
       ServerCommon.sim_LogInDefaultUser(true);
 
@@ -145,26 +147,45 @@ describe("userAccount_Meth.js - userAccount.getUserDetails() Meteor method", fun
 
 describe("userAccount_Meth.js - userAccount.getCourseCreatorsDetails() Meteor method", function() {
 
-   // TODO
+   beforeEach(function(){
+      ServerCommon.genericCourse_Setup();
+      ServerCommon.diffCourse_Setup();
 
-   // it("Checking if returned details from an existing user matches what is expected", function () {
-   //    ServerCommon.sim_LogInDefaultUser(true);
-   //
-   //    let result = Meteor.call('userAccount.getCourseCreatorsDetails', DEFAULT_userId);
-   //
-   //    expect( result.userId ).to.equal( DEFAULT_userId );
-   //
-   //    let expectedJoinDate = Meteor.users.findOne( {_id : DEFAULT_userId} ).createdAt;
-   //    expect( result.joinDate.toString() ).to.equal( expectedJoinDate.toString() );
-   //
-   //    expect( result.username ).to.equal( username );
-   //    expect( result.role ).to.equal( "INSTR" );
-   // });
+      courseList = Courses_Configs.find().fetch();
+   });
 
-   // it("Checking if returned details from an non-existing user matches what is expected (null)", function () {
-   //    let result = Meteor.call('userAccount.getUserDetails', Random.id() );
-   //
-   //    expect( result ).to.be.null;
-   // });
+   it("Checking if returned details from a valid courseList match what is expected", function () {
+      let result = Meteor.call('userAccount.getCourseCreatorsDetails', courseList);
+
+
+      expect( result[0].userId ).to.equal( DEFAULT_userId );
+
+      let expectedJoinDate = Meteor.users.findOne( {_id : DEFAULT_userId} ).createdAt;
+      expect( result[0].joinDate.toString() ).to.equal( expectedJoinDate.toString() );
+
+      expect( result[0].username ).to.equal( DEFAULT_username );
+      expect( result[0].role ).to.equal( "INSTR" );
+
+
+      expect( result[1].userId ).to.equal( DIFF_userId );
+
+      let expectedJoinDate_2 = Meteor.users.findOne( {_id : DIFF_userId} ).createdAt;
+      expect( result[1].joinDate.toString() ).to.equal( expectedJoinDate_2.toString() );
+
+      expect( result[1].username ).to.equal( DIFF_username );
+      expect( result[1].role ).to.equal( "INSTR" );
+   });
+
+   it("Checking if returned details from a non-valid courseList match what is expected (null)", function () {
+      let fake_courseList = [
+         {userId: Random.id()},
+         {userId: Random.id()}
+      ];
+
+
+      let result = Meteor.call('userAccount.getCourseCreatorsDetails', fake_courseList);
+
+      expect( result ).to.be.empty;
+   });
 
 });

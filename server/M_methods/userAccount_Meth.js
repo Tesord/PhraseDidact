@@ -1,14 +1,11 @@
 
-/** TODO If Meteor method on server folder, then when it is called, the server runs it instead;
+/** ::L_NOTE:: 
+ * If Meteor method on server folder, then when it is called, the server runs it instead;
  * but Client can run "expected" version through stub.
  * If on "imports" folder, then both server & client runs it (client run miniMongo version).
  * If on "client" only, then only client runs the method (no much point).
  **/
 
-/** TODO Error handling at the client's side, when error of SimpleSchema is thrown to client,
-using Meteor.call()'s callback function **/
-
-/** TODO Make sure multiple userId is not inserted into database (unique) **/
 
 Meteor.methods({
 
@@ -40,6 +37,7 @@ Meteor.methods({
       return Roles.userIsInRole( Meteor.userId(), "LEARN" );
    },
 
+   // TODO this method could be replaced by a publish function instead
    'userAccount.getUserDetails' : (userId) => {
       let user = Meteor.users.findOne( {_id : userId} );
 
@@ -58,6 +56,7 @@ Meteor.methods({
    },
 
 
+   // TODO this could get replaced by a publish function...
    'userAccount.getCourseCreatorsDetails' : (courseList) => {
       let userIdArray = [];
       // get userId of the creators of all the courses
@@ -77,6 +76,7 @@ Meteor.methods({
                userId : userDetail._id,
                joinDate : userDetail.createdAt,
                username: userDetail.username,
+               role: userDetail.roles[0]
             }
          );
       }
