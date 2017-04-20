@@ -1,0 +1,46 @@
+@import (reference) "1common";
+@import (reference) "1contents";
+
+
+#do-course-content {
+   .standard-content;
+
+   text-align: center;
+}
+
+
+#do-course-main {
+   padding-top: 10rem;
+   padding-bottom: 10rem;
+   padding-left: 4rem;
+   padding-right: 4rem;
+}
+
+
+@question-simpleText-section-width: 44%;
+@question-simpleText-section-margin-right: 10%;
+
+#question-simpleText-section {
+   .standard-main;
+
+   width: @question-simpleText-section-width;
+   margin-right: @question-simpleText-section-margin-right      !important;
+   height: 9.5rem;
+
+}
+
+#question-simpleText-word {
+   .no-wider-than-required;
+
+   font-size: 2rem;
+
+   // dotted underline
+   border-bottom: 1px dashed #999;
+   text-decoration: none;
+}
+
+#answer-simpleText-section {
+   .no-wider-than-required;
+
+   width: calc(100% - @question-simpleText-section-width - @question-simpleText-section-margin-right - 1%);
+}

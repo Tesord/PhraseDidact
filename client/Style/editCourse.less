@@ -1,8 +1,10 @@
-@import (reference) "1common";
+@import (reference) "1contents";
 
 
-#edit-course-section {
+#edit-course-content {
    .standard-content;
+
+   max-width: 95%;
 
    h4 {
       margin-bottom: 0.5rem   !important;
@@ -30,5 +32,7 @@
    height: 16rem;
 
    display: block;
-   overflow: hidden;
+   overflow-y: hidden;
+   // prevents long sentences from dropping a line when overflowing
+   white-space: nowrap;
 }

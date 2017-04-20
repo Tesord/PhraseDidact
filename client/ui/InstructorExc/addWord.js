@@ -3,6 +3,8 @@ import DocumentTitle from 'react-document-title';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 
+import EditWord_Form from './editWord/editWord_Form';
+
 import Func_Util from '/imports/api/functional/func_Util';
 
 
@@ -36,7 +38,7 @@ class AddWord extends Component {
 
    backToCourse(){
       var r = confirm("Discard this edit?");
-      if (r == true) {
+      if (r === true) {
          this.context.router.history.push( "/course/" + this.props.match.params.courseName  + "/edit" );
       }
    }
@@ -44,13 +46,13 @@ class AddWord extends Component {
    save(e){
       e.preventDefault();
 
-      let l2_wordName = this.l2_wordName_Ref.value;
-      let l2_examples = this.l2_examples_Ref.value;
+      let l2_wordName = this.mainContent.l2_wordName_Ref.value;
+      let l2_examples = this.mainContent.l2_examples_Ref.value;
 
-      let l1_wordName = this.l1_wordName_Ref.value;
-      let l1_examples = this.l1_examples_Ref.value;
+      let l1_wordName = this.mainContent.l1_wordName_Ref.value;
+      let l1_examples = this.mainContent.l1_examples_Ref.value;
 
-      let difficultyLevel = this.difficultyLevel_Ref.value;
+      let difficultyLevel = this.mainContent.difficultyLevel_Ref.value;
 
 
       Meteor.call('instructor.addWord', this.props.match.params.courseName, l2_wordName, l2_examples, l1_wordName, l1_examples, difficultyLevel, (err, result) => {
@@ -79,56 +81,13 @@ class AddWord extends Component {
    getMainContent( button ){
 
       return (
-         <div id="add-word-section">
-            <form onSubmit={	this.save.bind(this)	}>
-               <contentTitle>	Add word pair	</contentTitle>
-
-               <hr className="_Theme_hr_Default_"/>
-
-               <h3> Word to learn (L2) </h3>
-
-               <annotation>	Word	</annotation>
-               <input type="text" className="form-control"   maxLength="150"     required
-                     ref={	(this_elem) => (this.l2_wordName_Ref = this_elem) } />
-
-                  <annotation>	Examples (separate each one by a new line)	</annotation>
-               <textarea rows="6"    maxLength="1000"    required
-                     ref={	(this_elem) => (this.l2_examples_Ref = this_elem) } ></textarea>
-               <br />
-
-               <hr className="_Theme_hr_Default_"/>
-
-               <h3> Native word (L1) </h3>
-
-               <annotation>	Word	</annotation>
-               <input type="text" className="form-control"   maxLength="150"     required
-                     ref={	(this_elem) => (this.l1_wordName_Ref = this_elem) } />
-
-                  <annotation>	Examples (separate each one by a new line)	</annotation>
-               <textarea rows="6"    maxLength="1000"    required
-                     ref={	(this_elem) => (this.l1_examples_Ref = this_elem) } ></textarea>
-
-               <hr className="_Theme_hr_Default_"/>
-
-               <annotation>  Level of difficulty   </annotation>
-               <label>
-                  <input type="number" className="single-date-or-month-field      form-control-spinner"
-                     defaultValue="0"     min="0"  max="999"
-                     ref={(this_elem) => { this.difficultyLevel_Ref = ( this_elem ); } }      />
-               </label>
-
-               <hr className="_Theme_hr_Default_"/>
-
-               <div className="single-line-element">
-                  { button }
-                  <button className="pd-btn rounded-border	   align-right   btn-default"
-                     onClick={ this.backToCourse.bind(this) } >
-                     Back
-                  </button>
-               </div>
-            </form>
-         </div>
-
+         <EditWord_Form    ref={(this_elem) => {this.mainContent = this_elem;} }
+            isAdd = {true}
+            funcContext = {this}
+            save_Func = {this.save}
+            backToCourse_Func = {this.backToCourse}
+            button = { button }
+         />
       );
 
    }

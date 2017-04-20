@@ -3,6 +3,11 @@ import React from 'react';
 
 /* General JS Helper functions */
 
+export function convert_ms_to_minutes(ms){
+   return ( ms / 1000 / 60);
+}
+
+
 export function removeFromArrayByIndex_ARNI(index, array){
 
    if(index >= 0 && index < array.length){
@@ -12,6 +17,38 @@ export function removeFromArrayByIndex_ARNI(index, array){
       return array;
    }
 
+}
+
+
+export function createStringNewLineSep_FromArray(array){
+   let resultString = "";
+
+   for(let i = 0; i < array.length; i++){
+      if(i === (array.length - 1) ){
+         resultString = resultString + array[i];
+      }
+      else{
+         resultString = resultString + array[i] + '\n';
+      }
+   }
+
+   return resultString;
+}
+
+
+export function createStringHRSep_FromArray(array){
+   let resultString = "";
+
+   for(let i = 0; i < array.length; i++){
+      if(i === (array.length - 1) ){
+         resultString = resultString + array[i];
+      }
+      else{
+         resultString = resultString + array[i] + '<hr>';
+      }
+   }
+
+   return resultString;
 }
 
 

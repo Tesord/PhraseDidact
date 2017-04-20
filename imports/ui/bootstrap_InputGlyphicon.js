@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 
-/* TODO document how you can get ref from this class instance in fillLearnerProfile */
 class Bootstrap_InputGlyphicon extends Component {
 
    render(){

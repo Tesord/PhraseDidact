@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
-
-import Instructor_Meth from '/imports/M_methods/instructor_Meth';
+import shortid from 'shortid';
 
 import WordList from './Course/wordList';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Bootstrap_InputGlyphicon from '/imports/ui/bootstrap_InputGlyphicon';
+import Picture_Button from '/imports/ui/picture_Button';
 
 import Func_Util from '/imports/api/functional/func_Util';
 
 import Courses_Words from '/imports/collections/courses_Words';
+import Courses_Configs from '/imports/collections/courses_Configs';
 
 
 
@@ -35,7 +36,7 @@ class EditCourse extends Component {
    getMainContent( wordLearnList, nativeWordList ){
 
       return (
-         <div id="edit-course-section">
+         <div id="edit-course-content">
             <contentTitle>	Editing: <b> {this.props.match.params.courseName} </b> 	</contentTitle>
             <hr className="_Theme_hr_Default_"/>
 
@@ -76,7 +77,9 @@ class EditCourse extends Component {
 
    }
 
+
    load(){
+<<<<<<< HEAD
       let courseWords_List = Courses_Words.find().fetch();
 
       this.setState( {
@@ -104,11 +107,85 @@ class EditCourse extends Component {
             removeBlock_func = {this.removeBlock}
          />
       );
+=======
+      let courseWords_List = Courses_Words.find({ courseId : this.courseId }).fetch();
+
+      this.setState( {
+         content: this.getMainContent(
+            this.create_EditingWordBlock(courseWords_List, true),
+            this.create_EditingWordBlock(courseWords_List, false)
+         )
+      } );
+   }
+   create_EditingWordBlock(courseWords_List, isL2){
+
+      let resultList = [];
+
+      let html_Ver_Examples = [];
+      let wordName = "";
+      let uniqueId = "";
+
+      for(let word_pair   of    courseWords_List){
+         if( isL2 ){
+            html_Ver_Examples = word_pair.l2_examples.map(
+               this.create_EditingWordBlock__MapFunc
+            );
+
+            wordName = word_pair.l2_wordName;
+         }
+         else{
+            html_Ver_Examples = word_pair.l1_examples.map(
+               this.create_EditingWordBlock__MapFunc
+            );
+
+            wordName = word_pair.l1_wordName;
+         }
+
+         uniqueId = shortid.generate();
+
+         resultList.push(
+            <div key={"ewb" + uniqueId}  className="editing-word-block    _Theme_innerItem_Default_">
+               <Picture_Button
+                  imgURL="/ui/img/close_cross_in_circular_outlined_interface.svg"
+                  className="align-right pointer-hover"      width="30rem" height="30rem"
+                  actFunction={ this.removeBlock }
+                  actFuncParams={ word_pair._id }
+                  functionContext={ this }
+               />
+               <Picture_Button
+                  imgURL="/ui/img/Edit_Notepad_Icon.svg"
+                  className="align-right pointer-hover  moderate-right-margin"      width="27rem" height="27rem"
+                  actFunction={ this.editBlock }
+                  actFuncParams={ word_pair._id }
+                  functionContext={ this }
+               />
+
+               <h4>{ wordName }</h4>
+               <div className="single-line-element align-right"> Difficulty: { word_pair.difficultyLevel } </div>
+               <br/>
+
+               <div className="_Theme_exampleText_Default_">{ html_Ver_Examples }</div>
+            </div>
+         );
+      }
+
+      return resultList;
+   }
+   /* HELPER function of create_EditingWordBlock() */
+   create_EditingWordBlock__MapFunc(line_Of_Example){
+      uniqueId = shortid.generate();
+
+      return ( <div     key={"exam" + uniqueId}> - {line_Of_Example} <br/></div> );
+>>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
    }
 
 
+
+<<<<<<< HEAD
+=======
    editBlock(word_pair_id){
 
+>>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
       this.context.router.history.push("/course/" + this.props.match.params.courseName + "/editWord/" + word_pair_id);
    }
 
@@ -131,15 +208,39 @@ class EditCourse extends Component {
 
    isInstructorAction(){
 
+<<<<<<< HEAD
       // Get required data from DB, while also checks whether user actually owns the course
+=======
+      // Add required data from DB to local DB, this also checks whether user actually owns the course
+>>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
       Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
          onReady: () => {     // matched, user actually owns the course
-            this.load();
+
+            // now just need to get courseId to further filter the words that belong to the currently displayed course
+            Meteor.subscribe("single_Created_Course", this.props.match.params.courseName, {
+
+               onReady: () => {
+                  let course = Courses_Configs.findOne( { courseName : this.props.match.params.courseName} );
+
+                  if( course ){
+                     this.courseId = course._id;
+
+                     this.load();
+                  }
+                  else{    // user does not own the course!
+                     /* TODO change to "Permission denied" or something */
+                     setTimeout( () => { window.location.replace("/notFound"); }, 500);
+                  }
+
+               },
+               onStop: () => {      // if error occurs here, it is some sort of technical error
+                  /* TODO change to "Something went wrong" or something page */
+                  setTimeout( () => { window.location.replace("/notFound"); }, 500);
+               }
+            });
+
          },
-         onStop: () => {      // no match, user doesn't own the course!
-
-            /* TODO change to "Access denied" or something page */
-
+         onStop: () => {      // no match, course not found
             setTimeout( () => { window.location.replace("/notFound"); }, 500);
          }
       } );

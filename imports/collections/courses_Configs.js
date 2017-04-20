@@ -12,14 +12,6 @@ const Schemas = {};
  */
 
 Schemas.Courses_Configs = new SimpleSchema({
-   courseId: {
-      type: String,
-      label: "courseId",
-      max: 20,
-
-      index: true,
-      unique: true
-   },
    userId: {
       type: String,
       label: "userId",
@@ -35,19 +27,30 @@ Schemas.Courses_Configs = new SimpleSchema({
    },
    access: {
       type: String,
-      label: "access"
+      label: "access",
+      max: 50,
+
+      allowedValues: ["public", "private"]
    },
    description: {
       type: String,
       label: "description",
-      max: 5000
+      max: 5000,
+
+      optional: true
    },
    tags: {
       type: Array,
-      label: "tags"
+      label: "tags",
+
+      optional: true
    },
    'tags.$': {
       type: String
+   },
+
+   createdAt: {
+      type: Date
    }
 });
 

@@ -61,7 +61,18 @@ class AddCourse extends Component {
    }
 
    handleErrors(err){
+<<<<<<< HEAD
       window.alert(err);
+=======
+      switch(err.error){
+         case "E11000":
+            window.alert("Error: Course with this name already exists! Please pick another one or add an unique identifer such as (*username*)");
+            break;
+         default:
+            window.alert("Error: Sorry, something went wrong. Please try again :(");
+            break;
+      }
+>>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
 
       this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
    }
@@ -70,7 +81,7 @@ class AddCourse extends Component {
    getMainContent( button ){
 
       return (
-         <div id="add-course-section">
+         <div className="standard-content">
             <form onSubmit={	this.save.bind(this)	}>
                <contentTitle>	Create Course	</contentTitle>
 
