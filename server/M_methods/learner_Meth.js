@@ -58,16 +58,16 @@ Meteor.methods({
          let course = Courses_Configs.findOne( { courseName, access: "public" } );
 
          if( course ){
-            /* setting up data */
+         /* setting up data */
             let allWords = Courses_Words.find({ userId : course.userId, courseId : course._id }).fetch();
             let resultArray = [];
 
             let curr_wordAttempt = null;
 
-            /* gathering data */
+         /* gathering data */
 
             // initialising wordAttempt record for any new words, even if two loops are required, bulk should speed up overall performance
-            let bulk = Words_Attempts.rawCollection().initializeOrderedBulkOp();    // accessing npm version is required to use this method
+            let bulk = Words_Attempts.rawCollection().initializeUnorderedBulkOp();    // accessing npm version is required to use this method
             let createdTime = null;
 
             for(let word   of       allWords){
@@ -87,8 +87,11 @@ Meteor.methods({
                }
 
             }
-
-            bulk.execute();
+            /* CreatedTime not null indicates at least one operation is scheduled,
+             * required to prevent  "MongoError: Invalid Operation, No operations in bulk"    being thrown */
+            if( createdTime ){
+               bulk.execute();
+            }
 
 
             // now wordAttempt of all words should be inserted into the DB...
@@ -103,7 +106,7 @@ Meteor.methods({
                );
             }
 
-            /* sorting data */
+         /* sorting data */
             resultArray.sort(
                function(a, b) {                    // ascending sort
                   return a.score - b.score;
@@ -117,7 +120,7 @@ Meteor.methods({
             // TODO does some calculation or something to determine question type?
             let type = "TEXT";
 
-            /* return result */
+         /* return result */
             return {
                type,
                l2_wordName : resultArray[0].word.l2_wordName,
