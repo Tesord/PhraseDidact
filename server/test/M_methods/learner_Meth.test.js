@@ -4,47 +4,7 @@ import ServerCommon from './serverCommon.test';
 
 import userAccount_Meth from '../../M_methods/learner_Meth';
 
-
-describe("learner_Meth.js - learner.addWordAttempt Meteor method", function() {
-
-   beforeEach(function(){
-      ServerCommon.genericCourse_Setup();
-
-      ServerCommon.genericWordPair_Setup();
-      ServerCommon.secondWordPair_Setup();
-   });
-
-   it("Initialising a learner's word_Attempt on a never-visitied-before course [SUCCESS]", function () {
-      ServerCommon.sim_LogInDifferentUser(false);
-
-      Meteor.call('learner.addWordAttempt', TEST_wordId );
-      let result = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, TEST_wordId, DIFF_userId);
-      expect(result).to.exist;
-
-      Meteor.call('learner.addWordAttempt', SECOND_wordId );
-      result = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, SECOND_wordId, DIFF_userId);
-      expect(result).to.exist;
-   });
-
-   it("Initialising an instructor's word_Attempt [REJECT]", function () {
-      ServerCommon.sim_LogInDefaultUser(true);
-
-      Meteor.call('learner.addWordAttempt', TEST_wordId );
-
-      let result = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, TEST_wordId, DIFF_userId);
-      expect(result).to.not.exist;
-   });
-
-   it("Initialising an unlogged user's word_Attempt [REJECT]", function () {
-      ServerCommon.sim_UserIsUnlogged();
-
-      Meteor.call('learner.addWordAttempt', TEST_wordId );
-
-      let result = ServerCommon.wordsAttempts_ContentRetriever(TEST_courseId, TEST_wordId, DIFF_userId);
-      expect(result).to.not.exist;
-   });
-
-});
+// TODO save profile method
 
 
 describe("learner_Meth.js - learner.getNextQuestion Meteor method", function() {

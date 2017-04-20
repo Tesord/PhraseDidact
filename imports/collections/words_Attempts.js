@@ -22,10 +22,6 @@ Schemas.Words_Attempts = new SimpleSchema({
       label: "wordId",
       max: 20,
    },
-   lastReviewDate: {
-      type: Date,
-      label: "lastReviewDate",
-   },
    nextReviewDate: {
       type: Date,
       label: "nextReviewDate",

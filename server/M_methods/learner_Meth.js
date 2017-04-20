@@ -12,7 +12,7 @@ import Func_Util from '/imports/api/functional/func_Util';
 function wordScoreFormula(word, wordAttempt){
    return (
       (word.difficultyLevel / 100) +
-      (     Math.abs(      Func_Util.convert_ms_to_minutes(wordAttempt.lastReviewDate - wordAttempt.nextReviewDate)    )     )
+      (     Func_Util.convert_ms_to_minutes( new Date() - wordAttempt.nextReviewDate )    )
    );
 }
 
@@ -50,34 +50,6 @@ Meteor.methods({
       }
    },
 
-   // TODO permission
-   'learner.addWordAttempt': (wordId) => {
-      if( Roles.userIsInRole( Meteor.userId(), "LEARN" ) ){
-
-         let word = Courses_Words.findOne( { _id: wordId } );
-
-         if( word                                                                   &&
-            Courses_Configs.findOne( { _id: word.courseId, access: "public" } )     &&
-            !Words_Attempts.findOne( {userId : Meteor.userId(), wordId } )
-         ){
-
-               let createdTime = new Date();
-
-               Words_Attempts.insert({
-                  wordId : word._id,
-                  courseId : word.courseId,
-                  userId : Meteor.userId(),
-                  lastReviewDate : createdTime,
-                  nextReviewDate : createdTime,
-
-                  createdAt: createdTime
-               });
-
-         }
-
-      }
-   },
-
 
    // TODO permission
    'learner.getNextQuestion': (courseName) => {
@@ -93,14 +65,35 @@ Meteor.methods({
             let curr_wordAttempt = null;
 
             /* gathering data */
+
+            // initialising wordAttempt record for any new words, even if two loops are required, bulk should speed up overall performance
+            let bulk = Words_Attempts.rawCollection().initializeOrderedBulkOp();    // accessing npm version is required to use this method
+            let createdTime = null;
+
             for(let word   of       allWords){
                curr_wordAttempt = Words_Attempts.findOne( {userId : Meteor.userId(), wordId: word._id } );
 
                if( !curr_wordAttempt  ){
-                  Meteor.call('learner.addWordAttempt', word._id, courseName);
-                  // get the just added record from DB...
-                  curr_wordAttempt = Words_Attempts.findOne( {userId : Meteor.userId(), wordId: word._id } );
+                  createdTime = new Date();
+
+                  bulk.insert({
+                     wordId : word._id,
+                     courseId : word.courseId,
+                     userId : Meteor.userId(),
+                     nextReviewDate : createdTime,
+
+                     createdAt: createdTime
+                  });
                }
+
+            }
+
+            bulk.execute();
+
+
+            // now wordAttempt of all words should be inserted into the DB...
+            for(let word   of       allWords){
+               curr_wordAttempt = Words_Attempts.findOne( {userId : Meteor.userId(), wordId: word._id } );
 
                resultArray.push(
                   {
