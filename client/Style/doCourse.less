@@ -16,28 +16,23 @@
 }
 
 
-@do-course-question-width: 44%;
-@do-course-question-margin-right: 10%;
+@question-simpleText-section-width: 44%;
+@question-simpleText-section-margin-right: 10%;
 
-#question-section {
+#question-simpleText-section {
    .standard-main;
 
-   width: @do-course-question-width;
-   margin-right: @do-course-question-margin-right      !important;
-   height: 9.3rem;
+   width: @question-simpleText-section-width;
+   margin-right: @question-simpleText-section-margin-right      !important;
+   height: 9.5rem;
+
+   h3 {
+      margin-top: 0px;
+   }
 }
 
-
-@do-course-answer-width: calc(100% - @do-course-question-width - @do-course-question-margin-right - 1%);
-
-#answer-section {
-   .standard-sidebar;
-
-   width: @do-course-answer-width;
-}
-
-#answer-textarea {
+#answer-simpleText-section {
    display: inline-block;
 
-   width: @do-course-answer-width;
+   width: calc(100% - @question-simpleText-section-width - @question-simpleText-section-margin-right - 1%);
 }

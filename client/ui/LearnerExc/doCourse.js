@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import DocumentTitle from 'react-document-title';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
+import Word_Example_Revealable from '/imports/ui/word_example_Revealable';
 
 import Func_Util from '/imports/api/functional/func_Util';
 
@@ -84,11 +85,17 @@ class DoCourse extends Component {
 
                <contentTitle> Translate this word </contentTitle>
                <br/>
-               <div id="question-section" className="_Theme_innerBorder_Default_">
-                  QUESTION
+               <div id="question-simpleText-section" className="_Theme_innerBorder_Default_">
+
+                  <Word_Example_Revealable
+                     word={result.l2_wordName}
+                     exampleArray={result.l2_examples}
+                  />
+
+
                </div>
 
-               <textarea rows="4"    id="answer-textarea"    className="no-resize   form-control"
+               <textarea rows="4"    id="answer-simpleText-section"    className="no-resize   form-control"
                   maxLength="230"    required
                   ref={	(this_elem) => (this.answer_Ref = this_elem) } >
                </textarea>
