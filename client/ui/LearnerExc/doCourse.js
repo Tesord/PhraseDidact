@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import DocumentTitle from 'react-document-title';
 
-import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Tipped_WordnListTooltip from '/imports/ui/tipped_WordnListTooltip';
 
 import Func_Util from '/imports/api/functional/func_Util';
@@ -13,14 +12,13 @@ class DoCourse extends Component {
    constructor(){
 		super();
 
-      this.questionType = "";
-
 		this.state = {
-			content: <BlueCircle_greyBG />,
+         questionData: {},
+			control: getReadyAnim(false)
 		};
 	}
 
-   getReadyAnim(){
+   getReadyAnim(isAnswered){
       return (
 
          <button className="pd-btn  rounded-border	   btn-primary">Answer</button>
@@ -28,7 +26,7 @@ class DoCourse extends Component {
       );
    }
 
-   getLoadingAnim(){
+   getLoadingAnim(isAnswered){
       return (
 
          <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Answering...</button>
@@ -117,7 +115,8 @@ class DoCourse extends Component {
             this.questionType = result.type;
 
             this.setState( {
-               content: this.getMainContent( this.getReadyAnim(), result )
+               questionData: result,
+               control: this.getReadyAnim( false )
             });
 
          }
