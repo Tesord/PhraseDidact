@@ -101,7 +101,7 @@ class Learner_Home extends Component {
    /* TODO display content & search content */
    render(){
       return(
-         <div id="learner-dashboard-section">
+         <div className="standard-content">
             <div id="learner-courses" className="_Theme_outerBorder_Default_">
                <contentTitle>	Courses	</contentTitle>
 

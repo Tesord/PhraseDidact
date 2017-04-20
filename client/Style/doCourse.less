@@ -1,0 +1,43 @@
+@import (reference) "1contents";
+
+
+#do-course-content {
+   .standard-content;
+
+   text-align: center;
+}
+
+
+#do-course-main {
+   padding-top: 10rem;
+   padding-bottom: 10rem;
+   padding-left: 4rem;
+   padding-right: 4rem;
+}
+
+
+@do-course-question-width: 44%;
+@do-course-question-margin-right: 10%;
+
+#question-section {
+   .standard-main;
+
+   width: @do-course-question-width;
+   margin-right: @do-course-question-margin-right      !important;
+   height: 9.3rem;
+}
+
+
+@do-course-answer-width: calc(100% - @do-course-question-width - @do-course-question-margin-right - 1%);
+
+#answer-section {
+   .standard-sidebar;
+
+   width: @do-course-answer-width;
+}
+
+#answer-textarea {
+   display: inline-block;
+
+   width: @do-course-answer-width;
+}

@@ -7,12 +7,23 @@ import Func_Util from '/imports/api/functional/func_Util';
 
 
 
+/* REF:
+ * Learning-related calculations HERE */
 function wordScoreFormula(word, wordAttempt){
    return (
       (word.difficultyLevel / 100) +
       (     Math.abs(      Func_Util.convert_ms_to_minutes(wordAttempt.lastReviewDate - wordAttempt.nextReviewDate)    )     )
    );
 }
+
+const WORDATTEMPT_INITIAL_REVIEWmins = 24 * 60;
+
+const WORDATTEMPT_RESPONSE_FACTOR = {
+   Easy: 1.5,
+   Okay: 1,
+   Hard: 0.5,
+};
+
 
 
 Meteor.methods({
@@ -69,7 +80,7 @@ Meteor.methods({
 
 
    // TODO permission
-   'learner.getNextQuestion_Text': (courseName) => {
+   'learner.getNextQuestion': (courseName) => {
       if( Roles.userIsInRole( Meteor.userId(), "LEARN" ) ){
 
          let course = Courses_Configs.findOne( { courseName, access: "public" } );
@@ -106,8 +117,16 @@ Meteor.methods({
                }
             );
 
+
+            /* REF:
+             * Question types here */
+
+            // TODO does some calculation or something to determine question type?
+            let type = "TEXT";
+
             /* return result */
             return {
+               type,
                l2_wordName : resultArray[0].word.l2_wordName,
                l2_examples : resultArray[0].word.l2_examples,
             };

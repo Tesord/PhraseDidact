@@ -12,6 +12,8 @@ class DoCourse extends Component {
    constructor(){
 		super();
 
+      this.questionType = "";
+
 		this.state = {
 			content: <BlueCircle_greyBG />,
 		};
@@ -65,33 +67,61 @@ class DoCourse extends Component {
    }
 
 
-   getMainContent( button ){
+   getMainContent( button, result ){
 
-      return (
-         <div className="standard-content">
-            SOMETHING HERER
-         </div>
-
-      );
+      switch (this.questionType){
+         case "TEXT":
+            return this.getTextQuestion( button, result );
+         default:
+            return (<div></div>)
+      }
 
    }
+   getTextQuestion( button, result ){
+      return(
+         <div id="do-course-content">
+            <div id="do-course-main"    className="_Theme_outerBorder_Default_">
+
+               <contentTitle> Translate this word </contentTitle>
+               <br/>
+               <div id="question-section" className="_Theme_innerBorder_Default_">
+                  QUESTION
+               </div>
+
+               <textarea rows="4"    id="answer-textarea"    className="no-resize   form-control"
+                  maxLength="230"    required
+                  ref={	(this_elem) => (this.answer_Ref = this_elem) } >
+               </textarea>
+
+            </div>
+         </div>
+      );
+   }
+
 
    isLearnerAction(){
-      Meteor.call("learner.doCourse", this.props.match.params.courseName , (err, result) => {
+      Meteor.call("learner.getNextQuestion", this.props.match.params.courseName , (err, result) => {
          if(err){
             /* TODO change to "Access denied" or something page */
 
             setTimeout( () => { window.location.replace("/notFound"); }, 500);
          }
          else{
-            this.state = {
-               content: this.getMainContent( this.getReadyAnim() )
-            };
+            this.questionType = result.type;
+
+            this.setState( {
+               content: this.getMainContent( this.getReadyAnim(), result )
+            });
+
          }
 
       });
 
-      
+
+      // makes mandatory transition appears seamless
+      this.state = ( {
+         content: <div></div>
+      } );
    }
 
    isOtherAction(){

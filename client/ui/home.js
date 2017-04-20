@@ -31,7 +31,7 @@ class Home extends Component {
 
    getUnloggedPage(){
       return(
-         <div id="unlogged-page-section">
+         <div className="standard-content">
             WELCOME TO PHRASEDIDACT!
          </div>
       );

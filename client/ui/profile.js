@@ -32,7 +32,7 @@ class Profile extends Component{
             this.setState( {
                content:
 
-                  <div  id="user-profile-section" className="h-center-margin">
+                  <div  id="user-profile-content" className="h-center-margin">
          				   { array }
          			</div>
 

@@ -34,7 +34,7 @@ class EditCourse extends Component {
    getMainContent( wordLearnList, nativeWordList ){
 
       return (
-         <div id="edit-course-section">
+         <div id="edit-course-content">
             <contentTitle>	Editing: <b> {this.props.match.params.courseName} </b> 	</contentTitle>
             <hr className="_Theme_hr_Default_"/>
 

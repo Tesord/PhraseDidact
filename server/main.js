@@ -75,7 +75,7 @@ Meteor.startup(() => {
       if( course ){
          // course exists, and user can indeed access the course
 
-         let wordPairArray = Courses_Words.find( course._id ).fetch();
+         let wordPairArray = Courses_Words.find( {courseId : course._id} ).fetch();
          // get the wordIds of all words in course
          let wordIdArray = [];
          for(let wordPair     of    wordPairArray){
@@ -93,16 +93,6 @@ Meteor.startup(() => {
       else{
          throw new Meteor.Error("404/401", "Course not found or Unauthorized access");
       }
-
-      // if(word){
-      //    // word-pair exists, but do user have permission to view record?
-      //    if(course.access === "public"){
-      //       return Words_Attempts.find({ courseId : course._id });
-      //    }
-      //    else{
-      //       throw new Meteor.Error("401", "Unauthorized access.");
-      //    }
-      // }
 
    });
 

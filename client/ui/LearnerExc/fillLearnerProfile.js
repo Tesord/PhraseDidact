@@ -51,7 +51,7 @@ class FillLearnerProfile extends Component {
 
       return (
 
-         <div id="learner-profile-section">
+         <div id="learner-profile-content">
 
                { this.getLearnProf_page(pageNo) }
 

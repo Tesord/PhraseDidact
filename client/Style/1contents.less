@@ -1,4 +1,37 @@
 @import (reference) "1common";
+@import (reference) "header";
+
+
+
+/* Base class for all main content sections */
+.standard-content {
+   .h-center-margin;
+
+   margin-top: 4rem     !important;
+   margin-bottom: 4rem     !important;
+
+   padding-left: calc( @nav-horiz-padding + (@nav-horiz-padding / 2) );
+   padding-right: calc( @nav-horiz-padding + (@nav-horiz-padding / 2) );
+
+   max-width: 110rem;
+   min-width: @min-nav-width;
+}
+
+@standard-main-margin-right: 2rem;     // depended on by other styling files
+
+.standard-main {
+   margin-right: @standard-main-margin-right;
+}
+.standard-main, .standard-sidebar {
+   /* Padding is to keep content touching the very edge of screen in small displays */
+   padding-left: calc( @nav-horiz-padding + (@nav-horiz-padding / 2) );
+   padding-right: calc( @nav-horiz-padding + (@nav-horiz-padding / 2) );
+
+   display: inline-block;
+   vertical-align: top;
+}
+
+
 
 @contentTitle-padding: 1rem;
 
