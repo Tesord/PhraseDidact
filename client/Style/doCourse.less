@@ -1,3 +1,4 @@
+@import (reference) "1common";
 @import (reference) "1contents";
 
 
@@ -26,13 +27,20 @@
    margin-right: @question-simpleText-section-margin-right      !important;
    height: 9.5rem;
 
-   h3 {
-      margin-top: 0px;
-   }
+}
+
+#question-simpleText-word {
+   .no-wider-than-required;
+
+   font-size: 2rem;
+
+   // dotted underline
+   border-bottom: 1px dashed #999;
+   text-decoration: none;
 }
 
 #answer-simpleText-section {
-   display: inline-block;
+   .no-wider-than-required;
 
    width: calc(100% - @question-simpleText-section-width - @question-simpleText-section-margin-right - 1%);
 }

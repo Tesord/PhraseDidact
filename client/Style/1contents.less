@@ -23,11 +23,12 @@
    margin-right: @standard-main-margin-right;
 }
 .standard-main, .standard-sidebar {
+   .no-wider-than-required;
+
    /* Padding is to keep content touching the very edge of screen in small displays */
    padding-left: calc( @nav-horiz-padding + (@nav-horiz-padding / 2) );
    padding-right: calc( @nav-horiz-padding + (@nav-horiz-padding / 2) );
 
-   display: inline-block;
    vertical-align: top;
 }
 
@@ -37,7 +38,8 @@
 
 contentTitle {
    font-size: 3rem;
-   /*  !important    allows overwritting of   "h-center-margin" 's   margin: auto */
+   /*  ::L_NOTE::
+    * !important    allows overwritting of   "h-center-margin" 's   margin: auto */
    margin-bottom: 1.7rem   !important;
 
    padding-left: @contentTitle-padding;

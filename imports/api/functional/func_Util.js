@@ -36,6 +36,22 @@ export function createStringNewLineSep_FromArray(array){
 }
 
 
+export function createStringHRSep_FromArray(array){
+   let resultString = "";
+
+   for(let i = 0; i < array.length; i++){
+      if(i === (array.length - 1) ){
+         resultString = resultString + array[i];
+      }
+      else{
+         resultString = resultString + array[i] + '<hr>';
+      }
+   }
+
+   return resultString;
+}
+
+
 
 
 /* PhraseDidact specific */

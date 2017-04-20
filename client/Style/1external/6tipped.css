@@ -486,8 +486,8 @@
 /* medium (default) */
 .tpd-size-medium .tpd-content,
 .tpd-size-medium .tpd-title {
-  padding: 10px;
-  font-size: 11px;
+  padding: 1.5rem;      /* CUSTOM: changed, so that it scales dynamically  */
+  font-size: 1.5rem;       /* CUSTOM: changed, it is now bigger and it scales dynamically */
   line-height: 16px;
 }
 .tpd-size-medium .tpd-background { border-radius: 8px; }
@@ -546,14 +546,14 @@
 /* default (dark) */
 .tpd-skin-dark .tpd-content,
 .tpd-skin-dark .tpd-title,
-.tpd-skin-dark .tpd-close { color: #fff; }
+.tpd-skin-dark .tpd-close { color: #282828; }      /* CUSTOM: changed, so the text is BLACK instead  */
 .tpd-skin-dark .tpd-background-content,
 .tpd-skin-dark .tpd-background-title {
-  background-color: #282828;
+  background-color: #fff;     /* CUSTOM: changed, so the background is WHITE instead  */
 }
 .tpd-skin-dark .tpd-background {
-  border-width: 1px;
-  border-color: rgba(255,255,255,.1);
+   border-radius: 4px;           /* CUSTOM: changed, v  */
+   border: 2px solid #617491;       /* CUSTOM: changed, so a border is there  */
 }
 /* line below the title */
 .tpd-skin-dark .tpd-title-wrapper { border-bottom: 1px solid #404040; }

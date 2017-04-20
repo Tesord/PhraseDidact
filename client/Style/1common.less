@@ -65,10 +65,15 @@ textarea {
 
 /* Add-on attributes for existing components */
 
+/**
+ *  Horizontally center this component.
+ *  If component using this require custom margins, then  !important  should be applied (up to 3 directions).
+ *
+ *  Modify:    'margin'
+ *  Requir:    Some sort of 'width' set
+ *  Incomp:    'display:   inline / inline-block'
+ **/
 .h-center-margin {
-   /* ::L_NOTE::
-      i.e. horizontally center this component.  If component using this require custom margin,
-      then  !important  should be applied to them. */
    margin: auto;
 }
 
@@ -80,10 +85,20 @@ textarea {
    float: right;
 }
 
+/**
+ *  Modify:    'display' & 'overflow-y'
+ **/
 .single-line-element {
    display: block;
    // automatically adjust height according to float-induced height
    overflow-y: auto;
+}
+
+/**
+ *  Modify:    'display'
+ **/
+.no-wider-than-required {
+   display: inline-block;
 }
 
 .single-date-or-month-field {

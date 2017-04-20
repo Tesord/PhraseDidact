@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import DocumentTitle from 'react-document-title';
 
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
-import Word_Example_Revealable from '/imports/ui/word_example_Revealable';
+import Tipped_WordnListTooltip from '/imports/ui/tipped_WordnListTooltip';
 
 import Func_Util from '/imports/api/functional/func_Util';
 
@@ -87,11 +87,11 @@ class DoCourse extends Component {
                <br/>
                <div id="question-simpleText-section" className="_Theme_innerBorder_Default_">
 
-                  <Word_Example_Revealable
+                  <Tipped_WordnListTooltip
                      word={result.l2_wordName}
-                     exampleArray={result.l2_examples}
+                     word_id="question-simpleText-word"
+                     list={result.l2_examples}
                   />
-
 
                </div>
 
