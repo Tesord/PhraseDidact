@@ -27,10 +27,40 @@ class DoCourse extends Component {
       this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
    }
 
+   reset(){
+      this.answered = false;
+      this.answer_Ref.value = "";
+      this.isLearnerAction();
+
+   }
+
+   sendFeedback(value){
+      Meteor.call('learner.processFeedback', value, this.question, this.props.match.params.courseName, (err, result) => {
+
+         if(err){
+            this.handleErrors(err);
+         }
+         else{		// successful
+            this.reset();
+         }
+      });
+   }
+
    getReadyAnim(){
 
       if(this.answered){
+         return (
 
+            <div id="do-course-control-bottom"   className="_Theme_questionControl_Default_">
+               <button className="pd-btn rounded-border	align-right     btn-success"
+                  onClick={ this.sendFeedback.bind( this, "Easy" ) } >Easy</button>
+               <button className="pd-btn rounded-border	align-right moderate-right-margin    btn-warning"
+                  onClick={ this.sendFeedback.bind( this, "Okay" ) } >Okay</button>
+               <button className="pd-btn rounded-border	align-right moderate-right-margin    btn-danger"
+                  onClick={ this.sendFeedback.bind( this, "Hard" ) } >Hard</button>
+            </div>
+
+         );
       }
       else{
          return (
@@ -84,33 +114,49 @@ class DoCourse extends Component {
    checkAnswer_SimpleText(e){
       e.preventDefault();
 
-      this.answered = true;
+      // do nothing if question is already answered
+      if(!this.answered){
 
-      Meteor.call('learner.answerQuestion', this.answer_Ref.value, this.question, this.props.match.params.courseName, (err, result) => {
+         Meteor.call('learner.answerQuestion', this.answer_Ref.value, this.question, this.props.match.params.courseName, (err, result) => {
 
-         if(err){
-            this.handleErrors(err);
-         }
-         else{		// successful
+            if(err){
+               this.handleErrors(err);
+            }
+            else{		// successful
 
-            console.log( result );
+               if( result.isCorrect ){
+                  window.alert("Correct!");
 
-         }
-      });
+                  this.answered = true;
+
+                  this.setState( {
+                     content: this.getMainContent( this.getReadyAnim() )
+                  });
+               }
+               else{
+                  window.alert("Incorrect, the correct answer is: \n\n" + result.word.l1_wordName);
+
+                  this.sendFeedback();
+               }
+
+            }
+         });
+      }
+
    }
 
 
-   getMainContent( control, result ){
+   getMainContent( control ){
 
       switch ( this.question.type ){
          case "TEXT":
-            return this.getQuestion_SimpleText( control, result );
+            return this.getQuestion_SimpleText( control );
          default:
             return (<div></div>)
       }
 
    }
-   getQuestion_SimpleText( control, result ){
+   getQuestion_SimpleText( control ){
       return(
          <div id="do-course-content">
             <form id="do-course-main"    className="_Theme_outerBorder_Default_"

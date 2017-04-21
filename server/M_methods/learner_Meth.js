@@ -4,7 +4,8 @@ import Courses_Words from '/imports/collections/courses_Words';
 import Words_Attempts from '/imports/collections/words_Attempts';
 
 import Func_Util from '/imports/api/functional/func_Util';
-
+import QuestionDataPacker_Util from '../api/questionDataPacker_Util';
+import QuestionMarker_Util from '../api/questionMarker_Util';
 
 
 /* REF:
@@ -23,6 +24,9 @@ const WORDATTEMPT_RESPONSE_FACTOR = {
    Okay: 1,
    Hard: 0.5,
 };
+
+
+
 
 //
 // function updateWordScore(word, ){
@@ -126,13 +130,11 @@ Meteor.methods({
             // TODO does some calculation or something to determine question type?
             let type = "TEXT";
 
+
          /* return result */
-            return {
-               type,
-               wordId : resultArray[0].word._id,
-               l2_wordName : resultArray[0].word.l2_wordName,
-               l2_examples : resultArray[0].word.l2_examples,
-            };
+            return QuestionDataPacker_Util.pack(resultArray[0].word, type);
+
+
          }
 
       }
@@ -148,22 +150,7 @@ Meteor.methods({
 
          if( course && word ){
 
-            let isCorrect = true;
-
-            if( Func_Util.replaceNewLinesWithSpace(response).trim()   ===   word.l1_wordName ){
-               Words_Attempts.update(
-                  { wordId :  word._id , userId : Meteor.userId() },
-                  {$inc:   {correctAttempts: 1, attempts: 1 }  }
-               );
-            }
-            else{
-               isCorrect = false;
-
-               Words_Attempts.update(
-                  { wordId :  word._id , userId : Meteor.userId() },
-                  {$inc:   {attempts: 1}     }
-               );
-            }
+            let isCorrect = QuestionMarker_Util.check(response, questionObj, word);
 
             return {
                isCorrect,
@@ -173,6 +160,12 @@ Meteor.methods({
          }
 
       }
+
+   },
+
+   'learner.processFeedback': (response, questionObj, courseName) => {
+
+
 
    }
 
