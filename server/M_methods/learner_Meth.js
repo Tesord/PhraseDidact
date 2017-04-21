@@ -13,25 +13,57 @@ import QuestionMarker_Util from '../api/questionMarker_Util';
 function wordScoreFormula(word, wordAttempt){
    return (
       (word.difficultyLevel / 100) +
-      (     Func_Util.convert_ms_to_minutes( new Date() - wordAttempt.nextReviewDate )    )
+      (     Func_Util.convert_ms_to_minutes( new Date() - wordAttempt.learnScore )    )
    );
 }
 
-const WORDATTEMPT_INITIAL_REVIEWmins = 24 * 60;
+function learnScoreFormula(learnScore, feedback){
+   let san_Feedback = feedback.toUpperCase();
+   let factor = WORDATTEMPT_FEEDBACK_FACTOR[san_Feedback];
 
-const WORDATTEMPT_RESPONSE_FACTOR = {
-   Easy: 1.5,
-   Okay: 1,
-   Hard: 0.5,
+   if( factor ){
+      return (
+
+         learnScore * factor
+
+      );
+   }
+   else{    // No factor set? Then just use default feedback.
+      return (
+
+         learnScore * WORDATTEMPT_FEEDBACK_FACTOR.OKAY
+
+      );
+   }
+
+}
+
+const WORDATTEMPT_INITIAL_LEARNSCORE = 24 * 60;
+
+const WORDATTEMPT_FEEDBACK_FACTOR = {
+   EASY: 2,
+   OKAY: 1.5,
+   HARD: 1,
+
+   WRONG: 0.25
 };
 
 
 
+/* Sub-routines used by this class' Meteor methods */
 
-//
-// function updateWordScore(word, ){
-//
-// }
+function updateWordScore(wordId, feedback){
+
+   let score = Words_Attempts.findOne({ wordId, userId: Meteor.userId() }).learnScore;
+
+   Words_Attempts.update(
+      { wordId },
+      {$set:
+         { learnScore: learnScoreFormula(score, feedback) }
+      }
+   );
+
+}
 
 
 Meteor.methods({
@@ -88,7 +120,7 @@ Meteor.methods({
                      wordId : word._id,
                      courseId : word.courseId,
                      userId : Meteor.userId(),
-                     nextReviewDate : createdTime,
+                     learnScore : WORDATTEMPT_INITIAL_LEARNSCORE,
 
                      attempts: 0,
                      correctAttempts: 0,
@@ -144,13 +176,15 @@ Meteor.methods({
    'learner.answerQuestion': (response, questionObj, courseName) => {
 
       if( Roles.userIsInRole( Meteor.userId(), "LEARN" ) ){
-
-         let course = Courses_Configs.findOne( { courseName, access: "public" } );
          let word = Courses_Words.findOne( {_id: questionObj.wordId} );
 
-         if( course && word ){
+         if( Courses_Configs.findOne( { courseName, access: "public" } )    &&   word ){
 
             let isCorrect = QuestionMarker_Util.check(response, questionObj, word);
+
+            if(!isCorrect){
+               updateWordScore( questionObj.wordId, "WRONG" );
+            }
 
             return {
                isCorrect,
@@ -163,9 +197,18 @@ Meteor.methods({
 
    },
 
-   'learner.processFeedback': (response, questionObj, courseName) => {
+   'learner.processFeedback': (feedback, questionObj, courseName) => {
 
+      if( Roles.userIsInRole( Meteor.userId(), "LEARN" ) ){
+         let word = Courses_Words.findOne( {_id: questionObj.wordId} );
 
+         if( Courses_Configs.findOne( { courseName, access: "public" } )    &&   word ){
+
+            updateWordScore( questionObj.wordId, feedback );
+
+         }
+
+      }
 
    }
 
