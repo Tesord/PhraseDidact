@@ -6,6 +6,8 @@ import Courses_Words from '/imports/collections/courses_Words';
 import Courses_Configs from '/imports/collections/courses_Configs';
 import Words_Attempts from '/imports/collections/words_Attempts';
 
+import Func_Util from '/imports/api/functional/func_Util';
+
 
 // TODO For maintainability, there should be some sort of factory for creating test data and comparision...
 
@@ -126,7 +128,7 @@ export function thirdWordPair_Setup(){
 
 
 export function coursesConfigs_ContentRetriever(courseName, access, description, tags){
-   let tagArray = tags.replace( /\n/g, " " ).split( " " );
+   let tagArray = Func_Util.replaceNewLinesWithSpace(tags).split( " " );
 
    return Courses_Configs.findOne( {
                               userId: DEFAULT_userId,

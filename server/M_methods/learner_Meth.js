@@ -24,6 +24,10 @@ const WORDATTEMPT_RESPONSE_FACTOR = {
    Hard: 0.5,
 };
 
+//
+// function updateWordScore(word, ){
+//
+// }
 
 
 Meteor.methods({
@@ -82,6 +86,8 @@ Meteor.methods({
                      userId : Meteor.userId(),
                      nextReviewDate : createdTime,
 
+                     attempts: 0,
+                     correctAttempts: 0,
                      createdAt: createdTime
                   });
                }
@@ -123,13 +129,51 @@ Meteor.methods({
          /* return result */
             return {
                type,
+               wordId : resultArray[0].word._id,
                l2_wordName : resultArray[0].word.l2_wordName,
                l2_examples : resultArray[0].word.l2_examples,
             };
          }
 
       }
-   }
+   },
 
+
+   'learner.answerQuestion': (response, questionObj, courseName) => {
+
+      if( Roles.userIsInRole( Meteor.userId(), "LEARN" ) ){
+
+         let course = Courses_Configs.findOne( { courseName, access: "public" } );
+         let word = Courses_Words.findOne( {_id: questionObj.wordId} );
+
+         if( course && word ){
+
+            let isCorrect = true;
+
+            if( Func_Util.replaceNewLinesWithSpace(response).trim()   ===   word.l1_wordName ){
+               Words_Attempts.update(
+                  { wordId :  word._id , userId : Meteor.userId() },
+                  {$inc:   {correctAttempts: 1, attempts: 1 }  }
+               );
+            }
+            else{
+               isCorrect = false;
+
+               Words_Attempts.update(
+                  { wordId :  word._id , userId : Meteor.userId() },
+                  {$inc:   {attempts: 1}     }
+               );
+            }
+
+            return {
+               isCorrect,
+               word
+            };
+
+         }
+
+      }
+
+   }
 
 });

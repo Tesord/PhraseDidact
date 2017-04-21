@@ -13,28 +13,48 @@ class DoCourse extends Component {
    constructor(){
 		super();
 
-      this.questionType = "";
+      this.question = {};
+      this.answered = false;
 
 		this.state = {
 			content: <BlueCircle_greyBG />,
 		};
 	}
 
+   handleErrors(err){
+      window.alert(err);
+
+      this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
+   }
+
    getReadyAnim(){
-      return (
 
-         <button className="pd-btn  rounded-border	   btn-primary">Answer</button>
+      if(this.answered){
 
-      );
+      }
+      else{
+         return (
+
+            <div id="do-course-control-bottom"   className="_Theme_questionControl_Default_">
+               <button className="pd-btn rounded-border	align-right     btn-primary">Answer</button>
+            </div>
+
+         );
+      }
    }
 
    getLoadingAnim(){
+
       return (
 
-         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Answering...</button>
+         <div id="do-course-control-bottom"   className="_Theme_questionControl_Default_">
+            <button className="pd-btn rounded-border	 align-right        btn-primary    disabled" disabled aria-disabled="true">Answering...</button>
+         </div>
 
       );
+
    }
+
 
    // save(e){
    //    e.preventDefault();
@@ -61,46 +81,65 @@ class DoCourse extends Component {
    //
    // }
 
-   handleErrors(err){
-      window.alert(err);
+   checkAnswer_SimpleText(e){
+      e.preventDefault();
 
-      this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
+      this.answered = true;
+
+      Meteor.call('learner.answerQuestion', this.answer_Ref.value, this.question, this.props.match.params.courseName, (err, result) => {
+
+         if(err){
+            this.handleErrors(err);
+         }
+         else{		// successful
+
+            console.log( result );
+
+         }
+      });
    }
 
 
-   getMainContent( button, result ){
+   getMainContent( control, result ){
 
-      switch (this.questionType){
+      switch ( this.question.type ){
          case "TEXT":
-            return this.getTextQuestion( button, result );
+            return this.getQuestion_SimpleText( control, result );
          default:
             return (<div></div>)
       }
 
    }
-   getTextQuestion( button, result ){
+   getQuestion_SimpleText( control, result ){
       return(
          <div id="do-course-content">
-            <div id="do-course-main"    className="_Theme_outerBorder_Default_">
+            <form id="do-course-main"    className="_Theme_outerBorder_Default_"
+               onSubmit={ this.checkAnswer_SimpleText.bind( this ) } >
 
-               <contentTitle> Translate this word </contentTitle>
-               <br/>
-               <div id="question-simpleText-section" className="_Theme_innerBorder_Default_">
+               <div id="do-course-data-top">
 
-                  <Tipped_WordnListTooltip
-                     word={result.l2_wordName}
-                     word_id="question-simpleText-word"
-                     list={result.l2_examples}
-                  />
+                  <contentTitle> Translate this word </contentTitle>
+                  <br/>
+                  <div id="question-simpleText-section" className="_Theme_innerBorder_Default_">
+
+                     <Tipped_WordnListTooltip
+                        word={ this.question.l2_wordName }
+                        word_id="question-simpleText-word"
+                        list={ this.question.l2_examples }
+                     />
+
+                  </div>
+
+                  <textarea rows="4"    id="answer-simpleText-section"    className="no-resize   form-control"
+                     maxLength="230"    required
+                     ref={	(this_elem) => (this.answer_Ref = this_elem) } >
+                  </textarea>
 
                </div>
 
-               <textarea rows="4"    id="answer-simpleText-section"    className="no-resize   form-control"
-                  maxLength="230"    required
-                  ref={	(this_elem) => (this.answer_Ref = this_elem) } >
-               </textarea>
+               {control}
 
-            </div>
+            </form>
          </div>
       );
    }
@@ -114,10 +153,10 @@ class DoCourse extends Component {
             setTimeout( () => { window.location.replace("/notFound"); }, 500);
          }
          else{
-            this.questionType = result.type;
+            this.question = result;
 
             this.setState( {
-               content: this.getMainContent( this.getReadyAnim(), result )
+               content: this.getMainContent( this.getReadyAnim() )
             });
 
          }

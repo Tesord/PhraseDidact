@@ -30,7 +30,10 @@ Schemas.Words_Attempts = new SimpleSchema({
    attempts: {
       type: SimpleSchema.Integer,
       label: "attempts",
-      defaultValue: 0
+   },
+   correctAttempts: {
+      type: SimpleSchema.Integer,
+      label: "correctAttempts",
    },
    createdAt: {
       type: Date
