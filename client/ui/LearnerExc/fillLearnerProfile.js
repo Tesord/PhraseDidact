@@ -172,7 +172,7 @@ class FillLearnerProfile extends Component {
       e.preventDefault();
       this.save();
 
-      this.context.router.history.push("/user/" + Meteor.user().username + "/profile/");
+      this.context.router.history.push("");
    }
 
 

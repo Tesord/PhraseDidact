@@ -14,7 +14,7 @@ class Instructor_Home extends Component {
       super();
 
       this.state = {
-         courses:    "Nothing yet!",
+         courses:    "",
          students:   "No one yet!"
       };
    }
