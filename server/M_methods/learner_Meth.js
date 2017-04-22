@@ -10,11 +10,16 @@ import QuestionMarker_Util from '../api/questionMarker_Util';
 
 /* REF:
  * Learning-related calculations HERE */
-function wordScoreFormula(word, wordAttempt){
-   return (
-      (word.difficultyLevel / 100) +
-      (     Func_Util.convert_ms_to_minutes( new Date() - wordAttempt.learnScore )    )
-   );
+function nextStudyScoreFormula(word, wordAttempt){
+
+   if(
+      Func_Util.convert_ms_to_minutes( new Date() - wordAttempt.lastAttemptDate )   >  wordAttempt.learnScore
+   ){
+      return (word.difficultyLevel / 100) - wordAttempt.learnScore;
+   }
+   else{
+      return (word.difficultyLevel / 100) + wordAttempt.attempts;
+   }
 }
 
 function learnScoreFormula(learnScore, feedback){
@@ -45,14 +50,14 @@ const WORDATTEMPT_FEEDBACK_FACTOR = {
    OKAY: 1.5,
    HARD: 1,
 
-   WRONG: 0.25
+   WRONG: 0.4
 };
 
 
 
 /* Sub-routines used by this class' Meteor methods */
 
-function updateWordScore(wordId, feedback){
+function updateLearnScore(wordId, feedback){
 
    let score = Words_Attempts.findOne({ wordId, userId: Meteor.userId() }).learnScore;
 
@@ -121,6 +126,7 @@ Meteor.methods({
                      courseId : word.courseId,
                      userId : Meteor.userId(),
                      learnScore : WORDATTEMPT_INITIAL_LEARNSCORE,
+                     lastAttemptDate: createdTime,
 
                      attempts: 0,
                      correctAttempts: 0,
@@ -143,7 +149,7 @@ Meteor.methods({
                resultArray.push(
                   {
                      word: word,
-                     score: wordScoreFormula(word, curr_wordAttempt)
+                     score: nextStudyScoreFormula(word, curr_wordAttempt)
                   }
                );
             }
@@ -166,7 +172,6 @@ Meteor.methods({
          /* return result */
             return QuestionDataPacker_Util.pack(resultArray[0].word, type);
 
-
          }
 
       }
@@ -183,7 +188,7 @@ Meteor.methods({
             let isCorrect = QuestionMarker_Util.check(response, questionObj, word);
 
             if(!isCorrect){
-               updateWordScore( questionObj.wordId, "WRONG" );
+               updateLearnScore( questionObj.wordId, "WRONG" );
             }
 
             return {
@@ -204,7 +209,7 @@ Meteor.methods({
 
          if( Courses_Configs.findOne( { courseName, access: "public" } )    &&   word ){
 
-            updateWordScore( questionObj.wordId, feedback );
+            updateLearnScore( questionObj.wordId, feedback );
 
          }
 

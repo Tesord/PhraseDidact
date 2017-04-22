@@ -26,6 +26,10 @@ Schemas.Words_Attempts = new SimpleSchema({
       type: Number,
       label: "learnScore",
    },
+   lastAttemptDate: {
+      type: Date,
+      label: "lastAttemptDate",
+   },
 
    attempts: {
       type: SimpleSchema.Integer,

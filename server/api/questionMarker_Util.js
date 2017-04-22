@@ -12,23 +12,35 @@ export function check(response, questionObj, word){
 
 }
 
+/* HELPER function of this class */
+function answer_DBProc(word, isCorrect){
 
-export function text_Check(response, word){
-
-   if( Func_Util.replaceNewLinesWithSpace(response).trim().toUpperCase()   ===   word.l1_wordName.toUpperCase() ){
+   if(isCorrect){
       Words_Attempts.update(
          { wordId :  word._id , userId : Meteor.userId() },
-         {$inc:   {correctAttempts: 1, attempts: 1 }  }
+         { $inc:   {correctAttempts: 1, attempts: 1 },
+           $set:   {lastAttemptDate: new Date() }    }
       );
-
-      return true;
    }
    else{
       Words_Attempts.update(
          { wordId :  word._id , userId : Meteor.userId() },
-         {$inc:   {attempts: 1}     }
+         { $inc:   {attempts: 1},
+           $set:   {lastAttemptDate: new Date() } }
       );
+   }
 
+}
+
+
+export function text_Check(response, word){
+
+   if( Func_Util.replaceNewLinesWithSpace(response).trim().toUpperCase()   ===   word.l1_wordName.toUpperCase() ){
+      answer_DBProc(word, true);
+      return true;
+   }
+   else{
+      answer_DBProc(word, false);
       return false;
    }
 

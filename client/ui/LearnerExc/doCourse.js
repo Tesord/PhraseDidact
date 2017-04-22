@@ -86,30 +86,6 @@ class DoCourse extends Component {
    }
 
 
-   // save(e){
-   //    e.preventDefault();
-   //
-   //    let courseName = this.courseName_Ref.value;
-   //    let access = this.access_Ref.getSelectedValue_OfRadioGroup();
-   //
-   //    let description = this.description_Ref.value;
-   //    let tags = this.tags_Ref.value;
-   //
-   //
-   //    Meteor.call('instructor.addCourse', courseName, access, description, tags, (err, result) => {
-   //
-   //       if(err){
-   //          this.handleErrors(err);
-   //       }
-   //       else{		// successful
-   //          this.context.router.history.push("/course/" + courseName + "/edit");
-   //       }
-   //    });
-   //
-   //
-   //    this.setState( {     content:    this.getMainContent( this.getLoadingAnim() )    });
-   //
-   // }
 
    checkAnswer_SimpleText(e){
       e.preventDefault();
@@ -136,7 +112,7 @@ class DoCourse extends Component {
                else{
                   window.alert("Incorrect, the correct answer is: \n\n" + result.word.l1_wordName);
 
-                  this.sendFeedback();
+                  this.reset();
                }
 
             }
@@ -194,9 +170,9 @@ class DoCourse extends Component {
    isLearnerAction(){
       Meteor.call("learner.getNextQuestion", this.props.match.params.courseName , (err, result) => {
          if(err){
-            /* TODO change to "Access denied" or something page */
+            /* TODO Technical error occurred... try again? */
 
-            setTimeout( () => { window.location.replace("/notFound"); }, 500);
+            location.reload();
          }
          else{
             this.question = result;
