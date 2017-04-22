@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 
 const NavHead = () => {
 
@@ -7,8 +9,7 @@ const NavHead = () => {
       <div id="nav-head" className="align-left">
          <div className="navbar-title">PhraseDidact</div>
 
-         <div className="navbar-menu-items">Home</div>
-         <div className="navbar-menu-items">SOMETHING</div>
+         <Link to="/" className="navbar-menu-items">Home</Link>
       </div>
    );
 };

@@ -16,30 +16,44 @@ class Profile extends Component{
          content: <BlueCircle_greyBG />
       };
 
+   }
 
-      Meteor.subscribe("learner_LProfile",  {
+
+   componentDidMount(){
+
+      Meteor.subscribe("learner_LProfile", this.props.match.params.username,  {
          onReady: () => {
             let result = Learner_LProfile.findOne();
 
-            let array = [];
+            if(result){
+               let array = [];
 
-            for(var key in result){
-               array.push( <div className="single-line-element"> { key + " : " + result[key] } </div> );
+               for(var key in result){
+                  array.push( <div className="single-line-element" key={key}> { key + " : " + result[key] } </div> );
+               }
+
+
+               this.setState( {
+                  content:
+
+                     <div  id="user-profile-content" className="h-center-margin">
+            				   { array }
+            			</div>
+
+               });
+            }
+            else{
+               setTimeout( () => { window.location.replace("/notFound"); }, 500);
             }
 
-
-
-            this.setState( {
-               content:
-
-                  <div  id="user-profile-content" className="h-center-margin">
-         				   { array }
-         			</div>
-
-            });
          }
       } );
 
+      // makes mandatory transition appears seamless
+      this.state = ( {
+         content: <div></div>
+      } );
+      
    }
 
 

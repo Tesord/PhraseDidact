@@ -34,12 +34,19 @@ import DoCourse from './ui/LearnerExc/doCourse';
 
 /* ::L_NOTE::
  * - The <Router /> represents the content that will be rendered in any page of the web app.
+ *
  * - A <Route /> represents a possible web path.
- * 	By default, the "path" property means any web path that begin with the string provided will render its component.
- *		If "exact" is also written, then each character of the web path (after the domain) must match char-to-char.
- *		If no "path" is given, then it is ALWAYS a match.
+ *   By default, the "path" property means any web path that begin with the string provided will render its component.
+ *
+ *   IMPORTANT: For all paths that have the same beginning segments, they should be arranged in order of
+ *	  	 length / specificness, to avoid a situation where the switch always stop at a broader path; never reaching the
+ *     more specific ones.
+ *
+ *	  If "exact" is also written, then each character of the web path (after the domain) must match char-to-char.
+ *	  If no "path" is given, then it is ALWAYS a match.
+ *
  * - The <Switch /> indicates that when searching through the list of <Route />s (from top to bottom),
- *		as soon as one matches, it will only render that one (exclusive).
+ *	    as soon as one matches, it will only render that one (exclusive).
  */
 const routes = (
 	<Router>
@@ -56,9 +63,9 @@ const routes = (
 				<Route path="/user/:username/profile" component={Profile} />
 
 				<Route path="/addCourse" component={AddCourse} />
+				<Route path="/course/:courseName/editWord/:wordPairId" component={EditWord} />
 				<Route path="/course/:courseName/edit" component={EditCourse} />
 				<Route path="/course/:courseName/addWord" component={AddWord} />
-				<Route path="/course/:courseName/editWord/:wordPairId" component={EditWord} />
 
 				<Route path="/course/:courseName/" component={DoCourse} />
 

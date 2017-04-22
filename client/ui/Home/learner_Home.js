@@ -15,7 +15,7 @@ class Learner_Home extends Component {
 
       this.state = {
          courses:    [],
-         progress:   "Nothing yet!"
+         progress:   ""
       };
    }
 
@@ -26,7 +26,20 @@ class Learner_Home extends Component {
       Meteor.call("userAccount.getCourseCreatorsDetails", courseList, (err, result) => {
 
          this.setState( {
-            courses: this.create_CourseBlocks(courseList, result)
+            courses: this.create_CourseBlocks(courseList, result),
+
+            progress: (
+               <div>
+                  <Link className="pd-btn rounded-border	    btn-primary"
+                     to="/fillLearnerProfile" >
+                     Fill Learner Profile
+                  </Link>
+                  <Link className="pd-btn rounded-border	    btn-primary"
+                     to={"/user/" + Meteor.user().username + "/profile"} >
+                     View Learner Profile
+                  </Link>
+               </div>
+            )
          } );
 
       });
