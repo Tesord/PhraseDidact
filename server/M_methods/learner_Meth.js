@@ -25,29 +25,35 @@ function nextStudyScoreFormula(word, wordAttempt){
 function learnScoreFormula(learnScore, feedback){
    let san_Feedback = feedback.toUpperCase();
    let factor = WORDATTEMPT_FEEDBACK_FACTOR[san_Feedback];
+   let result = 0;
 
    if( factor ){
-      return (
-
-         learnScore * factor
-
-      );
+      result =    learnScore * factor;
    }
    else{    // No factor set? Then just use default feedback.
-      return (
+      result =    learnScore * WORDATTEMPT_FEEDBACK_FACTOR.OKAY;
+   }
 
-         learnScore * WORDATTEMPT_FEEDBACK_FACTOR.OKAY
 
-      );
+   if( result > WORDATTEMPT_MAX_LEARNSCORE ){
+      return WORDATTEMPT_MAX_LEARNSCORE;
+   }
+   else if( result < WORDATTEMPT_MIN_LEARNSCORE ){
+      return WORDATTEMPT_MIN_LEARNSCORE;
+   }
+   else{
+      return result;
    }
 
 }
 
-const WORDATTEMPT_INITIAL_LEARNSCORE = 24 * 60;
+const WORDATTEMPT_INITIAL_LEARNSCORE =    60 * 24;              // 1 day
+const WORDATTEMPT_MAX_LEARNSCORE =        60 * 24 * 365;        // 1 year
+const WORDATTEMPT_MIN_LEARNSCORE =        60 * 12;              // half a day
 
 const WORDATTEMPT_FEEDBACK_FACTOR = {
-   EASY: 2,
-   OKAY: 1.5,
+   EASY: 3,
+   OKAY: 2,
    HARD: 1,
 
    WRONG: 0.4
