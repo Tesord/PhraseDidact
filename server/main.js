@@ -9,8 +9,12 @@ import Words_Attempts from '/imports/collections/words_Attempts';
 Meteor.startup(() => {
    // code to run on server at startup
 
-   Meteor.publish('learner_LProfile', function() {
-      return Learner_LProfile.find({ userId: this.userId });
+   Meteor.publish('learner_LProfile', function(username) {
+      let user = Meteor.users.findOne( { username } );
+
+      if(user){
+         return Learner_LProfile.find({ userId: user._id });
+      }
    });
 
    Meteor.publish('available_Courses', function() {

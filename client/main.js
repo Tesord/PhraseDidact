@@ -17,11 +17,8 @@ import EditCourse from './ui/InstructorExc/editCourse';
 import AddWord from './ui/InstructorExc/addWord';
 import EditWord from './ui/InstructorExc/editWord';
 
-<<<<<<< HEAD
-=======
 import DoCourse from './ui/LearnerExc/doCourse';
 
->>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
 
 
 /*************** TODO WHEN FINISHED: comment out the below imports & delete above.
@@ -62,11 +59,8 @@ const routes = (
 				<Route path="/course/:courseName/edit" component={EditCourse} />
 				<Route path="/course/:courseName/addWord" component={AddWord} />
 				<Route path="/course/:courseName/editWord/:wordPairId" component={EditWord} />
-<<<<<<< HEAD
-=======
 
 				<Route path="/course/:courseName/" component={DoCourse} />
->>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
 
 				<Route component={NotFound} />
 			</Switch>

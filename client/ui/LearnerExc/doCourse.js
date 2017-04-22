@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DocumentTitle from 'react-document-title';
 
+import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Tipped_WordnListTooltip from '/imports/ui/tipped_WordnListTooltip';
 
 import Func_Util from '/imports/api/functional/func_Util';
@@ -12,22 +13,14 @@ class DoCourse extends Component {
    constructor(){
 		super();
 
-<<<<<<< HEAD
-=======
       this.question = {};
       this.answered = false;
 
->>>>>>> 9a9ed7eb99540cd7ffa3c631e339cbb58a304e0c
 		this.state = {
-         questionData: {},
-			control: getReadyAnim(false)
+			content: <BlueCircle_greyBG />,
 		};
 	}
 
-<<<<<<< HEAD
-   getReadyAnim(isAnswered){
-      return (
-=======
    handleErrors(err){
       window.alert(err);
 
@@ -54,7 +47,6 @@ class DoCourse extends Component {
    }
 
    getReadyAnim(){
->>>>>>> 9a9ed7eb99540cd7ffa3c631e339cbb58a304e0c
 
       if(this.answered){
          return (
@@ -81,12 +73,8 @@ class DoCourse extends Component {
       }
    }
 
-<<<<<<< HEAD
-   getLoadingAnim(isAnswered){
-=======
    getLoadingAnim(){
 
->>>>>>> 9a9ed7eb99540cd7ffa3c631e339cbb58a304e0c
       return (
 
          <div id="do-course-control-bottom"   className="_Theme_questionControl_Default_">
@@ -190,12 +178,7 @@ class DoCourse extends Component {
             this.question = result;
 
             this.setState( {
-<<<<<<< HEAD
-               questionData: result,
-               control: this.getReadyAnim( false )
-=======
                content: this.getMainContent( this.getReadyAnim() )
->>>>>>> 9a9ed7eb99540cd7ffa3c631e339cbb58a304e0c
             });
 
          }

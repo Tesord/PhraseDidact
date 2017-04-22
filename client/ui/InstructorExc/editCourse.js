@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import shortid from 'shortid';
 
-import WordList from './Course/wordList';
-
 import BlueCircle_greyBG from '../Loading/blueCircle_greyBG';
 import Bootstrap_InputGlyphicon from '/imports/ui/bootstrap_InputGlyphicon';
 import Picture_Button from '/imports/ui/picture_Button';
@@ -79,35 +77,6 @@ class EditCourse extends Component {
 
 
    load(){
-<<<<<<< HEAD
-      let courseWords_List = Courses_Words.find().fetch();
-
-      this.setState( {
-         content: this.getMainContent( this.renderWordLearnList(courseWords_List), this.renderNativeWordList(courseWords_List) )
-      } );
-   }
-   renderWordLearnList(courseWords_List){
-      return (
-         <WordList
-            courseWords_List = {courseWords_List}
-            isL2 = {true}
-            funcContext = {this}
-            editBlock_func = {this.editBlock}
-            removeBlock_func = {this.removeBlock}
-         />
-      );
-   }
-   renderNativeWordList(courseWords_List){
-      return (
-         <WordList
-            courseWords_List = {courseWords_List}
-            isL2 = {false}
-            funcContext = {this}
-            editBlock_func = {this.editBlock}
-            removeBlock_func = {this.removeBlock}
-         />
-      );
-=======
       let courseWords_List = Courses_Words.find({ courseId : this.courseId }).fetch();
 
       this.setState( {
@@ -176,16 +145,12 @@ class EditCourse extends Component {
       uniqueId = shortid.generate();
 
       return ( <div     key={"exam" + uniqueId}> - {line_Of_Example} <br/></div> );
->>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
    }
 
 
 
-<<<<<<< HEAD
-=======
    editBlock(word_pair_id){
 
->>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
       this.context.router.history.push("/course/" + this.props.match.params.courseName + "/editWord/" + word_pair_id);
    }
 
@@ -208,11 +173,7 @@ class EditCourse extends Component {
 
    isInstructorAction(){
 
-<<<<<<< HEAD
-      // Get required data from DB, while also checks whether user actually owns the course
-=======
       // Add required data from DB to local DB, this also checks whether user actually owns the course
->>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
       Meteor.subscribe("edit_Course_Words", this.props.match.params.courseName, {
          onReady: () => {     // matched, user actually owns the course
 

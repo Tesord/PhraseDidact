@@ -61,9 +61,6 @@ class AddCourse extends Component {
    }
 
    handleErrors(err){
-<<<<<<< HEAD
-      window.alert(err);
-=======
       switch(err.error){
          case "E11000":
             window.alert("Error: Course with this name already exists! Please pick another one or add an unique identifer such as (*username*)");
@@ -72,7 +69,6 @@ class AddCourse extends Component {
             window.alert("Error: Sorry, something went wrong. Please try again :(");
             break;
       }
->>>>>>> 704e5621f80a78bbc1d0b970a4271c52bc8913e0
 
       this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
    }
