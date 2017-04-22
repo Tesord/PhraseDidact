@@ -1,6 +1,8 @@
 import Courses_Configs from '/imports/collections/courses_Configs';
 import Courses_Words from '/imports/collections/courses_Words';
 
+import Func_Util from '/imports/api/functional/func_Util';
+
 
 Meteor.methods({
 
@@ -10,7 +12,7 @@ Meteor.methods({
             tags.length <= 1000
       ){
 
-         let tagArray = tags.replace( /\n/g, " " ).split( " " );
+         let tagArray = Func_Util.replaceNewLinesWithSpace(tags).split( " " );
 
          try{
 

@@ -7,6 +7,14 @@ import Func_Util from '/imports/api/functional/func_Util';
 
 class Tipped_WordnListTooltip extends Component {
 
+   attachTooltip(){
+
+      Tipped.create(".simple-tooltip", Func_Util.createStringHRSep_FromArray( this.props.list ),
+         { position: "bottom" }
+      );
+
+   }
+
    render(){
       return (
 
@@ -15,12 +23,13 @@ class Tipped_WordnListTooltip extends Component {
       );
    }
 
+   componentDidUpdate(){
+      Tipped.init();
+      this.attachTooltip();
+   }
+
    componentDidMount(){
-
-      Tipped.create(".simple-tooltip", Func_Util.createStringHRSep_FromArray( this.props.list ),
-         { position: "bottom" }
-      );
-
+      this.attachTooltip();
    }
 
 }

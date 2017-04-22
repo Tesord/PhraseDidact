@@ -52,6 +52,10 @@ export function createStringHRSep_FromArray(array){
 }
 
 
+export function replaceNewLinesWithSpace(string){
+   return string.replace( /\n/g, " " );
+}
+
 
 
 /* PhraseDidact specific */

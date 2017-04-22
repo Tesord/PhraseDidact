@@ -12,93 +12,168 @@ class DoCourse extends Component {
    constructor(){
 		super();
 
+<<<<<<< HEAD
+=======
+      this.question = {};
+      this.answered = false;
+
+>>>>>>> 9a9ed7eb99540cd7ffa3c631e339cbb58a304e0c
 		this.state = {
          questionData: {},
 			control: getReadyAnim(false)
 		};
 	}
 
+<<<<<<< HEAD
    getReadyAnim(isAnswered){
       return (
-
-         <button className="pd-btn  rounded-border	   btn-primary">Answer</button>
-
-      );
-   }
-
-   getLoadingAnim(isAnswered){
-      return (
-
-         <button className="pd-btn  rounded-border	   btn-primary    disabled" disabled aria-disabled="true">Answering...</button>
-
-      );
-   }
-
-   // save(e){
-   //    e.preventDefault();
-   //
-   //    let courseName = this.courseName_Ref.value;
-   //    let access = this.access_Ref.getSelectedValue_OfRadioGroup();
-   //
-   //    let description = this.description_Ref.value;
-   //    let tags = this.tags_Ref.value;
-   //
-   //
-   //    Meteor.call('instructor.addCourse', courseName, access, description, tags, (err, result) => {
-   //
-   //       if(err){
-   //          this.handleErrors(err);
-   //       }
-   //       else{		// successful
-   //          this.context.router.history.push("/course/" + courseName + "/edit");
-   //       }
-   //    });
-   //
-   //
-   //    this.setState( {     content:    this.getMainContent( this.getLoadingAnim() )    });
-   //
-   // }
-
+=======
    handleErrors(err){
       window.alert(err);
 
       this.setState( {     content:    this.getMainContent( this.getReadyAnim() )    });
    }
 
+   reset(){
+      this.answered = false;
+      this.answer_Ref.value = "";
+      this.isLearnerAction();
 
-   getMainContent( button, result ){
+   }
 
-      switch (this.questionType){
+   sendFeedback(value){
+      Meteor.call('learner.processFeedback', value, this.question, this.props.match.params.courseName, (err, result) => {
+
+         if(err){
+            this.handleErrors(err);
+         }
+         else{		// successful
+            this.reset();
+         }
+      });
+   }
+
+   getReadyAnim(){
+>>>>>>> 9a9ed7eb99540cd7ffa3c631e339cbb58a304e0c
+
+      if(this.answered){
+         return (
+
+            <div id="do-course-control-bottom"   className="_Theme_questionControl_Default_">
+               <button className="pd-btn rounded-border	align-right     btn-success"
+                  onClick={ this.sendFeedback.bind( this, "Easy" ) } >Easy</button>
+               <button className="pd-btn rounded-border	align-right moderate-right-margin    btn-warning"
+                  onClick={ this.sendFeedback.bind( this, "Okay" ) } >Okay</button>
+               <button className="pd-btn rounded-border	align-right moderate-right-margin    btn-danger"
+                  onClick={ this.sendFeedback.bind( this, "Hard" ) } >Hard</button>
+            </div>
+
+         );
+      }
+      else{
+         return (
+
+            <div id="do-course-control-bottom"   className="_Theme_questionControl_Default_">
+               <button className="pd-btn rounded-border	align-right     btn-primary">Answer</button>
+            </div>
+
+         );
+      }
+   }
+
+<<<<<<< HEAD
+   getLoadingAnim(isAnswered){
+=======
+   getLoadingAnim(){
+
+>>>>>>> 9a9ed7eb99540cd7ffa3c631e339cbb58a304e0c
+      return (
+
+         <div id="do-course-control-bottom"   className="_Theme_questionControl_Default_">
+            <button className="pd-btn rounded-border	 align-right        btn-primary    disabled" disabled aria-disabled="true">Answering...</button>
+         </div>
+
+      );
+
+   }
+
+
+
+   checkAnswer_SimpleText(e){
+      e.preventDefault();
+
+      // do nothing if question is already answered
+      if(!this.answered){
+
+         Meteor.call('learner.answerQuestion', this.answer_Ref.value, this.question, this.props.match.params.courseName, (err, result) => {
+
+            if(err){
+               this.handleErrors(err);
+            }
+            else{		// successful
+
+               if( result.isCorrect ){
+                  window.alert("Correct!");
+
+                  this.answered = true;
+
+                  this.setState( {
+                     content: this.getMainContent( this.getReadyAnim() )
+                  });
+               }
+               else{
+                  window.alert("Incorrect, the correct answer is: \n\n" + result.word.l1_wordName);
+
+                  this.reset();
+               }
+
+            }
+         });
+      }
+
+   }
+
+
+   getMainContent( control ){
+
+      switch ( this.question.type ){
          case "TEXT":
-            return this.getTextQuestion( button, result );
+            return this.getQuestion_SimpleText( control );
          default:
             return (<div></div>)
       }
 
    }
-   getTextQuestion( button, result ){
+   getQuestion_SimpleText( control ){
       return(
          <div id="do-course-content">
-            <div id="do-course-main"    className="_Theme_outerBorder_Default_">
+            <form id="do-course-main"    className="_Theme_outerBorder_Default_"
+               onSubmit={ this.checkAnswer_SimpleText.bind( this ) } >
 
-               <contentTitle> Translate this word </contentTitle>
-               <br/>
-               <div id="question-simpleText-section" className="_Theme_innerBorder_Default_">
+               <div id="do-course-data-top">
 
-                  <Tipped_WordnListTooltip
-                     word={result.l2_wordName}
-                     word_id="question-simpleText-word"
-                     list={result.l2_examples}
-                  />
+                  <contentTitle> Translate this word </contentTitle>
+                  <br/>
+                  <div id="question-simpleText-section" className="_Theme_innerBorder_Default_">
+
+                     <Tipped_WordnListTooltip
+                        word={ this.question.l2_wordName }
+                        word_id="question-simpleText-word"
+                        list={ this.question.l2_examples }
+                     />
+
+                  </div>
+
+                  <textarea rows="4"    id="answer-simpleText-section"    className="no-resize   form-control"
+                     maxLength="230"    required
+                     ref={	(this_elem) => (this.answer_Ref = this_elem) } >
+                  </textarea>
 
                </div>
 
-               <textarea rows="4"    id="answer-simpleText-section"    className="no-resize   form-control"
-                  maxLength="230"    required
-                  ref={	(this_elem) => (this.answer_Ref = this_elem) } >
-               </textarea>
+               {control}
 
-            </div>
+            </form>
          </div>
       );
    }
@@ -107,16 +182,20 @@ class DoCourse extends Component {
    isLearnerAction(){
       Meteor.call("learner.getNextQuestion", this.props.match.params.courseName , (err, result) => {
          if(err){
-            /* TODO change to "Access denied" or something page */
+            /* TODO Technical error occurred... try again? */
 
-            setTimeout( () => { window.location.replace("/notFound"); }, 500);
+            location.reload();
          }
          else{
-            this.questionType = result.type;
+            this.question = result;
 
             this.setState( {
+<<<<<<< HEAD
                questionData: result,
                control: this.getReadyAnim( false )
+=======
+               content: this.getMainContent( this.getReadyAnim() )
+>>>>>>> 9a9ed7eb99540cd7ffa3c631e339cbb58a304e0c
             });
 
          }

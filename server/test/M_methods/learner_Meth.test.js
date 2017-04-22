@@ -7,6 +7,7 @@ import userAccount_Meth from '../../M_methods/learner_Meth';
 // TODO save profile method
 
 
+// TODO, add test for newly added wordId, learnScore (result) too
 describe("learner_Meth.js - learner.getNextQuestion Meteor method", function() {
 
    beforeEach(function(){

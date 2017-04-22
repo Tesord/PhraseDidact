@@ -7,6 +7,7 @@ import Instructor_Meth from '../../M_methods/instructor_Meth';
 
 import Courses_Configs from '/imports/collections/courses_Configs';
 
+import Func_Util from '/imports/api/functional/func_Util';
 
 
 
@@ -213,7 +214,7 @@ describe("instructor_Meth.js - instructor.fetchCourseByUser() Meteor method", fu
       expect( result.access ).to.equal( test_access );
       expect( result.description ).to.equal( test_description );
 
-      let tagArray = test_tags.replace( /\n/g, " " ).split( " " );
+      let tagArray = Func_Util.replaceNewLinesWithSpace(test_tags).split( " " );
       expect( result.tags ).to.eql( tagArray );
    });
 
